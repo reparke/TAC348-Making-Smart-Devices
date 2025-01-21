@@ -21,7 +21,7 @@ show_in_list: false
 
 <!-- 
 Congratulations! The job you wanted when you were five years old is now yours. What do you now do for a living? 
-What is a random area of expertise that you have? 
+What is a random area of you have a lot of knowledge about?
 What close encounters have you had with a famous person?
 Which superhero do you identify with the most?
 What advice would you give to your 10 year old self? 

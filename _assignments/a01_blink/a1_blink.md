@@ -42,6 +42,18 @@ Goals
 
 -   Complete only the first step (do not move onto **Compile Project**
 
+### Login to your Particle Account
+
+-   In Workbench, Go to View \> Command Palette
+-   Type **Particle: Login.**
+
+<img src="a1_blink.assets/image-20250121135802535.png" alt="image-20250121135802535" style="width:400px "/>
+
+- Type **Login with Username**
+- Enter the **username** your used to register your Particle account (this will be your email address)
+- Enter the **password** your used to register your Particle account
+- When prompted to enter a **6-digit login code**, leave it blank and hit Enter on your keyboard (*Note: if you set up two factor authentication on your account, then enter the code here*)
+
 ### Setup device settings
 
 -   In Workbench, Go to View \> Command Palette

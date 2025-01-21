@@ -160,9 +160,9 @@ Week 10 idea:
 
 - Electricity and Ohm's Law
 - Safety
-- Software tools: Workbench (open and discuss)
-
 - Photon 2 microcontroller
+
+- Software tools: Workbench (open and discuss)
 - LED 
 
 #### Lab

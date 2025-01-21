@@ -42,12 +42,24 @@ title: Photon 2 Microcontroller
 
 1. What voltage does the Photon 2 operate at?
 2. Which IC (integrated circuit) is the "main" processor?
-4. What is the difference between pins `3v3` and `VUSB`?
-5. How many digital input pins are there? 
-6. How many analog output pins are there?
-7. How many ground pins are there?
-8. What is the voltage that the input pins can handle?
-9. Can we power the Photon 2 with battery?
+3. What is the difference between pins `3v3` and `VUSB`?
+4. How many digital input pins are there? 
+5. How many analog output pins are there?
+6. How many ground pins are there?
+7. What is the voltage that the input pins can handle?
+8. Can we power the Photon 2 with battery?
+
+<!-- recommended supply voltage: 3.3v, Supply Input Voltage: up to 6.2v -->
+
+<!-- main: realtek RTL8721DM  -->
+
+<!-- 3v3 is always 3.3v; VUSB is 5v when connected to USB-->
+
+<!-- 20 digital GPIO; 6 analog IN; 0 analog out; 1 ground pin -->
+
+<!-- Input high voltage: GPIO can operate at 3.3V max so be caution with higher voltage devices -->
+
+<!-- show other communication pins -->       
 
 ## Datasheet 
 

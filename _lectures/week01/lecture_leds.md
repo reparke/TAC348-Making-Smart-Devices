@@ -61,7 +61,7 @@ title: LEDs and Digital Output
 
 <!--go through this together -->
 
-- [Datasheet](https://www.sparkfun.com/datasheets/Components/LED/COM-09590-YSL-R531R3D-D2.pdf)  
+- [Datasheet](https://cdn.sparkfun.com/datasheets/Components/General/YSL-R1047WD-F10.pdf)  
 - Forward Current
 - Peak Forward Current
 - Forward Voltage
