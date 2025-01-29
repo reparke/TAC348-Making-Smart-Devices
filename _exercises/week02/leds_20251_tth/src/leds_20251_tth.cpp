@@ -61,13 +61,31 @@ void loop() {
   //      however, in this class we rarely use for loops
           // and we NEVER use while loops
 
-    brightness = brightness + 10;
-    if (brightness >= 255) {
-      brightness = 0;
-    }
-    delay(500);
-    analogWrite(PIN_LED, brightness);
-    Serial.println("The brightness is " + String(brightness));
-    // we can not concatenate (use +) a string and int
+    // brightness = brightness + 10;
+    // if (brightness >= 255) {
+    //   brightness = 0;
+    // }
+    // delay(500);
+    // analogWrite(PIN_LED, brightness);
+    // Serial.println("The brightness is " + String(brightness));
+    // // we can not concatenate (use +) a string and int
+
+  // lets use the potentiometer to control the brightness of the LED
+  // reading pot converts 0-3.3V to a digital value 0-4095
+  // writing an LED brightness uses PWM 0-255
+
+  int potVal = analogRead(PIN_POT); // 0-4095
+
+  // int pwmVal = potVal / 4095 * 255;  //incorrect!
+// int pwmVal = potVal / 4095.0 * 255;
+int pwmVal = float(potVal) / 4095 * 255;
+
+  // in C++,  int / int --> int
+  //       float / int --> float
+
+  analogWrite(PIN_LED, pwmVal);
+
+  Serial.println("potVal = " + String(potVal) + ", pwmVal = " + String(pwmVal));
+
 
 }

@@ -8,7 +8,7 @@ toc_icon: "bookmark"  # corresponding Font Awesome icon name (without fa prefix)
 toc_sticky: true
 ---
 
-## Syllabus Fall 2024
+## Syllabus Spring 2025
 
 ### Course Info
 

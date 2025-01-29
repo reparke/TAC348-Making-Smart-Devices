@@ -60,13 +60,34 @@ void loop() {
   //remember that local var disappear each time the functions ends
   //so if want to store brightness, it needs to GLOBAL
 
-  brightness = brightness + 10; //update
-  //reset
-  if (brightness >= 255) {
-    brightness = 0;
-  }
-  Serial.println("The brightness is " + String(brightness));
-  analogWrite(PIN_LED, brightness);
-  delay(500);
+  // brightness = brightness + 10; //update
+  // //reset
+  // if (brightness >= 255) {
+  //   brightness = 0;
+  // }
+  // Serial.println("The brightness is " + String(brightness));
+  // analogWrite(PIN_LED, brightness);
+  // delay(500);
+
+  //read pot
+  int potVal = analogRead(PIN_POT);
+
+
+  // int pwmVal = potVal / 4095 * 255; 
+  //in C++, int / int --> int
+  // SO when we divide integers AND we want a decimal, we need to force
+  // one of the integers to be a float because int / float --> float
+  // int pwmVal = potVal / 4095.0 * 255;   //one way to make sure you get a float
+  int pwmVal = float(potVal) / 4095 * 255;
+
+  Serial.println("Pot val = " + String(potVal) + " and PWM val = " + String(pwmVal));
+  analogWrite(PIN_LED, pwmVal);
+  delay(100); //100 ms
+
+  //use the potentiometer to control the brightness of the LED
+  // pot is analog input which means it converts 0-3.3V to 0-4095
+  // changing brightness is analog output which uses PWM and values vary 0-255
  
+
+  
 }
