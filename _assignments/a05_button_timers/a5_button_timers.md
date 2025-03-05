@@ -46,7 +46,7 @@ Here is a video overview: [https://youtu.be/MuYajFfvIvk](https://youtu.be/MuYajF
 
 -   1 x RGB LED (and any associated resistors)
 
--   3 x push button (and any associated resistors)
+-   2 x push button (and any associated resistors)
 
 -   Jumper wire 
 
@@ -83,7 +83,7 @@ Here is a video overview: [https://youtu.be/MuYajFfvIvk](https://youtu.be/MuYajF
 - You will also need to track the state of whether the red timer is active, and whether the blue timer is active (Hint: you will have one variable to show the if the red timer is active or not, and one variable for the blue timer. What type of variable makes sense for these?)
 - Logic (applied to blue button as well)
   - If red button is pressed and red timer is active, make the timer inactive
-  - If red button is pressed and red timer is not active, start the timer (Hint: )	
+  - If red button is pressed and red timer is not active, start the timer
 
 #### Testing Stage 2
 
@@ -134,7 +134,7 @@ Here is a video overview: [https://youtu.be/MuYajFfvIvk](https://youtu.be/MuYajF
 
 - Using `millis()` timing, create logic to use the RGB LED to display the active timers every **1 second** 
 - When the red timer is active, briefly flash red (you are allowed to use 100 millisecond `delay()` to show each color)
-- When the red timer is active, briefly flash red (you are allowed to use 100 millisecond `delay()` to show each color)
+- When the blue timer is active, briefly flash blue (you are allowed to use 100 millisecond `delay()` to show each color)
 
 #### Testing Stage 5	
 

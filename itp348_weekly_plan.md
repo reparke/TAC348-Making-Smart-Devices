@@ -529,7 +529,8 @@ Week 10 idea:
 ### Reading
 
 - Have students create an [Blynk](https://blynk.io/) account
-- Have students come to class with RGB LED with magnetic switch (Tues) and again for (thurs)
+  - Have students come to class with RGB LED with magnetic switch (Tues) and again for (thurs)
+
 
 ### Day 1
 

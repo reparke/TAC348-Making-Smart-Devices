@@ -24,13 +24,16 @@ const int BLINK_RATE = 500;             // time for blinking don't walk light
 
 // TODO:  Create enum State for stoplight states
 
-// TODO: Create variables for state change and state length
+// TODO: Create variables for state change and millis timer
 
 // TODO: create enum Color for signal light colors
 
 /* ======= FUNCTIONS =========== */
 // TODO: COMPLETE setColor
-void setColor() {}
+void setColor(Color c) {}
+
+// TODO: COMPLETE updateOLED
+void updateOLED() {}
 
 // TODO: COMPLETE updateNextState
 
@@ -91,5 +94,8 @@ void setup() {
 void loop() {
     // TODO: comment out this function after verifying OLED and RGB LED work
     testLightandOLED();
+	
+	// TODO: uncomment to start state machine
+	//updateNextState();
 }
 
