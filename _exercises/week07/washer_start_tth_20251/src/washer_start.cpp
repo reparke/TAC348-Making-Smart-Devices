@@ -38,15 +38,28 @@ const int LONG_CYCLE = 4000;
 
 int counter = 0;  // debugging only
 
+/*
+    X track states and cycles
+    x track timing
+    - track any state variables
+    - build state transition logic
+*/
+
 // enum options to make changing color of RGB LED easier
 enum Color { red, blue, orange, yellow, white, black };
 
 // TODO: create enum State for states
+enum State { idle, hotWash, coldWash, regularyDry, extraDry };
 
 // TODO: create enum Cycle for cycles
+enum Cycle { economy, deluxe, superDeluxe };
 
 // TODO: create other state variables
 unsigned long prevMillis = 0;
+// what other variables do we need to represent our system at any given moment?
+State currentState = idle;
+Cycle currentCycle = economy;
+int switchVal = HIGH;
 
 /* ===== FUNCTIONS ====== */
 // changes the light color based on the enum Color value
@@ -87,11 +100,112 @@ void setColor(Color c) {
 }
 // TODO: create void getCyclePosition()
 // reads potentiometer and updates current Cycle
-void getCyclePosition() {}
+void getCyclePosition() {
+    /*
+        converts from pot value to Cycle
+
+        how do we convert pot value to Cycle?
+
+        --> break up range of pot value into cycles
+        pot: 0-4095
+        three cycles
+    */
+    // int potVal = analogRead(POT_PIN);
+    // if (potVal >= 0 && potVal < 1365) {
+    //     currentCycle = economy;
+    // } else if (potVal >= 1365 && potVal < 2730) {
+    //     currentCycle = deluxe;
+    // } else {
+    //     currentCycle = superDeluxe;
+    // }
+
+    // alternate way
+    //? is there another way to convert one range to another?
+    // map!
+    int potVal = analogRead(POT_PIN);
+    int mappedVal = map(potVal, 0, 4095, 0, 2);  // mappedVal is 0  1  2
+    currentCycle = Cycle(mappedVal);
+}
 
 // TODO: create void updateNextState()
 // uses button inputs and current state to update global state variable
-void updateNextState() {}
+void updateNextState() {
+    /*
+    in general, what kinds of things should we be doing here in this function
+        1 check current time and check switch and pot (cycle)
+        2 use logic (switch) to determine the next state; and update the next
+    state 3 update any outputs (led)
+    */
+
+    switchVal = digitalRead(SWITCH_PIN);
+    getCyclePosition();  // read pot and update Cycle
+    unsigned long currMillis = millis();
+
+    // transition logic
+    // implement the economy cycle
+    // hint: SWITCH
+    //      use currentState for outer/first switch
+
+    switch (currentState) {
+        case idle:
+            if (switchVal == 0) {
+                switch (currentCycle) {
+                    case economy:
+                        currentState = coldWash;
+                        setColor(blue);
+                        prevMillis = currMillis;
+                        break;
+                    case deluxe:
+                        currentState = hotWash;
+                        setColor(red);
+                        prevMillis = currMillis;
+                        break;
+                    case superDeluxe:
+                        setColor(red);
+                        currentState = hotWash;
+                        prevMillis = currMillis;
+                        break;
+                }
+            }
+            break;
+        case coldWash:
+            if (currMillis - prevMillis > SHORT_CYCLE) {
+                currentState = regularyDry;
+                setColor(orange);
+                prevMillis = currMillis;
+            }
+            break;
+        case hotWash:
+            if (currMillis - prevMillis > SHORT_CYCLE) {
+                prevMillis = currMillis;
+                switch (currentCycle) {
+                    case deluxe:
+                        currentState = regularyDry;
+                        setColor(orange);
+                        break;
+                    case superDeluxe:
+                        currentState = extraDry;
+                        setColor(yellow);
+                        break;
+                }
+            }
+            break;
+        case regularyDry:
+            if (currMillis - prevMillis > SHORT_CYCLE) {
+                currentState = idle;
+                setColor(white);
+                // prevMillis = currMillis; //don't need to do this
+            }
+            break;
+        case extraDry:
+            if (currMillis - prevMillis > LONG_CYCLE) {
+                setColor(white);
+                currentState = idle;
+                // no need to reset timer
+            }
+            break;
+    }
+}
 
 /* ============= DEBUGGING FUNCTIONS ONLY ============= */
 // functions used for testing only
@@ -181,9 +295,9 @@ void displayAllStateInfo() {
 void loop() {
     // this function is just for debugging
     // delete when you start to code the transitions
-    testInitialSetup();
+    // testInitialSetup();
 
-    // updateNextState();
+    updateNextState();
 }
 
 void setup() {
@@ -194,3 +308,9 @@ void setup() {
     pinMode(LED_BLUE_PIN, OUTPUT);
     pinMode(LED_GREEN_PIN, OUTPUT);
 }
+
+// enum Food { tacos, chips, pizza, broccoli };
+
+// enum Food { tacos = 9, chips = 2, pizza = 1, broccoli = -5000 };
+
+// enum Food { tacos = -10, chips, pizza, broccoli };

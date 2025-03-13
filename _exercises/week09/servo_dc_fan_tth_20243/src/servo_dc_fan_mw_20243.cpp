@@ -129,5 +129,5 @@ void loop() {
     // potDCMotor();
     // basicServo();
     // potServo();
-    simpleFan();
+    // simpleFan();
 }
