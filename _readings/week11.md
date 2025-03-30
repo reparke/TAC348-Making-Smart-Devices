@@ -22,7 +22,7 @@ title: Pre-Lecture Activities
 
 ### Build before class all week 
 
-<img src="week11 temp.assets/Screenshot 2024-07-03 at 8.09.48 PM.png" alt="Screenshot 2024-07-03 at 8.09.48 PM" />
+<img src="week11.assets/ultraonic_oled_wiring" alt="ultraonic_oled_wiring" />
 
 
 

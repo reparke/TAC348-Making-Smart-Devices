@@ -843,6 +843,7 @@ Week 10 idea:
 #### Lecture / Lab
 
 - Finish InitialState Integration (if necessary)
+- retrieving from api
 
 #### Exercise - Sunrise API
 
@@ -881,7 +882,7 @@ Week 10 idea:
 
 #### Lecture
 
-- Discuss [weather stack](https://weatherstack.com/) show example call
+- Discuss [weather stack](https://weastitherstack.com/) show example call
 
 - Walkthrough integration
 
