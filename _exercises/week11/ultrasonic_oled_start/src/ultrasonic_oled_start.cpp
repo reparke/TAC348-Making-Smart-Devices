@@ -39,8 +39,7 @@ MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
 //////////////////////////
 // Ultrasonic Distance  //
 //////////////////////////
-const int PIN_TRIGGER = D6;
-const int PIN_ECHO = D5;
+
 
 void setup() {
     Serial.begin(9600);  // begin serial communication with the computer
