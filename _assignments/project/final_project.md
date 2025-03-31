@@ -28,7 +28,13 @@ the key functioning elements. Here is a [partial list of components and services
 ## Project Requirements
 
 * Be designed and built by you solely. Inspiration may be taken from online and other sources, but sources must be cited and final project must be substantially different.
-* Use at least two sensors we discussed in class
+* Use at least four major components. Major component include
+  * Sensor
+  * Servo / Motors
+  * Components not covered in class will be probably count but the need to be approved
+  * LEDs and buttons count but together only count as one component
+  * A switch connected the EN pin does not count as  component
+
 * Use at least two component to interact with environment (e.g. switch, button, etc.)
 * Use cloud / internet connectivity in a meaningful way
 * Must send data to a cloud system and display a dashboard 
@@ -143,8 +149,7 @@ Grading
 | **Project Milestone / Schematic**                         | **10** |
 |                                                           |        |
 | **Final Device**                                          |        |
-| Sensors                                                   | **10** |
-| Receive / produce interaction with environment            | **10** |
+| Sensors / produce interaction with environment            | **20** |
 | Sending data to cloud platform / dashboard                | **10** |
 | Controlling device from remotely (via cloud or Bluetooth) | **10** |
 | In-person demonstration                                   | **10** |
