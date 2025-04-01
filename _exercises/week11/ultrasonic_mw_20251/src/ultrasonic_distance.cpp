@@ -4,8 +4,8 @@ SYSTEM_THREAD(ENABLED);
 SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
 // ultrasonic pins
-const int PIN_ECHO = D6;
-const int PIN_TRIGGER = D5;
+const int PIN_ECHO = D5;
+const int PIN_TRIGGER = D6;
 
 const int WARNING_RANGE = 5; //5 inches
 const int MIN_RANGE = 1; 

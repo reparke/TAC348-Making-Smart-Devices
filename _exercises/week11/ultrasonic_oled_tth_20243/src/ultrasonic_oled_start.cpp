@@ -83,16 +83,16 @@ void loop() {
     float distanceCm = sensorTime * SPEED_SOUND_CM / 2;
     float distanceIn = CM_TO_IN * distanceCm;
 
-    if (distanceCm <= MIN_RANGE || distanceCm >= MAX_RANGE) {
-        Serial.println("Out of range: " + String(distanceCm, 1) + " cm; " +
-                       String(distanceIn, 1) + " in");
-    } else if (distanceCm <= WARNING_RANGE) {
-        Serial.println("Warning: " + String(distanceCm, 1) + " cm; " +
-                       String(distanceIn, 1) + " in");
-    } else {
-        Serial.println("Distance: " + String(distanceCm, 1) + " cm; " +
-                       String(distanceIn, 1) + " in");
-    }
+    // if (distanceCm <= MIN_RANGE || distanceCm >= MAX_RANGE) {
+    //     Serial.println("Out of range: " + String(distanceCm, 1) + " cm; " +
+    //                    String(distanceIn, 1) + " in");
+    // } else if (distanceCm <= WARNING_RANGE) {
+    //     Serial.println("Warning: " + String(distanceCm, 1) + " cm; " +
+    //                    String(distanceIn, 1) + " in");
+    // } else {
+    //     Serial.println("Distance: " + String(distanceCm, 1) + " cm; " +
+    //                    String(distanceIn, 1) + " in");
+    // }
 
     delay(500);  // in a perfect world, lets use a millis timer
 }
