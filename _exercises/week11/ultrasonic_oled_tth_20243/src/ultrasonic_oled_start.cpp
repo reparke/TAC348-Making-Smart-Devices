@@ -42,11 +42,12 @@ MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
 const int PIN_TRIGGER = D6;
 const int PIN_ECHO = D5;
 
-const int MIN_RANGE = 2;  // 2 cm
-const int WARNING_RANGE = 12;
+const int MIN_RANGE = 2;       // 2 cm
+const int WARNING_RANGE = 12;  // 5 in
 const int MAX_RANGE = 400;
 
 float SPEED_SOUND_CM = 0.03444;
+float CM_TO_IN = 0.393701;
 
 void setup() {
     Serial.begin(9600);  // begin serial communication with the computer
@@ -80,13 +81,17 @@ void loop() {
     int sensorTime = pulseIn(PIN_ECHO, HIGH);
 
     float distanceCm = sensorTime * SPEED_SOUND_CM / 2;
+    float distanceIn = CM_TO_IN * distanceCm;
 
     if (distanceCm <= MIN_RANGE || distanceCm >= MAX_RANGE) {
-        Serial.println("Out of range");
+        Serial.println("Out of range: " + String(distanceCm, 1) + " cm; " +
+                       String(distanceIn, 1) + " in");
     } else if (distanceCm <= WARNING_RANGE) {
-        Serial.println("Warning: " + String(distanceCm, 1) + " cm");
+        Serial.println("Warning: " + String(distanceCm, 1) + " cm; " +
+                       String(distanceIn, 1) + " in");
     } else {
-        Serial.println("Distance: " + String(distanceCm, 1) + " cm");
+        Serial.println("Distance: " + String(distanceCm, 1) + " cm; " +
+                       String(distanceIn, 1) + " in");
     }
 
     delay(500);  // in a perfect world, lets use a millis timer
