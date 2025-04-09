@@ -98,7 +98,7 @@ MicroOLED --------------- Photon 2
 Pulse Sensor ------------ Photon 2
   GND (black)------------ GND
   VCC (red) ------------- 3.3V
-  Data (Pink) ----------- A0
+  Data (Pink) ----------- A1
 ```
 
 *Additional Wiring*

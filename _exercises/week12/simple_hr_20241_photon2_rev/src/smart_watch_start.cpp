@@ -3,7 +3,7 @@ SYSTEM_MODE(AUTOMATIC);
 SYSTEM_THREAD(ENABLED);
 SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
-const int pulseSignalPin = A0;
+const int pulseSignalPin = A1;
 
 #include <PulseSensorAmped.h>
 

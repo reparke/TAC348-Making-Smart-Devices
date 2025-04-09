@@ -19,21 +19,21 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 //////////////////////////////////
 MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
 
-// ultrasonic pins
+// ultra sonic pins
 const int PIN_ECHO = D5;
 const int PIN_TRIGGER = D6;
 
-const int WARNING_RANGE = 5; //5 inches
-const int MIN_RANGE = 1; 
+const int WARNING_RANGE = 5;
+const int MIN_RANGE = 1;
 const int MAX_RANGE = 157;
 
-float SPEED_SOUND_CM = 0.03444;
-float CM_TO_IN = 0.393701;
+const float SPEED_SOUND_CM = 0.03444;
+const float CM_TO_IN = 0.393701;
 
 void setup() {
     Serial.begin(9600);
-    pinMode(PIN_ECHO, INPUT); //Ultra -> P2
-    pinMode(PIN_TRIGGER, OUTPUT); //P2 -> Ultra
+    pinMode(PIN_ECHO, INPUT);
+    pinMode(PIN_TRIGGER, OUTPUT);
 
     oled.begin();
     oled.clear(ALL);
@@ -41,62 +41,63 @@ void setup() {
     oled.display();
 
 }
-
 /*
-display all info on the screen (not serial monitor)
-
-* show large graphic when out of range (no_full_screen)
-* show distance AND small warning graphic when less than 5 cm (warning_half_screen)
-* otherwise, show distance and yes_half_screen
-
+    display all info on OLED
+    * show large graphic when out of range (no_full_screen)
+    * show the distance AND small warning graphic when in warning range (warning half screen)
+    * otherwise, show the distance and yes half screen
 */
 
+
+// important: make sure that Ultra VCC is connnected to VUSB
+
 /*
-    measure distance
-    display
-        less than 1 in or more than 157 in, show out of range
+measure distance
+display
+    less than min range(1 in) or more than 157 in, show out of range
+    less than 5 in, show warning
+    otherwise, display distance
 
-        less than 5 in, show warning
 
-        otherwise, show distance
 */
 
 void loop() {
+    // how to measure distance?
     digitalWrite(PIN_TRIGGER, LOW);
     delayMicroseconds(2);
     digitalWrite(PIN_TRIGGER, HIGH);
     delayMicroseconds(10);
     digitalWrite(PIN_TRIGGER, LOW);
-    //these 5 lines of code start the sensor reading
-    //aka sending the 8 pulses out
+    // these 5 lines of code start the sensor reading
+    // aka sending out the 8 pulses
 
-    //pulseIn -- returns the time for signal to change
+    // pulseIn to measure time
+    // pulseIn returns the length of time for a signal to change from L-H or H-L
     int sensorTime = pulseIn(PIN_ECHO, HIGH);
 
     float distanceCm = sensorTime * SPEED_SOUND_CM / 2;
-
     float distanceIn = distanceCm * CM_TO_IN;
 
-    // OR is C++ is ||
-    if (distanceIn <= MIN_RANGE ||distanceIn >= MAX_RANGE ) {
-        Serial.println("Out of range: " + String(distanceIn, 1));
+    // OR in C+ is ||
+    if (distanceIn <= MIN_RANGE || distanceIn >= MAX_RANGE) {
+        Serial.println("Out of range");
         oled.clear(PAGE);
         oled.drawBitmap(no_full_screen_bitmap);
         oled.display();
-    }
-    else if (distanceIn <= WARNING_RANGE) {
-        Serial.println("Warning: " + String(distanceIn, 1));
+    } else if (distanceIn <= WARNING_RANGE) {
+        Serial.println("Warning: " + String(distanceIn, 1) + " in");
         oled.clear(PAGE);
         oled.drawBitmap(warning_half_screen_bitmap);
 
-        oled.setCursor(0, 30);
+        oled.setCursor(0,30);
         oled.setFontType(1);
         oled.setColor(BLACK);
         oled.print(String(distanceIn, 1) + " in");
+
         oled.display();
-    }
-    else {
-        Serial.println("Distance: " + String(distanceIn, 1));
+
+    } else {
+        Serial.println("Distance: " + String(distanceIn, 1) + " in");
         oled.clear(PAGE);
         oled.drawBitmap(yes_half_screen_bitmap);
 
@@ -104,7 +105,9 @@ void loop() {
         oled.setFontType(1);
         oled.setColor(BLACK);
         oled.print(String(distanceIn, 1) + " in");
+
         oled.display();
     }
+
     delay(500);
 }

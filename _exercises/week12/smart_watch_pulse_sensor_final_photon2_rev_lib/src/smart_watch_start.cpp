@@ -32,7 +32,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 #include <PulseSensorAmped.h>
 // const int pulseSignalPin = A4;
 /* CHANGE */
-const int pulseSignalPin = A0;
+const int pulseSignalPin = A1;
 /* CHANGE */
 PulseSensor PulseSensorAmped;
 
