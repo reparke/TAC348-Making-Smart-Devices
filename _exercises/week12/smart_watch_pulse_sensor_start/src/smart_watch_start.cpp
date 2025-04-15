@@ -55,6 +55,8 @@ MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
 //////////////////////////////////
 #include "bitmaps_watch.h"
 #include "bitmaps_weather.h"
+#include "bitmaps_sunrise_sunset.h"
+
 
 //////////////////////////
 // Heart Screen Vars    //
@@ -74,6 +76,14 @@ MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
 // Weather Screen  Var  //
 //////////////////////////
 /* Weatherstack only has 250 API calls in free plan so use
+   very long delay (8 times per day)
+*/
+// TODO:
+
+//////////////////////////
+// Sunrise Screen  Var  //
+//////////////////////////
+/* 
    very long delay (8 times per day)
 */
 // TODO:

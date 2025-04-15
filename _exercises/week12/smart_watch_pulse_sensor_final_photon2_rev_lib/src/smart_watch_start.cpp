@@ -27,8 +27,6 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 //////////////////////////////////
 #define ARDUINOJSON_ENABLE_ARDUINO_STRING 1
 #include <ArduinoJson.h>
-
-  
 #include <PulseSensorAmped.h>
 // const int pulseSignalPin = A4;
 /* CHANGE */
@@ -53,6 +51,7 @@ MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
 //////////////////////////////////
 // Bitmaps                      //
 //////////////////////////////////
+#include "bitmaps_sunrise_sunset.h"
 #include "bitmaps_watch.h"
 #include "bitmaps_weather.h"
 
@@ -89,6 +88,17 @@ int weatherCode;
 int uvIndex;
 
 //////////////////////////
+// Sunrise Screen  Var  //
+//////////////////////////
+/* 
+   very long delay (8 times per day)
+*/
+// TODO:
+
+unsigned long SUNRISE_SCREEN_UPDATE = 10512000;
+String sunriseTime, sunsetTime;
+
+//////////////////////////
 // Button Variables     //
 //////////////////////////
 const int PIN_BUTTON = D3;
@@ -98,7 +108,7 @@ int prevButtonVal = HIGH;  // the last VERIFIED state
 // States               //
 //////////////////////////
 // TODO: create state enum and variable(s) to track state
-enum State { Clock, Heart, Weather };
+enum State { Clock, Heart, Weather};
 State currentState = Heart;
 
 //////////////////////////////
@@ -182,6 +192,27 @@ void runClockScreen() {
     */
 }
 
+void runSunriseScreen() {
+    // 8 times per day we request the weather day
+    unsigned long curMillis = millis();
+    if (curMillis - prevMillis > WEATHER_SCREEN_UPDATE) {
+        prevMillis = curMillis;
+        Particle.publish("sunrise_sunset", "", PRIVATE);
+    }
+    // but we always draw the screen
+    oled.clear(PAGE);
+    // rain is code 302, 299, 296
+    oled.drawBitmap(bitmap_sunrise_sunset);
+    oled.setFontType(0);
+    oled.setCursor(40, 8);
+    oled.print( sunriseTime.substring(0,4));
+
+    oled.setCursor(40, 31);
+    // display the description on one line
+    oled.print(sunsetTime.substring(0, 4));
+    oled.display();
+}
+
 // TODO
 void runWeatherScreen() {
     // 8 times per day we request the weather day
@@ -209,11 +240,9 @@ void runWeatherScreen() {
     oled.print(temperature, 0);
 
     oled.setCursor(0, 28);
-    //display the description on one line
-    oled.print(weatherDescription.substring(0,9));
+    // display the description on one line
+    oled.print(weatherDescription.substring(0, 9));
     oled.display();
-
-
 }
 // TODO
 void getNextState() {
@@ -240,7 +269,8 @@ void loadNextScreen() {
             runHeartScreen();
             break;
         case Weather:
-            runWeatherScreen();
+            // runWeatherScreen();
+            runSunriseScreen();
             break;
     }
 }
@@ -253,6 +283,33 @@ void PulseSensorAmped_data(int BPM, int IBI) {
 }
 
 void PulseSensorAmped_lost(void) {}
+
+void myHandlerSunrise(const char *event, const char *data) {
+    // declare object to store JSON response
+    StaticJsonDocument<1024> doc;
+    DeserializationError error = deserializeJson(doc, data);
+
+    // Test to see if was successful
+    if (error) {
+        Serial.print(F("deserializeJson() failed: "));
+        return;
+    }
+
+    // we will const char * as a String!
+    // what is data? It is the entire JSON response from sunrise api
+    //  String jsonResposne = String(data);
+    //  Serial.println(jsonResposne);
+
+    // {"rise":"{{results.sunrise}}","set":"{{results.sunset}}"}
+    // sunsetTime = doc["set"];
+    // sunriseTime = doc["rise"];
+    String setTime = doc["set"];
+    String riseTime = doc["rise"];
+    sunriseTime = riseTime;
+    sunsetTime = setTime;
+    Serial.println("The sunset time is " + setTime +
+                   " and the rise time is " + riseTime);
+}
 
 void myHandler(const char *event, const char *data) {
     // declare object to store JSON response
@@ -302,13 +359,15 @@ https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64
     Time.beginDST();
 
     Particle.subscribe("hook-response/WeatherStackJSON", myHandler, MY_DEVICES);
-
+    Particle.subscribe("hook-response/sunrise_sunset", myHandlerSunrise, MY_DEVICES);
 }
 
 void loop() {
     if (runOnce == true && Particle.connected() == true) {
         runOnce = false;
         Particle.publish("WeatherStackJSON", "", PRIVATE);
+        Particle.publish("sunrise_sunset", "");
+
         Serial.println("run once");
     }
 

@@ -1013,6 +1013,8 @@ Note: need to update exercies (start and final) since trigger and echo pins chan
 
 
 
+==Spring: Move accel to next week so day 1 is clock screen and webhook of weather, and day 2 is json of weather + maybe sleep?== 
+
 ## 13. Smart Watch + Accelerometer
 
 ### Reading
