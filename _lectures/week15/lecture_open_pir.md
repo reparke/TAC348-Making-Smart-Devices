@@ -92,7 +92,9 @@ title: Open PIR (Passive Infrared Sensor)
 
 ## Wiring
 
-<img src="lecture_open_pir.assets/Screenshot 2024-06-29 at 11.44.31 PM.png" alt="Screenshot 2024-06-29 at 11.44.31 PM" style="width:800px;" />
+<img src="lecture_open_pir.assets/open_pir_sparkfun_sleep_button_bb.png" alt="Screenshot 2024-06-29 at 11.44.31 PM" style="width:800px;" />
+
+*Note: button is not required*
 
 ## Exercise
 
