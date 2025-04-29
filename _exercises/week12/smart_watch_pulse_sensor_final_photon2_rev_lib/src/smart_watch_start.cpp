@@ -215,35 +215,57 @@ void runSunriseScreen() {
 
 // TODO
 void runWeatherScreen() {
-    // 8 times per day we request the weather day
+    // // for debugging
+    // Serial.println("Weather");
+    // oled.clear(PAGE);  // Clear the display
+    // oled.setCursor(0, 0);
+    // oled.print("Weather");
+    // oled.display();
+
+    /*
+        what should WEATHER_SCREEN_UPDATE be?
+            or, how often should we redraw the screen?
+        --> we have a unique constraint
+            we get 100 API requests / month with free weatherstack
+            ==> we should update 3 times per day (30 days in month)
+    */
+
     unsigned long curMillis = millis();
     if (curMillis - prevMillis > WEATHER_SCREEN_UPDATE) {
         prevMillis = curMillis;
-        Particle.publish("WeatherStackJSON", "", PRIVATE);
+        // get new weather
+        Particle.publish("WeatherStackJSON", "");
     }
-    // but we always draw the screen
     oled.clear(PAGE);
-    // rain is code 302, 299, 296
-    switch (weatherCode) {
+
+    //rain is code 302, 299, 296
+    switch(weatherCode) {
         case 302:
         case 299:
-        case 296:
+        case 296:   //this is an OR
             oled.drawBitmap(bitmap_rainy_16x12);
             break;
-        // we could have more case statements for other weather
+        //we could many more here...
         default:
             oled.drawBitmap(bitmap_sunny_16x12);
             break;
     }
-    oled.setFontType(0);
+    oled.setFontType(1);
     oled.setCursor(38, 5);
-    oled.print(temperature, 0);
+    oled.print(temperature,0);
+
+    oled.setFontType(0);
+    oled.print("o");
 
     oled.setCursor(0, 28);
-    // display the description on one line
-    oled.print(weatherDescription.substring(0, 9));
+    oled.print(weatherDescription);
+    oled.setCursor(0, 40);
+    oled.print("UV Ind: ");
+    oled.print(uvIndex);
     oled.display();
+    
 }
+
 // TODO
 void getNextState() {
     switch (currentState) {

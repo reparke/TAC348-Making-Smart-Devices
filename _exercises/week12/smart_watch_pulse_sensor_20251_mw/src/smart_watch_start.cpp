@@ -56,6 +56,8 @@ MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
 #include "bitmaps_watch.h"
 #include "bitmaps_weather.h"
 
+boolean runOnce = true;
+
 //////////////////////////
 // Heart Screen Vars    //
 //////////////////////////
@@ -63,16 +65,16 @@ MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
     the heart rate detection to fail
     This delay was determined experimentally to work well
 */
-//need a global var to store HR
-int beatAverage = 0;
-unsigned long HEART_SCREEN_UPDATE = 3000;
+// calling oled.display() takes a long time
+const unsigned long HEART_SCREEN_UPDATE = 3000;
 unsigned long prevMillis = 0;
+int beatAvg = 0;
 
 //////////////////////////
 // Clock  Screen  Var   //
 //////////////////////////
 // TODO:
-const unsigned long CLOCK_SCREEN_UPDATE = 500;
+const unsigned long CLOCK_SCREEN_UPDATE = 500;  // update every 1/2 s
 
 //////////////////////////
 // Weather Screen  Var  //
@@ -81,62 +83,67 @@ const unsigned long CLOCK_SCREEN_UPDATE = 500;
    very long delay (8 times per day)
 */
 // TODO:
-const unsigned long WEATHER_SCREEN_UPDATE = 10512000; //roughly 8 hours
+const unsigned long WEATHER_SCREEN_UPDATE = 10512000;  // 8 hours
+float temperature;
+String weatherDescription;
+int weatherCode;
+int uvIndex;
 
-
-    //////////////////////////
-    // Button Variables     //
-    //////////////////////////
-    const int PIN_BUTTON = D3;
+//////////////////////////
+// Button Variables     //
+//////////////////////////
+const int PIN_BUTTON = D3;
 int prevButtonVal = HIGH;  // the last VERIFIED state
 
 //////////////////////////
 // States               //
 //////////////////////////
 // TODO: create state enum and variable(s) to track state
-enum State { Clock, Heart, Weather };
+enum State { Clock, Weather, Heart };
 State currentState = Heart;
-
-bool runOnce = true;    //flag var to make sure weather publish works first time
 
 ///////////////////////////////////////////////////////////////
 //               END LIBRARIES AND DECLARATIONS              //
 ///////////////////////////////////////////////////////////////
 
-/*
-    at a certain interval HEART_SCREEN_UPDATE
-    if the beat is in valid range, show
-        heart graphic
-        current heart beat rate
-    if beat is invalid, show
-        heart graphic
-        "---"
-*/
+// TODO
 void runHeartScreen() {
-unsigned long curMillis = millis();
-if (curMillis-prevMillis > HEART_SCREEN_UPDATE) {
-    prevMillis = curMillis;
-    oled.clear(PAGE);
-    oled.drawBitmap(bitmap_heart_16x12);
-    oled.setFontType(1);
-    oled.setCursor(20,0);
-    if (beatAverage > 230 || beatAverage < 40) {
-        oled.print("---");
-        Serial.println("---");
-    }
-    else {
-        //valid HR
-        Serial.println(beatAverage);
-        oled.print(String(beatAverage));
-    }
-    oled.display();
-}
     //     // for debugging
-//     Serial.println("Heart");
-//     oled.clear(PAGE);  // Clear the display
-//     oled.setCursor(0, 0);
-//     oled.print("Heart");
-//     oled.display();
+    //     Serial.println("Heart");
+    //     oled.clear(PAGE);  // Clear the display
+    //     oled.setCursor(0, 0);
+    //     oled.print("Heart");
+    //     oled.display();
+    /*
+        if HR is valid, show heart icon and HR on oled
+        if HR is invalid, show heart icon and "---"
+
+        invalid: very very high or very very low
+    */
+    unsigned long curMillis = millis();
+    if (curMillis - prevMillis > HEART_SCREEN_UPDATE) {
+        prevMillis = curMillis;
+        oled.clear(PAGE);
+        oled.drawBitmap(bitmap_heart_16x12);
+        oled.setFontType(1);
+        oled.setCursor(20, 0);
+        if (beatAvg > 230 || beatAvg < 40) {
+            oled.print("---");
+            Serial.println("---");
+
+        } else {
+            oled.print(String(beatAvg));
+            Serial.println(beatAvg);
+        }
+
+        oled.setCursor(0, 30);
+
+        // from Photon 2 documentation
+        float batteryVoltage = analogRead(A6) / 819.2;
+        oled.print("%: " + String(batteryVoltage, 1));
+
+        oled.display();
+    }
 }
 
 // TODO
@@ -147,77 +154,104 @@ void runClockScreen() {
     // oled.setCursor(0, 0);
     // oled.print("Clock");
     // oled.display();
+    /*
 
-    // what should CLOCK_SCREEN_UPDATE be?
-    // goal: screen should redraws as infrequently as posssible
-    //       while still maintaining the user performance / expectation
-    //  --> update 1/2 s
+        question: how often does the data update?
+                once per second because the seconds change every second
+
+        how often should we update/redraw the clock screen?
+            goal: draw as INFREQUENTLY as possible as long as we can ensure
+                  the user experience is positive
+
+            options: redraw the screen
+            1 time per second
+            2 times per second
+    */
     unsigned long curMillis = millis();
     if (curMillis - prevMillis > CLOCK_SCREEN_UPDATE) {
         prevMillis = curMillis;
+        oled.clear(PAGE);
+        oled.drawBitmap(bitmap_clock_16x12);
 
+        // make the formatting variables
         String dateFormat = "%b %e";
         String dayFormat = "%a";
         String timeFormat = "%I:%M";
         String secondFormat = "%S";
 
-        oled.clear(PAGE);
-        //we must always draw image first
-        oled.drawBitmap(bitmap_clock_16x12);
         oled.setFontType(0);
-        //date
-        oled.setCursor(25,0);
+        // date
+        oled.setCursor(25, 0);
         oled.print(Time.format(dateFormat));
-        //day
+
+        // day
         oled.setCursor(25, 10);
         oled.print(Time.format(dayFormat));
-        //second
-        oled.setCursor(50,30);
+
+        // second
+        oled.setCursor(50, 30);
         oled.print(Time.format(secondFormat));
-        //time
+
+        // time
         oled.setFontType(1);
         oled.setCursor(0, 25);
         oled.print(Time.format(timeFormat));
 
         oled.display();
-
-        //time zone only needs to be done once so lets do it in setup()
-
-
     }
-
 }
 
-/*
-    problem: we won't request the weather for 8 hours
-    solution: let's request the weather when the device first states, and then 
-                let the millis timer take over
-
-    there is a little trick here
-    in theory! we could put code in setup if we want it to run once on startup
-        BUT there's another problem...in setup, we don't have wifi yet!
-
-        so! if we want to run ONCE at startup AND that code needs internet, we need to actually put the code in loop and do some checks 
-*/
 // TODO
 void runWeatherScreen() {
-//     // for debugging
-//     Serial.println("Weather");
-//     oled.clear(PAGE);  // Clear the display
-//     oled.setCursor(0, 0);
-//     oled.print("Weather");
-//     oled.display();
-/*
-    how often should we request the weather data?
-        with free plan, we get 100 request / month
-        --> in order to stay under our max, we should request
-        no more than 3 times per day
-*/
-    unsignged long curMillis = millis();
+    // // for debugging
+    // Serial.println("Weather");
+    // oled.clear(PAGE);  // Clear the display
+    // oled.setCursor(0, 0);
+    // oled.print("Weather");
+    // oled.display();
+
+    /*
+        what should WEATHER_SCREEN_UPDATE be?
+            or, how often should we redraw the screen?
+        --> we have a unique constraint
+            we get 100 API requests / month with free weatherstack
+            ==> we should update 3 times per day (30 days in month)
+    */
+
+    unsigned long curMillis = millis();
     if (curMillis - prevMillis > WEATHER_SCREEN_UPDATE) {
         prevMillis = curMillis;
+        // get new weather
         Particle.publish("WeatherStackJSON", "");
     }
+    oled.clear(PAGE);
+
+    //rain is code 302, 299, 296
+    switch(weatherCode) {
+        case 302:
+        case 299:
+        case 296:   //this is an OR
+            oled.drawBitmap(bitmap_rainy_16x12);
+            break;
+        //we could many more here...
+        default:
+            oled.drawBitmap(bitmap_sunny_16x12);
+            break;
+    }
+    oled.setFontType(1);
+    oled.setCursor(38, 5);
+    oled.print(temperature,0);
+
+    oled.setFontType(0);
+    oled.print("o");
+
+    oled.setCursor(0, 28);
+    oled.print(weatherDescription);
+    oled.setCursor(0, 40);
+    oled.print("UV Ind: ");
+    oled.print(uvIndex);
+    oled.display();
+    
 }
 
 // TODO
@@ -253,30 +287,52 @@ void loadNextScreen() {
 ////////////////////////////
 // Pulse Sensor Functions //
 ////////////////////////////
-// this is an EVENT HANDLER which is called automatically by the HR library
-//everytime it detects a beat
-void PulseSensorAmped_data(int BPM, int IBI) {
-    beatAverage = BPM;
-    //stores most recent detected BPM from the event handler into 
-    //   our global var
-}
+
+// event handler
+void PulseSensorAmped_data(int BPM, int IBI) { beatAvg = BPM; }
 
 void PulseSensorAmped_lost(void) {}
 
-
-
 void myHandler(const char *event, const char *data) {
     // Handle the integration response
+    Serial.println(String(data));
+
+    StaticJsonDocument<1024> doc;
+    DeserializationError error = deserializeJson(doc, data);
+
+    // Test to see if was successful
+    if (error) {
+        Serial.print(F("deserializeJson() failed: "));
+        return;
+    }
+
+    /* template
+    {"name":"{{location.name}}", "temperature":"{{current.temperature}}",
+    "description":"{{current.weather_descriptions.0}}",
+    "uvIndex":"{{current.uv_index}}","code":"{{current.weather_code}}"
+    }
+    */
+
+    /* Here is where your parsing code goes */
+    // parse JSON
+    temperature = doc["temperature"];
+    weatherCode = doc["code"];
+    weatherDescription = String(doc["description"]);
+    uvIndex = doc["uvIndex"];
+
+    Serial.println("Description = " + weatherDescription);
+    Serial.println("Code = " + String(weatherCode));
+    Serial.println("Temperature = " + String(temperature));
+    Serial.println("UV Index = " + String(uvIndex));
 }
 
 void setup() {
-    Particle.subscribe("hook-response/WeatherStackJSON", myHandler, MY_DEVICES);
     /*
 https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64313/4?u=rob7
 */
     analogRead(pulseSignalPin);  // bug workaround
 
-    Serial.begin(115200);
+    Serial.begin(9600);
     Serial.println("Initializing...");
 
     PulseSensorAmped.attach(pulseSignalPin);
@@ -294,44 +350,31 @@ https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64
 
     pinMode(PIN_BUTTON, INPUT);
 
-    // Time.beginDST(); // not yet
-    Time.zone(-8);
+    Particle.subscribe("hook-response/WeatherStackJSON", myHandler, MY_DEVICES);
 }
 
 /*
-    Screen display logic
-    each time through the loop, call function to show oled screen based on state
-        loadNextState
-    In loadNextState, we will look at the currentState to show the appropriate
-   screen BUT within each of the display functions, we are going to have a timer
-        this will prevent the DRAWING from happening to frequently
-        by DRAWING, we mean calling oled.display()
+    goal: we would like to make ONE weatherStack request everytime the photon
+   turns on      --> this SHOULD BE IN SETUP problem: in the setup, the photon
+   does not YET HAVE INTERNET ACCESS!
+
+    solution: put publish, and create a boolean flag to make sure it only runs
+   once
 */
 
-//there is a chance that when loop() runs the first time, we STILL won't have wifi
 void loop() {
-    if(runOnce == true && Particle.connected() == true) {
-        runOnce = false; //don't run a scond time
+    if (runOnce == true && Particle.connected() == true) {
+        runOnce = false;
         Particle.publish("WeatherStackJSON", "");
     }
-
-    int curButtonVal = digitalRead(PIN_BUTTON);
     // latch
+    int curButtonVal = digitalRead(PIN_BUTTON);
     if (curButtonVal == LOW && prevButtonVal == HIGH) {
-        // change the state
-        getNextState();  // update to next state
+        getNextState();
     }
     loadNextScreen();
+    // takes a reading
+    PulseSensorAmped.process();
+
     prevButtonVal = curButtonVal;
-
-    //check HR sensor reading
-    PulseSensorAmped.process();     //measure HR
-
-    /*
-        measure HR all the time
-        - battery drain
-        + HR is instantly availaable
-        + tracking HR over time
-        --> when not on the heart screen, we could sample HR at longer intervals
-    */
 }

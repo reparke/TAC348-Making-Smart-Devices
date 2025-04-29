@@ -19,16 +19,16 @@ show_in_list: true
 
 - Uses SPI communication protocol
 
-| Sensor | Photon 2               |
-| ------ | ---------------------- |
-| 3.3v   | 3.3v                   |
-| Reset  | Any digital output pin |
-| GND    | GND                    |
-| IRQ    | -                      |
-| MOSI   | MO                     |
-| MISO   | MI                     |
-| SCK    | SCK                    |
-| SDA    | Any digital output pin |
+| Sensor | Photon 2                       |
+| ------ | ------------------------------ |
+| 3.3v   | 3.3v                           |
+| Reset  | A1 (or any digital output pin) |
+| GND    | GND                            |
+| IRQ    | -                              |
+| MOSI   | MO                             |
+| MISO   | MI                             |
+| SCK    | SCK                            |
+| SDA    | A0 (or any digital output pin) |
 
 ## Wiring Diagram
 
@@ -42,7 +42,7 @@ show_in_list: true
 
 * We need a library to handle much of the complex communication with the OLED 
 * To install a library, go to the command palette and type `Install Library`
-* Install the OLED library: `ARGON-RFID-MFRC522`
+* Install the OLED library: `MFRC522`
 
 ### Examples
 

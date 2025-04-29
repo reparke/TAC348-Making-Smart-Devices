@@ -68,7 +68,7 @@ title: RFID (Radio Frequency ID Scanner	)
 
 ## RFID Library
 
-  * `ARGON-RFID-MFRC522` is a Photon 2 compatible library
+  * `MFRC522` is a Photon 2 compatible library
 
 ## Sample Code #1: Find the Card ID
 
@@ -80,19 +80,17 @@ title: RFID (Radio Frequency ID Scanner	)
 
 ```c++
 #include <MFRC522.h>
-#include <SPI.h>
 
 const int SS_PIN = A0;
 const int RST_PIN = A1;
-const String MATCH_ID = "OB 45 EA 0E"; //target id to match
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance.
 
 void setup() {
-    SPI.begin();                        // Init SPI bus
-    mfrc522.PCD_Init();                 // Init MFRC522
-    mfrc522.PCD_DumpVersionToSerial();  // Show details of  MFRC522 Card
-  Serial.println("Scan PICC to see UID and type...");
+    Serial.println(9600);
+	mfrc522.setSPIConfig();
+    mfrc522.PCD_Init();  // Init MFRC522 card
+	Serial.println("Scan PICC to see UID and type...");
 }
 
 ```
@@ -110,7 +108,6 @@ void loop() {
     return;
   }
   // Dump info about the card. PICC_HaltA() is automatically called.
-  Serial.println("About to dump");
   mfrc522.PICC_DumpToSerial(&(mfrc522.uid));
 }
 
@@ -126,7 +123,7 @@ void loop() {
 
 ```c++
 #include <MFRC522.h>
-#include <SPI.h>
+
 
 const int SS_PIN = A0;
 const int RST_PIN = A1;
@@ -135,10 +132,9 @@ const String MATCH_ID = "OB 45 EA 0E"; //target id to match
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance.
 
 void setup() {
-    SPI.begin();                        // Init SPI bus
-    mfrc522.PCD_Init();                 // Init MFRC522
-    mfrc522.PCD_DumpVersionToSerial();  // Show details of  MFRC522 Card
-  Serial.println("Scan PICC to see UID and type...");
+	Serial.begin(9600);
+    mfrc522.setSPIConfig();
+    mfrc522.PCD_Init();  // Init MFRC522 card
 }
 ```
 
@@ -209,11 +205,7 @@ scanId.trim();         //scanId has an intial leading " "
 - Create program to turn D7 LED on with one card and off with second card
 - Use a `millis()` timer to pause 1 second between each card read
 
-<!-- Note: MFRC522 library doesn't work with DeviceOS 3.1+. You need to do the following-->
-
-<!-- change MIFARE_UnbrickUidSector method to return true in case of ELSE after line 1630 !-->
-
-<!-- open project.properties and delete the dependency line for MFRC522. Particle cloud flash uses the cloud version of the library otherwise, meaning it won't use the local, changed version-->
+<!-- Note: MFRC522 library now works with DeviceOS 5.8+ and Photon 2 -->
 
 ## Obtaining Sensors and Cards
 

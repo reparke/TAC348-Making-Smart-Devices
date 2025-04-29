@@ -1043,7 +1043,10 @@ Note: need to update exercies (start and final) since trigger and echo pins chan
 * ==NB: If students used mustache templates with WeatherStack, the response template will need to be update==
 
 ```json
-{"name":"{{location.name}}", "temperature":"{{current.temperature}}","description":"{{current.weather_descriptions.0}}","weather_code":"{{current.weather_code}}","uv_index":"{{current.uv_index}}"}
+{"name":"{{location.name}}", "temperature":"{{current.temperature}}",
+    "description":"{{current.weather_descriptions.0}}",
+    "uvIndex":"{{current.uv_index}}","code":"{{current.weather_code}}"
+ }
 ```
 
 * NB 2: With threading enabled, `setup()` runs before cloud connectivity is enabled. In order to get the weather initially when Photon 2 turns on, we need to set a boolean flag and do a check in `loop()`

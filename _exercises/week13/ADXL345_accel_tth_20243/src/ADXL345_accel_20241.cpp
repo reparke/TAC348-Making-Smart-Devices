@@ -169,9 +169,10 @@ void loop() {
     //    int r = map(adxl.cx, -1.0, 1.0, 0.0, 255.0);
     //    int r = map(abs(adxl.cx), 0.2, 0.80, 0.0, 255.0);
     //    changeRgbLed(r, 0,0);
+       changeRgbLed(255, 255, 255);
 
-    // displayExampleGraphs();
-    // delay(500);
+    displayExampleGraphs();
+    delay(500);
 
     // detect orientation
     // int orientation = adxl.getOrientation();
@@ -210,11 +211,11 @@ void loop() {
         suggestion is if/else
     */
 
-    if (adxl.readDoubleTap() == true) {
-        Serial.println(String(counter++) + "Double Tap (in Z)");
-    } else if (adxl.readTap() == true) {
-        Serial.println(String(counter++) + "Single Tap (in Z)");
-    }else if (adxl.readActivity() == true) {
-        Serial.println(String(counter++) + "Activity (in X)");
-    }
+    // if (adxl.readDoubleTap() == true) {
+    //     Serial.println(String(counter++) + "Double Tap (in Z)");
+    // } else if (adxl.readTap() == true) {
+    //     Serial.println(String(counter++) + "Single Tap (in Z)");
+    // }else if (adxl.readActivity() == true) {
+    //     Serial.println(String(counter++) + "Activity (in X)");
+    // }
 }

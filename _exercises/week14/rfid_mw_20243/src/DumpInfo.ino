@@ -31,8 +31,8 @@
 //#include <SPI.h>
 #include "MFRC522.h"
 
-#define SS_PIN SS
-#define RST_PIN D2
+#define SS_PIN A0
+#define RST_PIN A1
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);	// Create MFRC522 instance.
 

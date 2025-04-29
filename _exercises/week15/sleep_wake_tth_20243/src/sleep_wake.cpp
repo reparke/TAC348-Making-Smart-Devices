@@ -4,7 +4,7 @@ SYSTEM_THREAD(ENABLED);
 SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
 const int PIN_PIR = D2;
-const int PIN_BUTTON = D10;
+const int PIN_BUTTON = D3;
 
 /*
     PIR sensor

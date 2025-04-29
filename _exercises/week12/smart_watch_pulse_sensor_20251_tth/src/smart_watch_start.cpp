@@ -83,7 +83,11 @@ const unsigned long CLOCK_SCREEN_UPDATE = 500;  // update every 1/2 s
    very long delay (8 times per day)
 */
 // TODO:
-const unsigned long WEATHER_SCREEN_UPDATE = 10512000;  //8 hours
+const unsigned long WEATHER_SCREEN_UPDATE = 10512000;  // 8 hours
+float temperature;
+String weatherDescription;
+int weatherCode;
+int uvIndex;
 
 //////////////////////////
 // Button Variables     //
@@ -169,26 +173,26 @@ void runClockScreen() {
         oled.clear(PAGE);
         oled.drawBitmap(bitmap_clock_16x12);
 
-        //make the formatting variables
+        // make the formatting variables
         String dateFormat = "%b %e";
         String dayFormat = "%a";
         String timeFormat = "%I:%M";
         String secondFormat = "%S";
 
         oled.setFontType(0);
-        //date
+        // date
         oled.setCursor(25, 0);
         oled.print(Time.format(dateFormat));
 
-        //day
+        // day
         oled.setCursor(25, 10);
         oled.print(Time.format(dayFormat));
 
-        //second
+        // second
         oled.setCursor(50, 30);
         oled.print(Time.format(secondFormat));
 
-        //time
+        // time
         oled.setFontType(1);
         oled.setCursor(0, 25);
         oled.print(Time.format(timeFormat));
@@ -217,10 +221,37 @@ void runWeatherScreen() {
     unsigned long curMillis = millis();
     if (curMillis - prevMillis > WEATHER_SCREEN_UPDATE) {
         prevMillis = curMillis;
-        //get new weather
+        // get new weather
         Particle.publish("WeatherStackJSON", "");
-
     }
+    oled.clear(PAGE);
+
+    //rain is code 302, 299, 296
+    switch(weatherCode) {
+        case 302:
+        case 299:
+        case 296:   //this is an OR
+            oled.drawBitmap(bitmap_rainy_16x12);
+            break;
+        //we could many more here...
+        default:
+            oled.drawBitmap(bitmap_sunny_16x12);
+            break;
+    }
+    oled.setFontType(1);
+    oled.setCursor(38, 5);
+    oled.print(temperature,0);
+
+    oled.setFontType(0);
+    oled.print("o");
+
+    oled.setCursor(0, 28);
+    oled.print(weatherDescription);
+    oled.setCursor(0, 40);
+    oled.print("UV Ind: ");
+    oled.print(uvIndex);
+    oled.display();
+    
 }
 
 // TODO
@@ -262,9 +293,37 @@ void PulseSensorAmped_data(int BPM, int IBI) { beatAvg = BPM; }
 
 void PulseSensorAmped_lost(void) {}
 
-
 void myHandler(const char *event, const char *data) {
     // Handle the integration response
+    Serial.println(String(data));
+
+    StaticJsonDocument<1024> doc;
+    DeserializationError error = deserializeJson(doc, data);
+
+    // Test to see if was successful
+    if (error) {
+        Serial.print(F("deserializeJson() failed: "));
+        return;
+    }
+
+    /* template
+    {"name":"{{location.name}}", "temperature":"{{current.temperature}}",
+    "description":"{{current.weather_descriptions.0}}",
+    "uvIndex":"{{current.uv_index}}","code":"{{current.weather_code}}"
+    }
+    */
+
+    /* Here is where your parsing code goes */
+    // parse JSON
+    temperature = doc["temperature"];
+    weatherCode = doc["code"];
+    weatherDescription = String(doc["description"]);
+    uvIndex = doc["uvIndex"];
+
+    Serial.println("Description = " + weatherDescription);
+    Serial.println("Code = " + String(weatherCode));
+    Serial.println("Temperature = " + String(temperature));
+    Serial.println("UV Index = " + String(uvIndex));
 }
 
 void setup() {
@@ -295,14 +354,15 @@ https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64
 }
 
 /*
-    goal: we would like to make ONE weatherStack request everytime the photon turns on      --> this SHOULD BE IN SETUP
-    problem: in the setup, the photon does not YET HAVE INTERNET ACCESS!
+    goal: we would like to make ONE weatherStack request everytime the photon
+   turns on      --> this SHOULD BE IN SETUP problem: in the setup, the photon
+   does not YET HAVE INTERNET ACCESS!
 
-    solution: put publish, and create a boolean flag to make sure it only runs once
+    solution: put publish, and create a boolean flag to make sure it only runs
+   once
 */
 
 void loop() {
-
     if (runOnce == true && Particle.connected() == true) {
         runOnce = false;
         Particle.publish("WeatherStackJSON", "");
