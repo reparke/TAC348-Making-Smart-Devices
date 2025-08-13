@@ -3,7 +3,7 @@ week: 10
 number: 9
 category: assignments
 title: Bluetooth Car
-date_due: Sun Mar 30 @ 11:59 pm
+date_due: Sun Nov 2 @ 11:59 pm
 
 ---
 Assignment 9 – Bluetooth Car

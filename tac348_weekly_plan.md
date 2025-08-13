@@ -133,10 +133,10 @@ Week 10 idea:
 
 #### Lecture
 
-* Remind: ==Students need to pick up kit from ITP office BEFORE Wed class==
+* Remind: ==Students need to pick up kit from TAC office BEFORE Wed class==
 
 - Course introduction / syllabus (PPTX)
-- Ice breaker *(see slides in local ITP 348 Docs folder)* 
+- Ice breaker *(see slides in local TAC 348 Docs folder)* 
   
 - Introduction to IoT
 - Explain course website

@@ -1,4 +1,4 @@
-# ITP 348 – Introduction to Physical Computing
+# TAC 348 – Making Smart Devices
 
 ==**More information to be added later**==
 

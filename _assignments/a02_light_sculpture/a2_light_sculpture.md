@@ -3,7 +3,7 @@ week: 2
 number: 2
 category: assignments
 title: Light Sculpture
-date_due: Sun Jan 26 @ 11:59 pm
+date_due: Sun Sep 7 @ 11:59 pm
 ---
 
 Assignment 2 – Light Sculpture

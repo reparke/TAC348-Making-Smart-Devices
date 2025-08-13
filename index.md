@@ -8,7 +8,7 @@ header:
 ---
 
 
-Welcome to the course page for **ITP 348 - Making Smart Devices: Introduction to Electronics/Wearables**! This course is offered by the [Information Technology Program](https://itp.usc.edu/) in the [Viterbi School of Engineering](https://viterbischool.usc.edu/) at the [University of Southern California](https://www.usc.edu)
+Welcome to the course page for **TAC 348 - Making Smart Devices: Introduction to Electronics/Wearables**! This course is offered by the [Technology and Applied Computing Program](https://tac.usc.edu/) in the [Viterbi School of Engineering](https://viterbischool.usc.edu/) at the [University of Southern California](https://www.usc.edu)
 
 
 
@@ -19,11 +19,11 @@ You'll find course material and useful links on the side.
 - [Week by Week Schedule](schedule.md) - Weekly schedule of lectures, assignments, readings
 - [Exercises](https://github.com/reparke/ITP348-Physical-Computing/tree/main/_exercises) - GitHub repository with the code we create during class. All projects are created with [Particle Workbench](https://www.particle.io/workbench/)
 - [Brightspace](https://brightspace.usc.edu) - For submitting assignments
-- [Piazza](https://piazza.com/usc/spring2025/itp348/home) - Discussion board for assignments and class
-- [ITP-348 Photon 2 troubleshooting guide](https://docs.google.com/document/d/12_kRqHdNPQmiGWF4pe0LWZbBaEmdoF-bbJtCxojCN74/edit#heading=h.7fjmqgnpux8d) This is a super useful document with the most common issues and solutions encountered in ITP 348
+- [Piazza](https://piazza.com/usc/fall2025/tac348/home) - Discussion board for assignments and class
+- [TAC-348 Photon 2 troubleshooting guide](https://docs.google.com/document/d/12_kRqHdNPQmiGWF4pe0LWZbBaEmdoF-bbJtCxojCN74/edit#heading=h.7fjmqgnpux8d) This is a super useful document with the most common issues and solutions encountered in TAC 348
 
 #### Specific Course Content Links
-- [Syllabus](itp348_syllabus.md) - Course plan, policies, and date
+- [Syllabus](tac348_syllabus.md) - Course plan, policies, and date
 - [Lectures](lectures.html) - HTML slides shows of lectures
 - [Assignments](assignments.html) - Assignment writeups
 - [Videos](readings.md) - Short weekly videos and readings to be reviewed before class

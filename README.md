@@ -2,10 +2,10 @@
 
 [Viterbi School of Engineering](https://viterbischool.usc.edu/)
 
-[Information Technology Program](https://itp.usc.edu/)
+[Technology and Applied Computing](https://tac.usc.edu/)
 
-# ITP 348 – Introduction to Physical Computing
-This course is offered by the [Information Technology Program](https://itp.usc.edu/) in the [Viterbi School of Engineering](https://viterbischool.usc.edu/) at the [University of Southern California](https://www.usc.edu)
+# TAC 348 – Making Smart Devices
+This course is offered by the [Technology and Applied Computing Program](https://tac.usc.edu/) in the [Viterbi School of Engineering](https://viterbischool.usc.edu/) at the [University of Southern California](https://www.usc.edu)
 
 The live course website can be found at **https://reparke.github.io/ITP348-Physical-Computing/**
 

@@ -12,7 +12,7 @@ main:
   - title: "Brightspace"
     url: https://Brightspace.usc.edu
   - title: "Piazza"
-    url: https://piazza.com/usc/spring2025/itp348
+    url: https://piazza.com/usc/fall2025/tac348/home
   - title: "Kit"
     url: /kit
   - title: "Lectures"
@@ -20,6 +20,6 @@ main:
   - title: "Resources"
     url: /resources
   - title: "Syllabus"
-    url: /itp348_syllabus
+    url: /tac348_syllabus
   - title: "Contact"
     url: https://parke.wufoo.com/forms/feedback-form/

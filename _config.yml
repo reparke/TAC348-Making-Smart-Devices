@@ -104,18 +104,18 @@ footer:
     - label: "Wordpress"
       icon: "fab fa-fw fa-wordpress"
       url: "https://robparke.com"
-    - label: "ITP"
+    - label: "TAC"
       icon: ""
-      url: "https://itp.usc.edu"
+      url: "https://tac.usc.edu"
     - label: "USC"
       icon: ""
       url: "https://usc.edu"
 
 #This are variables that are used to calculate dates for each week
 calendar:
-  semester_start_sunday: 2025-01-13 00:00:00 -0700 #despite var name, this should be Monday
+  semester_start_sunday: 2025-08-25 00:00:00 -0700 #despite var name, this should be Monday
   semester_num_weeks: 16  
-  semester_has_spring_break: true #true if Spring semester
+  semester_has_spring_break: false #true if Spring semester
   semester_week_of_spring_break: 10 #put the week number Spring Break occurs
   seconds_to_start_next_week: 604800
   seconds_in_week: 604800

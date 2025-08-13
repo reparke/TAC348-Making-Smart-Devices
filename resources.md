@@ -14,7 +14,7 @@ toc_sticky: true
 ## References
 
 ### Debugging Tips
-- [ITP-348 Photon 2 troubleshooting guide](https://docs.google.com/document/d/12_kRqHdNPQmiGWF4pe0LWZbBaEmdoF-bbJtCxojCN74/edit#heading=h.7fjmqgnpux8d) This is a super useful document with the most common issues and solutions encountered in ITP 348
+- [TAC-348 Photon 2 troubleshooting guide](https://docs.google.com/document/d/12_kRqHdNPQmiGWF4pe0LWZbBaEmdoF-bbJtCxojCN74/edit#heading=h.7fjmqgnpux8d) This is a super useful document with the most common issues and solutions encountered in TAC 348
 - [Official Particle community forum](https://community.particle.io/) This is best place to search for errors you encounter
 
 ### Useful Particle Links
