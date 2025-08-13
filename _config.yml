@@ -1,5 +1,5 @@
 #added for new theme
-title: "ITP 348: Making Smart Devices"
+title: "TAC 348: Making Smart Devices"
 #may need to use course name and title
 name: "Rob Parke"
 remote_theme: "mmistakes/minimal-mistakes@4.19.3"
@@ -9,7 +9,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   
-description: "ITP 348 - Making Smart Devices: Introduction to Electronics/Wearables @ USC (Open Educational Resource)"
+description: "TAC 348 - Making Smart Devices: Introduction to Electronics/Wearables @ USC (Open Educational Resource)"
 url: https://reparke.github.io
 repository: "reparke/ITP348-Physical-Computing"
 # logo: "/assets/images/usc_monogram_gold_on_trans.png"
@@ -19,7 +19,7 @@ breadcrumbs: false
 
 # configuration
 # fill in the course details
-# courseName: ITP 348 - Intro to Physical Computing
+# courseName: TAC 348 - Intro to Physical Computing
 
 
 
