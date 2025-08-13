@@ -10,7 +10,7 @@ title: Course Introduction
 
 <!-- headingDivider: 2 -->
 
-# ITP 348
+# TAC 348
 
 ### Making Smart Devices
 
@@ -23,7 +23,7 @@ title: Course Introduction
 - Associate Professor
 - Connected Devices and Making Minor
 - Sound Editor / Web Developer (previous)
-- USC Alum!<img src="lecture_course_intro.assets/image-20200113171156623.png" alt="USC ITP" style="width:300px" />
+- USC Alum!<img src="lecture_course_intro.assets/image-20200113171156623.png" alt="USC TAC" style="width:300px" />
 
 
 ## Learning Assistants / Graders

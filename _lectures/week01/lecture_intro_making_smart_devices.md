@@ -130,29 +130,29 @@ Empowering and fun
 ## Past Student Projects
 
 
-| <img src="lecture_intro_making_smart_devices.assets/Device2-e1627015555253.jpg" alt="IMG_0981" style="width: 500px" /> | <img src="lecture_intro_making_smart_devices.assets/Project-Submission-Code-_-Device_kamrynmc_attempt_2021-05-05-16-17-49_IMG_4080.jpg" alt="ITP-348 Final Projects 014 121719" style="width:500px" /> |
+| <img src="lecture_intro_making_smart_devices.assets/Device2-e1627015555253.jpg" alt="IMG_0981" style="width: 500px" /> | <img src="lecture_intro_making_smart_devices.assets/Project-Submission-Code-_-Device_kamrynmc_attempt_2021-05-05-16-17-49_IMG_4080.jpg" alt="TAC-348 Final Projects 014 121719" style="width:500px" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 |                                                              |                                                              |
 |                                                              |                                                              |
 
 ## Past Student Projects 
-| <img src="lecture_intro_making_smart_devices.assets/image-20210823194019330.png" alt="IMG_0981" style="width:450px;" /> | <img src="lecture_intro_making_smart_devices.assets/Project_Submission_-_Code___Device_yjkim_attempt_2021-04-30-15-57-08_IMG_0621_2-e1627018636863-768x1024.jpg" alt="ITP-348 Final Projects 014 121719" style="width:650px" /> |
+| <img src="lecture_intro_making_smart_devices.assets/image-20210823194019330.png" alt="IMG_0981" style="width:450px;" /> | <img src="lecture_intro_making_smart_devices.assets/Project_Submission_-_Code___Device_yjkim_attempt_2021-04-30-15-57-08_IMG_0621_2-e1627018636863-768x1024.jpg" alt="TAC-348 Final Projects 014 121719" style="width:650px" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 |                                                              |                                                              |
 
 ## Past Student Projects
 
 
-| <img src="lecture_intro_making_smart_devices.assets/IMG_0981.jpg" alt="IMG_0981" style="width:450px;" /> | <img src="lecture_intro_making_smart_devices.assets/ITP-348%20Final%20Projects%20014%20121719.jpg" alt="ITP-348 Final Projects 014 121719" style="width:650px" /> |
+| <img src="lecture_intro_making_smart_devices.assets/IMG_0981.jpg" alt="IMG_0981" style="width:450px;" /> | <img src="lecture_intro_making_smart_devices.assets/TAC-348%20Final%20Projects%20014%20121719.jpg" alt="TAC-348 Final Projects 014 121719" style="width:650px" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 |                                                              |                                                              |
 
 ## Reference
 
-- [More ITP 348 Projects](https://robparke.com/tag/itp348_projects/)
+- [More TAC 348 Projects](https://robparke.com/tag/itp348_projects/)
 - [AI - IoT](https://www.visualcapitalist.com/aiot-when-ai-meets-iot-technology/)
 
 ## Credits
 
-- [Tim Gotimer / ITP](https://itp.usc.edu)
+- [Tim Gotimer / TAC](https://tac.usc.edu)
 

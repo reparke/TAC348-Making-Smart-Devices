@@ -73,7 +73,7 @@ title: Losant Cloud Platform and Interface
 * [Download project: Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
 
 * Paste the following link into the top right
-  https://github.com/reparke/ITP348-Physical-Computing/tree/main/_exercises/week11/losant_temperature_start) 
+  https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week11/losant_temperature_start) 
 
 * Create account at [Losant](https://accounts.losant.com/signin) (we will go through the steps together)
 

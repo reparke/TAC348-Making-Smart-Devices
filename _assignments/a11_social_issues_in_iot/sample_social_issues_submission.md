@@ -12,7 +12,7 @@ show_in_list: false
 
 Jubilation Lee, Scott Summers, Ororo Monroe
 
-ITP 348
+TAC 348
 
 Social Issues in Tech Assignment
 

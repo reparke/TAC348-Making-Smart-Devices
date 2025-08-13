@@ -19,11 +19,11 @@ title: Kit Overview
 
 - No course textbook
   - There are two **required** kits this course
-  - #1 you pick up from the ITP office in RRB (M-F @ 9-5)
+  - #1 you pick up from the TAC office in RRB (M-F @ 9-5)
   - #2 you purchased from Sparkfun (link was emailed to you). Please purchased this **as soon as possible**
 
 - This includes all the most of the components we will discuss during the semester
-- [Kit parts and pictures](https://reparke.github.io/ITP348-Physical-Computing/kit)
+- [Kit parts and pictures](https://reparke.github.io/TAC348-Making-Smart-Devices/kit)
 
 ## Student Responsibilities
 
@@ -32,7 +32,7 @@ title: Kit Overview
 - Maintain components in working order
 
 - Instructor may provide replacements for lost components on a limited basis. Beyond that, you will have to find replacements on your own
-- If you stay enrolled (past week 3 drop deadline), the ITP kit is yours to keep. 
+- If you stay enrolled (past week 3 drop deadline), the TAC kit is yours to keep. 
 
 ## Recommendation for Organization
 

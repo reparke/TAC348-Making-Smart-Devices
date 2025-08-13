@@ -82,7 +82,7 @@ Consider two straws. Which has greater flow?
 
 * Resistor values are determined visually by color bands
 * Unfortunately resistor labeling is not accessibly designed
-* To support students who are color blind or have difficulty distinguishing colors, here are [resources for support](https://reparke.github.io/ITP348-Physical-Computing/reference/general/reading_resistors_color_blind.html)
+* To support students who are color blind or have difficulty distinguishing colors, here are [resources for support](https://reparke.github.io/TAC348-Making-Smart-Devices/reference/general/reading_resistors_color_blind.html)
 
 ## Key Concepts
 

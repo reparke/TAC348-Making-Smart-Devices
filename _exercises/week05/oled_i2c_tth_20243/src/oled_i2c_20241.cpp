@@ -60,7 +60,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 // Declare a MicroOLED object. If no parameters are supplied, default pins are
 // used, which will work for the Photon Micro OLED Shield (RST=D7, DC=D6, CS=A2)
 // MicroOLED oled;
-MicroOLED oled(MODE_I2C, 9, 1);    // Example I2C declaration RST=D7, DC=LOW
+MicroOLED oled(MODE_I2C, 9, 1);  // Example I2C declaration RST=D7, DC=LOW
 // (0)
 
 const int PIN_POT1 = A0;
@@ -87,7 +87,6 @@ void printTitle(String title, int font) {
     delay(1500);
     oled.clear(PAGE);
 }
-
 
 void pixelExample() {
     printTitle("Pixels", 1);
@@ -325,7 +324,7 @@ void setup() {
     pinMode(PIN_BUTTON, INPUT);
     pinMode(PIN_POT1, INPUT);
     pinMode(PIN_POT2, INPUT);
-    oled.clear(PAGE); //erase the flame logo
+    oled.clear(PAGE);  // erase the flame logo
 }
 
 void loop() {
@@ -335,36 +334,31 @@ void loop() {
     // textExamples();  // Finally the text example
 
     int xPot = analogRead(PIN_POT1);
-    int yPot = analogRead(PIN_POT2); // what is this value? 0-4095
+    int yPot = analogRead(PIN_POT2);  // what is this value? 0-4095
 
-    //what is the range of values we can draw on screen?
-    //      limited by width and height of
-    // convert our ADC from pots to the cursor position on the screen
+    // what is the range of values we can draw on screen?
+    //       limited by width and height of
+    //  convert our ADC from pots to the cursor position on the screen
 
     int xPixel = map(xPot, 0, 4095, 0, oled.getLCDWidth());
     int yPixel = map(yPot, 0, 4095, 0, oled.getLCDHeight());
 
     oled.pixel(xPixel, yPixel);
-    //after we have draw or printed things on screen, we always have to call display
+    // after we have draw or printed things on screen, we always have to call
+    // display
     oled.display();
 
-    //we could create a latch but we can also get by without it
+    // we could create a latch but we can also get by without it
     int buttonVal = digitalRead(PIN_BUTTON);
     if (buttonVal == LOW) {
         oled.clear(PAGE);
     }
-
-
-
-
-
 }
 
 // display the following on the oled
-//ITP 348
-//Hello World
+// TAC 348
+// Hello World
 //  DONT use the printTitle() fn
-
 
 /*
     build an etch a sketch

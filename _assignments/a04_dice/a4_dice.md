@@ -78,9 +78,9 @@ The die value can be represented by a 3x3 grid of LED lights as follows:
 
 *(replace \# with the current assignment number)*
 
--   **Project Name**: `itp348_a#_lastname_firstname`
+-   **Project Name**: `tac348_a#_lastname_firstname`
 
--   **Zip File** (project folder): `itp348_a#_lastname_firstname.zip`
+-   **Zip File** (project folder): `tac348_a#_lastname_firstname.zip`
 
 ## Video Submission Checklist
 

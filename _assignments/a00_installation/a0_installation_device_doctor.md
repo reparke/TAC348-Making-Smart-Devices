@@ -100,7 +100,7 @@ Install Fritzing
 
 >   Fritzing is a program to create visual layouts of device projects.
 
--   ITP has paid for a Fritzing support license for the class. To download it, please go to the course Brightspace site and click on "Fritzing Download".
+-   TAC has paid for a Fritzing support license for the class. To download it, please go to the course Brightspace site and click on "Fritzing Download".
 
 -   Download and install Fritzing, and then continue these instructions
 
@@ -119,7 +119,7 @@ Install Fritzing Library for Additional Parts
 
 - On **Parts** panel on the right side of the screen, click the small dropdown menu and choose **Import…**
 
-- Navigate to the folder with the file you downloaded and open `ITP_348_Parts.fzpz`
+- Navigate to the folder with the file you downloaded and open `TAC_348_Parts.fzpz`
 
 - Click the small dropdown menu on the **Parts** panel again and chose *Save Bin*
 

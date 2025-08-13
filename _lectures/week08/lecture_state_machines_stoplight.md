@@ -48,7 +48,7 @@ title: State Machines Part 2 - Stoplight Example
   * Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
   * Paste the following link into the top right
   
-  `https://github.com/reparke/ITP348-Physical-Computing/tree/main/_exercises/week07/stop_light_rgb_leds_oled_start`
+  `https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week07/stop_light_rgb_leds_oled_start`
 
 * Wire device as shown below
 

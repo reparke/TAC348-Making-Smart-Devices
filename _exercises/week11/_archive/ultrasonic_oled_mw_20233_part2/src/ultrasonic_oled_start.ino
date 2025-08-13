@@ -40,17 +40,17 @@ const float SPEED_SOUND_CM = 0.03444;
 const float CONV_CM_IN = 0.3437;
 
 // range: 2cm - 400cm
-const int MIN_RANGE = 2;      // cm
+const int MIN_RANGE = 2;       // cm
 const int WARNING_RANGE = 12;  // 5 in ~~ 12 cm
-const int MAX_RANGE = 400;    // cm
+const int MAX_RANGE = 400;     // cm
 
 void setup() {
     Serial.begin(9600);  // begin serial communication with the computer
     oled.begin();        // Initialize the OLED
     oled.clear(ALL);     // Clear the display's internal memory
-    oled.drawBitmap(bitmap_itp348);
-    oled.display();      // Display what's in the buffer (splashscreen)
-    delay(1000);         // Delay 1000 ms
+    oled.drawBitmap(bitmap_tac348);
+    oled.display();  // Display what's in the buffer (splashscreen)
+    delay(1000);     // Delay 1000 ms
 
     // trigger and ethco
     pinMode(PIN_ECHO, INPUT);
@@ -88,7 +88,7 @@ void loop() {
         Serial.println("Warning: " + String(distanceIn, 2));
         oled.clear(PAGE);
         oled.drawBitmap(bitmap_warning);
-        //adjust cursor so it's below warning graphic
+        // adjust cursor so it's below warning graphic
         oled.setCursor(0, 36);
         oled.setColor(BLACK);
         oled.print(String(distanceIn, 2) + " in");
@@ -104,12 +104,10 @@ void loop() {
         oled.display();
     }
 
-    //if we aren't slowing this down at all (e.g. with oled), they we should add delay
-    //if doing constant reading as in this example
+    // if we aren't slowing this down at all (e.g. with oled), they we should
+    // add delay if doing constant reading as in this example
     delay(500);
 }
-
-
 
 /*
 Using the serial monitor, display

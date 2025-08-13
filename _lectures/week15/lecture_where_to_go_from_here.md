@@ -4,7 +4,7 @@ theme: itp
 
 week: 15
 category: lecturespart
-title: Next Steps After ITP 348
+title: Next Steps After TAC 348
 ---
 
 <!-- headingDivider: 2 -->
@@ -13,8 +13,8 @@ title: Next Steps After ITP 348
 
 ## Where to go from here?
 
-- PCB design *(covered in ITP 388)*
-- Microcontroller programming *(covered in ITP 388)*
+- PCB design *(covered in TAC 388)*
+- Microcontroller programming *(covered in TAC 388)*
 - Movement
 - Manufacturing
 - Device fleet management

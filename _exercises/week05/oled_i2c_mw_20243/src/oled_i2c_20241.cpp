@@ -339,7 +339,7 @@ void loop() {
     // oled.setFontType(0);
     // oled.setCursor(0,0);
     // oled.clear(PAGE);
-    // oled.print("ITP 348");
+    // oled.print("TAC 348");
     // oled.setCursor(0,20);
     // oled.print("Hello World");
     // oled.display();
@@ -374,6 +374,6 @@ void loop() {
 }
 
 // modify so that the OLED says
-//"ITP 348"
+//"TAC 348"
 //"Hello World"
 // DONT use print title

@@ -5,7 +5,7 @@ title: Guide to Car Chassis Assembly
 show_in_list: false
 ---
 
-# ITP 348: Car Chassis Setup
+# TAC 348: Car Chassis Setup
 
  [![Completed RedBot](guide_build_chassis.assets/348_chasis_angle_profile.jpg)](https://cdn.sparkfun.com/assets/learn_tutorials/3/3/7/Redbot_Kit_Brian_Revisions-03.jpg) 
 

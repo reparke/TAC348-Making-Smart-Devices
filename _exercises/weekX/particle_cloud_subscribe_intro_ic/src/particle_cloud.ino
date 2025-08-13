@@ -1,6 +1,6 @@
 const int PIN_RED = A2;
 const int PIN_GREEN = A5;
-const int PIN_BLUE = D15; //aka MOSI
+const int PIN_BLUE = D15;  // aka MOSI
 
 void setup() {
     pinMode(PIN_RED, OUTPUT);
@@ -20,7 +20,6 @@ void loop() {
     delay(1000);
     Serial.println("off");
 }
-
 
 // const int PIN_LED = D7;
 // const int PIN_RED = A2;
@@ -92,7 +91,7 @@ void loop() {
 //     Serial.begin(9600);
 //     // subscribe to event
 //     //                 (eventname, eventhanflerFunction, all or my devices)
-//     Particle.subscribe("ITP348_color_change_event", colorEventHandler,
+//     Particle.subscribe("TAC348_color_change_event", colorEventHandler,
 //                        ALL_DEVICES);
 // }
 
@@ -118,8 +117,8 @@ void loop() {
 //     //check the switch, turn on board LED if switch is open, turn if closed
 //     unsigned long curMillis = millis();
 //     if (curMillis - prevMillis > 5000) {
-//         int switchVal = digitalRead(PIN_SWITCH); //HIGH is open, LOW is closed
-//         if (switchVal == HIGH) { // open
+//         int switchVal = digitalRead(PIN_SWITCH); //HIGH is open, LOW is
+//         closed if (switchVal == HIGH) { // open
 //             digitalWrite(PIN_LED, HIGH);
 //         }
 //         else {
@@ -128,6 +127,6 @@ void loop() {
 //         prevMillis = curMillis;
 //     }
 
-//     Particle.publish("ITP348_color_change_event", String(random(0, 5)));
+//     Particle.publish("TAC348_color_change_event", String(random(0, 5)));
 //     delay(3000);
 // }

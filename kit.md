@@ -12,7 +12,7 @@ replace: [($1]\(($1)\)      -->
 
 ## Custom Course Kit
 
-We have a custom kit for the course, which was packaged and provided by the great people at [Sparkfun](https://www.sparkfun.com/). Students will need to purchase this course kit in lieu of a textbook. In addition to items in the course kit, ITP will provide enrolled students with an [Photon 2](https://store.particle.io/products/photon-2) microcontroller and a few extra components.
+We have a custom kit for the course, which was packaged and provided by the great people at [Sparkfun](https://www.sparkfun.com/). Students will need to purchase this course kit in lieu of a textbook. In addition to items in the course kit, TAC will provide enrolled students with an [Photon 2](https://store.particle.io/products/photon-2) microcontroller and a few extra components.
 
 ### Kit Contents
 
@@ -38,7 +38,7 @@ Prices listed retail prices at Sparkfun's [website](https://www.sparkfun.com), n
 
 
 
-### Components provided by ITP
+### Components provided by TAC
 
 Prices reflect Particle's Wholesale / Education discount and sales tax in Los Angeles, but do <u>not</u> include shipping costs.
 

@@ -205,9 +205,9 @@ There are 5 states in the brewing process. Note that we will use **seconds** in 
 
 *(replace \# with the current assignment number)*
 
--   **Project Name**: `itp348_a#_lastname_firstname`
+-   **Project Name**: `tac348_a#_lastname_firstname`
 
--   **Zip File** (project folder): `itp348_a#_lastname_firstname.zip`
+-   **Zip File** (project folder): `tac348_a#_lastname_firstname.zip`
 
 ## Video Submission Checklist
 

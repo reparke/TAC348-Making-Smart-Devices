@@ -164,7 +164,7 @@ title: I2C LCD Screen
 
 * Download project: Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
 * Paste the following link into the top right
-  https://github.com/reparke/ITP348-Physical-Computing/tree/main/_exercises/week13/ultrasonic_start
+  https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week13/ultrasonic_start
 * Connect I2C LCD and run example code
 * Recommended library for the Photon 2:
   * ```LiquidCrystal_I2C_Spark```

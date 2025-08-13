@@ -6,7 +6,7 @@
 
 [Information Technology Program](https://itp.usc.edu)
 
-# ITP 348 – Introduction to Physical Computing 
+# TAC 348 – Making Smart Devices 
 
 # Spring 2020
 

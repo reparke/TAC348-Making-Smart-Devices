@@ -13,7 +13,7 @@ title: OLED Screens and I2c Communication
 https://learn.sparkfun.com/tutorials/micro-oled-breakout-hookup-guide#using-the-arduino-library -->
 
 # OLED Screens and I2C Communication
-### ITP 348 - Making Smart Devices
+### TAC 348 - Making Smart Devices
 
 ![bg opacity:.95 left:50%](lecture_i2c_oled.assets/oled_usc.jpg)
 

@@ -330,28 +330,24 @@ void setup() {
 }
 
 void loop() {
-
     int xPot = analogRead(PIN_POT1);
-    int yPot = analogRead(PIN_POT2); //ADC --> range 0-4095
+    int yPot = analogRead(PIN_POT2);  // ADC --> range 0-4095
 
-    int xMax =  oled.getLCDWidth(); // max x dimension
-    int yMax = oled.getLCDHeight(); // max y direction
+    int xMax = oled.getLCDWidth();   // max x dimension
+    int yMax = oled.getLCDHeight();  // max y direction
 
     int x = map(xPot, 0, 4095, 0, xMax);
     int y = map(yPot, 0, 4095, 0, yMax);
 
-    oled.pixel(x,y);    //no need for setFont or setCursor
+    oled.pixel(x, y);  // no need for setFont or setCursor
     oled.display();
 
-    //build latch
+    // build latch
     int curButtonVal = digitalRead(PIN_BUTTON);
     if (curButtonVal == LOW && prevButtonVal == HIGH) {
         oled.clear(PAGE);
     }
     prevButtonVal = curButtonVal;
-
-
-
 
     // pixelExample();  // Run the pixel example function
     // lineExample();   // Then the line example function
@@ -361,29 +357,29 @@ void loop() {
     /* print "hello world" on the OLED screen
         don't use printTitle()
 
-        print ITP 348 on the next line
+        print TAC 348 on the next line
     */
     // to show text
-//     oled.setCursor(0, 0);
-//     oled.setFontType(0);
-//     oled.clear(PAGE);  // erases what's on the screen
-//     oled.print("Hello!");
-//     oled.setCursor(0, 20);  // far left but down a little bit
-//     oled.print("ITP 348!");
+    //     oled.setCursor(0, 0);
+    //     oled.setFontType(0);
+    //     oled.clear(PAGE);  // erases what's on the screen
+    //     oled.print("Hello!");
+    //     oled.setCursor(0, 20);  // far left but down a little bit
+    //     oled.print("TAC 348!");
 
-//     // after you write / draw a bunch of things the screen, they only show
-//     // up when we say oled.display()
-//     oled.display();
-// }
+    //     // after you write / draw a bunch of things the screen, they only
+    //     show
+    //     // up when we say oled.display()
+    //     oled.display();
+    // }
     /* build an etch a sketch
         we have an oled, 2 pots, and a button
 
-        pots are the knobs so map them 
+        pots are the knobs so map them
             read pot and map to what? the screen dimensions
             eg potX and potY
 
         buttons reset
-            clear screen 
+            clear screen
     */
-
 }

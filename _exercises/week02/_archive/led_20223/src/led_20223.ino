@@ -1,7 +1,7 @@
 /*
  * Rob Parke
    assign 2
-   ITP 348
+   TAC 348
  */
 
 // to control LED
@@ -37,8 +37,8 @@ void loop() {
         analogWrite(PIN_LED, pwmValue);
         delay(20);
     }
-      for (int pwmValue = 255; pwmValue >= 0; pwmValue = pwmValue - 5) {
-          analogWrite(PIN_LED, pwmValue);
-          delay(20);
-      }
+    for (int pwmValue = 255; pwmValue >= 0; pwmValue = pwmValue - 5) {
+        analogWrite(PIN_LED, pwmValue);
+        delay(20);
+    }
 }

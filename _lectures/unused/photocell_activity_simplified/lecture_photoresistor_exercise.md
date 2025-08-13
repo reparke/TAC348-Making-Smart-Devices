@@ -3,7 +3,7 @@
 <!-- headingDivider: 2 -->
 
 # Measuring Light with Photoresistors
-### ITP 348 - Introduction to Physical Computing
+### TAC 348 - Making Smart Devices
 
 ![bg opacity:.85 left:50%](lecture_photoresistor.assets/09088-02-L.jpg)
 

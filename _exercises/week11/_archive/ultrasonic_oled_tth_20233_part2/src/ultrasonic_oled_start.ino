@@ -36,74 +36,75 @@ MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
 const int PIN_TRIGGER = D6;
 const int PIN_ECHO = D5;
 
-const int MAX_RANGE = 400; //4m = 400 cm
-const int MIN_RANGE = 2;  // cm
-const int WARNING_RANGE = 12; //cm 
+const int MAX_RANGE = 400;     // 4m = 400 cm
+const int MIN_RANGE = 2;       // cm
+const int WARNING_RANGE = 12;  // cm
 
-//speed of sound is 343 m/s
-//we are concerned with cm, and we are given microseconds
-//  343 m / s --> 343 * 100 cm / s --> 34300 / 10^6 
+// speed of sound is 343 m/s
+// we are concerned with cm, and we are given microseconds
+//   343 m / s --> 343 * 100 cm / s --> 34300 / 10^6
 const double SPEED_SOUND_CM = 0.0343;
-
 
 void setup() {
     Serial.begin(9600);  // begin serial communication with the computer
     oled.begin();        // Initialize the OLED
     oled.clear(ALL);     // Clear the display's internal memory
-    oled.drawBitmap(bitmap_itp348);
-    oled.display();      // Display what's in the buffer (splashscreen)
-    delay(1000);         // Delay 1000 ms
+    oled.drawBitmap(bitmap_tac348);
+    oled.display();  // Display what's in the buffer (splashscreen)
+    delay(1000);     // Delay 1000 ms
 
-    pinMode(PIN_ECHO, INPUT);     //receive INPUT signal from sensor to tell us the time
-    pinMode(PIN_TRIGGER, OUTPUT); //send OUTPUT signal to sensor to start measuring
+    pinMode(PIN_ECHO,
+            INPUT);  // receive INPUT signal from sensor to tell us the time
+    pinMode(PIN_TRIGGER,
+            OUTPUT);  // send OUTPUT signal to sensor to start measuring
 }
 
 /********************************************************************************/
 void loop() {
-  //sequence to starting the ultra sonic sensor
-  digitalWrite(PIN_TRIGGER, LOW);
-  delayMicroseconds(2); //really short LOW for 2 micro sec
-  digitalWrite(PIN_TRIGGER, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(PIN_TRIGGER, LOW);
+    // sequence to starting the ultra sonic sensor
+    digitalWrite(PIN_TRIGGER, LOW);
+    delayMicroseconds(2);  // really short LOW for 2 micro sec
+    digitalWrite(PIN_TRIGGER, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(PIN_TRIGGER, LOW);
 
-  //now we wait... to measure
-  int sensorTime = pulseIn(PIN_ECHO, HIGH); //time for the echo to be sent, bounce, and return
-  // time in microseconds
-  // speed of sound is 343.5 m/s
-  double distanceCm = sensorTime * SPEED_SOUND_CM / 2;
+    // now we wait... to measure
+    int sensorTime = pulseIn(
+        PIN_ECHO, HIGH);  // time for the echo to be sent, bounce, and return
+    // time in microseconds
+    // speed of sound is 343.5 m/s
+    double distanceCm = sensorTime * SPEED_SOUND_CM / 2;
 
-  // ifs...
-  //out of range
-  if(distanceCm < MIN_RANGE || distanceCm > MAX_RANGE) { //OR doesn't work in C++
-      Serial.println("Error out of range Distance is " + String(distanceCm, 1) +
-                     " cm");
-    oled.clear(PAGE);
-    oled.drawBitmap(bitmap_no);
-    oled.display();
-  }
-  else if (distanceCm >= MIN_RANGE && distanceCm < WARNING_RANGE ) {
-    Serial.println("Warning! Distance is " + String(distanceCm, 1) + " cm");
-    oled.clear(PAGE);
-    oled.drawBitmap(bitmap_warning);
-    oled.setCursor(0, 40);
-    oled.setColor(BLACK);
-    oled.print(String(distanceCm, 1) + " cm");
-    oled.display();
-  }
-  else {
-    Serial.println("Distance is " + String(distanceCm, 1) + " cm");
-    oled.clear(PAGE);
-    oled.drawBitmap(bitmap_yes);
-    oled.setCursor(0, 40);
-    oled.setColor(BLACK);
-    oled.print(String(distanceCm, 1) + " cm");
-    oled.display();
-  }
+    // ifs...
+    // out of range
+    if (distanceCm < MIN_RANGE ||
+        distanceCm > MAX_RANGE) {  // OR doesn't work in C++
+        Serial.println("Error out of range Distance is " +
+                       String(distanceCm, 1) + " cm");
+        oled.clear(PAGE);
+        oled.drawBitmap(bitmap_no);
+        oled.display();
+    } else if (distanceCm >= MIN_RANGE && distanceCm < WARNING_RANGE) {
+        Serial.println("Warning! Distance is " + String(distanceCm, 1) + " cm");
+        oled.clear(PAGE);
+        oled.drawBitmap(bitmap_warning);
+        oled.setCursor(0, 40);
+        oled.setColor(BLACK);
+        oled.print(String(distanceCm, 1) + " cm");
+        oled.display();
+    } else {
+        Serial.println("Distance is " + String(distanceCm, 1) + " cm");
+        oled.clear(PAGE);
+        oled.drawBitmap(bitmap_yes);
+        oled.setCursor(0, 40);
+        oled.setColor(BLACK);
+        oled.print(String(distanceCm, 1) + " cm");
+        oled.display();
+    }
 
-  //if you are constantly going to reading distance, then you need a 500 ms delay between read
-  delay(500); //if not reading all the time, don't the delay
-
+    // if you are constantly going to reading distance, then you need a 500 ms
+    // delay between read
+    delay(500);  // if not reading all the time, don't the delay
 }
 
 /*

@@ -1,4 +1,4 @@
-# ITP 348 Exercises
+# TAC 348 Exercises
 
 Below are a combination of my own sample exercises / notes as well as projects created during in-class exercises. 
 

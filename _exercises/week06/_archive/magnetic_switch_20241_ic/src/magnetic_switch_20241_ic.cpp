@@ -11,7 +11,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
    operation is similar to other things we’ve done. what variables would you
    need to this?)
 
-    Your event name should be ITP348_Door
+    Your event name should be TAC348_Door
     Change the RGB colors based on their door status
         Red means the door is open
         White means the door is closed
@@ -21,7 +21,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 const int PIN_LED = D7;
 const int PIN_RED = A2;
 const int PIN_GREEN = A5;
-const int PIN_BLUE = D15; // aka MOSI pin
+const int PIN_BLUE = D15;  // aka MOSI pin
 const int PIN_SWITCH = D2;
 
 int prevDoorState = HIGH;

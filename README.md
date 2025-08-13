@@ -7,7 +7,7 @@
 # TAC 348 – Making Smart Devices
 This course is offered by the [Technology and Applied Computing Program](https://tac.usc.edu/) in the [Viterbi School of Engineering](https://viterbischool.usc.edu/) at the [University of Southern California](https://www.usc.edu)
 
-The live course website can be found at **https://reparke.github.io/ITP348-Physical-Computing/**
+The live course website can be found at **https://reparke.github.io/TAC348-Making-Smart-Devices/**
 
 
 

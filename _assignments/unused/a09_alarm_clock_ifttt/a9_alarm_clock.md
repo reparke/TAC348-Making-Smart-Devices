@@ -106,9 +106,9 @@ Deliverables
 **Required naming convention** (replace \# with the current assignment number)
 
 -   **Project Name**
-    -   `itp348_a#_lastname_firstname`
+    -   `tac348_a#_lastname_firstname`
 -   **Zip File** (include entire project folder)
-    -   `itp348_a#_lastname_firstname.zip`
+    -   `tac348_a#_lastname_firstname.zip`
 
 Grading
 -------

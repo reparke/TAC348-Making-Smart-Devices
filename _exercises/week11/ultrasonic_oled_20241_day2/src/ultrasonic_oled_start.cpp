@@ -69,9 +69,9 @@ void setup() {
     Serial.begin(9600);  // begin serial communication with the computer
     oled.begin();        // Initialize the OLED
     oled.clear(ALL);     // Clear the display's internal memory
-    oled.drawBitmap(itp348_bitmap);
-    oled.display();      // Display what's in the buffer (splashscreen)
-    delay(1000);         // Delay 1000 ms
+    oled.drawBitmap(tac348_bitmap);
+    oled.display();  // Display what's in the buffer (splashscreen)
+    delay(1000);     // Delay 1000 ms
     pinMode(PIN_TRIGGER, OUTPUT);
     pinMode(PIN_ECHO, INPUT);
 }
@@ -79,7 +79,7 @@ void setup() {
 /********************************************************************************/
 void loop() {
     measureDistance();
-    
+
     if (distanceCm <= MIN_RANGE_CM || distanceCm >= MAX_RANGE_CM) {
         Serial.println("Out of range");
         oled.clear(PAGE);
@@ -104,11 +104,14 @@ void loop() {
 
 /*
   Bitmaps
-  * Using the ultrasonic distance sensor, display graphics and distance measurement on the OLED
- 
+  * Using the ultrasonic distance sensor, display graphics and distance
+measurement on the OLED
+
   * Large error graphic when out of range (`no_full_screen.png`)
-  * Small warning message when less than 12 cm and the distance (`warning_half_screen.png`)
-  * Small graphics and distance message otherwise and the distance (`yes_half_screen.png`)
+  * Small warning message when less than 12 cm and the distance
+(`warning_half_screen.png`)
+  * Small graphics and distance message otherwise and the distance
+(`yes_half_screen.png`)
 *
 */
 /*

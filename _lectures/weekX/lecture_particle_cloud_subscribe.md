@@ -147,7 +147,7 @@ void setup() {
 
 ## Exercise
 
-* Subscribe to public event called `ITP348_color_change_event`
+* Subscribe to public event called `TAC348_color_change_event`
 * The data of this event will be a number from 0-3. Use this number to change the color on your LED below
   * 0 is white, 1 is green, 2 is magenta, 3 is yellow, 4 is red
 
@@ -168,13 +168,13 @@ void setup() {
 * When the magnetic switch is opened or closed, change the state of `myDoor`
 * Publish **public** cloud event with the data `doorIsOpen` or `doorIsClosed` when `myDoor` changes. Note **only one** publish should occur every time door is opened or closed
 * Your name should be 
-  `ITP348/Door/<<YOUR_INITIALS>>`
+  `TAC348/Door/<<YOUR_INITIALS>>`
 
 ## Lab Part 2:
 
 * Create event handler
 * Register a subscriber for the **your partner's** student's event
-  `ITP348/Door/<<THEIR_INITIALS>>`
+  `TAC348/Door/<<THEIR_INITIALS>>`
 * Change the RGB colors based on their door status
   * Red means "door is open"
   * White means "door is closed"

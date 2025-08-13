@@ -20,7 +20,7 @@ https://learn.sparkfun.com/tutorials/micro-oled-breakout-hookup-guide#using-the-
 - This OLED is no longer used in our class 
 - Please see the I2C version of the OLED screen
 
-### ITP 348 - Introduction to Physical Computing
+### TAC 348 - Making Smart Devices
 
 ![bg opacity:.95 left:50%](lecture_spi_oled.assets/oled_usc.jpg)
 

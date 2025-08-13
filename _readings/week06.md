@@ -19,7 +19,7 @@ title: Pre-Lecture Activities
 
 - Photon 2, breadboard, resistors, push buttons, LEDs, RGB LEDS, wires potentiometer
 - [Speaker / buzzer](https://www.sparkfun.com/products/7950)
-- *You can see what parts look like visually by checking out the [kit page](https://reparke.github.io/ITP348-Physical-Computing/kit)*
+- *You can see what parts look like visually by checking out the [kit page](https://reparke.github.io/TAC348-Making-Smart-Devices/kit)*
 
 
 

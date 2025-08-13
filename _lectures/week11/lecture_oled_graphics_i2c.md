@@ -116,7 +116,7 @@ const uint8_t heart_bmp[] = {
 
 ## Lab
 
-* Convert `itp348_full_screen.jpg` to bitmap and load as startup graphic (*image is in the starting folder*)
+* Convert `tac348_full_screen.jpg` to bitmap and load as startup graphic (*image is in the starting folder*)
 * Using the ultrasonic distance sensor, display graphics and distance measurement on the OLED
   * Large error graphic when out of range (`no_full_screen.png`)
   * Small warning message when less than 5 inches (`warning_half_screen.png`)

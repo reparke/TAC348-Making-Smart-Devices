@@ -48,7 +48,7 @@ void setup() {
     Serial.begin(9600);
 
     // subscribe to partner's event
-    Particle.subscribe("ITP348/Door/RP", switchEventHandler, ALL_DEVICES);
+    Particle.subscribe("TAC348/Door/RP", switchEventHandler, ALL_DEVICES);
     displayColors(MAGENTA);
     delay(1000);
 }
@@ -59,13 +59,13 @@ void loop() {
     if (switchRead == HIGH) {  // just read that switch is open
         if (myDoor == CLOSED) {
             myDoor = OPEN;
-            Particle.publish("ITP348/Door/RP", "doorIsOpen");
+            Particle.publish("TAC348/Door/RP", "doorIsOpen");
             Serial.println("Local door: doorIsOpen");
         }
     } else {  // just read that switch is closed
         if (myDoor == OPEN) {
             myDoor = CLOSED;
-            Particle.publish("ITP348/Door/RP", "doorIsClosed");
+            Particle.publish("TAC348/Door/RP", "doorIsClosed");
             Serial.println("Local door: doorIsClosed");
         }
     }
@@ -75,7 +75,7 @@ void switchEventHandler(const char *event, const char *data) {
     String eventName = String(event);
     String eventData = String(data);  // convert the pointer to be string
     Serial.println("Remote:\n" + String(event) + "\n" + String(data));
-    if (eventName.equalsIgnoreCase("ITP348/Door/RP")) {
+    if (eventName.equalsIgnoreCase("TAC348/Door/RP")) {
         if (eventData.equalsIgnoreCase("doorIsOpen")) {
             Serial.println("Remote door: doorIsOpen");
 

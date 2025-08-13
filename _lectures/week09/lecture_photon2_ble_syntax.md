@@ -118,7 +118,7 @@ void onDataReceived(const uint8_t* data, size_t len,
 * Download starting code
   * Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
   * Paste the following link into the top right
-    https://github.com/reparke/ITP348-Physical-Computing/tree/main/_exercises/week09/ble_fan_start
+    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_fan_start
 * In Bluefruit app, connect to over UART (listed as "controller")
 
 ##  Lab Wiring Guide
@@ -183,7 +183,7 @@ Motor Controller
 * Download starting code
   * Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
   * Paste the following link into the top right
-    https://github.com/reparke/ITP348-Physical-Computing/tree/main/_exercises/week09/ble_uart_rgb_accel_example
+    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_uart_rgb_accel_example
 
 ## Demo #1: Control RGB LED with Phone Accelerometers (part 2)
 
@@ -209,7 +209,7 @@ Motor Controller
   * Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
 
   * Paste the following link into the top right
-    https://github.com/reparke/ITP348-Physical-Computing/tree/main/_exercises/week09/ble_health_temp_final
+    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_health_temp_final
 
 ## Demo #2: Read Health Thermometer Service (part 2)
 

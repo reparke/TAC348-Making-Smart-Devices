@@ -145,7 +145,7 @@
 #### Lecture
 
 - Course introduction / syllabus
-- Ice breaker *(see slides in local ITP 348 Docs folder)* 
+- Ice breaker *(see slides in local TAC 348 Docs folder)* 
 - Introduction to IoT
 - Kit Overview
 - Possibly show this [mind map](https://www.mindmeister.com/1308604904?t=O0Vcty0Uys) from Boris Tomas
@@ -588,7 +588,7 @@
 
 * Create function to change LED colors: white switch is closed, red switch is open
 * subscribe to variable -- work in pairs 
-  - create unique event ITP348/Door/<<UNIQUE_NAME>>
+  - create unique event TAC348/Door/<<UNIQUE_NAME>>
 
 ## Feedback
 

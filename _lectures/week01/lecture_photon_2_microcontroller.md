@@ -91,8 +91,8 @@ title: Photon 2 Microcontroller
 ## Important Note
 
 * Your Photon 2 folder name cannot contain any spaces at all
-  - `C:\Users\Rob\ITP-348\Projects` is ok
-  - `c:\Users\Rob Parke\ITP 348\Cool Projects` is not
+  - `C:\Users\Rob\TAC-348\Projects` is ok
+  - `c:\Users\Rob Parke\TAC 348\Cool Projects` is not
 
 ## Key features
 

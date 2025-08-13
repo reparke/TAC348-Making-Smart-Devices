@@ -19,7 +19,7 @@ title: Pre-Lecture Activities
 - Accelerometer
 - RFID sensor
 - RFID keycards
-- *You can see what parts look like visually by checking out the [kit page](https://reparke.github.io/ITP348-Physical-Computing/kit)*
+- *You can see what parts look like visually by checking out the [kit page](https://reparke.github.io/TAC348-Making-Smart-Devices/kit)*
 
 ### Build before class Mon / Tue
 

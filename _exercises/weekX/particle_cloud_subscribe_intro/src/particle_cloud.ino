@@ -2,7 +2,7 @@
 const int PIN_LED = D7;
 const int PIN_RED = A2;
 const int PIN_GREEN = A5;
-const int PIN_BLUE = D15; // aka MOSI
+const int PIN_BLUE = D15;  // aka MOSI
 const int PIN_SWITCH = D2;
 enum Color { WHITE, GREEN, MAGENTA, YELLOW, RED };
 
@@ -65,7 +65,7 @@ void setup() {
     pinMode(PIN_SWITCH, INPUT);
 
     Serial.begin(9600);
-    Particle.subscribe("ITP348_color_change_event", colorHandler, ALL_DEVICES);
+    Particle.subscribe("TAC348_color_change_event", colorHandler, ALL_DEVICES);
     displayColors(MAGENTA);
 }
 
@@ -82,6 +82,6 @@ void colorHandler(const char *event, const char *data) {
 
 // For Rob only--message sent to students
 void loop() {
-    Particle.publish("ITP348_color_change_event", String(random(0, 5)), PUBLIC);
+    Particle.publish("TAC348_color_change_event", String(random(0, 5)), PUBLIC);
     delay(3000);
 }

@@ -135,7 +135,7 @@ Week 10 idea:
 #### Lecture
 
 - Course introduction / syllabus
-- Ice breaker *(see slides in local ITP 348 Docs folder)* 
+- Ice breaker *(see slides in local TAC 348 Docs folder)* 
 - Introduction to IoT
 - Kit Overview
 - Possibly show this [mind map](https://www.mindmeister.com/1308604904?t=O0Vcty0Uys) from Boris Tomas
@@ -380,7 +380,7 @@ Week 10 idea:
 * Discuss scanning light assignment 
 * Lecture: digital input
 * Draw and discuss button
-* Guided: Wire RGB and Button with this [image](https://reparke.github.io/ITP348-Physical-Computing/lectures/week03/lecture_rgb_leds.assets/image-20210204155745432.png)
+* Guided: Wire RGB and Button with this [image](https://reparke.github.io/TAC348-Making-Smart-Devices/lectures/week03/lecture_rgb_leds.assets/image-20210204155745432.png)
 * Guided: make button turn on D7
 * discuss RGB LED
 * have students make RGB LED turn on white when pressed only
@@ -557,7 +557,7 @@ Week 10 idea:
 - Wire switch and RGB LED
 - Publish switch event in console (this won't take very long)
 
-  - create unique event ITP348/Door/<<UNIQUE_NAME>>
+  - create unique event TAC348/Door/<<UNIQUE_NAME>>
 - Create function to change LED colors: white switch is closed, red switch is open
 
 #### Lecture

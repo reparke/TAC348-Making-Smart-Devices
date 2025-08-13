@@ -304,7 +304,7 @@
        - publish variable
        - create function to turn off/on LED
        - subscribe to variable -- work in pairs 
-         - create unique event ITP348/Door/<<UNIQUE_NAME>>
+         - create unique event TAC348/Door/<<UNIQUE_NAME>>
    - Day 2
      - Lecture
        - Continue with Particle cloud

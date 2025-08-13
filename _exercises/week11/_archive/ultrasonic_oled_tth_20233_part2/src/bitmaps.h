@@ -1,5 +1,5 @@
-// 'itp348', 64x48px
-const unsigned char bitmap_itp348[] PROGMEM = {
+// 'tac348', 64x48px
+const unsigned char bitmap_tac348[] PROGMEM = {
     0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x3f, 0x3f, 0x3f, 0xff, 0x3f, 0x3f,
     0x3f, 0x3f, 0x3f, 0x3f, 0x3f, 0x3f, 0x3f, 0xff, 0x3f, 0x3f, 0x3f, 0x3f,
     0x3f, 0x3f, 0x7f, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f, 0x3f, 0x3f,
@@ -138,5 +138,5 @@ const unsigned char bitmap_yes[] PROGMEM = {
 // Array of all bitmaps for convenience. (Total bytes used to store images in
 // PROGMEM = 1600)
 const int bitmap_allArray_LEN = 4;
-const unsigned char* bitmap_allArray[4] = {bitmap_itp348, bitmap_no,
+const unsigned char* bitmap_allArray[4] = {bitmap_tac348, bitmap_no,
                                            bitmap_warning, bitmap_yes};

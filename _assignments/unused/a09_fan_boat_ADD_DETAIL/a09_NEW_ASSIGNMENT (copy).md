@@ -17,7 +17,7 @@ Goals
 
 **Overview**
 
-This assignment is to create a public temperature feed for ITP 348. You will
+This assignment is to create a public temperature feed for TAC 348. You will
 read the temperature from their home and send the data as public event to the
 Particle cloud. You will then use an OLED to display two screens: 1) feed of the
 most recent temperatures from all students, and 2) your own temperature along
@@ -74,14 +74,14 @@ Here is an example:
 -   Publish the temperature as a **PUBLIC** event
 
 -   For the event name, you must use the following format  
-    **ITP348-A6/XXX** *replace XXX with your 3 letter initial*
+    **TAC348-A6/XXX** *replace XXX with your 3 letter initial*
 
 -   Check the Particle console to make sure the event is publishing properly
 
 >   **Stage 3: Subscribing and storing events**
 
--   Subscribe to the event: **ITP348-A6** (this will include an event beginning
-    with **ITP348-A6**)
+-   Subscribe to the event: **TAC348-A6** (this will include an event beginning
+    with **TAC348-A6**)
 
 -   You will create what is called a “circular buffer.” Basically, when the
     first event arrives, you will store the name and temperature in index 0, and
@@ -140,11 +140,11 @@ In **loop()**, use the button to switch between two “states” of your device.
 
 -   **Project Name**
 
-    -   itp348_a\#_lastname_firstname
+    -   tac348_a#_lastname_firstname
 
 -   **Zip File** (include entire project folder)
 
-    -   itp348_a\#_lastname_firstname.zip
+    -   tac348_a#_lastname_firstname.zip
 
 Deliverables
 ------------

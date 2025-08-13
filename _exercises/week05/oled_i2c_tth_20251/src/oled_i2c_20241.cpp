@@ -7,10 +7,12 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 /*
     some sensors are very simple and are easy to write to communicate with
         ex: tmp36 or photoresistor
-    for more complicated sensor (ex oled, accelerometer), there is a lot LOW LEVEL code needed to communicate
+    for more complicated sensor (ex oled, accelerometer), there is a lot LOW
+   LEVEL code needed to communicate
         ==> instead, we will use LIBRARIES
 
-    libraries is a collection of function and objects, and we use libraries that simplify communicating with complicated sensor
+    libraries is a collection of function and objects, and we use libraries that
+   simplify communicating with complicated sensor
 
     how to find libraries
     - look at community.particle.io
@@ -65,7 +67,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 // Declare a MicroOLED object. If no parameters are supplied, default pins are
 // used, which will work for the Photon Micro OLED Shield (RST=D7, DC=D6, CS=A2)
 // MicroOLED oled;
-MicroOLED oled(MODE_I2C, 9, 1);    // Example I2C declaration RST=D7, DC=LOW
+MicroOLED oled(MODE_I2C, 9, 1);  // Example I2C declaration RST=D7, DC=LOW
 // (0)
 
 // SYSTEM_MODE(MANUAL);
@@ -75,7 +77,7 @@ const int PIN_POT1 = A0;
 const int PIN_POT2 = A1;
 const int PIN_BUTTON = D2;
 
-int prevButtonVal = HIGH;  //latch
+int prevButtonVal = HIGH;  // latch
 
 // Center and print a small title
 // This function is quick and dirty. Only works for titles one
@@ -95,8 +97,6 @@ void printTitle(String title, int font) {
     delay(1500);
     oled.clear(PAGE);
 }
-
-
 
 void pixelExample() {
     printTitle("Pixels", 1);
@@ -294,7 +294,8 @@ void textExamples() {
         oled.setFontType(0);
         oled.print("A7:");
         oled.setFontType(2);
-        // oled.print(analogRead(A7)); //what is wrong here? - >Photon2 has A0-A5
+        // oled.print(analogRead(A7)); //what is wrong here? - >Photon2 has
+        // A0-A5
         oled.display();
         delay(100);
     }
@@ -340,10 +341,10 @@ void setup() {
 
 void loop() {
     int xPot = analogRead(PIN_POT1);
-    int yPot = analogRead(PIN_POT2); //range 0-4095
+    int yPot = analogRead(PIN_POT2);  // range 0-4095
 
-    int xMax = oled.getLCDWidth(); // max x
-    int yMax = oled.getLCDHeight(); // max y
+    int xMax = oled.getLCDWidth();   // max x
+    int yMax = oled.getLCDHeight();  // max y
 
     int xPixel = map(xPot, 0, 4095, 0, xMax);
     int yPixel = map(yPot, 0, 4095, 0, yMax);
@@ -352,15 +353,12 @@ void loop() {
 
     oled.display();
 
-    //clear screen with latch
+    // clear screen with latch
     int curButtonVal = digitalRead(PIN_BUTTON);
     if (curButtonVal == LOW && prevButtonVal == HIGH) {
         oled.clear(PAGE);
     }
     prevButtonVal = curButtonVal;
-
-
-
 
     // pixelExample();  // Run the pixel example function
     // lineExample();   // Then the line example function
@@ -368,18 +366,18 @@ void loop() {
     // textExamples();  // Finally the text example
 
     // print out "Hello!" on one line
-    //print out "ITP 348" on next line
+    // print out "TAC 348" on next line
     // DONT use printTitle()
 
     // oled.clear(PAGE);   // clears anything from the screen
     // oled.setFontType(0);
     // oled.setCursor(0,0);
     // // oled.println("Hello!");
-    // // oled.println("ITP 348");
+    // // oled.println("TAC 348");
     // oled.print("Hello!");
 
     // oled.setCursor(0,10);
-    // oled.print("ITP348");
+    // oled.print("TAC348");
     // //after we add any text or graphics to the screen, call display
 
     // oled.display();
@@ -392,9 +390,6 @@ void loop() {
         use pots as knobs
         use analogread with pots
         button to clear screen
-        
+
     */
-
-
-
 }

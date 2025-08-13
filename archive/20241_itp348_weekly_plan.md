@@ -128,7 +128,7 @@ Week 10 idea:
 * Remind: ==Students need to pick up kit from ITP office BEFORE Wed class==
 
 - Course introduction / syllabus (PPTX)
-- Ice breaker *(see slides in local ITP 348 Docs folder)* 
+- Ice breaker *(see slides in local TAC 348 Docs folder)* 
   
 - Introduction to IoT
 - Explain course website
@@ -355,7 +355,7 @@ Week 10 idea:
 * Discuss scanning light assignment 
 * Lecture: digital input
 * Draw and discuss button
-* Guided: Wire RGB and Button with this [image](https://reparke.github.io/ITP348-Physical-Computing/lectures/week03/lecture_rgb_leds.assets/image-20210204155745432.png)
+* Guided: Wire RGB and Button with this [image](https://reparke.github.io/TAC348-Making-Smart-Devices/lectures/week03/lecture_rgb_leds.assets/image-20210204155745432.png)
 * Guided: make button turn on D7
 * cover latch (motivate)
 * discuss RGB LED

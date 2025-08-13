@@ -5,7 +5,7 @@ title: Guide to Car Chassis Assembly
 show_in_list: false
 ---
 
-## ITP 348: Car Chassis Setup
+## TAC 348: Car Chassis Setup
 
 Note: These instructions are deprecated because they use the old red robot chassis
 

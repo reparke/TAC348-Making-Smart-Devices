@@ -62,13 +62,13 @@ Overview
 -   Earthquake monitor
 -   Retrofitted children’s toy
 -   Home monitoring station
--   [Highlights from past ITP 348 student projects](https://robparke.com/tag/itp348_projects/)
+-   [Highlights from past TAC 348 student projects](https://robparke.com/tag/itp348_projects/)
 
 
 
 ## List of Components 
 
-[This list](https://reparke.github.io/ITP348-Physical-Computing/assignments/project/sample_components.html) includes the components and services we will cover in this course (and you have in your kits). You can also use components not discussed in the course, but you are not required or expected to do so.
+[This list](https://reparke.github.io/TAC348-Making-Smart-Devices/assignments/project/sample_components.html) includes the components and services we will cover in this course (and you have in your kits). You can also use components not discussed in the course, but you are not required or expected to do so.
 
 
 

@@ -9,7 +9,7 @@ title: State Machines Part 1 - Overview
 <!-- headingDivider: 2 -->
 
 # State Machines
-### ITP 348 - Introduction to Physical Computing
+### TAC 348 - Making Smart Devices
 
 ![bg opacity:.85 left:60%](lecture_state_machines_overview.assets/image-20200303153612762.png)
 

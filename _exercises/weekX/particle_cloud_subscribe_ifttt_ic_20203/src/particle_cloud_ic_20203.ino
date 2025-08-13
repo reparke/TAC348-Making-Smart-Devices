@@ -1,12 +1,12 @@
 const int PIN_LED = D7;
 
 const int PIN_SWITCH = D2;
-int switchRead;  //magnetic switch
+int switchRead;  // magnetic switch
 
 bool isDoorOpen = false;
 const int PIN_RED = A2;
 const int PIN_GREEN = A5;
-const int PIN_BLUE = D15; //aka MOSI
+const int PIN_BLUE = D15;  // aka MOSI
 
 void setup() {
     pinMode(PIN_LED, OUTPUT);
@@ -17,11 +17,12 @@ void setup() {
     pinMode(PIN_SWITCH, INPUT);
     Serial.begin(9600);
 
-    Particle.variable("isDoorOpen", isDoorOpen);  //particle variables need to be GLOBAL
+    Particle.variable("isDoorOpen",
+                      isDoorOpen);  // particle variables need to be GLOBAL
     Particle.function("blinkLed", blinkLed);
 
-    //subscribe to partner's event
-    Particle.subscribe("ITP348/Door/NH", switchEventHandler, ALL_DEVICES);
+    // subscribe to partner's event
+    Particle.subscribe("TAC348/Door/NH", switchEventHandler, ALL_DEVICES);
     blinkLed("twice");
 }
 
@@ -31,26 +32,26 @@ void loop() {
     if (switchRead == HIGH) {  // just read that switch is open
         if (isDoorOpen == false) {
             isDoorOpen = true;
-            Particle.publish("ITP348/Door/REP", "closed --> open");
+            Particle.publish("TAC348/Door/REP", "closed --> open");
         }
     } else {  // just read that switch is closed
         if (isDoorOpen == true) {
             isDoorOpen = false;
-            Particle.publish("ITP348/Door/REP", "open --> closed");
+            Particle.publish("TAC348/Door/REP", "open --> closed");
         }
     }
 }
 
 void switchEventHandler(const char *event, const char *data) {
     String eventName = String(event);
-    String eventData = String(data);  //convert the pointer to be string
+    String eventData = String(data);  // convert the pointer to be string
 
-    if (eventName.equalsIgnoreCase("ITP348/Door/NH")) {
+    if (eventName.equalsIgnoreCase("TAC348/Door/NH")) {
         if (eventData.equalsIgnoreCase("closed --> open")) {
             analogWrite(PIN_RED, 255);
             analogWrite(PIN_GREEN, 0);
             analogWrite(PIN_BLUE, 0);
-        }  //open to close
+        }  // open to close
         else {
             analogWrite(PIN_RED, 255);
             analogWrite(PIN_GREEN, 255);
@@ -58,7 +59,7 @@ void switchEventHandler(const char *event, const char *data) {
         }
     }
 }
-//this is a particle function
+// this is a particle function
 int blinkLed(String cmd) {
     Serial.println(cmd);
     if (cmd.equals("twice")) {
