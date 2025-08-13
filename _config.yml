@@ -11,7 +11,7 @@ plugins:
   
 description: "TAC 348 - Making Smart Devices: Introduction to Electronics/Wearables @ USC (Open Educational Resource)"
 url: https://reparke.github.io
-repository: "reparke/ITP348-Physical-Computing"
+repository: "reparke/TAC348-Making-Smart-Devices"
 # logo: "/assets/images/usc_monogram_gold_on_trans.png"
 breadcrumbs: false
 
@@ -30,7 +30,7 @@ breadcrumbs: false
 baseurl: /ITP348-Physical-Computing
 
 # url where the useful documents are available to download
-resourcesUrl: "https://reparke.github.io/ITP348-Physical-Computing" 
+resourcesUrl: "https://reparke.github.io/TAC348-Making-Smart-Devices" 
 
 # url where the student's grading info is kept 
 gradingUrl: "https://brightspace.usc.edu" 
@@ -100,7 +100,7 @@ footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/reparke/ITP348-Physical-Computing"
+      url: "https://github.com/reparke/TAC348-Making-Smart-Devices"
     - label: "Wordpress"
       icon: "fab fa-fw fa-wordpress"
       url: "https://robparke.com"

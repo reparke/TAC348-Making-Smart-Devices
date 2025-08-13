@@ -17,7 +17,7 @@ Welcome to the course page for **TAC 348 - Making Smart Devices: Introduction to
 You'll find course material and useful links on the side. 
 
 - [Week by Week Schedule](schedule.md) - Weekly schedule of lectures, assignments, readings
-- [Exercises](https://github.com/reparke/ITP348-Physical-Computing/tree/main/_exercises) - GitHub repository with the code we create during class. All projects are created with [Particle Workbench](https://www.particle.io/workbench/)
+- [Exercises](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises) - GitHub repository with the code we create during class. All projects are created with [Particle Workbench](https://www.particle.io/workbench/)
 - [Brightspace](https://brightspace.usc.edu) - For submitting assignments
 - [Piazza](https://piazza.com/usc/fall2025/tac348/home) - Discussion board for assignments and class
 - [TAC-348 Photon 2 troubleshooting guide](https://docs.google.com/document/d/12_kRqHdNPQmiGWF4pe0LWZbBaEmdoF-bbJtCxojCN74/edit#heading=h.7fjmqgnpux8d) This is a super useful document with the most common issues and solutions encountered in TAC 348
@@ -38,6 +38,6 @@ You'll find course material and useful links on the side.
 
 These are not necessarily needed for this course, but provide more information about how this site is built
 
-- [GitHub repository](https://github.com/reparke/ITP348-Physical-Computing) - This is where all the raw files lives
+- [GitHub repository](https://github.com/reparke/TAC348-Making-Smart-Devices) - This is where all the raw files lives
 - [Building your own course / site](https://robparke.com/creating-accessible-open-educational-resources/) - I wanted this course material to be accessible and open-source. I tried to make some notes about the process for anyone interested
 - [Contact / Feedback](https://parke.wufoo.com/forms/feedback-form/) - If you find this material helpful in any way or you find it useful, please let me know by filling out this form. I would love to hear about it! 
