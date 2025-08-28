@@ -140,12 +140,7 @@ Week 10 idea:
   
 - Introduction to IoT
 - Explain course website
-- Kit overiew
-  - Explain how to use envelopes
-  - Explain how to identify kit parts
-
-
-#### Lecture
+- Kit overview (explain how to identify kit parts)
 
 * C++ Syntax (optional at the end)
 
@@ -177,7 +172,7 @@ Week 10 idea:
 
   
 
-## 2. Pulse Width Modulation, ADC ==Spring 2024 - MLK Holiday==
+## 2. Pulse Width Modulation, ADC ==Fall 2025 - Labor Day Holiday==
 
 ### Holiday Alternative Plan
 
@@ -276,7 +271,7 @@ Week 10 idea:
 
 
 
-## 3. Buttons, Digital Input, RGB
+## 3. Buttons, Digital Input, RGB ==Fall 2025 w2d2 Rob in Tapia==
 
 ### Announcements
 
@@ -520,6 +515,20 @@ Week 10 idea:
 - w8d2 FSM washing machine
 - w9d1 motors with fan
 - w9d2 motors with fan + bluetooth
+
+==**Fall: Try to start Sound earlier due to fall break**==
+
+- ==idea: Day 1 covers motors by directly building fan with potentiometer; Day 2 cover bluetooth and control can with bluetooth==
+
+- ==**Fall**==
+  - w6d1 magnetic switch
+  - w6d2 blynk
+  - w7d1 Sound
+  - w7d2 holiday
+  - w8d1, FSM stoplight 
+  - w8d2 FSM washing machine
+  - w9d1, we covered motors and servos, and built the fan
+  - w9d2, we introduced bluetooth with fan 
 
 #### Assignment
 
@@ -965,6 +974,8 @@ Note: need to update exercies (start and final) since trigger and echo pins chan
 
 
 ## 12. Smart Watch, Heart Rate Sensor
+
+==Fall 2025 w12d1 is Veteran's day holiday so make w12d2 design review and push rest into following week. Probably skip watch json==
 
 ### Reading
 

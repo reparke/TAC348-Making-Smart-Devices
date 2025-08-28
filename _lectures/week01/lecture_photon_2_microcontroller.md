@@ -36,18 +36,18 @@ title: Photon 2 Microcontroller
 * A datasheet explains how a component functions, how to use it, what conditions it will operate, etc.
 * Don't worry about understanding everything in a datasheet, but learn to pull out key information
 
-- [Photon 2 Datasheet](https://docs.particle.io/reference/datasheets/wi-fi/photon-2-datasheet/)
+* [Photon 2 Datasheet](https://docs.particle.io/reference/datasheets/wi-fi/photon-2-datasheet/)
 
 ## Work in groups and answer the following
 
-1. What voltage does the Photon 2 operate at?
-2. Which IC (integrated circuit) is the "main" processor?
-3. What is the difference between pins `3v3` and `VUSB`?
-4. How many digital input pins are there? 
-5. How many analog output pins are there?
-6. How many ground pins are there?
-7. What is the voltage that the input pins can handle?
-8. Can we power the Photon 2 with battery?
+1. Which IC (integrated circuit) is the "main" processor?
+2. What is the voltage difference between pins `3v3` and `VUSB`?
+3. How many digital input pins are there? 
+4. How many analog output pins are there?
+5. How many ground pins are there?
+6. How much memory (RAM) does the Photon 2 have?
+7. Can we power the Photon 2 with battery? If so, what is the battery voltage?
+8. What is the voltage that the input pins can handle? (see [this page](https://docs.particle.io/reference/device-os/api/input-output/input-output/))
 
 <!-- recommended supply voltage: 3.3v, Supply Input Voltage: up to 6.2v -->
 
@@ -56,6 +56,10 @@ title: Photon 2 Microcontroller
 <!-- 3v3 is always 3.3v; VUSB is 5v when connected to USB-->
 
 <!-- 20 digital GPIO; 6 analog IN; 0 analog out; 1 ground pin -->
+
+<!-- 512 KB of static RAM (SRAM) and 4 MB of pseudo-static RAM (PSRAM) -->
+
+<!-- battery voltage is 3.7v -->
 
 <!-- Input high voltage: GPIO can operate at 3.3V max so be caution with higher voltage devices -->
 
@@ -66,19 +70,7 @@ title: Photon 2 Microcontroller
 
 - [Photon 2 Pinouts](https://docs.particle.io/assets/images/photon2-rendering.png)
 
-- [Photon 2 Datasheet](https://docs.particle.io/reference/datasheets/wi-fi/photon-2-datasheet/)
-
-<!-- recommended supply voltage: 3.3v, Supply Input Voltage: up to 6.2v -->
-
-<!-- main: realtek RTL8721DM  -->
-
-<!-- 3v3 is always 3.3v; VUSB is 5v when connected to USB-->
-
-<!-- 20 digital GPIO; 6 analog IN; 0 analog out; 1 ground pin -->
-
-<!-- Input high voltage: GPIO can operate at 3.3V max so be caution with higher voltage devices -->
-
-<!-- show other communication pins -->        
+- [Photon 2 Datasheet](https://docs.particle.io/reference/datasheets/wi-fi/photon-2-datasheet/)       
 
 
 

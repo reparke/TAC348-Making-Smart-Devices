@@ -6,15 +6,15 @@ SerialLogHandler logHandler(LOG_LEVEL_INFO);
 
 void setup() {
   //tell the argon if pin D2 is input or output
-  pinMode(D2, OUTPUT);
+  pinMode(D7, OUTPUT);
 }
 
 void loop() {
   //turn on led
-  digitalWrite(D2, HIGH);
+  digitalWrite(D7, HIGH);
   //pause with "delay"
   delay(1000);  //1000 milliseconds or 1 sec
-  digitalWrite(D2, LOW);
+  digitalWrite(D7, LOW);
   delay(1000);
 }
 

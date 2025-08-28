@@ -13,7 +13,7 @@ title: C++ Syntax
 
 # C++ Syntax Overview
 
-## C++ Compared to Python and Java
+## C++ Compared to Python, Matlab, and Java
 
 * For comparison of programs side-by-side using functions, arrays / lists, and functions using C++, Python, and Java, see this page:
   [C++ comparison](https://reparke.github.io/TAC348-Making-Smart-Devices/c++_comparison)

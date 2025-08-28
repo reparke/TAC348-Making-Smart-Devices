@@ -105,16 +105,6 @@ Empowering and fun
 
    
 
-## Communication 
-
-* WiFi and Cellular
-* Bluetooth Low Energy (BLE)
-  - Ex: Communication between smart watch and phone; wireless headphones
-  - Range: ~1200+ ft
-* Near-Field Communication (NFC) 
-  - Ex: Contact-less payment like Apple Pay
-  - Range: 4 inches
-
 ## Our focus in this class
 
 * building electronic prototype
@@ -143,7 +133,7 @@ Empowering and fun
 ## Past Student Projects
 
 
-| <img src="lecture_intro_making_smart_devices.assets/IMG_0981.jpg" alt="IMG_0981" style="width:450px;" /> | <img src="lecture_intro_making_smart_devices.assets/TAC-348%20Final%20Projects%20014%20121719.jpg" alt="TAC-348 Final Projects 014 121719" style="width:650px" /> |
+| <img src="lecture_intro_making_smart_devices.assets/IMG_0981.jpg" alt="IMG_0981" style="width:450px;" /> | <img src="lecture_intro_making_smart_devices.assets/ITP-348%20Final%20Projects%20014%20121719.jpg" alt="TAC-348 Final Projects 014 121719" style="width:650px" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 |                                                              |                                                              |
 
