@@ -32,7 +32,6 @@ Assignment 0 – Installation and Setup
 
 ## Connect your Particle Photon 2 to your Computer
 
-- Connect the antenna (discussed in class)
 - Connect the Photon 2 to your breadboard (discussed in class)
 - Connect the micro USB cable to your computer
 
