@@ -21,7 +21,7 @@ title: Pre-Lecture Activities
 
 ### Build before class Mon / Tues 
 
-- none
+![image-20250905141202734](week03.assets/image-20250905141202734.png)
 
 ### Build before class Wed / Thurs 
 

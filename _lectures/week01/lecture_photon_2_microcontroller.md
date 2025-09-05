@@ -124,7 +124,7 @@ void loop() {
 * Similar to `import`
 * Allows us to access additional code and functions
 * We will use this to communicate with certain devices like LCD screens
-* Notice the `#`
+* Notice the `#` 
 
 ## Variable Declaration
 

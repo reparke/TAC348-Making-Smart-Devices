@@ -222,7 +222,7 @@ Week 10 idea:
 
 ### Lab
 
-- Blink 2 LED
+- ~~Blink 2 LED~~
 - Explain Workbench project
 
 #### Lecture
