@@ -28,7 +28,7 @@ title: Analog to Digital Conversion
 
 ## Understanding Resolution
 
-<img src="lecture_adc.assets/2-bit_resolution_analog_comparison.png" style="width:525px" /><img src="lecture_adc.assets/3-bit_resolution_analog_comparison.png" style="width:450px" />
+<img src="lecture_adc.assets/2-bit_resolution_analog_comparison_v2.png" style="width:525px" /><img src="lecture_adc.assets/3-bit_resolution_analog_comparison_v2.png" style="width:450px" />
 
 * Red line is actual analog input voltage (in volts)
 * Blue line is the digital sample value (just a number with no units)
