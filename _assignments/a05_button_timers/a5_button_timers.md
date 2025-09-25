@@ -220,6 +220,5 @@ Grading
 | **Stage 5: Timer Status**                                    |        |
 | Light flashes red when red timer is active                   | 2      |
 | Light flashes blue when blue timer is active                 | 2      |
-| **Extra credit**                                             | +3     |
 |                                                              |        |
 | Total                                                        | 34     |

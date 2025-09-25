@@ -1,22 +1,3 @@
-#include "Particle.h"
-SYSTEM_MODE(AUTOMATIC);
-SYSTEM_THREAD(ENABLED);
-
-SerialLogHandler logHandler(LOG_LEVEL_WARN);
-
-/*
-    there is a lot of "low level" code to connect to certain sensor
-    --> instead we will use a LIBRARY which handles that
-
-    Library - collection of functions and objects
-
-    How to find libraries
-        - look community.particle.io
-        - search particle library database
-        - internet (eg accelerometer MGP4050 )
-        - datasheet
-
-*/
 /******************************************************************************
   Micro-OLED-Shield-Example.ino
   SparkFun Micro OLED Library Hello World Example
@@ -56,29 +37,30 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 #include "SparkFunMicroOLED.h"  // Include MicroOLED library
 #include "math.h"
 
+/*
+    look through this code and modify loop()
+        make "hello world" show up on oled
+        don't use printTitle()
+*/
+
+const int PIN_POT1 = A0;
+const int PIN_POT2 = A1;
+const int PIN_BUTTON = D2;
+
 //////////////////////////////////
 // MicroOLED Object Declaration //
 //////////////////////////////////
 // Declare a MicroOLED object. If no parameters are supplied, default pins are
 // used, which will work for the Photon Micro OLED Shield (RST=D7, DC=D6, CS=A2)
 // MicroOLED oled;
-MicroOLED oled(MODE_I2C, 9, 1);  // Example I2C declaration RST=D7, DC=LOW
+// MicroOLED oled(MODE_I2C, D7, 0);    // Example I2C declaration RST=D7, DC=LOW
 // (0)
+MicroOLED oled(MODE_I2C, 9, 1);
 
 // SYSTEM_MODE(MANUAL);
-const int PIN_POT1 = A0;
-const int PIN_POT2 = A1;
-const int PIN_BUTTON = D2;
-
-int prevButtonVal = HIGH;
-
-void testInputs() {
-    int xPot = analogRead(PIN_POT1);
-    int yPot = analogRead(PIN_POT2);  // ADC --> range 0-4095
-    int curButtonVal = digitalRead(PIN_BUTTON);
-    Serial.println("Pot 1 = " + String(xPot) + ", Pot 2 = " + String(yPot) +
-                   ", Button = " + String(curButtonVal));
-}
+// Center and print a small title
+// This function is quick and dirty. Only works for titles one
+// line long.
 void printTitle(String title, int font) {
     int middleX = oled.getLCDWidth() / 2;
     int middleY = oled.getLCDHeight() / 2;
@@ -94,6 +76,7 @@ void printTitle(String title, int font) {
     delay(1500);
     oled.clear(PAGE);
 }
+
 void pixelExample() {
     printTitle("Pixels", 1);
 
@@ -288,9 +271,9 @@ void textExamples() {
         oled.print(analogRead(A1));
         oled.setCursor(0, 32);
         oled.setFontType(0);
-        // oled.print("A7:");
-        // oled.setFontType(2);
-        // oled.print(analogRead(A7)); //photon 2 has pins A0-A5
+        oled.print("A7:");
+        oled.setFontType(2);
+        //oled.print(analogRead(A7)); //why an error for Phton?
         oled.display();
         delay(100);
     }
@@ -327,6 +310,7 @@ void setup() {
     oled.display();   // Display what's in the buffer (splashscreen)
     delay(1000);      // Delay 1000 ms
     randomSeed(analogRead(A0) + analogRead(A1));
+
     pinMode(PIN_BUTTON, INPUT);
     pinMode(PIN_POT1, INPUT);
     pinMode(PIN_POT2, INPUT);
@@ -334,58 +318,62 @@ void setup() {
 }
 
 void loop() {
-    testInputs();
-
-    // int xPot = analogRead(PIN_POT1);
-    // int yPot = analogRead(PIN_POT2);  // ADC --> range 0-4095
-
-    // int xMax = oled.getLCDWidth();   // max x dimension
-    // int yMax = oled.getLCDHeight();  // max y direction
-
-    // int x = map(xPot, 0, 4095, 0, xMax);
-    // int y = map(yPot, 0, 4095, 0, yMax);
-
-    // oled.pixel(x, y);  // no need for setFont or setCursor
-    // oled.display();
-
-    // // build latch
-    // int curButtonVal = digitalRead(PIN_BUTTON);
-    // if (curButtonVal == LOW && prevButtonVal == HIGH) {
-    //     oled.clear(PAGE);
-    // }
-    // prevButtonVal = curButtonVal;
-
     // pixelExample();  // Run the pixel example function
     // lineExample();   // Then the line example function
     // shapeExample();  // Then the shape example
     // textExamples();  // Finally the text example
 
-    /* print "hello world" on the OLED screen
-        don't use printTitle()
+    // oled.clear(PAGE);   // erases screen
 
-        print TAC 348 on the next line
+    // oled.setCursor(0,0);
+    // oled.setFontType(0);
+    // oled.print("hello world");
+
+    // oled.setcursor(0,20);
+    // oled.print("TAC 348");
+
+    // oled.display();             //actually draws on screen
+
+
+    /*
+        etch a sketch
+         two pots for drawing
+         one button for reset
+         oled for display
+
+         button will erase the screen
+            oled.clear(PAGE)
+        
+        two pots
+            read the pots and map them to height and width of screen
+            ADC - 0,4095 --> map height       or map width (0, ?)
+
+        somehow draw on the screen?
+            oled.pixel(X, Y)
+
     */
-    // to show text
-    //     oled.setCursor(0, 0);
-    //     oled.setFontType(0);
-    //     oled.clear(PAGE);  // erases what's on the screen
-    //     oled.print("Hello!");
-    //     oled.setCursor(0, 20);  // far left but down a little bit
-    //     oled.print("TAC 348!");
 
-    //     // after you write / draw a bunch of things the screen, they only
-    //     show
-    //     // up when we say oled.display()
-    //     oled.display();
-    // }
-    /* build an etch a sketch
-        we have an oled, 2 pots, and a button
+    //what are x and y
+    int xPot = analogRead(PIN_POT1);
+    int yPot = analogRead(PIN_POT2);
 
-        pots are the knobs so map them
-            read pot and map to what? the screen dimensions
-            eg potX and potY
+    //figure out the max x and y of our screen
+    int xMax = oled.getLCDWidth(); 
+    int yMax = oled.getLCDHeight();
 
-        buttons reset
-            clear screen
-    */
+    //map
+    int xPixel = map(xPot, 0, 4095, 0, xMax);
+    int yPixel = map(yPot, 0, 4095, 0, yMax);
+
+   x` fonttype or setcursor
+
+    //to reset screen, use button -- no need for latch
+    int buttonVal = digitalRead(PIN_BUTTON);
+    if (buttonVal == LOW) {
+        oled.clear(PAGE);
+    }
+
+    //always end with
+    oled.display();
+
 }
