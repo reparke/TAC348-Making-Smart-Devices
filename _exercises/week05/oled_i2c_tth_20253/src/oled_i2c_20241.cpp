@@ -37,12 +37,6 @@
 #include "SparkFunMicroOLED.h"  // Include MicroOLED library
 #include "math.h"
 
-/*
-    look through this code and modify loop()
-        make "hello world" show up on oled
-        don't use printTitle()
-*/
-
 const int PIN_POT1 = A0;
 const int PIN_POT2 = A1;
 const int PIN_BUTTON = D2;
@@ -54,10 +48,11 @@ const int PIN_BUTTON = D2;
 // used, which will work for the Photon Micro OLED Shield (RST=D7, DC=D6, CS=A2)
 // MicroOLED oled;
 // MicroOLED oled(MODE_I2C, D7, 0);    // Example I2C declaration RST=D7, DC=LOW
+MicroOLED oled(MODE_I2C, 9, 1);  // from digging in documentation
 // (0)
-MicroOLED oled(MODE_I2C, 9, 1);
 
 // SYSTEM_MODE(MANUAL);
+
 // Center and print a small title
 // This function is quick and dirty. Only works for titles one
 // line long.
@@ -273,7 +268,7 @@ void textExamples() {
         oled.setFontType(0);
         oled.print("A7:");
         oled.setFontType(2);
-        //oled.print(analogRead(A7)); //why an error for Phton?
+        // oled.print(analogRead(A7));
         oled.display();
         delay(100);
     }
@@ -310,10 +305,10 @@ void setup() {
     oled.display();   // Display what's in the buffer (splashscreen)
     delay(1000);      // Delay 1000 ms
     randomSeed(analogRead(A0) + analogRead(A1));
-
-    pinMode(PIN_BUTTON, INPUT);
     pinMode(PIN_POT1, INPUT);
     pinMode(PIN_POT2, INPUT);
+    pinMode(PIN_BUTTON, INPUT);
+
     oled.clear(PAGE);
 }
 
@@ -322,57 +317,104 @@ void loop() {
     // lineExample();   // Then the line example function
     // shapeExample();  // Then the shape example
     // textExamples();  // Finally the text example
-
-    // oled.clear(PAGE);   // erases screen
-
-    // oled.setCursor(0,0);
-    // oled.setFontType(0);
-    // oled.print("hello world");
-
-    // oled.setcursor(0,20);
-    // oled.print("TAC 348");
-
-    // oled.display();             //actually draws on screen
-
-
     /*
-        etch a sketch
-         two pots for drawing
-         one button for reset
-         oled for display
-
-         button will erase the screen
-            oled.clear(PAGE)
-        
-        two pots
-            read the pots and map them to height and width of screen
-            ADC - 0,4095 --> map height       or map width (0, ?)
-
-        somehow draw on the screen?
-            oled.pixel(X, Y)
+        display "hello world" on the OLED
+        DON'T use printTitle()
 
     */
 
-    //what are x and y
+    // oled.clear(PAGE);
+    // oled.setCursor(0,0); //more cursor to top left
+    // oled.setFontType(0);
+    // oled.print("Hello world");
+    // oled.display();
+
+    /*
+        two pots, oled, button
+            pots are knobs (one for x and one y)
+            oled is screen
+            button as reset/erase
+
+            button -> oled.clear(PAGE);
+
+            two pots
+                read the pot -- ADC values 0-4095
+                use map!
+                map them to the height and width of the screen
+                    get max height and width from getLCDWidth
+
+            draw
+                oled.pixel(x,y)
+
+
+    */
+
     int xPot = analogRead(PIN_POT1);
     int yPot = analogRead(PIN_POT2);
-
-    //figure out the max x and y of our screen
-    int xMax = oled.getLCDWidth(); 
-    int yMax = oled.getLCDHeight();
-
-    //map
-    int xPixel = map(xPot, 0, 4095, 0, xMax);
-    int yPixel = map(yPot, 0, 4095, 0, yMax);
-
-    Serial.println(String(xPixel) + " " + String(yPixel));
-    //to reset screen, use button -- no need for latch
     int buttonVal = digitalRead(PIN_BUTTON);
+
+    int xPixel = map(xPot, 0, 4095, 0, oled.getLCDWidth() - 1);
+    int yPixel = map(yPot, 0, 4095, 0, oled.getLCDHeight() - 1);
+
+    oled.pixel(xPixel, yPixel);
+
+    oled.display();
+
     if (buttonVal == LOW) {
         oled.clear(PAGE);
     }
-
-    //always end with
-    oled.display();
-
 }
+
+/*
+    Libraries
+        some sensors are really simple to communicate with
+            eg. tmp36 or PR
+        for more complicated ones, there is a lot of LOW LEVEL CODE need to
+   communicate with them
+            ===> use libraries instead
+
+        library is a collection of functions and objects
+        we use libraires to simplify communicating with complicated sensor
+
+    how to find a library
+    - communinty.particle.io
+    - search particle lib database
+    - internet (eg search sparkfun microoled library
+    - datasheet
+*/
+
+// #include "Particle.h"
+// SYSTEM_MODE(AUTOMATIC);
+// SYSTEM_THREAD(ENABLED);
+// SerialLogHandler logHandler(LOG_LEVEL_WARN);
+
+// /*
+//     2 pots
+//     button
+//     oled
+//     --> first test the components
+// */
+
+// const int PIN_POT1 = A0;
+// const int PIN_POT2 = A1;
+// const int PIN_BUTTON = D2;
+
+// void testInputs() {
+//     int pot1 = analogRead(PIN_POT1);
+//     int pot2 = analogRead(PIN_POT2);
+//     int button = digitalRead(PIN_BUTTON);
+
+//     Serial.println("pot1 = " + String(pot1) + ", pot2 = " + String(pot2) + ",
+//     button = " + String(button));
+// }
+
+// void setup() {
+//     pinMode(PIN_POT1, INPUT);
+//     pinMode(PIN_POT2, INPUT);
+//     pinMode(PIN_BUTTON, INPUT);
+//     Serial.begin(9600);
+// }
+
+// void loop() {
+//     //testInputs();
+// }

@@ -7,20 +7,17 @@ SYSTEM_MODE(AUTOMATIC);
 SYSTEM_THREAD(ENABLED);
 SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
-
 // it uses a timing approach based on cur and prevMillis
 #include "SparkFunMicroOLED.h"   // Include MicroOLED library
 MicroOLED oled(MODE_I2C, 9, 1);  // Example I2C declaration RST=D7, DC=LOW
 
 const int PIN_RED = A2;
 const int PIN_GREEN = A5;
-const int PIN_BLUE = D15; // aka MOSI pin
+const int PIN_BLUE = D15;  // aka MOSI pin
 
 const int LONG_LIGHT_DURATION = 5000;   // time for green, red, walk, don't walk
 const int SHORT_LIGHT_DURATION = 2000;  // time for yellow
 const int BLINK_RATE = 500;             // time for blinking don't walk light
-
-
 
 // TODO:  Create enum State for stoplight states
 
@@ -30,14 +27,10 @@ const int BLINK_RATE = 500;             // time for blinking don't walk light
 
 /* ======= FUNCTIONS =========== */
 // TODO: COMPLETE setColor
-void setColor(Color c) {}
 
-// TODO: COMPLETE updateOLED
-void updateOLED() {}
+// // TODO: COMPLETE updateOLED
 
-// TODO: COMPLETE updateNextState
-
-void updateNextState() {}
+// // TODO: COMPLETE updateNextState
 
 /* ======= FUNCTIONS FOR DEBUGGING LED WIRING ========= */
 // functions used for testing only
@@ -89,13 +82,10 @@ void setup() {
     oled.display();
 }
 
-
-
 void loop() {
     // TODO: comment out this function after verifying OLED and RGB LED work
     testLightandOLED();
-	
-	// TODO: uncomment to start state machine
-	//updateNextState();
-}
 
+    // TODO: uncomment to start state machine
+    // updateNextState();
+}
