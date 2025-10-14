@@ -15,7 +15,7 @@
 
 * Use Bluefruit app to control a RGB LED and buzzer
 * Download starting code
-  * Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+  * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
   * Paste the following link into the top right
     https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_uart_control_start
 * In Bluefruit app, connect to over UART (listed as "controller")
@@ -54,7 +54,7 @@ On-board LED    D7
 * Send commands **from** app **to** Photon 2, interpret them in Photon 2, and perform an action
 * Download starting code
 
-  * Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+  * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
 
   * Paste the following link into the top right
     https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_uart_control_start

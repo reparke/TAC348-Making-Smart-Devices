@@ -70,7 +70,7 @@ title: Losant Cloud Platform and Interface
 
 ## Lab
 
-* [Download project: Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+* [Download project: Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
 
 * Paste the following link into the top right
   https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week11/losant_temperature_start) 

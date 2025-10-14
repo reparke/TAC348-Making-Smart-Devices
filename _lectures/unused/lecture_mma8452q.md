@@ -110,7 +110,7 @@ if (accel.available()) {	//check if available
 
 ## Exercise 1
 
-* Download starting code: Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+* Download starting code: Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
   * Paste the following link into the top right
     https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week13/accelerometer_start
 * Connect sensor and run example code

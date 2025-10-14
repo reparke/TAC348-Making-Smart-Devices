@@ -122,7 +122,7 @@ CONV_FACTOR_CM_TO_IN = 0.3437
 
 ## Lab
 
-* Download project: Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+* Download project: Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
 * Paste the following link into the top right
   https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week11/ultrasonic_oled_start
 

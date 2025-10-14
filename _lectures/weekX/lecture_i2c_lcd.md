@@ -162,7 +162,7 @@ title: I2C LCD Screen
 
 ## Exercise 1
 
-* Download project: Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+* Download project: Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
 * Paste the following link into the top right
   https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week13/ultrasonic_start
 * Connect I2C LCD and run example code

@@ -18,7 +18,7 @@ title: Smart Watch
 ## Starting Project
 
   * For assembly and wiring, refer to [these instructions](guide_build_watch.md)
-  * Download starting code: Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+  * Download starting code: Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
     * Paste the following link into the top right
       https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week12/smart_watch_pulse_sensor_start
 

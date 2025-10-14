@@ -36,7 +36,7 @@
 
 
 * Download starting code
-  * Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+  * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
   * Paste the following link into the top right
   
   `https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week07/stop_light_rgb_leds_start`

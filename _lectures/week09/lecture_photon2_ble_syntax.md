@@ -116,7 +116,7 @@ void onDataReceived(const uint8_t* data, size_t len,
 
 * Use Bluefruit app to control a DC motor and servo motor
 * Download starting code
-  * Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+  * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
   * Paste the following link into the top right
     https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_fan_start
 * In Bluefruit app, connect to over UART (listed as "controller")
@@ -181,7 +181,7 @@ Motor Controller
 * Use Bluefruit app to send accelerometer data from phone to Photon 2
 * Control RGB LED colors with accelerometer data
 * Download starting code
-  * Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+  * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
   * Paste the following link into the top right
     https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_uart_rgb_accel_example
 
@@ -206,7 +206,7 @@ Motor Controller
 
 * Download starting code
 
-  * Go to [https://bit.ly/ProjectZip](https://bit.ly/ProjectZip)
+  * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
 
   * Paste the following link into the top right
     https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_health_temp_final
