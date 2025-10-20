@@ -22,6 +22,13 @@ title: DC Motors
 
 4. DC motor applications
 
+## Key Principles
+
+* *Quick reminder: Motors are really cool but this is not a physics course. More discussion about how they works at the end*
+* DC Motors convert electrical energy into mechanical rotation
+* Apply more voltage and the motor spins faster (to a point)
+* Electric current in a magnetic field p roduces force—this is what keeps the motor spinning
+
 ## DC Motor Applications
 
 * Hobby motors
@@ -31,67 +38,21 @@ title: DC Motors
   * Electric scooters
   * High-torque applications
 * Motors can also generate electricity (generators / alternators)
+* We cover brushed motors which are simpler to understand, but brushless motors are more efficient and powerful (used in high performance applications like drones)
 
 <!--Torque is a measure of force that causes an object to rotate about an axis-->
 
-## How Do Brushed Motors Work?
-
-- Electromagnetism!
-- VERY brief physics aside
-
-## Electromagnetism
-
-* The guiding principle behind electric motors is the **Lorentz Force**
-
-
-* **Electrical current in a magnetic field produces a physical force**
-* Force direction is given by the “right-hand rule”
-  * Current direction along your index
-  * Magnetic field along your middle
-  * Force direction is along your thumb
-
 ## Three Main Parts of DC Motor  
 
-* Stator magnets (stationary)
-* Armature / Windings (rotating wire)
-* Commutator (supplies current to armature)
+* Permanent / stationary magnets (*stator*)
+* Rotating wire coils (*armature* / windings)
+* Switch that automatically reverses current to keep spinning (*commutator*)
 
 ## Inside Simple DC Motor
 
 <img src="lecture_dc_motors.assets/524dcee9757b7f00478b4567.jpg" alt="https://cdn.sparkfun.com/assets/a/1/6/0/2/524dcee9757b7f00478b4567.jpg" style="width:500px;" /> <img src="lecture_dc_motors.assets/BrushMotorAnatomy_1.png" alt="Disected Motor!" style="width:350px;" />
 
 
-
-## DC Motor Construction
-
-<img src="lecture_dc_motors.assets/dc_motor_construction_single.png" alt="dc_motor_construction" style="width:600px" />
-
-<img src="lecture_dc_motors.assets/dc_motor_construction.png" alt="dc_motor_construction" style="width:500px" />
-
-
-
-
-
-## Illustration
-<img src="lecture_dc_motors.assets/dc_motor_illustration_slow.gif" alt="dc_motor_illustration" style="width:500px;" />
-
-
-
-<!-- force on right side of armature is INTO screen while force on left side of armature is OUT of screen (since current is opposite direction)-->
-
-<!--
-Lorentz Force:  When the armature rotates 90 degrees, the two contacts reverse the current. This doesn’t change the direction of the current relative to the magnetic field. The Lorentz Force is acting in the SAME direction all the time. Keeps the motor spinning in the same direction
--->
-
-
-
-## DC Motor Types
-
-| Brushed                                                      | Brushless (synchronous or electronically commutated motor)   |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Physical contact points in the commutator to switch current direction | Inverter to electrically switches the DC power supply to AC power supply |
-| Pro: Relatively inexpensive                                  | Pro: Less wear on moving parts                               |
-| Con: Parts wear out over time                                | Con: More expensive                                          |
 
 
 
@@ -109,7 +70,8 @@ Lorentz Force:  When the armature rotates 90 degrees, the two contacts reverse t
 * Spin is controlled by current direction
 * If direction is reversed, the motor spins in the opposite direction
 * It is not practical to have to reverse the wires to change motor direction
-* Also, we have no way to control speed
+* But...we have no way to control speed
+* And...motors could draw too much current for Photon 2 or damage pins in motor moves in reverse 
 
 ## Motor Controller
 <img src="lecture_dc_motors.assets/image-20200323180344596.png" alt="image-20200323180344596" style="width:500px;" />
@@ -144,7 +106,7 @@ Lorentz Force:  When the armature rotates 90 degrees, the two contacts reverse t
 
 ## Controlling the Motor Direction
 
-* Setting the direction is done by changing the two input pins to HIGH and LOW separatel
+* Setting the direction is done by changing the two input pins to HIGH and LOW separately
   * Ex: `AI1 = HIGH` and `AI2 = LOW` is one direction
   * Ex: `AI1 = LOW` and `AI2 = HIGH` is other direction
 * Setting them both to LOW means stopping the motor
@@ -187,6 +149,50 @@ Lorentz Force:  When the armature rotates 90 degrees, the two contacts reverse t
 * The theoretical PWM values are 0 to 255. Write a sketch to determine the min and max values.
 * Write a sketch that powers up the fan from the practical minimum (the value we established in the previous exercise) to the maximum
 * There should be a ramp up in speed, getting progressively faster until it maxes out
+
+# Bonus Notes on Motors
+
+## How Do Brushed Motors Work?
+
+- Electromagnetism!
+- VERY brief physics aside
+
+## Electromagnetism
+
+* The guiding principle behind electric motors is the **Lorentz Force**
+
+
+* **Electrical current in a magnetic field produces a physical force**
+* Force direction is given by the “right-hand rule”
+  * Current direction along your index
+  * Magnetic field along your middle
+  * Force direction is along your thumb
+
+## DC Motor Construction
+
+<img src="lecture_dc_motors.assets/dc_motor_construction_single.png" alt="dc_motor_construction" style="width:600px" />
+
+<img src="lecture_dc_motors.assets/dc_motor_construction.png" alt="dc_motor_construction" style="width:500px" />
+
+## Illustration
+
+<img src="lecture_dc_motors.assets/dc_motor_illustration_slow.gif" alt="dc_motor_illustration" style="width:500px;" />
+
+
+
+<!-- force on right side of armature is INTO screen while force on left side of armature is OUT of screen (since current is opposite direction)-->
+
+<!--
+Lorentz Force:  When the armature rotates 90 degrees, the two contacts reverse the current. This doesn’t change the direction of the current relative to the magnetic field. The Lorentz Force is acting in the SAME direction all the time. Keeps the motor spinning in the same direction
+-->
+
+## DC Motor Types
+
+| Brushed                                                      | Brushless (synchronous or electronically commutated motor)   |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Physical contact points in the commutator to switch current direction | Inverter to electrically switches the DC power supply to AC power supply |
+| Pro: Relatively inexpensive                                  | Pro: Less wear on moving parts                               |
+| Con: Parts wear out over time                                | Con: More expensive                                          |
 
 
 

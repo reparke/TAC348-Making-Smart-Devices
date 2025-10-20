@@ -155,7 +155,7 @@ void setup() {
 void loop() {
     // basicDCMotor();
     // potDCMotor();
-    // basicServo();
+    basicServo();
     // potServo();
-    simpleFan();
+    // simpleFan();
 }
