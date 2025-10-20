@@ -2,7 +2,7 @@
 marp: true
 theme: itp
 
-week: 11
+week: 10
 category: lectures
 title: OLED Screen Graphics (I2C)
 ---

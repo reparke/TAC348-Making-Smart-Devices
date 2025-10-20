@@ -2,7 +2,7 @@
 marp: true
 theme: itp
 
-week: 10
+week: 11
 category: lectures
 title: Sending Multiple Values to Initial State using JSON
 ---
