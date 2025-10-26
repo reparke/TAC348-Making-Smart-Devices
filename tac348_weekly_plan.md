@@ -847,7 +847,7 @@ Week 10 idea:
 
 ### Day 2 
 
-* Turn in weather stack lab today
+* Turn in weather lab today
 
 #### Lecture / Lab
 
@@ -891,11 +891,13 @@ Week 10 idea:
 
 #### Lecture
 
-- Discuss [weather stack](https://weastitherstack.com/) show example call
+- Discuss [open-meteo](https://open-meteo.com/) show example call
 
 - Walkthrough integration
 
 - Write json code together
+
+*Alt version with weather stack and mustache templates*
 
 - response template
 
@@ -910,8 +912,7 @@ Consider using this template with UV and weather code because we need them later
 
 #### Lab
 
-- Create [weather stack](https://weatherstack.com/) account (hopefully they have already done this)
-- If there are API problems with weather stack, consider using [https://openweathermap.org/](https://openweathermap.org) except it take up to an hour for API to activate. In that case, just share API key
+- Create [open-meteo](https://open-meteo.com/)  account (hopefully they have already done this)
 - Also consider [Air Now EPA air quality API](https://docs.airnowapi.org/webservices)
 - Have them use their own API key to view JSON in a browser (use formatter online if necessary
 - Create webhook in Particle

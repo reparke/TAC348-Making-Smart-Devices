@@ -3,7 +3,7 @@ week: 11
 number: 12
 category: assignments
 title: Project
-date_due: Proposal due Sun Nov 9 @ 11:59 pm; Milestone due Sun Sun Nov 30 @ 11:59 pm; Finished device and presentation during Final Period (in person) Fri Dec 12 for MW class and Tue Dec 18 for TTh class
+date_due: Proposal due Sun Nov 9 @ 11:59 pm; Milestone due Sun Sun Nov 30 @ 11:59 pm; Finished device and presentation during the Final Exam Time listed in the Schedule of Classes (in person) Fri Dec 12 @ 11-1pm for MW class and Tue Dec 16 @ 11-1pm for TTh class
 ---
 
 Final Project

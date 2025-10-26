@@ -43,7 +43,7 @@ Here is a video overview: [https://youtu.be/lqQhFIVWDR0](https://youtu.be/lqQhFI
 
 -   Photon 2
 -   Breadboard
--   1 x speaker
+-   1 x buzzer
 -   1 x magnetic switch
 
 

@@ -39,7 +39,7 @@ Here is a video overview: [https://youtu.be/BB8cKghUftI](https://youtu.be/BB8cKg
 * Download the starting project here: [starting project link](https://reparke.github.io/ProjectZip/#/home?url=https:%2F%2Fgithub.com%2Freparke%2FTAC348-Making-Smart-Devices%2Ftree%2Fmain%2F_assignments%2Fa09_bluetooth_car%2Fble_car_start)
 * There are two files in the `src` folder
   * `particle_ble_setup.h` Handles all the Bluetooth communication. You can mostly leave this file unchanged
-  * `ble_car_setup.ino` This is the project source code. Most of your changes here will be in `onDataReceived`
+  * `ble_car_setup.cpp` This is the project source code. Most of your changes here will be in `onDataReceived`
 
 ## Requirements
 

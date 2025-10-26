@@ -32,10 +32,10 @@ title: Pre-Lecture Activities
 
 | Sensor | Photon 2 |
 | ------ | -------- |
-| GND    | GND      |
 | VCC    | VUSB     |
 | TRIG   | D6       |
 | ECHO   | D5       |
+| GND    | GND      |
 
 | OLED         | Photon 2 |
 | ------------ | -------- |

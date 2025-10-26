@@ -108,22 +108,25 @@ Here is an example
 
 ```c++
 void myHandler(const char *event, const char *data) {
-  	//declare object to store JSON response
-	StaticJsonDocument<1024> doc;
-    DeserializationError error = deserializeJson(doc, data);
-    
-    // Test to see if was successful
-    if (error) {
-        Serial.print(F("deserializeJson() failed: "));
-        return;
-    }
-    
+//Part 1 allows for webhook responses to be delivered in multple "chunks"; you don't need to change this
+    static String jsonBuffer; //store json response
+    int responseIndex = 0;
+    const char* slashOffset = strrchr(event, '/');
+    if (slashOffset) responseIndex = atoi(slashOffset + 1);
+    if (responseIndex == 0) jsonBuffer = "";
+    jsonBuffer += data;
+
+// Part 2 is where you can parse the actual data; you code goes in the IF
+    DynamicJsonDocument doc(12288);
+    DeserializationError error = deserializeJson(doc, jsonBuffer);
+
+    if (!error) { // Test to see if was successful
+        
     /* Here is where your parsing code goes */
-    
     String city = doc["place"]["city"];  // "los angeles"
     int temp = doc["temperature"][1];  // 89
     Serial.println("The second temperature for " + city + " is " + String(temp));
-}
+    }
 ```
 ## Useful Links
 
