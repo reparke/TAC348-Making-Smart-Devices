@@ -957,7 +957,7 @@ Note: need to update exercies (start and final) since trigger and echo pins chan
 
 - Student design range finding with ultrasonic sensor. Provide starting project (same one that uses OLED later)
 
-### Day 2 --
+### Day 2 
 
 #### Lecture
 

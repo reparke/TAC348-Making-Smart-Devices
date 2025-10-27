@@ -77,6 +77,13 @@ Here is a video overview: [https://youtu.be/BB8cKghUftI](https://youtu.be/BB8cKg
 
 -   **Zip File** (project folder): `tac348_a#_lastname_firstname.zip`
 
+## Competition - Best Car
+
+* Upload a short video to **==YouTube==** showing your car's design **and** your car driving in a figure-8 pattern (driving and turning)
+
+-   Students will vote anonymously for the best car based on design and steering
+-   A prize will be awarded to the winner
+
 ## Video Submission Checklist
 
 *Upload video to ==**YouTube**==. To receive credit, your submitted video must clearly demonstrate the following:*
