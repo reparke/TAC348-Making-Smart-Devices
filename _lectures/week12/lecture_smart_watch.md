@@ -108,12 +108,11 @@ title: Smart Watch
 
 ## Note on Weather Codes
 
-- Weatherstack reports the weather conditions with a 3 digit code, which we can use to determine with image to display
-- The full list can be found in the [API documentation](https://weatherstack.com/site_resources/weatherstack-weather-condition-codes.zip)
+- Open Meteo reports the weather conditions with a digit code, which we can use to determine with image to display
+- The full list can be found in the [World Meteorological Organization Code List] [WMO Interpretation Code](https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM))
 - For simplicity, you can use the follow abridged logic
-  - Rainy weather codes: 296, 302, or 308
-  - Cloudy weather codes: 116, 119, or 122
-  - Snowing weather code: 227
+  - Rainy weather codes: 20 or 60
+  - Snowing weather code: 22
   - Any other code can default to sunny 
 
 ## Important Reading

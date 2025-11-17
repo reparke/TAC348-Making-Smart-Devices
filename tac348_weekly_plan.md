@@ -835,6 +835,8 @@ Week 10 idea:
 #### Exercise
 
 * Send random temperature and humidity using `Particle.publish` to InitialState
+* ==NB== ArduinoJson v7.3.2 truncates values unless String() is specifically used
+  `  obj0[String("key")] = String("Temperature (F)");`
 
 #### Lab
 
@@ -1052,16 +1054,8 @@ Note: need to update exercies (start and final) since trigger and echo pins chan
 #### Lecture
 
 * Smart Watch - weather
-* ==NB: If students used mustache templates with WeatherStack, the response template will need to be update==
 
-```json
-{"name":"{{location.name}}", "temperature":"{{current.temperature}}",
-    "description":"{{current.weather_descriptions.0}}",
-    "uvIndex":"{{current.uv_index}}","code":"{{current.weather_code}}"
- }
-```
-
-* NB 2: With threading enabled, `setup()` runs before cloud connectivity is enabled. In order to get the weather initially when Photon 2 turns on, we need to set a boolean flag and do a check in `loop()`
+* NB: With threading enabled, `setup()` runs before cloud connectivity is enabled. In order to get the weather initially when Photon 2 turns on, we need to set a boolean flag and do a check in `loop()`
   * [Particle community post](https://community.particle.io/t/cant-particle-publish-in-setup-with-cpp-file/66688/3?u=rob7)
 
 

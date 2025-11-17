@@ -23,6 +23,7 @@ Ultrasonic Sensor
 */
 #include "SparkFunMicroOLED.h"  // Include MicroOLED library
 
+#include "bitmaps.h"
 //////////////////////////////////
 // MicroOLED Object Declaration //
 //////////////////////////////////
@@ -51,6 +52,7 @@ const float CM_TO_IN = 0.393701;
 const float SPEED_SOUND_CM = 0.034444;
 
 /*
+Monday 
 measure distance
 use serial monitor
   less than min range (1 inch), then print out of range
@@ -58,10 +60,21 @@ use serial monitor
   otherwise, who
 */
 
+/*
+Wednesday
+    display all info on OLED
+    * show large graphic when out of range (no_full_screen)
+    * show the distance AND small warning graphic when in warning range (warning
+   half screen)
+    * otherwise, show the distance and yes half screen
+*/
+
+
 void setup() {
     Serial.begin(9600);  // begin serial communication with the computer
     oled.begin();        // Initialize the OLED
     oled.clear(ALL);     // Clear the display's internal memory
+    oled.drawBitmap(usc_full_screen);
     oled.display();      // Display what's in the buffer (splashscreen)
     delay(1000);         // Delay 1000 ms
 

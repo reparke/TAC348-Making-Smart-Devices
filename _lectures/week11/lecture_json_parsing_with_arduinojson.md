@@ -100,11 +100,11 @@ void loop() {
 ### Configuration of Event Handler
 - The JSON will be passed to the `data` parameter of event handler 
 ```c++
-void myHandler(const char *event, const char *data) {
+void myHandler(const char *event, const char *data) 
 ```
 
 
-Here is an example
+Here is an template for `myHandler`
 
 ```c++
 void myHandler(const char *event, const char *data) {
@@ -122,12 +122,29 @@ void myHandler(const char *event, const char *data) {
 
     if (!error) { // Test to see if was successful
         
-    /* Here is where your parsing code goes */
+    /*          ============ 
+    Here is where your parsing code goes 
+    	        ============
+    */
+        
+
+    }
+}
+```
+### Parsing JSON
+
+* Add you code to parse JSON to `myHandler`
+* Each JSON response will look different
+* Here is an example
+
+```c++
     String city = doc["place"]["city"];  // "los angeles"
     int temp = doc["temperature"][1];  // 89
     Serial.println("The second temperature for " + city + " is " + String(temp));
-    }
 ```
+
+
+
 ## Useful Links
 
 - [ArduinoJson Library](https://arduinojson.org/)

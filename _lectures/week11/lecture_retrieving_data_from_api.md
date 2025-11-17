@@ -46,7 +46,7 @@ title: Retrieving Data from APIs
 1. Create an integration -> webhook on [Particle console](https://console.particle.io/integrations) 
 2. Use `Particle.publish` to trigger webhook
 3. Use `Particle.subscribe` to "listen" for response from webhook
-4. Create Mustache template that tells the Particle Cloud to which relevant data from the response should be to the Photon 2 (and the rest of the data will be ignored)
+4. **Optional:** Mustache template that tells the Particle Cloud to which relevant data from the response should be to the Photon 2 (and the rest of the data will be ignored)
 5. Create **function handler** that is used by `Particle.subscribe` to process JSON
 
 ## Step 0: How to use the API

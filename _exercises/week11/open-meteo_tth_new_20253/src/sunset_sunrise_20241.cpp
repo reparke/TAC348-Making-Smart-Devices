@@ -44,8 +44,9 @@ void myHandler(const char* event, const char* data) {
         int code = doc["current"]["weather_code"];
         int humidity = doc["current"]["relative_humidity_2m"];
         // Serial.println(String(data));
-        Serial.println("The weather " + String(tempF) + " and " + String(code) +
-                       " code and " + String(humidity) + "% humidity");
+        Serial.println("The weather is " + String(tempF, 1) + " F and " +
+                       String(humidity) + "% humidity with weather code " +
+                       (code));
         Serial.println();
     }
 }
@@ -53,7 +54,6 @@ void myHandler(const char* event, const char* data) {
 void setup() {
     // step 2: "listen" (AKA notify us) for this response
     //          when response comes, call the MYHANDLER function
-    Particle.subscribe("hook-response/OpenMeteoJsonFull", myHandler,
                        MY_DEVICES);
     Serial.begin(9600);
 }
