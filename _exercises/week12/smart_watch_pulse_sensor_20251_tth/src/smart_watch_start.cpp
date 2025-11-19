@@ -85,9 +85,9 @@ const unsigned long CLOCK_SCREEN_UPDATE = 500;  // update every 1/2 s
 // TODO:
 const unsigned long WEATHER_SCREEN_UPDATE = 10512000;  // 8 hours
 float temperature;
-String weatherDescription;
 int weatherCode;
-int uvIndex;
+int humidity;
+String description;
 
 //////////////////////////
 // Button Variables     //
@@ -100,12 +100,20 @@ int prevButtonVal = HIGH;  // the last VERIFIED state
 //////////////////////////
 // TODO: create state enum and variable(s) to track state
 enum State { Clock, Weather, Heart };
-State currentState = Heart;
+State currentState = Weather;
 
 ///////////////////////////////////////////////////////////////
 //               END LIBRARIES AND DECLARATIONS              //
 ///////////////////////////////////////////////////////////////
 
+int triggerGeminiWeather(String command) {
+    Particle.publish("gemini_weather", command);
+    return 0;
+}
+int triggerOpenMeteo(String command) {
+    Particle.publish("OpenMeteoJsonFull", command);
+    return 0;
+}
 // TODO
 void runHeartScreen() {
     //     // for debugging
@@ -222,36 +230,33 @@ void runWeatherScreen() {
     if (curMillis - prevMillis > WEATHER_SCREEN_UPDATE) {
         prevMillis = curMillis;
         // get new weather
-        Particle.publish("WeatherStackJSON", "");
+        Particle.publish("OpenMeteoJsonFull", "");
     }
     oled.clear(PAGE);
 
-    //rain is code 302, 299, 296
-    switch(weatherCode) {
-        case 302:
-        case 299:
-        case 296:   //this is an OR
+    // rain is code 20, 50,
+    switch (weatherCode) {
+        case 20:
+        case 50:  // this is an OR
             oled.drawBitmap(bitmap_rainy_16x12);
             break;
-        //we could many more here...
+        // we could many more here...
         default:
             oled.drawBitmap(bitmap_sunny_16x12);
             break;
     }
     oled.setFontType(1);
     oled.setCursor(38, 5);
-    oled.print(temperature,0);
+    oled.print(temperature, 0);
 
     oled.setFontType(0);
     oled.print("o");
 
     oled.setCursor(0, 28);
-    oled.print(weatherDescription);
     oled.setCursor(0, 40);
-    oled.print("UV Ind: ");
-    oled.print(uvIndex);
+    oled.print("Hum: ");
+    oled.print(humidity);
     oled.display();
-    
 }
 
 // TODO
@@ -293,38 +298,119 @@ void PulseSensorAmped_data(int BPM, int IBI) { beatAvg = BPM; }
 
 void PulseSensorAmped_lost(void) {}
 
-void myHandler(const char *event, const char *data) {
-    // Handle the integration response
-    Serial.println(String(data));
+// step 3: create the myHandler function
+void myHandler(const char* event, const char* data) {
+    static String jsonBuffer;
 
-    StaticJsonDocument<1024> doc;
-    DeserializationError error = deserializeJson(doc, data);
+    // two "const char *" params
+    // for us, treat these like strings
+    // the DATA param includes the entire json response
+    // Serial.println(String(data));
+
+    // these 5 lines are from the library and they convert the
+    //  JSON string back into an object we manipulate in code
+
+    int responseIndex = 0;
+    const char* slashOffset = strrchr(event, '/');
+    if (slashOffset) responseIndex = atoi(slashOffset + 1);
+    if (responseIndex == 0) jsonBuffer = "";
+    jsonBuffer += data;
+
+    // Part 2 is where you can parse the actual data; you code goes in the
+    // IF
 
     // Test to see if was successful
-    if (error) {
-        Serial.print(F("deserializeJson() failed: "));
-        return;
+    // StaticJsonDocument<2048> doc;
+    DynamicJsonDocument doc(12288);
+    DeserializationError error = deserializeJson(doc, jsonBuffer);
+    if (!error) {
+        // json: {"rise":"6:45:03 AM","set":"7:11:35 PM"}
+        // String sunriseTime = doc["rise"];
+        // String sunsetTime = doc["set"];
+        // Serial.println("In LA, the sunset time is " + sunsetTime +
+        //                " and the sunrise time is " + sunriseTime);
+        Serial.println(String(jsonBuffer));
+        Serial.println();
+        temperature = doc["current"]["temperature_2m"];
+        weatherCode = doc["current"]["weather_code"];
+        humidity = doc["current"]["relative_humidity_2m"];
+        // Serial.println(String(data));
+        Serial.println("The weather is " + String(temperature, 1) + " F and " +
+                       String(humidity) + "% humidity with weather code " +
+                       (weatherCode));
+        String jsonGemini = "{\"temp\":" + String(temperature) +
+                            ", \"code\":" + String(weatherCode) +
+                            ", \"humidity\":" + String(humidity) + "}";
+        Serial.println("Publishing to Gemini...");
+        Serial.println(jsonGemini);
+        Serial.println();
+
+        Particle.publish("gemini_weather", jsonGemini);
     }
-
-    /* template
-    {"name":"{{location.name}}", "temperature":"{{current.temperature}}",
-    "description":"{{current.weather_descriptions.0}}",
-    "uvIndex":"{{current.uv_index}}","code":"{{current.weather_code}}"
-    }
-    */
-
-    /* Here is where your parsing code goes */
-    // parse JSON
-    temperature = doc["temperature"];
-    weatherCode = doc["code"];
-    weatherDescription = String(doc["description"]);
-    uvIndex = doc["uvIndex"];
-
-    Serial.println("Description = " + weatherDescription);
-    Serial.println("Code = " + String(weatherCode));
-    Serial.println("Temperature = " + String(temperature));
-    Serial.println("UV Index = " + String(uvIndex));
 }
+/* example response
+{{candidates.0.content.parts.0.text}}
+*/
+void myHandlerGemini(const char* event, const char* data) {
+    static String jsonBuffer;
+
+    int responseIndex = 0;
+    const char* slashOffset = strrchr(event, '/');
+    if (slashOffset) responseIndex = atoi(slashOffset + 1);
+    if (responseIndex == 0) jsonBuffer = "";
+    jsonBuffer += data;
+
+    DynamicJsonDocument doc(12288);
+    DeserializationError error = deserializeJson(doc, jsonBuffer);
+    if (!error) {
+        // {{candidates.0.content.parts.0.text}}
+        Serial.println(String(jsonBuffer));
+        description =
+            doc["candidates"][0]["content"]["parts"][0]["text"].as<String>();
+        Serial.println();
+        Serial.println(description);
+        // weatherCode = doc["current"]["weather_code"];
+        // humidity = doc["current"]["relative_humidity_2m"];
+        // // Serial.println(String(data));
+        // Serial.println("The weather is " + String(temperature, 1) + " F and "
+        // +
+        //                String(humidity) + "% humidity with weather code " +
+        //                (weatherCode));
+        Serial.println();
+    }
+}
+// void myHandler(const char *event, const char *data) {
+//     // Handle the integration response
+//     Serial.println(String(data));
+
+//     StaticJsonDocument<1024> doc;
+//     DeserializationError error = deserializeJson(doc, data);
+
+//     // Test to see if was successful
+//     if (error) {
+//         Serial.print(F("deserializeJson() failed: "));
+//         return;
+//     }
+
+//     /* template
+//     {"name":"{{location.name}}", "temperature":"{{current.temperature}}",
+//     "description":"{{current.weather_descriptions.0}}",
+//     "uvIndex":"{{current.uv_index}}","code":"{{current.weather_code}}"
+//     }
+//     */
+
+//     /* Here is where your parsing code goes */
+//     // parse JSON
+//     temperature = doc["temperature"];
+//     weatherCode = doc["code"];
+//     weatherDescription = String(doc["description"]);
+//     uvIndex = doc["uvIndex"];
+
+//     Serial.println("Description = " + weatherDescription);
+//     Serial.println("Code = " + String(weatherCode));
+//     Serial.println("Temperature = " + String(temperature));
+//     Serial.println("UV Index = " + String(uvIndex));
+// }
 
 void setup() {
     /*
@@ -350,22 +436,28 @@ https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64
 
     pinMode(PIN_BUTTON, INPUT);
 
-    Particle.subscribe("hook-response/WeatherStackJSON", myHandler, MY_DEVICES);
+    Particle.subscribe("hook-response/OpenMeteoJsonFull", myHandler,
+                       MY_DEVICES);
+    Particle.function("triggerOpenMeteo", triggerOpenMeteo);
+    Particle.function("triggerGemini", triggerGeminiWeather);
+
+    Particle.subscribe("hook-response/gemini_weather", myHandlerGemini,
+                       MY_DEVICES);
 }
 
 /*
-    goal: we would like to make ONE weatherStack request everytime the photon
-   turns on      --> this SHOULD BE IN SETUP problem: in the setup, the photon
-   does not YET HAVE INTERNET ACCESS!
+    goal: we would like to make ONE weatherStack request everytime the
+   photon turns on      --> this SHOULD BE IN SETUP problem: in the setup,
+   the photon does not YET HAVE INTERNET ACCESS!
 
-    solution: put publish, and create a boolean flag to make sure it only runs
-   once
+    solution: put publish, and create a boolean flag to make sure it only
+   runs once
 */
 
 void loop() {
     if (runOnce == true && Particle.connected() == true) {
         runOnce = false;
-        Particle.publish("WeatherStackJSON", "");
+        Particle.publish("OpenMeteoJsonFull", "");
     }
     // latch
     int curButtonVal = digitalRead(PIN_BUTTON);

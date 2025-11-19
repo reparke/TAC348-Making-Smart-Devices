@@ -52,7 +52,7 @@ the key functioning elements. Here is a [partial list of components and services
   -   Not acceptable 
       -   Particle app 
 * Comment your code and follow consistent coding convention
-* Developer and user documentation (see below)
+* Written and video documentation (see below)
 * Your project has to compile and run *(projects that fail to run will receive a 50% penalty)*
 * No late submission will be accepted
 * Note: in the coming weeks we will discuss the following components in case
@@ -97,26 +97,23 @@ Deliverables
 **The remaining items are to be submitted on Brightspace**
 
 -   Workbench project with firmware code
--   Video of functioning device
--   User interface web app (submit link on Brightspace)
+-   Screenshots of dashboard and interface web app 
+-   Technical walkthrough video (include YouTube link in submission)
+    - Clear and simple video demonstrating each feature working (no need for fancy editing)
+    - Must show each requirement functioning.
 -   Developer documentation
     -   Assume a future TAC348 student is taking the course and told to make a
         specific change to your project (add a feature, fix an error, etc.).
-    -   Provide instructions how to setup your device and then explain key
-            elements (include any other helpful documentation like sequence
-            diagrams, Fritzing diagrams, etc.)
+    -   Provide instructions how to setup your device and then explain key elements (include any other helpful documentation like sequence diagrams, Fritzing diagrams, etc.)
     -   Consider the following:
         -   What would they need to know to setup your project and get it running?
         -   What would they need to know to modify it? (Assume that they don’t want to read through all your code - they want some sort of a quick start guide that will help them identify where they should start looking/working first)    
-        -   Give a general overview of all aspects of your project with
-                sufficient detail for them to know where to look to make
-                modifications.
+        -   Give a general overview of all aspects of your project with sufficient detail for them to know where to look to make modifications.
     -   [Sample developer documentation](https://reparke.github.io/TAC348-Making-Smart-Devices/assignments/project/samples/project_developer_guide_sample.pdf)
--   User documentation
-    -   Assume a non-technical person would like to use your device. What do
-        they need to know to get started and to use specific features? (You can
-        omit initial setup)
-    -   [Sample user documentation](https://reparke.github.io/TAC348-Making-Smart-Devices/assignments/project/samples/project_user_guide_sample.pdf)
+-   Sizzle reel / product highlight video (include YouTube link in submission)
+    - A short, polished video that showcases your device (30–60 seconds) 
+    - Demonstrates the device’s purpose and major features in a visually appealing way
+    - Think of this as something for your portfolio
 
 ### Project - Final Presentation (10 min)
 
@@ -158,7 +155,7 @@ Grading
 |                                                           |        |
 | **Documentation**                                         |        |
 | Developer documentation                                   | **5**  |
-| User documentation                                        | **5**  |
+| Product highlight video                                   | **5**  |
 | **Total**                                                 | **97** |
 
 ## Acknowledgements

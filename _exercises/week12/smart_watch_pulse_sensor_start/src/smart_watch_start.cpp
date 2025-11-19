@@ -33,7 +33,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 //////////////////////////////////
 /* These three lines are different from the video */
 #include <PulseSensorAmped.h>
-const int pulseSignalPin = A0;
+const int pulseSignalPin = A1;
 PulseSensor PulseSensorAmped;
 
 //////////////////////////////////
