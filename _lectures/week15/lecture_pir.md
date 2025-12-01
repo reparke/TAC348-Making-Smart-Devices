@@ -66,7 +66,7 @@ title: PIR - Passive Infrared Sensor
 
 ## Wiring
 
-<img src="lecture_pir.assets/pir_sparkfun_bb.png" style="width:1000px;" />
+![image-20251201111535044](lecture_pir.assets/image-20251201111535044.png)
 
 ## Exercise
 
