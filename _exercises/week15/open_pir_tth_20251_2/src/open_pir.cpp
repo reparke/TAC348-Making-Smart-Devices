@@ -14,20 +14,20 @@ void setup() {
     Serial.begin(9600);
 }
 void loop() {
-    // int currentAlarm = digitalRead(PIN_PIR);
-    // // HIGH movement detected
-    // // LOW no movement
-    // if (currentAlarm == HIGH) {
-    //     Serial.println(String(counter++) + " Movement detected");
-    // }
+    int currentAlarm = digitalRead(PIN_PIR);
+    // HIGH movement detected
+    // LOW no movement
+    if (currentAlarm == HIGH) {
+        Serial.println(String(counter++) + " Movement detected");
+    }
     // what if instead we wanted ONE message that says movement detected
     // and one message that says movement stopped?
 
-    int currentAlarm = digitalRead(PIN_PIR);
-    if (currentAlarm == HIGH && prevAlarm == LOW) {
-        Serial.println("movement detected");
-    } else if (currentAlarm == LOW && prevAlarm == HIGH) {
-        Serial.println("Movement stopped");
-    }
-    prevAlarm = currentAlarm;
+    // int currentAlarm = digitalRead(PIN_PIR);
+    // if (currentAlarm == HIGH && prevAlarm == LOW) {
+    //     Serial.println("movement detected");
+    // } else if (currentAlarm == LOW && prevAlarm == HIGH) {
+    //     Serial.println("Movement stopped");
+    // }
+    // prevAlarm = currentAlarm;
 }

@@ -1,11 +1,5 @@
----
-marp: false
-theme: itp
 
-week: 15
-category: lectures
 title: Open PIR (Passive Infrared Sensor)
----
 
 <!-- headingDivider: 2 -->
 

@@ -1,3 +1,11 @@
+---
+marp: false
+theme: itp
+
+week: 15
+category: lectures
+title: PIR - Passive Infrared Sensor
+---
 <!-- headingDivider: 2 -->
 
 # PIR - Passive Infrared Sensor
