@@ -20,4 +20,4 @@ title: Pre-Lecture Activities
 
 ### Build before class Mon / Tues 
 
-![image-20251201111413255](week15.assets/image-20251201111413255.png)
+![image-20251201113501490](week15.assets/image-20251201113501490.png)

@@ -56,7 +56,7 @@ title: PIR - Passive Infrared Sensor
 
 ## Wiring
 
-| PIR (Sparkfun)      | Argon                                                    |
+| PIR (Sparkfun)      | Photon 2                                                 |
 | ------------------- | -------------------------------------------------------- |
 | + **(red wire)**    | 5v                                                       |
 | - **(white wire)**  | GND                                                      |
@@ -66,7 +66,7 @@ title: PIR - Passive Infrared Sensor
 
 ## Wiring
 
-![image-20251201111535044](lecture_pir.assets/image-20251201111535044.png)
+![image-20251201113550745](lecture_pir.assets/image-20251201113550745.png)
 
 ## Exercise
 
