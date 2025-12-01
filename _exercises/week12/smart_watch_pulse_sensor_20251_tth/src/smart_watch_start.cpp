@@ -102,18 +102,7 @@ int prevButtonVal = HIGH;  // the last VERIFIED state
 enum State { Clock, Weather, Heart };
 State currentState = Weather;
 
-///////////////////////////////////////////////////////////////
-//               END LIBRARIES AND DECLARATIONS              //
-///////////////////////////////////////////////////////////////
 
-int triggerGeminiWeather(String command) {
-    Particle.publish("gemini_weather", command);
-    return 0;
-}
-int triggerOpenMeteo(String command) {
-    Particle.publish("OpenMeteoJsonFull", command);
-    return 0;
-}
 // TODO
 void runHeartScreen() {
     //     // for debugging
@@ -338,79 +327,9 @@ void myHandler(const char* event, const char* data) {
         Serial.println("The weather is " + String(temperature, 1) + " F and " +
                        String(humidity) + "% humidity with weather code " +
                        (weatherCode));
-        String jsonGemini = "{\"temp\":" + String(temperature) +
-                            ", \"code\":" + String(weatherCode) +
-                            ", \"humidity\":" + String(humidity) + "}";
-        Serial.println("Publishing to Gemini...");
-        Serial.println(jsonGemini);
-        Serial.println();
-
-        Particle.publish("gemini_weather", jsonGemini);
+       
     }
 }
-/* example response
-{{candidates.0.content.parts.0.text}}
-*/
-void myHandlerGemini(const char* event, const char* data) {
-    static String jsonBuffer;
-
-    int responseIndex = 0;
-    const char* slashOffset = strrchr(event, '/');
-    if (slashOffset) responseIndex = atoi(slashOffset + 1);
-    if (responseIndex == 0) jsonBuffer = "";
-    jsonBuffer += data;
-
-    DynamicJsonDocument doc(12288);
-    DeserializationError error = deserializeJson(doc, jsonBuffer);
-    if (!error) {
-        // {{candidates.0.content.parts.0.text}}
-        Serial.println(String(jsonBuffer));
-        description =
-            doc["candidates"][0]["content"]["parts"][0]["text"].as<String>();
-        Serial.println();
-        Serial.println(description);
-        // weatherCode = doc["current"]["weather_code"];
-        // humidity = doc["current"]["relative_humidity_2m"];
-        // // Serial.println(String(data));
-        // Serial.println("The weather is " + String(temperature, 1) + " F and "
-        // +
-        //                String(humidity) + "% humidity with weather code " +
-        //                (weatherCode));
-        Serial.println();
-    }
-}
-// void myHandler(const char *event, const char *data) {
-//     // Handle the integration response
-//     Serial.println(String(data));
-
-//     StaticJsonDocument<1024> doc;
-//     DeserializationError error = deserializeJson(doc, data);
-
-//     // Test to see if was successful
-//     if (error) {
-//         Serial.print(F("deserializeJson() failed: "));
-//         return;
-//     }
-
-//     /* template
-//     {"name":"{{location.name}}", "temperature":"{{current.temperature}}",
-//     "description":"{{current.weather_descriptions.0}}",
-//     "uvIndex":"{{current.uv_index}}","code":"{{current.weather_code}}"
-//     }
-//     */
-
-//     /* Here is where your parsing code goes */
-//     // parse JSON
-//     temperature = doc["temperature"];
-//     weatherCode = doc["code"];
-//     weatherDescription = String(doc["description"]);
-//     uvIndex = doc["uvIndex"];
-
-//     Serial.println("Description = " + weatherDescription);
-//     Serial.println("Code = " + String(weatherCode));
-//     Serial.println("Temperature = " + String(temperature));
-//     Serial.println("UV Index = " + String(uvIndex));
-// }
 
 void setup() {
     /*
@@ -438,11 +357,7 @@ https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64
 
     Particle.subscribe("hook-response/OpenMeteoJsonFull", myHandler,
                        MY_DEVICES);
-    Particle.function("triggerOpenMeteo", triggerOpenMeteo);
-    Particle.function("triggerGemini", triggerGeminiWeather);
-
-    Particle.subscribe("hook-response/gemini_weather", myHandlerGemini,
-                       MY_DEVICES);
+   
 }
 
 /*

@@ -17,3 +17,7 @@ title: Pre-Lecture Activities
 
 - Photon 2, breadboard, resistors, push buttons, LEDs, RGB LEDS, wires potentiometer
 - PIR sensor
+
+### Build before class Mon / Tues 
+
+![image-20251130165244829](week15.assets/image-20251130165244829.png)

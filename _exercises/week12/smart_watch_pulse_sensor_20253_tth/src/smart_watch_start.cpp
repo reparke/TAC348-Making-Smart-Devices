@@ -82,7 +82,7 @@ const unsigned long HEART_SCREEN_UPDATE = 3000;
 //////////////////////////
 // Clock  Screen  Var   //
 //////////////////////////
-// TODO:
+const unsigned long CLOCK_SCREEN_UPDATE = 500;
 
 //////////////////////////
 // Weather Screen  Var  //
@@ -90,7 +90,11 @@ const unsigned long HEART_SCREEN_UPDATE = 3000;
 /* Weatherstack only has 250 API calls in free plan so use
    very long delay (8 times per day)
 */
-// TODO:
+const unsigned long WEATHER_SCREEN_UPDATE = 600000; // 10 minutes
+int humidity;
+int weatherCode;
+float temperature;
+bool runOnce = true;
 
 //////////////////////////
 // Sunrise Screen  Var  //
@@ -116,6 +120,31 @@ State currentState = Heart;
 //               END LIBRARIES AND DECLARATIONS              //
 ///////////////////////////////////////////////////////////////
 
+void myHandler(const char* event, const char* data) {
+    // Part 1 allows for webhook responses to be delivered in multple "chunks";
+    // you don't need to change this
+    static String jsonBuffer;  // store json response
+    int responseIndex = 0;
+    const char* slashOffset = strrchr(event, '/');
+    if (slashOffset) responseIndex = atoi(slashOffset + 1);
+    if (responseIndex == 0) jsonBuffer = "";
+    jsonBuffer += data;
+
+    // Part 2 is where you can parse the actual data; you code goes in the IF
+    DynamicJsonDocument doc(12288);
+    DeserializationError error = deserializeJson(doc, jsonBuffer);
+
+    if (!error) {  // Test to see if was successful
+        temperature = doc["current"]["temperature_2m"];
+        weatherCode = doc["current"]["weather_code"];
+        humidity = doc["current"]["relative_humidity_2m"];
+
+        Serial.println("temperature: " + String(temperature));
+        Serial.println("Code:" + String(weatherCode));
+        Serial.println("Humidty: " + String(humidity));
+    }
+}
+
 // TODO
 void runHeartScreen() {
     // // for debugging
@@ -133,6 +162,20 @@ void runHeartScreen() {
 
     consider our millis timer and implement this screen
     */
+
+
+/*
+    to get weather data from API:
+    - build webhook - DONE
+    - publish a request to webhook
+    - subscribe to the response
+    - parse the JSON (unpack the keys and values)
+
+    we need to PUBLISH a request to the weather API
+    -> where /when in our code should we do that?
+
+    */
+
     unsigned long curMillis = millis();
     if (curMillis - prevMillis > HEART_SCREEN_UPDATE) {
         prevMillis = curMillis;
@@ -162,20 +205,87 @@ void runHeartScreen() {
 // TODO
 void runClockScreen() {
     // for debugging
-    Serial.println("Clock");
-    oled.clear(PAGE);  // Clear the display
-    oled.setCursor(0, 0);
-    oled.print("Clock");
-    oled.display();
+    // Serial.println("Clock");
+    // oled.clear(PAGE);  // Clear the display
+    // oled.setCursor(0, 0);
+    // oled.print("Clock");
+    // oled.display();
+
+    unsigned long curMillis = millis();
+    if (curMillis - prevMillis > CLOCK_SCREEN_UPDATE) {
+        prevMillis = curMillis;
+
+        String dateFormat = "%b %d"; //Nov 14
+        String dayFormat = "%a"; //Mon
+        String secondFormat = "%S";
+        String timeFormat = "%I:%M";
+
+        oled.clear(PAGE);
+        oled.drawBitmap(bitmap_clock_16x12);
+
+        //date
+        oled.setFontType(0);
+        oled.setCursor(25,0);
+        oled.print(Time.format(dateFormat));
+
+        // day
+        oled.setCursor(25, 10);
+        oled.print(Time.format(dayFormat));
+        
+        // time
+        oled.setFontType(1);
+        oled.setCursor(0, 25);
+        oled.print(Time.format(timeFormat));
+
+        // seconds
+        oled.setFontType(0);
+        oled.setCursor(50, 30);
+        oled.print(Time.format(secondFormat));
+        oled.display();
+    }
 }
+
+
 
 // TODO
 void runWeatherScreen() {
-    // for debugging
-    Serial.println("Weather");
-    oled.clear(PAGE);  // Clear the display
-    oled.setCursor(0, 0);
-    oled.print("Weather");
+    // // for debugging
+    // Serial.println("Weather");
+    // oled.clear(PAGE);  // Clear the display
+    // oled.setCursor(0, 0);
+    // oled.print("Weather");
+    // oled.display();
+    unsigned long curMillis = millis();
+    if (curMillis - prevMillis > WEATHER_SCREEN_UPDATE) {
+        prevMillis = curMillis;
+        Particle.publish("OpenMeteoJsonFull", "");
+    //this code works, but we ALSO want to publish a request when the device starts
+
+    /*
+        used to be setup()---but now the photon doesn't have internet access in setup()
+        well let's use a flag in loop() to publish ONLY ONCE on startup
+    */
+    }
+
+    oled.clear(PAGE);
+
+    if (weatherCode == 21) {
+        //rain
+        oled.drawBitmap(bitmap_rainy_16x12);
+    }
+    else {
+        oled.drawBitmap(bitmap_sunny_16x12);
+    }
+    oled.setFontType(1);
+    oled.setCursor(38, 5);
+    oled.print(temperature, 0);
+
+    oled.setFontType(0);
+    oled.print("o");
+
+    oled.setCursor(0, 40);
+    oled.print("Hum: ");
+    oled.print(humidity);
     oled.display();
 }
 
@@ -246,9 +356,20 @@ https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64
     delay(1000);  // Delay 1000 ms
 
     pinMode(PIN_BUTTON, INPUT);
+    Time.zone(-8);
+    // Time.beginDST();
+
+    Particle.subscribe("hook-response/OpenMeteoJsonFull", myHandler,
+                       MY_DEVICES);
 }
 
 void loop() {
+
+    if (runOnce == true && Particle.connected() == true) {
+        Particle.publish("OpenMeteoJsonFull", "");
+        runOnce = false;
+    }
+
     int curButtonVal = digitalRead(PIN_BUTTON);
     //change state (screen) only when button pressed
     if (curButtonVal == LOW && prevButtonVal == HIGH) {

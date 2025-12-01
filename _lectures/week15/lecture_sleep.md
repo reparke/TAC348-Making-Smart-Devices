@@ -49,16 +49,13 @@ title: Sleep and Battery Conservation
 
 
 
-## Options to Wake Photon 2
+## Waking Photon 2 from Ultra Low Power Mode
 
-| `ULTRA_LOW_POWER`       | `HIBERNATE`      |
-| ----------------------- | ---------------- |
-| signal on input pins    | signal on inputs |
-| time duration           | time duration    |
-| specific analog voltage |                  |
-| Serial input            |                  |
-| Bluetooth               |                  |
-| Wifi signal             |                  |
+* Specific time duration
+* Input on any GPIO
+  * `RISING` (low to high)
+  * `FALLING` (high to low)
+  * `CHANGE` (either low to high or high to low) 
 
 ## What Happens After Waking
 
@@ -80,7 +77,7 @@ System.sleep(config);
 
 ```c++
 SystemSleepConfiguration config;
-config.mode(SystemSleepMode::HIBERNATE).duration(10min);
+config.mode(SystemSleepMode::ULTRA_LOW_POWER).duration(10min);
 System.sleep(config);
 ```
 ## Sleep Example #2
