@@ -56,17 +56,17 @@ title: PIR - Passive Infrared Sensor
 
 ## Wiring
 
-| PIR (Sparkfun)      | Photon 2                                                 |
-| ------------------- | -------------------------------------------------------- |
-| + **(red wire)**    | 5v                                                       |
-| - **(white wire)**  | GND                                                      |
-| AL **(black wire)** | digital input pin <br />(with 10K pullup resistor to 5v) |
+| PIR (Sparkfun)      | Photon 2                                                     |
+| ------------------- | ------------------------------------------------------------ |
+| + **(red wire)**    | 5v                                                           |
+| - **(white wire)**  | GND                                                          |
+| AL **(black wire)** | digital input pin <br />(with 10K pullup resistor to 5v OR use `pinMode` with `INPUT_PULLUP`) |
 
 *Note: The wire color and pin order is specific to the [Sparkfun PIR sensor](https://www.sparkfun.com/products/13285) and not all PIR sensor*
 
 ## Wiring
 
-![image-20251201113550745](lecture_pir.assets/image-20251201113550745.png)
+![image-20251202115830901](lecture_pir.assets/image-20251202115830901.png)
 
 ## Exercise
 

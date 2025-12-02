@@ -29,18 +29,17 @@ Arduino 1.6.7
 ******************************************************************************/
 
 // 10k pull up resistor
-const int MOTION_PIN = D2;  // Pin connected to motion detector
+const int MOTION_PIN = D4;  // Pin connected to motion detector
 const int LED_PIN = D7;     // LED pin - active-high
 
 void setup() {
     Serial.begin(9600);
     // The PIR sensor's output signal is an open-collector,
     // so a pull-up resistor is required:
-    pinMode(MOTION_PIN, INPUT);
     pinMode(MOTION_PIN, INPUT_PULLUP);
     pinMode(LED_PIN, OUTPUT);
     Serial.println("PIR Sensor is stabilizing. Please wait...");
-    delay(30000);  // Wait 30 seconds for the sensor to stabilize
+    delay(3000);  // Wait 30 seconds for the sensor to stabilize
     Serial.println("Sensor ready.");
 }
 int count = 0;
