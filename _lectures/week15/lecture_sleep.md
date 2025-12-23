@@ -89,6 +89,7 @@ config.mode(SystemSleepMode::ULTRA_LOW_POWER).gpio(D10, FALLING);
 System.sleep(config);
 ```
 ## Sleep Example #3
+
 - Put device in `ULTRA_LOW_POWER`, and wake with a rising (`LOW` to `HIGH`) signal on pin D10 **or** after 2 hours
 
 ```c++
@@ -96,6 +97,14 @@ SystemSleepConfiguration config;
 config.mode(SystemSleepMode::ULTRA_LOW_POWER).gpio(D10, RISING).duration(2h);
 System.sleep(config);
 ```
+
+### Note on Inputs
+
+* Some sensors might not work as wake input triggers
+
+* For example, the Sparkfun PIR (JST) doesn't work as a wake trigger. As soon as the Photon 2 goes to sleep, the alarm pin drops from HIGH to LOW and triggers waking. A different PIR might work
+
+  
 
 ## Waking but Staying Silent
 
@@ -139,8 +148,6 @@ Particle.connect();
 * [Particle - About Sleep](https://docs.particle.io/tutorials/learn-more/about-sleep/)
 * [Particle - `sleep()` documentation](https://docs.particle.io/cards/firmware/sleep-sleep/sleep-sleep/)
 * Photo by [David Clode](https://unsplash.com/photos/Yg_sNKOiXvY) on [Unsplash](https://unsplash.com/s/photos/sleep?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-
-
 
 
 

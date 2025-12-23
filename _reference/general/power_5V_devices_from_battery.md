@@ -25,7 +25,7 @@ show_in_list: true
 * Any USB battery pack (like you would use to connect to your phone) with a **USB A** (the older, larger flat type) connecter should work
 * Connect the battery pack to the Photon 2's USB port and the Photon 2 will now have 5V
 * Connect your 5V devices to `GND` and `VUSB` on the Photon 2
-* Example: [Power Bank](https://www.amazon.com/10000mAh-Portable-Charger-External-Compatible/dp/B094Y1R46V)
+* Example: [Power Bank](https://www.amazon.com/INIU-Portable-10000mAh-Charging-External/dp/B0DCHWWBNS)
 
 ## Solution #2 - Use a Step-Up 5V Voltage Regulator
 

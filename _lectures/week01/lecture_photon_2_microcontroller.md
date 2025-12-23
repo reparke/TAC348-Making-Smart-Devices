@@ -72,7 +72,9 @@ title: Photon 2 Microcontroller
 
 - [Photon 2 Datasheet](https://docs.particle.io/reference/datasheets/wi-fi/photon-2-datasheet/)       
 
+### Pinouts
 
+![image-20251210141534118](lecture_photon_2_microcontroller.assets/image-20251210141534118.png)
 
 ## Structure of Photon 2 Programs
 
