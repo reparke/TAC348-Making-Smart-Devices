@@ -10,6 +10,25 @@ toc_sticky: true
 
 ---
 
+## 		Key Dates for Spring 2026
+
+### Soldering Workshop
+
+* Week 8: Mar 2 - Mar 5
+* usually week 8-10
+
+### Design Review
+
+* Week 12: ==**Mon Apr 6**== and ==**Tue Apr 7**==
+
+* After proposal due usually start of Week 12
+
+### Possible Guest Lecture Dates
+
+* Week 10: Mar 23 - Mar 27 (early)
+* Week 14: Apr 20 - Apr 24
+* Week 15: Apr 27 - May 1
+* Usually last few weeks of classes
 
 ## 		Things to implement
 
@@ -17,10 +36,10 @@ toc_sticky: true
 
 * [ ] week 10
   * [ ] future semester: consider permanently putting motors here; add something else for week 9
-* [ ] week 11Thank
+* [ ] week 11 Thank
   * [ ] ultra sonic and oled could be combined--it's not quite enough for 2 day
   * [ ] change bitmaps, code, and .h file so names are "no_large.bmp" and "no_small.bmp"
-* [ ] change some old projects (or at least starting code) to use new workbench templat
+* [x] change some old projects (or at least starting code) to use new workbench templat
 * [ ] update graphics slides and videos to use PROGMEM (See exercis)
 
 Week 10 idea: 
@@ -125,6 +144,10 @@ Week 10 idea:
 - Due start of current week: none
 - Given out start of current week: A0 - Software and tool installation; A1 - Blink
 
+### Lab 
+
+* None
+
 ### Day 1
 
 #### Alternate Plan - Spring missing one day
@@ -160,7 +183,7 @@ Week 10 idea:
 - Software tools: Workbench (open and discuss)
 - LED 
 
-#### Lab
+#### Guided Activity
 
 - show how to put Photon 2 on breadboard and remove 
 - turn on LED + resistor by connecting to 3v3 and ground
@@ -172,7 +195,7 @@ Week 10 idea:
 
   
 
-## 2. Pulse Width Modulation, ADC ==Fall 2025 - Labor Day Holiday==
+## 2. Pulse Width Modulation, ADC ==Spring 2026 - MLK Jr. Holiday==
 
 ### Holiday Alternative Plan
 
@@ -209,6 +232,10 @@ Week 10 idea:
 - Due start of current week: A0 and A1 - Blink
 - Given out start of current week: A2 - Light Sculpture 
 
+### Lab
+
+* Potentiometer + LED
+
 ### Day 1
 
 #### Notes
@@ -220,7 +247,7 @@ Week 10 idea:
 
 * Quickly review LED / Digital output
 
-### Lab
+#### Guided Activity
 
 - ~~Blink 2 LED~~
 - Explain Workbench project
@@ -229,12 +256,12 @@ Week 10 idea:
 
 - Pulse width modulation (lecture, PWM pins, analogWrite)
 
-#### Lab
+#### Guided Activity
 
 - Make light fully bright for 2 sec, half as bright for 2 sec, 1/3 as bright for 2 sec, 
 - Challenge: Increase light level of LED automatically
 
-#### Lab
+#### Exercise
 
 - Have students use for loop to sweep the brightness of an LED
 - Discuss `for` loops
@@ -250,7 +277,7 @@ Week 10 idea:
 - Serial monitor
 
 
-#### Guided activity
+#### Guided Activity
 
 - Do simple example where there is a global variable that gets incremented and display its value with Serial monitor
 
@@ -271,7 +298,7 @@ Week 10 idea:
 
 
 
-## 3. Buttons, Digital Input, RGB ==Fall 2025 w2d2 Rob in Tapia==
+## 3. Buttons, Digital Input, RGB
 
 ### Announcements
 
@@ -281,6 +308,11 @@ Week 10 idea:
 
 - Due start of current week: A2 - Light Sculpture 
 - Given out start of current week: A3 - Cylon light 
+
+### Lab
+
+* RGB LEDs
+
 ### Reading
 
 - https://learn.sparkfun.com/tutorials/pull-up-resistors
@@ -290,28 +322,28 @@ Week 10 idea:
 
 ### Day 1
 
-#### Guided activity
+#### Guided Activity
 
 - Ask them to **digitalRead()** on D2; use serial monitor to read with no connection (will be floating); then directly connect to **3.3v**, then GND
 - connect button with pullup
 - Ask what is the voltage at pin when button pressed and not pressed
 
-#### Guided activity
+#### Guided Activity
 
 * Explain Fritzing software
 * Create button with resistors in Fritzing
 
-#### Guided activity
+#### Guided Activity
 
 - Connect button with resistor on Photon 2
 
-#### Lab (students work on)
+#### Exercise (students work on)
 
 - Turn LED on while button pressed
 - Turn LED off after button pressed
 - Connect two LEDs
 
-#### Guided activity
+#### Guided Activity
 
 - Latching button **==identify way to program this==**
 - Connect 3 LEDs and control on/off with button presses (3 states)
@@ -330,7 +362,7 @@ Week 10 idea:
 
 - RGB LED lecture
 
-#### Lab
+#### Exercise
 
 - Display random color
 
@@ -338,7 +370,7 @@ Week 10 idea:
 
 - Functions in C++ *(this should be review from week 2)*
 
-#### Lab
+#### Exercise
 
 - Button press trigger random color
 - Rewrite sketch using `displayColor(r, g, b)` and `displayRandomColor()`
@@ -355,22 +387,6 @@ Week 10 idea:
 - Then walk through example together
 - If time, introduce a button to control states (idea of a state machine)
 
-### Fall 2022 Holiday Plan
-
-* Discuss scanning light assignment 
-* Lecture: digital input
-* Draw and discuss button
-* Guided: Wire RGB and Button with this [image](https://reparke.github.io/TAC348-Making-Smart-Devices/lectures/week03/lecture_rgb_leds.assets/image-20210204155745432.png)
-* Guided: make button turn on D7
-* cover latch (motivate)
-* discuss RGB LED
-* have students make RGB LED turn on white when pressed only
-* Have students press show red for 1/2 sec, green for 1/2 sec, blue for 1/2 sec, then orange for 1/2 sec
-* show random and have button press be random (if time)
-* show sequence if time (see 20233 TTh code)
-* show libraries if time
-* consider modifying assignment 
-
 
 ### Feedback 
 
@@ -383,13 +399,17 @@ Week 10 idea:
 - Due start of current week: A3 - Cylon light 
 - Given out start of current week: A4 - Electronic dice
 
+### Lab
+
+* Multi-tasking
+
 ### Reading
 
 * [Kirchoff's Voltage Law](https://www.khanacademy.org/science/ap-physics-1/ap-circuits-topic/kirchhoffs-loop-rule-ap/v/ee-kirchhoffs-voltage-law)
 
 ### Day 1
 
-#### 2021 Spring Idea
+#### Idea
 
 * ==Consider covering functions and libraries on Day 1, and leaving publishing for day 2==
 
@@ -454,6 +474,10 @@ Week 10 idea:
 - Given out start of current week: A5 - Reaction Timer
 - Alternate ideas: use TMP36 to measure temperature and display colors on RGB LED. Use potentiometer to control brightness of RGB LED. Display results on serial monitor. **Optional** use button for diagnostic or to change cel/fahr 
 
+### Lab
+
+* Etch-a-Sketch
+
 
 ### Day 1
 
@@ -505,10 +529,10 @@ Week 10 idea:
 
 ## 6. Magnetic Switch; Blynk ==Alt plan for holiday: Covering Sound==
 
-==**Spring**== Presidents Day cancelled one day from Week 6. New Plan
+==**Spring** Presidents Day cancelled one day from Week 6 + Rob gone for SIGCSE== 
 
 - w6d1 holiday
-- w6d2 sound
+- w6d2 sound (via video)
 - w7d1 magnetic switch
 - w7d2 blynk
 - w8d1 FSM stoplight
@@ -516,24 +540,25 @@ Week 10 idea:
 - w9d1 motors with fan
 - w9d2 motors with fan + bluetooth
 
-==**Fall: Try to start Sound earlier due to fall break**==
+**Fall: Try to start Sound earlier due to fall break.** idea: Day 1 covers motors by directly building fan with potentiometer; Day 2 cover bluetooth and control can with bluetooth
 
-- ==idea: Day 1 covers motors by directly building fan with potentiometer; Day 2 cover bluetooth and control can with bluetooth==
-
-- ==**Fall**==
-  - w6d1 magnetic switch
-  - w6d2 blynk
-  - w7d1 Sound
-  - w7d2 holiday
-  - w8d1, FSM stoplight 
-  - w8d2 FSM washing machine
-  - w9d1, we covered motors and servos, and built the fan
-  - w9d2, we introduced bluetooth with fan 
+- w6d1 magnetic switch
+- w6d2 blynk
+- w7d1 Sound
+- w7d2 holiday
+- w8d1, FSM stoplight 
+- w8d2 FSM washing machine
+- w9d1, we covered motors and servos, and built the fan
+- w9d2, we introduced bluetooth with fan 
 
 #### Assignment
 
 - Due start of current week: A5 - Button Timer
 - Given out start of current week: A6 - Shared Environment Monitor
+
+### Lab
+
+* Sound
 
 ### Reading
 
@@ -547,7 +572,7 @@ Week 10 idea:
 
 - Magnetic switch (video)
 
-#### Lab
+#### Exercise
 
 - Wire switch and RGB LED
 - Publish switch event in console (this won't take very long)
@@ -600,20 +625,19 @@ Week 10 idea:
 
 
 
-## 7. Sound ==Spring Presidents Day Holiday==
+## 7. Sound
 
 ### Notes
 
-- ==**Fall: Try to start Sound earlier due to fall break**==
-  - ==idea: Day 1 covers motors by directly building fan with potentiometer; Day 2 cover bluetooth and control can with bluetooth==
-- ==**Fall**==
+- **If Presidents Day or Fall break Falls in Week 7**
+- **Fall**
   - w7d1 Sound
   - w7d2 holiday
   - w8d1, FSM stoplight 
   - w8d2 FSM washing machine
   - w9d1, we covered motors and servos, and built the fan
   - w9d2, we introduced bluetooth with fan 
-- ==**Spring**== Presidents Day cancelled one day from Week 7. New Plan
+- **Spring** Presidents Day cancelled one day from Week 7. New Plan
   - w7d1 holiday
   - w7d2 FSM stoplight
   - w8d1 FSM washing machine
@@ -629,6 +653,10 @@ Week 10 idea:
 
 - Due start of current week:   A6 - Shared Environment Monitor
 - Given out start of current week:  A7 - Preliminary Proposal Idea
+
+### Lab
+
+* Blynk
 
 ### Day 1
 
@@ -660,6 +688,10 @@ Week 10 idea:
 - Due start of current week:   A7 - Preliminary Proposal Idea
 - Given out start of current week: A8 - Tea State Machine with Blynk (due in two weeks)
 
+### Lab
+
+* State Machines
+
 ### Day 1
 
 #### Lecture
@@ -667,7 +699,7 @@ Week 10 idea:
 - Finite state machines (video)
 - Discuss state machines
 
-#### Lab
+#### Exercise
 
 - Starting with sample code
 - walk through NS light state transitions (length, state)
@@ -730,6 +762,10 @@ Week 10 idea:
 * Due start of current week: none
 * Given out start of current week: none, but continue to work on  A8 - Timer with Blynk 
 
+### Lab
+
+* Bluetooth
+
 ### Day 1
 
 - Have students build fan and circuit before class
@@ -755,7 +791,7 @@ Week 10 idea:
 
 #### Lecture
 
-- LIPO battery
+- LiPo battery
 
 #### Feedback
 
@@ -808,18 +844,71 @@ Week 10 idea:
 
 
 
-## 10. Cloud Dashboards; APIs; Weather;  (==**This may be too much content**==)
+## 10. Ultrasonic Distance Sensor; OLED Graphics
+
+### Plan for Fall 2024
+
+**==Combine OLED Graphics and ultra sonic in one day==**
+
+==**Need more content here; could be spill over from last week**==
+
+Could combine graphics and OLED in one day; spent time going over A9 whic
+
+Note: need to update exercies (start and final) since trigger and echo pins changed
+
+### Reading
+
+- 
+
+### Assignment
+
+- Due start of current week: A8 - Timer with Blynk
+- Given out start of current week: A9 - Bluetooth Car
+### Day 1
+
+#### Lecture
+
+- project overview
+- Ultrasonic distance sensor 
+
+#### Lab
+
+- Student design range finding with ultrasonic sensor. Provide starting project (same one that uses OLED later)
+
+### Day 2 
+
+#### Lecture
+
+- OLED graphics
+- add sleep/wake from week 15 (need to add more)
+
+#### Lab
+
+- Student design range finding with ultrasonic sensor. Provide starting project (same one that uses OLED later)
+
+### Feedback Day 1
+
+- Went generally well. Ran out of time to talk about graphics.
+
+
+
+## 11. Cloud Dashboards; APIs; Weather;  (==**This may be too much content**==)
 
 ### Reading
 
 - Create [Initial State](https://www.initialstate.com/) account
-- Create [Weather Stack account](https://weatherstack.com/)
+- Create [open-meteo](https://open-meteo.com/)  account 
 
 
 ### Assignment
 
-- Due start of current week: A8 - Timer with Blynk 
-- Given out start of current week: A9 - Bluetooth Car
+- Due start of current week: A9 - Bluetooth Car
+- Given out start of current week: A10 - Smart Watch Assembly
+- Given out start of current week: Proposal
+
+### Lab
+
+* Weather Stack + JSON 
 
 ### Day 1
 
@@ -908,8 +997,9 @@ Week 10 idea:
   ```
 
 Consider using this template with UV and weather code because we need them later with the water (or is better to have student review mustache templates when setting up the watch)
+
   ```json
-  {"name":"{{location.name}}", "temperature":"{{current.temperature}}","description":"{{current.weather_descriptions.0}}","weather_code":"{{current.weather_code}}","uv_index":"{{current.uv_index}}"}
+{"name":"{{location.name}}", "temperature":"{{current.temperature}}","description":"{{current.weather_descriptions.0}}","weather_code":"{{current.weather_code}}","uv_index":"{{current.uv_index}}"}
   ```
 
 #### Lab
@@ -927,53 +1017,6 @@ Consider using this template with UV and weather code because we need them later
 
 - Have students use [https://openweathermap.org/api/air-pollution](https://openweathermap.org/api/air-pollution) to get AQI measure based on lat and long
 
-## 11. Ultrasonic Distance Sensor; OLED Graphics
-
-### Plan for Fall 2024
-
-**==Combine OLED Graphics and ultra sonic in one day==**
-
-==**Need more content here; could be spill over from last week**==
-
-Could combine graphics and OLED in one day; spent time going over A9 whic
-
-Note: need to update exercies (start and final) since trigger and echo pins changed
-
-### Reading
-
-- 
-
-### Assignment
-
-- Due start of current week: A9 - Bluetooth Car
-- Given out start of current week: A10 - Smart Watch Assembly
-- Given out start of current week: Proposal
-### Day 1
-
-#### Lecture
-
-- project overview
-- Ultrasonic distance sensor 
-
-#### Lab
-
-- Student design range finding with ultrasonic sensor. Provide starting project (same one that uses OLED later)
-
-### Day 2 
-
-#### Lecture
-
-- OLED graphics
-- add sleep/wake from week 15 (need to add more)
-
-#### Lab
-
-- Student design range finding with ultrasonic sensor. Provide starting project (same one that uses OLED later)
-
-### Feedback Day 1
-
-- Went generally well. Ran out of time to talk about graphics.
-
 
 
 ## 12. Smart Watch, Heart Rate Sensor
@@ -989,6 +1032,10 @@ Note: need to update exercies (start and final) since trigger and echo pins chan
 - Due start of current week: Proposal
 - Due start of current week: A10 - Smart Watch Assembly
 - Continue working on project 
+
+### Lab
+
+* None
 
 ### Day 1
 
@@ -1041,6 +1088,10 @@ Note: need to update exercies (start and final) since trigger and echo pins chan
 - Due start of current week: nothing
 - Continue working on project 
 
+### Lab
+
+* Smart Watch (on Mon/Tues)
+
 ### Day 1
 
 #### Lecture
@@ -1082,7 +1133,7 @@ Note: need to update exercies (start and final) since trigger and echo pins chan
 - Use accelerometer to control RGB LED (if time)
 - Try interrupts for tap 
 
-## 14. RFID + ==Thanksgiving==
+## 14. RFID
 
 ### Reading
 
@@ -1109,7 +1160,7 @@ Note: need to update exercies (start and final) since trigger and echo pins chan
 - Print out value; show need to upper case and trim space
 - now ask them to check for authorization for one card or the other
 
-### Day 2 ==Thanksgiving==
+### Day 2
 
 #### Lecture
 

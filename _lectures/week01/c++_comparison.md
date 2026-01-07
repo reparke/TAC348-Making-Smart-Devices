@@ -284,6 +284,84 @@ main()
 
 
 
+### Basic Syntax: MATLAB ([main.m](resources\c++_comparison\1_syntax\matlab\main.m))
+
+```matlab
+% Comments: single line
+%{
+  Comments: Multi-line
+%}
+
+% Program structure
+%  MATLAB scripts execute commands in order
+%  No explicit "main" function is strictly required for simple scripts,
+%  but you can define one to match the C++/Java structure.
+
+function main()
+% variable declarations
+% Variables are dynamically typed (no int/double declaration needed)
+    a = 8;
+    x = 3.14;
+    message = "Hello World!"; % String using double quotes 
+    gotMilk = true;
+
+    % Output
+    disp("This will print to the console");
+    disp(message);
+    fprintf("The value of X is %f\n", x); % using fprintf for formatted output
+    disp("---------------------------");
+
+    % Input
+    % input() parses the input. 
+    a = input("Enter a integer: ");
+    disp(a);
+
+    % Reading a string
+    % The "s" argument tells MATLAB to read as a string/character array
+    message = input("Enter a single word: ", "s");
+    disp(message);
+
+    % MATLAB input reads the whole line if "s" is used, effectively like getline
+    message = input("Enter multiple words: ", "s");
+    disp(message);
+    disp("---------------------------");
+
+    % If statements
+    if gotMilk == true
+        disp("You've got milk");
+    elseif gotMilk == false
+        disp("There is an absence of milk!");
+    else
+        disp("This will never execute");
+    end
+    disp("---------------------------");
+
+    % while loops
+    a = 7;
+    while a ~= 0
+        disp("This loop will continue until you enter 0.");
+        a = input("Enter a number: ");
+    end
+    disp("----------------------------");
+
+    % for loops
+    a = input("Enter a positive number to sum: ");
+    total = 0;
+    % MATLAB loops are inclusive of the end range (0 to a)
+    for i = 0:a
+        total = total + i;
+    end
+
+    % output result
+    fprintf("The summation of %d is %d\n", a, total);
+    disp("---------------------------");
+
+% call main
+main()
+```
+
+
+
 ### Basic Syntax: Java ([Program.java](resources\c++_comparison\1_syntax\java\Program.java))
 
 ```java
@@ -510,6 +588,51 @@ main()
 
 
 
+### Functions: MATLAB ([main.m](resources\c++_comparison\2_functions\java\main.m))
+
+```matlab
+% define main function
+% In MATLAB, if a script contains local functions (like calcSumSquares below), 
+% the script itself must be implemented as a function (like main here).
+
+function main()
+  a = 0;
+  b = 0;
+  result = 0;
+
+  disp("Enter two integers: ");
+  a = input("");
+  b = input("");
+
+  % calling function calcSumSquares with inputs a and b
+  result = calcSumSquares(a, b);
+
+  % calling function display result
+  displayResult(a, b, result);
+
+end
+
+% calcSumSquares
+% Takes two parameters
+% Returns the result of the computation
+function result = calcSumSquares(num1, num2)
+  result = num1 * num1 + num2 * num2;
+end
+
+
+% displayResult
+% Takes three parameters to display to command window
+% Returns nothing (so no return variable specified in function definition)
+function displayResult(num1, num2, result)
+  fprintf("The sum of squares of %d and %d is %d\n", num1, num2, result);
+end
+
+% call main function
+main()
+```
+
+
+
 ### Functions: Java ([Program.java](resources\c++_comparison\2_functions\java\Program.java))
 
 ```java
@@ -706,6 +829,53 @@ main()
 
 
 
+### Arrays / Lists: MATLAB
+
+```matlab
+% define main function
+function main()
+    % create array of numbers
+    % Unlike C++, MATLAB arrays are dynamic and can be resized
+    numbers = []; 
+    sizeOfArray = 4;
+    
+    % fill array with user input
+    for i = 1:sizeOfArray
+        % Note: MATLAB Indices start at 1, unlike C++ which starts at 0
+        prompt = "Enter num: ";
+        numbers(i) = input(prompt);
+    end
+    
+    % print array
+    disp("The numbers in the array are:");
+    for i = 1:length(numbers)
+        disp(numbers(i));
+    end
+    
+    % call method calcSum and store the return value
+    sumVal = calcSum(numbers);
+    fprintf("The sum of the numbers is %d\n", sumVal);
+end
+  
+%{
+   calcSum
+   input: array of ints
+   output: int
+   desc: adds all the values in the array and returns the sum
+%}
+function sumVal = calcSum(nums)
+    sumVal = 0;
+    for i = 1:length(nums)
+        sumVal = sumVal + nums(i);
+    end
+end
+
+% call main
+main()
+```
+
+
+
 ### Arrays / Lists: Java
 
 ```java
@@ -859,6 +1029,80 @@ class Order(object):
     print("Order: " + self.__name + " for " +
         str(self.__pounds) + " lbs @ $" +
         str(self.__costPerPound) + "/lb")
+```
+
+
+
+## Class definition: MATLAB
+
+```matlab
+% In MATLAB, classes are defined in a 'classdef' block.
+% We inherit from 'handle' so that the object behaves like a Reference type 
+% (like Java/Python/C++ objects). If we don't, it behaves like a Value type 
+% (like a C++ struct passed by value).
+
+classdef Order < handle
+   properties (Access = private)
+      name
+      pounds
+      costPerPound
+   end
+   
+   methods
+      % default constructor
+      function obj = Order()
+          obj.name = "";
+          obj.pounds = 0;
+          obj.costPerPound = 0.0;
+      end
+      
+      % get / set methods
+      function n = getName(obj)
+          n = obj.name;
+      end
+      
+      function p = getPounds(obj)
+          p = obj.pounds;
+      end
+      
+      function c = getCostPerPound(obj)
+          c = obj.costPerPound;
+      end
+      
+      function setName(obj, newName)
+          obj.name = newName;
+      end
+      
+      function setPounds(obj, newPounds)
+          obj.pounds = newPounds;
+      end
+      
+      function setCostPerPound(obj, newCost)
+          obj.costPerPound = newCost;
+      end
+      
+      % methods
+      %{
+        calcCost
+        input: none
+        output: returns pounds * costPerPound
+      %}
+      function c = calcCost(obj)
+          c = obj.pounds * obj.costPerPound;
+      end
+      
+      %{
+        displayOrder
+        input: none
+        output: none
+        side-effect: prints a summary of the order to the screen
+      %}
+      function displayOrder(obj)
+          fprintf("Order: %s for %d lbs @ $%0.2f/lb\n", ...
+              obj.name, obj.pounds, obj.costPerPound);
+      end
+   end
+end
 ```
 
 
@@ -1083,6 +1327,42 @@ def finalizeOrder(newOrder):
 
 
 # call main function
+main()
+```
+
+
+
+### Using classes: MATLAB
+
+```matlab
+% define CONSTANT
+% In MATLAB functions, variables are local, so we define this in main
+function main()
+    COST_PER_POUND = 7.99;
+    
+    % create an order object
+    order1 = Order();
+    
+    tempName = input("Enter coffee name (one word please): ", "s");
+    order1.setName(tempName);
+    
+    tempPounds = input("Enter # of pounds: ");
+    order1.setPounds(tempPounds);
+    
+    order1.setCostPerPound(COST_PER_POUND);
+    
+    finalizeOrder(order1);
+end
+
+function finalizeOrder(newOrder)
+    cost = 0;
+    
+    newOrder.displayOrder();
+    cost = newOrder.calcCost();
+    fprintf("Your order costs $%0.2f\n", cost);
+end
+
+% call main
 main()
 ```
 

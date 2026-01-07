@@ -19,4 +19,4 @@ title: Pre-Lecture Activities
 
 ### Build before class all week 
 
-- Create [Weather Stack](https://weatherstack.com/) account
+- Create [open-meteo](https://open-meteo.com/) account 
