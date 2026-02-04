@@ -17,7 +17,7 @@ show_in_list: false
   - Introduce yourself
   - Answer a question I pose
   - When timer ends, you'll return to the classroom and be assigned to new group of students with a new question
-- When we were are all done, share one interesting thing you learned about classmates
+- After each one, we'll share one interesting thing you learned about classmates
 
 <!-- 
 Congratulations! The job you wanted when you were five years old is now yours. What do you now do for a living? 

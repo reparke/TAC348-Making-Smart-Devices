@@ -178,10 +178,11 @@ Week 10 idea:
 
 - Electricity and Ohm's Law
 - Safety
+- putting photon 2 on motherboard
 - Photon 2 microcontroller
 
 - Software tools: Workbench (open and discuss)
-- LED 
+- LED (no code, just 3v3 + ground)
 
 #### Guided Activity
 
@@ -200,20 +201,28 @@ Week 10 idea:
 ### Holiday Alternative Plan
 
 - w2d1 - holiday
+
 - w2d2
   - Review digital output (Blink 2 LED)
   - Review Workbench project
   - Pulse width modulation (lecture, PWM pins, analogWrite)
   - Serial monitor
-  - Analog to digital conversion + potentiometer
+  - PWM activity - auto increase brightness
+
 - w3d1
+
+  - Review PWM: have students auto increase and decrease brightness
+  - Analog to digital conversion + potentiometer + activity
+  - replace pot with button (if time)
+
+- w3d2
+
   - buttons
   - latching
-- w3d2
   - RGB leds
   - functions
   - libraries (if time)
-  
+
   
 
 ### Announcements
@@ -416,10 +425,13 @@ Week 10 idea:
 #### Lecture
 
 * Photoresistor (video)
+* Show how to use Frtizing
 
 #### Exercise
 
-* Calibrate photoresistor
+* Review ADC and analog reading (e.g. 0-4095)
+* Students do photoresistor exercise on their own
+* Possibly libraries if time 
 
 #### Lecture
 
@@ -1207,4 +1219,4 @@ Consider using this template with UV and weather code because we need them later
 
 
 
-## 16 - Final Project Presentation	
+## 16 - Final Project Presentation		

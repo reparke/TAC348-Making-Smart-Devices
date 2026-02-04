@@ -42,12 +42,10 @@ title: Intro to Making Smart Devices
 
 ## Why learn this? 
 
-* Jobs (2020 data)
-  - 4.5 million Internet of Things (IoT) developers
-    - 57% annual growth rate
-  - 26 billion Internet nodes (excl. phones, tablets, and computers)
-    - 30 fold increase from 2009
-* 2025: projected 42 billion IoT devices globally 
+* Over 3 million employed in Internet of Things (IoT)  (2025)
+* 21.1 billion Internet devices
+  - 30 fold increase from 2009
+* 2030: projected 50 billion IoT devices globally 
 * Cross-discipline
   - CS, EE, data analytics, product design, entrepreneurship, making
 
@@ -139,6 +137,8 @@ Empowering and fun
 
 ## Reference
 
+- [State of IoT 2025](https://iot-analytics.com/number-connected-iot-devices/)
+- [Internet of Things Market Report 2025](https://www.startus-insights.com/innovators-guide/internet-of-things-market-report/)
 - [More TAC 348 Projects](https://robparke.com/tag/itp348_projects/)
 - [AI - IoT](https://www.visualcapitalist.com/aiot-when-ai-meets-iot-technology/)
 

@@ -20,11 +20,17 @@ title: Electricity
   * There will be some basic math, but that is not our focus
 * Rules of Thumbs
 
+## Key Concepts
+
+* Electrons are negatively-charged particles
+* Electricity is the flow of **electrons** from **positive** to **negative** (flow of energy)
+* Electronics is the study of devices that control / interact with the flow of electricity
+
 ## Electricity Analogies
 
-<img src="lecture_electricity.assets/1564543352673.png" alt="height:500px" style="width:400px" />	<img src="lecture_electricity.assets/1564543461389.png" alt="height:500px" style="width:400px" />
+<img src="lecture_electricity.assets/1564543352673.png" alt="height:500px" style="width:300px" />	<img src="lecture_electricity.assets/1564543461389.png" alt="height:500px" style="width:400px" />
 
-## Common Analogy
+## Analogy
 
 * Electricity can be thought of as water flowing down a pipe
 
@@ -34,14 +40,23 @@ title: Electricity
 
 * Water can be stored in a container (like a battery)
 
-## Common Analogy
+## Analogy - Voltage
 
 * The "pressure" (or height) of the water is the ***voltage***
   * Measured in units called **volts (V)** 
   * Higher voltage means more potential energy
   * Our circuits will typically consider voltages **0v - 5v**
 
-## Common Analogy
+## Voltage as Difference
+
+* When we describe voltage, we are measuring the **difference** between two points
+* In the water analogy, water could fall from 500 ft to 400 ft, or from 100 ft to 0 ft
+  - In both cases, water fell a difference of 100 ft, but the *reference point* changed
+* In a circuit, we commonly call the reference point **Ground (GND)** and say it is **0V**
+
+* In homes and buildings, **ground** is literally connected to the earth
+
+## Analogy - Current
 
 * The "rate of flow" of the electricity is the ***current***
   * Measured in units called amperes or **amps (A)**
@@ -50,7 +65,7 @@ title: Electricity
 * Note: 1 A is a lot! Our projects will consider smaller values such as **0.2 A.**
   * Instead, we will say 0.2 A is 200 **milli**amps (mA)
 
-## Compare
+## Analogy - Resistance
 
 Consider two straws. Which has greater flow?
 
@@ -84,33 +99,17 @@ Consider two straws. Which has greater flow?
 * Unfortunately resistor labeling is not accessibly designed
 * To support students who are color blind or have difficulty distinguishing colors, here are [resources for support](https://reparke.github.io/TAC348-Making-Smart-Devices/reference/general/reading_resistors_color_blind.html)
 
-## Key Concepts
-
-* Electrons are negatively-charged particles
-* Electricity is the flow of **electrons** from **positive** to **negative **(flow of energy)
-* Electronics is the study of devices that control / interact with the flow of electricity
-
 ## Circuits
 
-* Electricity will only flow if there is a **circuit** 
-* A circuit is a complete loop from a positive voltage source to a negative (lesser) source, through a conductive material
+* Electricity (*current*) will only flow if there is a **circuit** 
+* A circuit is a complete path from a positive voltage source to a negative (lesser) voltage source, through a conductive material like a wire
 
-
-## Voltage as Difference
-
-* When we describe voltage, we are measuring the **difference** between two points
-* In the water analogy, water could fall from 500 ft to 400 ft, or from 100 ft to 0 ft
-  - In both cases, water fell a difference of 100 ft, but the *reference point* changed
-* In a circuit, we commonly call the reference point **Ground (GND)** and say it is **0V**
-
-* In homes and buildings, **ground** is literally connected to the earth
-
-## Voltage Source
+## Voltage Sources
 
 * In our circuits, we will use a voltage source to provide energy potential
   - USB power: 5v (also stepped down to 3.3v which the Photon 2 uses)
-  - 9V battery: 9v
   - Rechargeable lithium battery: 3.7v
+  - 9V battery: 9v
 * Our circuits will have a positive voltage (e.g. 3.3v or 5v) and ground voltage (0v)
 * We will consider that current flows from the positive part of the circuit to the negative
 
@@ -128,9 +127,10 @@ or Voltage = Current * Resistance
 
 ## Example
 
-<img src="lecture_electricity.assets/1565141579356.png" alt="height:400px" style="width:400px" />
+<img src="lecture_electricity.assets/1565141579356.png" alt="height:400px" style="width:250px" />
 
-1.) The voltage source is 9v. If we have a resistor that is 300 Ohms, what is the current?
+1. The voltage source is 9v. If we have a resistor that is 300 Ohms, what is the current?
+
 2) The voltage source is 9v and you want to provide a current of 9mA. What size resistor should we use?
 
 <!-- 1. 30 mA; 2. 1kOhm -->

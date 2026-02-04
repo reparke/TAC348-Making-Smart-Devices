@@ -169,7 +169,7 @@ void loop() {
 
 * Blink **LED1** every **300 ms**
 * Blink **LED2** every **146 ms**
-* Create toggle button (latch) to turn **ON BOARD** on at **rising edge** and off again at the **rising edge**
+* Create toggle button (latch) to turn **ON BOARD LED**on at **rising edge** and off again at the **rising edge**
 * Track the number of times the button is pressed
 * Publish the number of button presses to cloud every **10000 ms** 
 * Extra Challenge
