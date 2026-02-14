@@ -1,5 +1,5 @@
 ---
-week: 
+week: 6
 category: readings
 title: Pre-Lecture Activities
 ---
