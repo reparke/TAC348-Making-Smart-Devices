@@ -9,7 +9,7 @@ int counter = 0;
 const int PIN_LED1 = D3;
 const int PIN_ONBOARD_LED = D4;
 const int PIN_LED2 = D4;
-const int PIN_BUTTON = D7;
+const int PIN_BUTTON = D2;
 
 /*
     1) Blink Led 1 every 300 ms WITHOUT delay
@@ -19,7 +19,7 @@ const int PIN_BUTTON = D7;
 
     2) Blink Led 2 every 146 ms WITHOUT delay
     3) Create button latch and track the number of buttons presses (serial
-   monitor)
+   monitor) 
    4) Publish the counter every 10 s WITHOUT delay
 
     Bonus challenge
@@ -32,24 +32,23 @@ unsigned long prevMillisLed1 = 0;
 const unsigned long INTERVAL_LED1 = 300;  // 300ms
 int stateLed1 = LOW;                      // led1 starts OFF initially
 
-// led2 variables
+//led2 variables
 unsigned long prevMillisLed2 = 0;
 const unsigned long INTERVAL_LED2 = 146;
 int stateLed2 = LOW;
 
-// publish variables
+//publish variables
 unsigned long prevMillisPublish = 0;
 const unsigned long INTERVAL_PUBLISH = 10000;
 
-// button var
+//button var
 int prevButtonState = HIGH;
-int stateOnboardLed = LOW;
+
 
 void setup() {
     pinMode(PIN_LED1, OUTPUT);
     pinMode(PIN_LED2, OUTPUT);
     pinMode(PIN_BUTTON, INPUT);
-    pinMode(PIN_ONBOARD_LED, OUTPUT);
     Serial.begin(9600);
 }
 
@@ -76,36 +75,38 @@ void loop() {
         }
     }
 
-    // led2 timer
+    //led2 timer
     if (currMillis - prevMillisLed2 > INTERVAL_LED2) {
         prevMillisLed2 = currMillis;
-        // we can use the same logic for led2 as above
-        // but! I'll show a more concise way to do it
-        stateLed2 = !stateLed2;  // flip HIGH to LOW, and LOW to HIGH
+        //we can use the same logic for led2 as above
+        //but! I'll show a more concise way to do it
+        stateLed2 = !stateLed2; // flip HIGH to LOW, and LOW to HIGH
         digitalWrite(PIN_LED2, stateLed2);
     }
 
-    // publish timer
+    //publish timer
     if (currMillis - prevMillisPublish > INTERVAL_PUBLISH) {
         prevMillisPublish = currMillis;
         Particle.publish("Num Button Presses", String(counter));
     }
 
-    // latch
+    //latch
     int currButtonState = digitalRead(PIN_BUTTON);
-    // prevButton needs to be global
+    //prevButton needs to be global
     if (prevButtonState == HIGH && currButtonState == LOW) {
         counter = counter + 1;
-        stateOnboardLed = !stateOnboardLed;
-        digitalWrite(PIN_ONBOARD_LED, stateOnboardLed);
-        // fun fact!
-        // counter = counter + 1;  ----->   counter++;
+
+        //fun fact!
+        //counter = counter + 1;  ----->   counter++;
         Serial.println("Counter = " + String(counter));
     }
     prevButtonState = currButtonState;
-    // IMPORTANT!
-    // for latch, ALWAYS update prevButton EVERY TIME in loop (not in the IF)
-    // for millis, ALWAYS update prevMillis ONLY INSIDE THE IF
+    //IMPORTANT!
+    //for latch, ALWAYS update prevButton EVERY TIME in loop (not in the IF)
+    //for millis, ALWAYS update prevMillis ONLY INSIDE THE IF
+
+
+
 
     // counter = counter + 1;
 

@@ -527,6 +527,10 @@ Week 10 idea:
 - Libraries
 - Discuss OLED
 
+#### Exercise
+
+* show students how to build test function to test input
+
 #### Lab
 
 - Have students connect OLED to display "Hello World"
