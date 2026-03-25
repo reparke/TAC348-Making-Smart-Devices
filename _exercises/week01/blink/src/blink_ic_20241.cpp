@@ -10,12 +10,14 @@ void setup() {
 }
 
 void loop() {
-  //turn on led
-  digitalWrite(D7, HIGH);
-  //pause with "delay"
-  delay(1000);  //1000 milliseconds or 1 sec
-  digitalWrite(D7, LOW);
-  delay(1000);
+    Serial.println("Blinky Blinky");
+
+    // turn on led
+    digitalWrite(D7, HIGH);
+    // pause with "delay"
+    delay(1000);  // 1000 milliseconds or 1 sec
+    digitalWrite(D7, LOW);
+    delay(1000);
 }
 
 /*

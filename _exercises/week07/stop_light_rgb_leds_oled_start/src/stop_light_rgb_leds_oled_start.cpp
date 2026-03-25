@@ -40,6 +40,7 @@ void testLightandOLED() {
     oled.setCursor(0, 0);
     oled.setFontType(0);
     oled.println("Testing\nOLED");
+    Serial.println("Testing OLED");
     oled.display();
     oled.setFontType(0);  // 7-segment font
     for (int i = 0; i < 20; i++) {
@@ -50,6 +51,7 @@ void testLightandOLED() {
     //-----------------------
     // test R, G, B LEDs individually; then white
     int lights[] = {PIN_RED, PIN_GREEN, PIN_BLUE};
+    Serial.println("Testing RGB");
     // turn off LED
     for (int i = 0; i < arraySize(lights); i++) {
         digitalWrite(lights[i], LOW);
