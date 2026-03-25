@@ -23,7 +23,7 @@ const float CM_TO_IN = 0.393701;
 // Distance thresholds in inches
 const int FAR_THRESHOLD_IN = 24;  // beyond this → FAR zone
 const int STOP_THRESHOLD_IN = 4;  // closer than this → STOP zone
-const int MAX_RANGE_IN = 60;      // above this → treat as bad reading
+const int MAX_RANGE_IN = 72;      // above this → treat as bad reading
 
 // Averaging
 const int NUM_READINGS = 5;
@@ -38,8 +38,6 @@ const int BAR_X = 1;   // left edge of bar outline
 const int BAR_Y = 40;  // top edge of bar outline
 const int BAR_W = 62;  // total width of bar outline
 const int BAR_H = 6;   // height of bar outline
-
-
 
 float readDistanceIn() {
     digitalWrite(TRIG_PIN, LOW);
@@ -70,12 +68,9 @@ float readDistanceIn() {
     // return total / NUM_READINGS;
 
     // v3 - smoothing and rejecting of spurious or our of range
-    if (distanceIn != 0) {
-        // if (distanceIn <= MAX_RANGE_IN) {
-            readings[readIndex] = distanceIn;
-        // } else {
-            // readings[readIndex] = MAX_RANGE_IN;
-        // }
+    if (distanceIn != 0 && distanceIn < MAX_RANGE_IN) {
+        readings[readIndex] = distanceIn;
+
         readIndex = readIndex + 1;
         if (readIndex >= NUM_READINGS) {
             readIndex = 0;
@@ -89,48 +84,46 @@ float readDistanceIn() {
     return total / NUM_READINGS;
 }
 
-// ─── Main display function
-// ────────────────────────────────────────────────────
-//
-// Layout (64 x 48 px):
-//
-//   y= 0  │ FAR / NEAR / STOP!          ← zone label
-//   y=14  │ 15.0 in                      ← distance (inches)
-//          │
-//   y=36  ┌──────────────────────────┐  ← bar outline
-//   y=46  └──────────────────────────┘
-//              ^-- tick mark at STOP threshold
-//
-// KEY IDEA: bar fill is computed continuously from distance,
-// not chosen from a fixed set of values.
-//
 //   map(inches, 0, FAR_THRESHOLD_IN, BAR_W, 0)
 //       inches=0   → barFill = BAR_W  (full — object is right here)
 //       inches=FAR → barFill = 0      (empty — object is far away)
 
+// don't display distance when far away because we clamp it
 void drawDisplay(float inches) {
-    // ── Zone label ─────────────────────────────────────────────────────────
-
     oled.setCursor(0, 0);
     if (inches >= FAR_THRESHOLD_IN) {  // far
         oled.drawBitmap(yes_half_screen_bitmap);
     } else if (inches <= STOP_THRESHOLD_IN) {  // stop
         oled.drawBitmap(no_half_screen_bitmap);
+        oled.setCursor(1, 30);
+        oled.print(String(inches, 1) + " in");
     } else {  // near
         oled.drawBitmap(warning_half_screen_bitmap);
+        oled.setCursor(1, 30);
+        oled.print(String(inches, 1) + " in");
     }
-    oled.setCursor(0, 30);
-    oled.print(String(inches, 1) + " in");
-
 }
 
 void drawBar(float inches) {
-    // Clamp before mapping so the bar never overflows its outline.
+    // Clamp displayIn to [0, FAR_THRESHOLD_IN] before calling map().
+    //
+    // map() does NOT clamp — it extrapolates linearly beyond the input range.
+    // If inches > FAR_THRESHOLD_IN (e.g. hand is 30 in away):
+    //   map(30, 0, 24, 60, 0) = -75   ← negative width passed to rectFill!
+    // If inches < 0 (shouldn't happen with averaging, but just in case):
+    //   map(-5, 0, 24, 60, 0) = 72    ← wider than the bar outline!
+    //
+    // Both cases draw pixels outside the outline box.
+    // Clamping first guarantees the output of map() stays in [0, 60].
     float displayIn = inches;
     if (displayIn > FAR_THRESHOLD_IN) {
         displayIn = FAR_THRESHOLD_IN;
     }
 
+    // map() converts the distance range to a pixel fill width:
+    //   displayIn = 0  (hand right here) → barFill = BAR_W-2 = 60 px (full)
+    //   displayIn = 24 (hand far away)   → barFill = 0 px        (empty)
+    // Output is BAR_W-2, not BAR_W, to leave 1 px of inset on each side.
     int barFill = map(int(displayIn), 0, FAR_THRESHOLD_IN, BAR_W - 2, 0);
 
     // Outline
@@ -141,8 +134,13 @@ void drawBar(float inches) {
         oled.rectFill(BAR_X + 1, BAR_Y + 1, barFill, BAR_H - 2);
     }
 
-    // Tick mark at the STOP threshold position
-    int stopTickX = BAR_X + 1 + map(STOP_THRESHOLD_IN, 0, FAR_THRESHOLD_IN, BAR_W - 2, 0);
+    // Tick mark showing where the STOP zone begins on the bar.
+    // Same map() logic as barFill — asks "at what pixel does STOP_THRESHOLD_IN
+    // fall?"
+    //   STOP_THRESHOLD_IN=4 → map(4, 0, 24, 60, 0) = 50 → stopTickX = 1+1+50 =
+    //   52
+    int stopTickX =
+        BAR_X + 1 + map(STOP_THRESHOLD_IN, 0, FAR_THRESHOLD_IN, BAR_W - 2, 0);
     oled.line(stopTickX, BAR_Y - 2, stopTickX, BAR_Y + BAR_H + 1);
 }
 
@@ -154,8 +152,6 @@ void setup() {
     pinMode(ECHO_PIN, INPUT);
 
     oled.begin();
-    oled.setColor(1);
-    oled.setDrawMode(0);
 
     oled.clear(PAGE);
     oled.drawBitmap(trojan_full_screen_bitmap);
