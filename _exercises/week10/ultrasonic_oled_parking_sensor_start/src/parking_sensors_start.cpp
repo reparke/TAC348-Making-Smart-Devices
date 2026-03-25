@@ -4,7 +4,6 @@
 
 SYSTEM_THREAD(ENABLED);
 
-
 //////////////////////////////////
 // MicroOLED Object Declaration //
 //////////////////////////////////
@@ -27,12 +26,25 @@ const int STOP_THRESHOLD_IN = 4;  // closer than this → STOP zone
 const int MAX_RANGE_IN = 60;      // above this → treat as bad reading
 
 // TODO: readDistance
-float readDistanceIn() {}
+float readDistanceIn() {
+    digitalWrite(TRIG_PIN, LOW);
+    delayMicroseconds(2);
+    digitalWrite(TRIG_PIN, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(TRIG_PIN, LOW);
 
-//TODO: drawDisplay
+    int sensorTime = pulseIn(ECHO_PIN, HIGH);
+
+    float distanceCm = sensorTime * SPEED_SOUND_CM / 2;
+    float distanceIn = distanceCm * CM_TO_IN;
+
+    return distanceIn;
+}
+
+// TODO: drawDisplay
 void drawDisplay(float inches) {}
 
-//TODO: drawBar
+// TODO: drawBar
 void drawBar(float inches) {}
 
 void setup() {
@@ -42,8 +54,7 @@ void setup() {
     pinMode(ECHO_PIN, INPUT);
 
     oled.begin();
-    delay(1000);     // Delay 1000 ms
+    delay(1000);  // Delay 1000 ms
 }
 
-void loop() {
-}
+void loop() {}

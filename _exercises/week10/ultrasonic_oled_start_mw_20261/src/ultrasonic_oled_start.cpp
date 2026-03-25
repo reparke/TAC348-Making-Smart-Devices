@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "bitmaps.h"
 SYSTEM_MODE(AUTOMATIC);
 SYSTEM_THREAD(ENABLED);
 SerialLogHandler logHandler(LOG_LEVEL_WARN);
@@ -53,17 +54,26 @@ const int MIN_RANGE = 1;      // inches
 const int MAX_RANGE = 157;    // inches
 
 /*
+
+https://javl.github.io/image2cpp/
   measure distance
   display on serial monitor
-    less than min range (1 in) or max range of 13 ft, show out of range
+    less than min range (1 in) or max range of 13 ft, show out of range AND show
+no_full_screen graphic
+
     less than 5 in, show warning
+        show WARNING GRAPHIC HALF SCREEN + distance
+
     otherwise display distance
+        show YES GRAPHIC half screen + distance
 */
 
 void setup() {
     Serial.begin(9600);  // begin serial communication with the computer
     oled.begin();        // Initialize the OLED
     oled.clear(ALL);     // Clear the display's internal memory
+
+    oled.drawBitmap(usc_full_screen);
     oled.display();      // Display what's in the buffer (splashscreen)
     delay(1000);         // Delay 1000 ms
 
