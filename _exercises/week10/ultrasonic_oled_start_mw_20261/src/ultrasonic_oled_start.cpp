@@ -1,5 +1,4 @@
 #include "Particle.h"
-#include "bitmaps.h"
 SYSTEM_MODE(AUTOMATIC);
 SYSTEM_THREAD(ENABLED);
 SerialLogHandler logHandler(LOG_LEVEL_WARN);
@@ -23,6 +22,7 @@ Ultrasonic Sensor
 
 */
 #include "SparkFunMicroOLED.h"  // Include MicroOLED library
+#include "bitmaps.h"
 
 //////////////////////////////////
 // MicroOLED Object Declaration //
@@ -40,77 +40,87 @@ MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
 //////////////////////////
 // Ultrasonic Distance  //
 //////////////////////////
-
-const int PIN_ECHO = D5;
 const int PIN_TRIGGER = D6;
-// this sensor requires 5v (VUSB)...sorta...kinda get to work with LiPo Li+
-// (3.7V pin) just like servo
+const int PIN_ECHO = D5;
 
-const float SPEED_OF_SOUND_CM = 0.03444;
-const float CM_TO_IN = 0.393701;  
+const float SPEED_SOUND_CM = 0.03444;
+const int MIN_RANGE_CM = 2;
+const int WARNING_RANGE_CM = 12;
+const int MAX_RANGE_CM = 400;
 
-const int WARNING_RANGE = 5;  // inches
-const int MIN_RANGE = 1;      // inches
-const int MAX_RANGE = 157;    // inches
+float distanceCm = 0;
 
-/*
+void measureDistance() {
+    digitalWrite(PIN_TRIGGER, LOW);  // stars sequence
+    delayMicroseconds(2);
+    digitalWrite(PIN_TRIGGER, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(PIN_TRIGGER, LOW);
+    // now send 8 pulses out
 
-https://javl.github.io/image2cpp/
-  measure distance
-  display on serial monitor
-    less than min range (1 in) or max range of 13 ft, show out of range AND show
-no_full_screen graphic
+    int timeMeasure = pulseIn(PIN_ECHO, HIGH);  // wait for time
 
-    less than 5 in, show warning
-        show WARNING GRAPHIC HALF SCREEN + distance
-
-    otherwise display distance
-        show YES GRAPHIC half screen + distance
-*/
+    distanceCm = timeMeasure * SPEED_SOUND_CM / 2;
+    delay(500);  // need a small delay; should use millis if timing is important
+                 // in the device
+}
 
 void setup() {
     Serial.begin(9600);  // begin serial communication with the computer
     oled.begin();        // Initialize the OLED
     oled.clear(ALL);     // Clear the display's internal memory
-
-    oled.drawBitmap(usc_full_screen);
-    oled.display();      // Display what's in the buffer (splashscreen)
-    delay(1000);         // Delay 1000 ms
-
-    pinMode(PIN_ECHO, INPUT);
+    oled.drawBitmap(tac348_bitmap);
+    oled.display();  // Display what's in the buffer (splashscreen)
+    delay(1000);     // Delay 1000 ms
     pinMode(PIN_TRIGGER, OUTPUT);
-    // pinMode is from the perspective of the photon
+    pinMode(PIN_ECHO, INPUT);
 }
 
 /********************************************************************************/
 void loop() {
-    // init sequence for ultra sonic
-    digitalWrite(PIN_TRIGGER, LOW);
-    delayMicroseconds(2);
-    digitalWrite(PIN_TRIGGER, HIGH);
-    delay(10);
-    digitalWrite(PIN_TRIGGER, LOW);
+    measureDistance();
 
-    // these 5 lines start the sensor working aka sending 8 pulses
-
-    // pulseIn measure time
-    // pulseIn measures the lenght of time for signal to change L-H or H-L
-
-    int sensorTime = pulseIn(PIN_ECHO, HIGH);
-
-    float distanceCm = sensorTime * SPEED_OF_SOUND_CM /2; //div 2 since time is 
-                                                        ///there and back
-    float distanceIn = distanceCm * CM_TO_IN;
-
-    //dist = rate * time   (dist = velo * time)
-
-    if (distanceIn <= MIN_RANGE || distanceIn >= MAX_RANGE) {
-      Serial.println("Out of range");
-    } else if (distanceIn <= WARNING_RANGE) {
-        Serial.println("Warning - Dist: " + String(distanceIn));
-    } else {
-        Serial.println("Dist: " + String(distanceIn));
+    if (distanceCm <= MIN_RANGE_CM || distanceCm >= MAX_RANGE_CM) {
+        Serial.println("Out of range");
+        oled.clear(PAGE);
+        oled.drawBitmap(no_full_screen_bitmap);
+        oled.display();
+    } else if (distanceCm <= WARNING_RANGE_CM) {
+        Serial.println("Warning! Distance (cm): " + String(distanceCm, 2));
+        oled.clear(PAGE);
+        oled.drawBitmap(warning_half_screen_bitmap);
+        oled.println(String(distanceCm) + " cm");
+        oled.display();
+    } else {  // valid range
+        Serial.println("Distance (cm): " + String(distanceCm, 2));
+        oled.clear(PAGE);
+        oled.drawBitmap(yes_half_screen_bitmap);
+        oled.println(String(distanceCm) + " cm");
+        oled.display();
     }
-
-    delay(500); // delay to add gap between readings
 }
+
+/*
+  Bitmaps
+  * Using the ultrasonic distance sensor, display graphics and distance
+measurement on the OLED
+
+  * Large error graphic when out of range (`no_full_screen.png`)
+  * Small warning message when less than 12 cm and the distance
+(`warning_half_screen.png`)
+  * Small graphics and distance message otherwise and the distance
+(`yes_half_screen.png`)
+*
+*/
+/*
+  use the ultra sonic sensor (config it)
+  see if we can get a reading
+  report the distance in CM to an object
+
+use ranges
+  range is 2 cm to 400 cm
+
+  show the distance in serial monitor
+  if less than 12 cm, show distance and warning mesage
+  otherwise say out of range
+*/

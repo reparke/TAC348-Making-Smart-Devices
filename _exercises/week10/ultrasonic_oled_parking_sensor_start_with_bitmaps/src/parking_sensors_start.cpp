@@ -54,7 +54,7 @@ void setup() {
     pinMode(ECHO_PIN, INPUT);
 
     oled.begin();
-    delay(100);  // Delay 1000 ms
+    delay(1000);  // Delay 1000 ms
 }
 
 void loop() {}

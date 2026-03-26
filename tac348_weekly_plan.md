@@ -34,6 +34,10 @@ toc_sticky: true
 
 **Definite**
 
+* [ ] ==Week 10 - ultra sonic==
+  * [ ] day 1: ultra sonic + graphics together
+  * [ ] day 2: parking sensor (start new project)
+  
 * [ ] week 10
   * [ ] future semester: consider permanently putting motors here; add something else for week 9
 * [ ] week 11 Thank
