@@ -1,6 +1,6 @@
 #include "Particle.h"
 #include "SparkFunMicroOLED.h"
-#include "bitmaps.h"
+
 
 SYSTEM_THREAD(ENABLED);
 

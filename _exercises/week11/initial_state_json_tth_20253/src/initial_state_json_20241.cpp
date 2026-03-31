@@ -86,7 +86,7 @@ void loop() {
         battery = 100;
     }
     JsonObject obj2 = doc.createNestedObject();
-    obj2[String("key")] = "Battery (%)";
+    obj2[String("key")] = String("Battery (%)");
     obj2[String("value")] = battery;
 
     // gps
@@ -94,7 +94,7 @@ void loop() {
     lng = lng + 0.00001;
     String coords = String(lat) + "," + String(lng);  // "34.9,55.4"
     JsonObject obj3 = doc.createNestedObject();
-    obj3[String("key")] = "GPS";
+    obj3[String("key")] = String("GPS");
     obj3[String("value")] = coords;
 
     // step 3: turn our json data into a string

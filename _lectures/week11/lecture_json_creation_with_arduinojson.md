@@ -31,7 +31,7 @@ title: Creating JSON with ArduinoJson Library
 
 ### Configuration of `ArduinoJson`
 
-- Import library and set up Arduino compatibility
+- Import library and set up Arduino compatibility (make sure these lines go AFTER `#include "Particle.h`")
 
 ```c++
 #define ARDUINOJSON_ENABLE_ARDUINO_STRING 1
