@@ -406,8 +406,7 @@ https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64
 
     pinMode(PIN_BUTTON, INPUT);
 
-    Particle.subscribe("hook-response/OpenMeteoJsonFull", myHandler,
-                       MY_DEVICES);
+    Particle.subscribe("hook-response/open_meteo_json", myHandler, MY_DEVICES);
     Particle.subscribe("hook-response/gemini_weather", myHandlerGemini,
                        MY_DEVICES);
 
@@ -428,7 +427,7 @@ https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64
 void loop() {
     if (runOnce == true && Particle.connected() == true) {
         runOnce = false;
-        Particle.publish("OpenMeteoJsonFull", "");
+        Particle.publish("open_meteo_json", "");
     }
     // latch
     int curButtonVal = digitalRead(PIN_BUTTON);

@@ -115,7 +115,7 @@ int prevButtonVal = HIGH;  // the last VERIFIED state
 //////////////////////////
 // TODO: create state enum and variable(s) to track state
 enum State { Clock, Weather, Heart };
-State currentState = Heart;
+State currentState = Weather;
 ///////////////////////////////////////////////////////////////
 //               END LIBRARIES AND DECLARATIONS              //
 ///////////////////////////////////////////////////////////////
@@ -258,7 +258,7 @@ void runWeatherScreen() {
     unsigned long curMillis = millis();
     if (curMillis - prevMillis > WEATHER_SCREEN_UPDATE) {
         prevMillis = curMillis;
-        Particle.publish("OpenMeteoJsonFull", "");
+        Particle.publish("open_meteo_json", "");
     //this code works, but we ALSO want to publish a request when the device starts
 
     /*
@@ -359,14 +359,13 @@ https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64
     Time.zone(-8);
     // Time.beginDST();
 
-    Particle.subscribe("hook-response/OpenMeteoJsonFull", myHandler,
-                       MY_DEVICES);
+    Particle.subscribe("hook-response/open_meteo_json", myHandler, MY_DEVICES);
 }
 
 void loop() {
 
     if (runOnce == true && Particle.connected() == true) {
-        Particle.publish("OpenMeteoJsonFull", "");
+        Particle.publish("open_meteo_json", "");
         runOnce = false;
     }
 

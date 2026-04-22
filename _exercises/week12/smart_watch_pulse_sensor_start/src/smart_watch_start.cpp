@@ -75,18 +75,10 @@ MicroOLED oled(MODE_I2C, PIN_RESET, DC_JUMPER);  // I2C declaration
 //////////////////////////
 // Weather Screen  Var  //
 //////////////////////////
-/* Weatherstack only has 250 API calls in free plan so use
-   very long delay (8 times per day)
+/* Open Meteo
 */
 // TODO:
 
-//////////////////////////
-// Sunrise Screen  Var  //
-//////////////////////////
-/* 
-   very long delay (8 times per day)
-*/
-// TODO:
 
 //////////////////////////
 // Button Variables     //
