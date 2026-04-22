@@ -30,6 +30,18 @@ title: Particle + Gemini Integration
 
 ![image-20251118222003205](lecture_particle_gemini_integration.assets/image-20251118222003205.png)
 
+## 
+
+![image-20260422094744899](lecture_particle_gemini_integration.assets/image-20260422094744899.png)
+
+## 
+
+![image-20260422094819922](lecture_particle_gemini_integration.assets/image-20260422094819922.png)
+
+## 
+
+![image-20260422094907350](lecture_particle_gemini_integration.assets/image-20260422094907350.png)
+
 * Copy API key
 
 ![image-20251118222330583](lecture_particle_gemini_integration.assets/image-20251118222330583.png)
@@ -40,6 +52,67 @@ title: Particle + Gemini Integration
   * Under **API restrictions** click **Restrict key**
   * Click the dropdown box and type **Generate Language API**
 * It may take 5-10 for key to be active
+
+
+
+# Gemini API Webhooks
+
+## The API JSON Structure
+
+<img src="https://ai.google.dev/static/site-assets/images/marketing/copy-code-illustration.png" alt="api_structure" style="width:400px;" />
+
+- Sending prompts via a webhook requires a specific JSON format
+- The structure follows a nested hierarchy that the Google Cloud Console expects
+- In Particle, we use placeholders like `{{temp}}` to inject real sensor data into the prompt
+
+## JSON Anatomy: Contents and Parts
+
+- **`contents`**: An array that represents the conversation history
+- **`parts`**: A nested array within contents that holds the actual message data
+- **`text`**: The string where you define the persona, provide the data, and give the instruction
+- This nesting allows the API to distinguish between different types of media or multiple turns in a chat
+
+## Finding Documentation
+
+- The primary source for these structures is the **Google AI for Developers API Reference**
+- Look for the **`generateContent`** method under the REST API section
+- The documentation defines the "Request Body," which lists every field you can include in your JSON
+
+## Customizing Behavior: generationConfig
+
+- You can add a `generationConfig` block to control the "vibe" of the output
+- **`temperature`**: Controls randomness (0.1 for facts, 0.9 for wit)
+- **`maxOutputTokens`**: Limits the response length to save memory or screen space
+- **`responseMimeType`**: Can be set to `application/json` if you want the AI to return data your code can parse
+
+## Webhook Implementation Code
+
+JSON
+
+```
+{
+  "contents": [
+    {
+      "parts": [
+        {
+          "text": "You are a concise assistant. Sensor data: {{data}}. Task: Summarize."
+        }
+      ]
+    }
+  ],
+  "generationConfig": {
+    "temperature": 0.7,
+    "maxOutputTokens": 100
+  }
+}
+```
+
+## Prompt Engineering for IoT
+
+- Be explicit about the format you want (e.g., "provide a single, short phrase")
+- Tell the model what to exclude to keep the string clean for small displays
+- Use the system instruction field if you want the persona to be permanent across different prompts
+- Always test your JSON in a validator like JSONLint before deploying to the Particle console
 
 
 
