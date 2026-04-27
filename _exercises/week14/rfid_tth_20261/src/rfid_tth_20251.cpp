@@ -1,4 +1,3 @@
-
 #include "Particle.h"
 
 SYSTEM_MODE(AUTOMATIC);
@@ -53,36 +52,19 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance.
 
+const String CARD1 = "0E 8B 8E 6A";
+const String CARD2 = "4E B3 01 BF";
+
 /*
-    The RFID cards have an UUID and they have some storage (not much)
+    how do we want to use this card for project?
+    1) store infomation on the card and the photon reads the info to do
+   something
 
-    how to use
-    - just use the UUID
-        code handles storing info and data access
-    -store data on the card itself (1 KB)
+    2) photon read the UID of the card, and then the photon already has some
+   info stored about what to do with that UID
 
-    ex: hotel - check out is 11 am --> ask for a late checkout 2pm
-        next day at 1 pm: you can't access your room
-
-    how does a hotel room access panel know when you are supposed to checkout?
-      possibilities
-        1. the reader gets real-time data and is networked to the hotel system
-            your card UUID is linked your account which knows when you will
-   checkout
-        2. checkout time is stored on the card itself
-
-        why 1) network?
-            -can we reuse
-            -much more flexiblity - advanced
-        why 2) on card
-            -easier
-            -less battery replacement
-            -reliable
-
+    # 2 is much easier
 */
-
-const String CARD1 = "4E B3 01 BF";
-const String CARD2 = "57 67 BA 60";
 
 void setup() {
     Serial.begin(9600);  // Initialize serial communications with the PC
@@ -106,32 +88,42 @@ void loop() {
     // // Dump debug info about the card. PICC_HaltA() is automatically called.
     // mfrc522.PICC_DumpToSerial(&(mfrc522.uid));
 
-    /*
-    following the example here
-    -if card is present
-    -if we can read the serial
-        -use a for loop to access the UID from the card
-        -STORE IT in variable
-    -compare scanned card with our stored cards
-    */
-
-    String scannedCard = "";  // new card we are scanning
+    String scannedCard = "";
     if (mfrc522.PICC_IsNewCardPresent() == true) {
         if (mfrc522.PICC_ReadCardSerial() == true) {
-            // figure out how to get the UID into a var
             for (byte i = 0; i < mfrc522.uid.size; i++) {
-                scannedCard +=
-                    String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
+                scannedCard += String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
                 scannedCard += String(mfrc522.uid.uidByte[i], HEX);
             }
+            // Serial.println("Scanned Card:" + scannedCard);
+            scannedCard.toUpperCase();  //converts to upperase
+            scannedCard.trim();
+
+            if (scannedCard == CARD1) {
+                Serial.println("found card1");
+            }
+            else if (scannedCard == CARD2) {
+                Serial.println("found card2");
+            }
+            else {
+                Serial.println("Unknown card");
+            }
         }
-        scannedCard.toUpperCase();
-        scannedCard.trim();
-    }
-    // Serial.println("Scanned Card:" + scannedCard);
-    if (scannedCard == CARD1) {
-        Serial.println("Found card 1");
-    } else if (scannedCard == CARD2) {
-        Serial.println("Found card 2");
     }
 }
+
+
+/*example
+request late check -- but card doesn't work
+    uid set to expire, and card was not updated
+
+    how does the door sensor know that I should have access to the hotel room?
+        1) card STORES the checkout time on the card (Apr 23 at 11 am)
+            + simpler but easier to spoof (fake)
+            + can'tbe hacked in the network 
+            batteries
+        OR
+        2) sensors are all networked in the building 
+            batteries OR door can charge sensor
+
+*/

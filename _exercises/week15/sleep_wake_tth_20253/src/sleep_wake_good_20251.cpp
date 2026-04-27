@@ -50,15 +50,15 @@ void setup() {
     Serial.begin(9600);
 }
 void loop() {
-    // wakeOnTimer();
-    wakeOnButton();
+    wakeOnTimer();
+    // wakeOnButton();
 
-    int currentAlarm = digitalRead(PIN_PIR);
+    // int currentAlarm = digitalRead(PIN_PIR);
     // HIGH movement detected
     // LOW no movement
-    if (currentAlarm == LOW) {
-        Serial.println(String(counter++) + " Movement detected");
-    }
+    // if (currentAlarm == LOW) {
+    //     Serial.println(String(counter++) + " Movement detected");
+    // }
     // what if instead we wanted ONE message that says movement detected
     // and one message that says movement stopped?
 

@@ -348,6 +348,11 @@ void myHandler(const char* event, const char* data) {
         String jsonGemini = "{\"temp\":" + String(temperature) +
                             ", \"code\":" + String(weatherCode) +
                             ", \"humidity\":" + String(humidity) + "}";
+        /*
+        
+        {"temp":78, "code":22, "humidity":45.5}
+        
+        */
         Serial.println("Publishing to Gemini...");
         Serial.println(jsonGemini);
         Serial.println();

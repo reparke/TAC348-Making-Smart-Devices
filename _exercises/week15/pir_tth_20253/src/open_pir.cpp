@@ -53,8 +53,9 @@ void loop()
         digitalWrite(PIN_ONBOARD_LED, HIGH);
     }
     else {
-        //movement stopped 5-10 seconds ago
+        //movement stopped 5-10 seconds ago (PIR has a hold time before re-arming)
         digitalWrite(PIN_ONBOARD_LED, LOW);
     }
-    
+
+    // delay(200); // without this, loop floods serial with thousands of messages per trigger
 }
