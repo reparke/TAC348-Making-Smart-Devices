@@ -10,24 +10,24 @@ toc_sticky: true
 
 ---
 
-## 		Key Dates for Spring 2026
+## 		Key Dates for Fall 2026
 
 ### Soldering Workshop
 
-* Week 8: Mar 2 - Mar 5
+* Week 8: Oct 12 - Oct 16
 * usually week 8-10
 
 ### Design Review
 
-* Week 12: ==**Mon Apr 6**== and ==**Tue Apr 7**==
+* Week 12: ==**Mon Nov 9**== and ==**Tue Nov 10**==
 
 * After proposal due usually start of Week 12
 
 ### Possible Guest Lecture Dates
 
-* Week 10: Mar 23 - Mar 27 (early)
-* Week 14: Apr 20 - Apr 24
-* Week 15: Apr 27 - May 1
+* Week 10: 
+* Week 14: 
+* Week 15: 
 * Usually last few weeks of classes
 
 ## 		Things to implement
@@ -187,6 +187,7 @@ Week 10 idea:
 
 - Software tools: Workbench (open and discuss)
 - LED (no code, just 3v3 + ground)
+- Maybe digitalWrite?
 
 #### Guided Activity
 
@@ -200,7 +201,7 @@ Week 10 idea:
 
   
 
-## 2. Pulse Width Modulation, ADC ==Spring 2026 - MLK Jr. Holiday==
+## 2. Pulse Width Modulation, ADC 
 
 ### Holiday Alternative Plan
 
@@ -313,9 +314,11 @@ Week 10 idea:
 
 ## 3. Buttons, Digital Input, RGB
 
+## ==Fall 2026 - Labor Holiday==
+
 ### Announcements
 
-- Explain social issues assignment - sign ups in two weeks
+- 
 
 ### Assignment
 
