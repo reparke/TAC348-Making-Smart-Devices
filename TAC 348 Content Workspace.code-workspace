@@ -11,6 +11,8 @@
 		"files.autoSave": "afterDelay",
 		"editor.wordWrap": "on",
 		"markdown.marp.exportType": "html",
-		"markdown.marp.enableHtml": true
+		"markdown.marp.enableHtml": true,
+		"workbench.colorTheme": "Dark Modern",
+		"workbench.activityBar.compact": false
 	}
 }
