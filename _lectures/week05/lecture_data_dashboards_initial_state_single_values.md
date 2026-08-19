@@ -46,8 +46,17 @@ title: Data Visualization and Dashboard with Initial State (Single Values)
 * Initial State is a data visualization service for IoT
 * Send data from Photon 2 to be stored at Initial State 
 * Create complex graphs and dashboards with the values from your Photon 2
-* Generous free tier!
 * Initial State can also send SMS and email alerts based on the data (though this requires a paid plan)
+
+## Initial State
+
+* **Important:** Initial State used to be free for students
+  * Now it only offers a 30 free trial 🥺
+* **How does this affect us?**
+  * Make an account, use it for 30 days for an assignment
+  * When you need to use it again, make another free account with a different email
+* **Is this annoying?**
+  * Yes. But there isn't a replacement that is both free and as-easy to use as Initial State
 
 ## Configuring Photon 2 and Initial State 
 

@@ -58,6 +58,8 @@ Week 10 idea:
 
 ---
 
+
+
 **Maybe**
 
 * [ ] JSON
@@ -314,7 +316,16 @@ Week 10 idea:
 
 ## 3. Buttons, Digital Input, RGB
 
-## ==Fall 2026 - Labor Holiday==
+## ==Fall 2026 - Labor Holiday + Tapia Week 4==
+
+Fall 2026 Plan
+
+|      | MW (normal)                                 | TTh                                         |
+| ---- | ------------------------------------------- | ------------------------------------------- |
+| w3d1 | *holiday*                                   | buttons, latches, RGB                       |
+| w3d2 | buttons, latches, RGB                       | multitasking (change publish to serial mon) |
+| w4d1 | multitasking (change publish to serial mon) | photoresistors, publish (video)             |
+| w4d2 | photoresistors, publish (video)             | *class cancelled* for Tapia                 |
 
 ### Announcements
 

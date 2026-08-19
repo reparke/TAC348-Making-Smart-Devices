@@ -12,7 +12,7 @@
 		"editor.wordWrap": "on",
 		"markdown.marp.exportType": "html",
 		"markdown.marp.enableHtml": true,
-		"workbench.colorTheme": "Dark Modern",
+		"workbench.colorTheme": "Monokai Dimmed",
 		"workbench.activityBar.compact": false
 	}
 }
