@@ -59,7 +59,9 @@ void setup() {
 - This extra data can waste time, bandwidth, power, and the response size can create errors
 - Instead, we can have Particle webserver send us only the data we actually want by creating **Mustache templates**
 
+<!-- {% raw %} -->
 <!-- Inserting a variable with double braces {{a}} will do HTML escaping of the characters &<>"'. To avoid this, use triple braces {{{a}}} -->
+<!-- {% endraw %} -->
 
 ## Example: Entire Weather Stack JSON Response
 
@@ -83,9 +85,11 @@ void setup() {
 
 - If we are only interested in the `temperature` value which is nested in the `current` object, we could create a template like the following
 
+<!-- {% raw %} -->
 ```json
   {"temp":"{{{current.temperature}}}"}
 ```
+<!-- {% endraw %} -->
 
 - Now instead of the server sending entire JSON response, it will only send the following
 ```json

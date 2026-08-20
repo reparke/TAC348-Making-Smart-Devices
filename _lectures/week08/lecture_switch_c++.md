@@ -3,6 +3,7 @@ marp: true
 theme: itp
 
 week: 8
+order: 2
 category: lectures
 title: Switch / Enum Part 2 (Switch)
 ---

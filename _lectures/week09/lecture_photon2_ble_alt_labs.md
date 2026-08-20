@@ -17,7 +17,7 @@
 * Download starting code
   * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
   * Paste the following link into the top right
-    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_uart_control_start
+    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/_archive/ble_uart_control_start
 * In Bluefruit app, connect to over UART (listed as "controller")
 
 ## Lab #1:RGB LED and Buzzer (part 2)
@@ -57,7 +57,7 @@ On-board LED    D7
   * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
 
   * Paste the following link into the top right
-    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_uart_control_start
+    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/_archive/ble_uart_control_start
 * In Bluefruit app, connect to over UART (listed as "controller")
 
 ## Lab #2: Control Fan (part 2)

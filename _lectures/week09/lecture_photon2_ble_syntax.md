@@ -3,6 +3,7 @@ marp: true
 theme: itp
 
 week: 9
+order: 5
 category: lectures
 title: Photon 2 BLE Syntax
 ---
@@ -183,7 +184,7 @@ Motor Controller
 * Download starting code
   * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
   * Paste the following link into the top right
-    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_uart_rgb_accel_example
+    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/_archive/ble_uart_rgb_accel_example
 
 ## Demo #1: Control RGB LED with Phone Accelerometers (part 2)
 
@@ -209,7 +210,7 @@ Motor Controller
   * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
 
   * Paste the following link into the top right
-    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/ble_health_temp_final
+    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week09/_archive/ble_health_temp_final
 
 ## Demo #2: Read Health Thermometer Service (part 2)
 

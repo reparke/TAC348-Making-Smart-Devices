@@ -4,7 +4,7 @@
 
 ### Watch before class this week
 
-* `switch` and `enum` in C++ (already covered in class last week)
+* `switch` and `enum` in C++
 
     {% include video id="W6uycVUrkm4" provider="youtube" %}
 
@@ -34,7 +34,7 @@
 | SDA (Blue)              | SDA           |
 | SCL (Yellow)            | SCL           |
 
-<img src="week07_no_spring_holiday.assets/Screenshot 2024-07-03 at 7.24.52 PM.png" alt="Screenshot 2024-07-03 at 7.24.52 PM" />
+<img src="week08.assets/Screenshot 2024-07-03 at 7.24.52 PM.png" alt="Screenshot 2024-07-03 at 7.24.52 PM" />
 
 
 
@@ -50,4 +50,4 @@
 | RGB Blue LED    | D15 (MO)      |
 | Potentiometer   | A1            |
 
-<img src="week07_no_spring_holiday.assets/Screenshot 2024-07-03 at 7.29.08 PM.png" alt="Screenshot 2024-07-03 at 7.29.08 PM" />
+<img src="week08.assets/Screenshot 2024-07-03 at 7.29.08 PM.png" alt="Screenshot 2024-07-03 at 7.29.08 PM" />

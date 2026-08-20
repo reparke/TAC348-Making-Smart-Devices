@@ -3,20 +3,21 @@ marp: true
 theme: itp
 
 week: 8
+order: 4
 category: lectures
-title: State Machines Part 3 - Dish Washer Example
+title: State Machines Part 3 - Washing Machine Example
 ---
 
 <!-- headingDivider: 2 -->
 
 # State Machines
-## In class Lab - Dishwashing Machine
+## In class Lab - Washing Machine
 
 <img src="lecture_state_machines_washer.assets/nathan-dumlao-m0ucB-06v7k-unsplash.jpg" style="width:600px;" />
 
 
 
-## In class Lab - Dishwashing Machine
+## In class Lab - Washing Machine
 
 * We are going to build a simple dish washing machine with three cycles
   * Economy
@@ -51,13 +52,13 @@ title: State Machines Part 3 - Dish Washer Example
 
 
 
-## In class Lab - Dishwashing Machine
+## In class Lab - Washing Machine
 
 
 * Download starting code
   * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
   * Paste the following link into the top right
-  ```https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week07/washer_start```
+  ```https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week08/washer_start```
 * Wire device as shown below
 
 ## Wiring Diagram

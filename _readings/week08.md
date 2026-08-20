@@ -9,7 +9,7 @@ title: Pre-Lecture Activities
 
 ### Watch before class this week
 
-* `switch` and `enum` in C++ (already covered in class last week)
+* `switch` and `enum` in C++
 
   {% include video id="W6uycVUrkm4" provider="youtube" %}
 

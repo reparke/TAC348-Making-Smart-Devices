@@ -3,6 +3,7 @@ marp: true
 theme: itp
 
 week: 9
+order: 3
 category: lectures
 title: LiPo Battery
 ---

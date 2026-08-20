@@ -30,13 +30,13 @@
 | RGB Blue LED    | D4            |
 | Potentiometer   | A5            |
 
-<img src="week07_no_spring_holiday.assets/Screenshot 2024-07-03 at 7.29.08 PM.png" alt="Screenshot 2024-07-03 at 7.29.08 PM" />
+<img src="week08.assets/Screenshot 2024-07-03 at 7.29.08 PM.png" alt="Screenshot 2024-07-03 at 7.29.08 PM" />
 
 
 
 ### Build before class Wed / Thurs 
 
-<img src="week08_no_spring_holiday.assets/Screenshot 2024-07-03 at 7.50.35 PM.png" alt="Screenshot 2024-07-03 at 7.50.35 PM" />
+<img src="week07.assets/Screenshot 2024-07-03 at 7.50.35 PM.png" alt="Screenshot 2024-07-03 at 7.50.35 PM" />
 
 
 

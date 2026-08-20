@@ -3,6 +3,7 @@ marp: true
 theme: itp
 
 week: 9
+order: 1
 category: lectures
 title: DC Motors
 ---

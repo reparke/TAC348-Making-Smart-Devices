@@ -3,6 +3,7 @@ marp: true
 theme: itp
 
 week: 8
+order: 1
 category: lectures
 title: State Machines Part 1 - Overview
 ---

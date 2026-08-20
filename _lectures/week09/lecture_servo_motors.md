@@ -3,6 +3,7 @@ marp: true
 theme: itp
 
 week: 9
+order: 2
 category: lectures
 title: Servo Motors
 

@@ -3,6 +3,7 @@ marp: true
 theme: itp
 
 week: 8
+order: 3
 category: lectures
 title: State Machines Part 2 - Stoplight Example
 
@@ -48,7 +49,7 @@ title: State Machines Part 2 - Stoplight Example
   * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
   * Paste the following link into the top right
   
-  `https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week07/stop_light_rgb_leds_oled_start`
+  `https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week08/stop_light_rgb_leds_oled_start`
 
 * Wire device as shown below
 

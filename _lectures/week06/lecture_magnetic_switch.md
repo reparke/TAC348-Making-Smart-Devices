@@ -3,6 +3,7 @@ marp: true
 theme: itp
 
 week: 6
+order: 1
 category: lectures
 title: Magnetic Switch
 

@@ -3,6 +3,7 @@ marp: true
 theme: itp
 
 week: 6
+order: 2
 category: lectures
 title: Creating IoT Mobile Apps with Blynk
 ---

@@ -2,7 +2,8 @@
 marp: true
 theme: itp
 
-week: 9
+week: 8
+order: 5
 category: lectures
 title: Soldering
 

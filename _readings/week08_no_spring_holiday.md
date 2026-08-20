@@ -25,7 +25,7 @@
 
 ### Build before class Mon / Tues 
 
-<img src="week08_no_spring_holiday.assets/Screenshot 2024-07-03 at 7.50.35 PM.png" alt="Screenshot 2024-07-03 at 7.50.35 PM" />
+<img src="week07.assets/Screenshot 2024-07-03 at 7.50.35 PM.png" alt="Screenshot 2024-07-03 at 7.50.35 PM" />
 
 
 
@@ -33,7 +33,7 @@
 
 The goal is to build a rotating fan. Here is the circuit wiring, and photos are below. 
 
-<img src="week08_no_spring_holiday.assets/Screenshot 2024-07-03 at 7.54.45 PM.png" alt="Screenshot 2024-07-03 at 7.54.45 PM" />
+<img src="week09.assets/Screenshot 2024-07-03 at 7.54.45 PM.png" alt="Screenshot 2024-07-03 at 7.54.45 PM" />
 
 
 #### Wiring for Motor Controller
@@ -61,15 +61,15 @@ The goal is to build a rotating fan. Here is the circuit wiring, and photos are 
 * The wiring colors vary with different servos so look carefully at your documentation
 * Many servos will require **5V** not **3.3V** so use `VUSB` 
 
-<img  src="week08.assets/image-20210310115209181.png" alt="image-20210310115209181" style="width:400px" />
+<img  src="week09.assets/image-20210310115209181.png" alt="image-20210310115209181" style="width:400px" />
 
 #### Photos
 
-<img src="week08.assets/fan1.jpg" alt="fan1" style="width:400px;" />
+<img src="week09.assets/fan1.jpg" alt="fan1" style="width:400px;" />
 
-<img src="week08.assets/fan2.jpg" alt="fan2" style="width:400px" />
+<img src="week09.assets/fan2.jpg" alt="fan2" style="width:400px" />
 
-<img src="week08.assets/fan3.jpg" alt="fan3" style="width:400px" />
+<img src="week09.assets/fan3.jpg" alt="fan3" style="width:400px" />
 
 ### Optional
 
