@@ -1,6 +1,6 @@
 ---
 title: Assignments
-layout: category
+layout: single
 category: assignments
 classes: wide
 ---

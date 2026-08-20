@@ -1,7 +1,7 @@
 ---
 title: Reference
 category: reference
-layout: category
+layout: single
 classes: wide
 
 ---

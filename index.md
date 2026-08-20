@@ -1,6 +1,7 @@
 ---
+layout: single
 header:
-  overlay_image: /assets/images/header.png
+  overlay_image: /TAC348-Making-Smart-Devices/assets/images/header.png
   overlay_filter: rgba(0,0,0,0.3) # same as adding an opacity of 0.5 to a black background
   show_overlay_excerpt: false
   excerpt: ""
@@ -40,4 +41,4 @@ These are not necessarily needed for this course, but provide more information a
 
 - [GitHub repository](https://github.com/reparke/TAC348-Making-Smart-Devices) - This is where all the raw files lives
 - [Building your own course / site](https://robparke.com/creating-accessible-open-educational-resources/) - I wanted this course material to be accessible and open-source. I tried to make some notes about the process for anyone interested
-- [Contact / Feedback](https://parke.wufoo.com/forms/feedback-form/) - If you find this material helpful in any way or you find it useful, please let me know by filling out this form. I would love to hear about it! 
+- [Contact / Feedback](https://parke.wufoo.com/forms/feedback-form/) - If you find this material helpful in any way or you find it useful, please let me know by filling out this form. I would love to hear about it!
