@@ -563,7 +563,7 @@ Fall 2026 Plan
 
 ## 6. Magnetic Switch; Blynk ==Alt plan for holiday: Covering Sound==
 
-==**Spring** Presidents Day cancelled one day from Week 6 + Rob gone for SIGCSE== 
+**Spring** Presidents Day cancelled one day from Week 6
 
 - w6d1 holiday
 - w6d2 sound (via video)
@@ -573,6 +573,8 @@ Fall 2026 Plan
 - w8d2 FSM washing machine
 - w9d1 motors with fan
 - w9d2 motors with fan + bluetooth
+
+==**Fall 2026**==
 
 **Fall: Try to start Sound earlier due to fall break.** idea: Day 1 covers motors by directly building fan with potentiometer; Day 2 cover bluetooth and control can with bluetooth
 
@@ -1055,7 +1057,7 @@ Consider using this template with UV and weather code because we need them later
 
 ## 12. Smart Watch, Heart Rate Sensor
 
-==Fall 2025 w12d1 is Veteran's day holiday so make w12d2 design review and push rest into following week. Probably skip watch json==
+==Fall 2026 w12d1 is Veteran's day holiday so make w12d2 design review and push rest into following week. Probably skip watch json==
 
 ### Reading
 
