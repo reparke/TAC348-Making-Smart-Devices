@@ -165,8 +165,8 @@ added depending on size of the class.
 
 | Item                                                       | % of Grade |
 | ---------------------------------------------------------- | ---------- |
-| Assignments                                                | 45         |
-| Final Project                                              | 35         |
+| Assignments                                                | 40         |
+| Final Project                                              | 40         |
 | Quizzes, In-Class Labs, and In-Class Polls / Participation | 20         |
 |                                                            |            |
 | Total                                                      | 100%       |

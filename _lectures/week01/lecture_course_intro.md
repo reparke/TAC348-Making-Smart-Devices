@@ -56,10 +56,10 @@ title: Course Introduction
 
 ## Grading Scale
 
-| Item                                                        | Weight |
-| ----------------------------------------------------------- | ------ |
-| Assignments                                                 | 45     |
-| Final Project                                               | 35     |
+| Item                                                         | Weight |
+| ------------------------------------------------------------ | ------ |
+| Assignments                                                  | 40     |
+| Final Project                                                | 40     |
 | In-Class Labs <br />In-Class Polls / Participation <br />Quizzes | 20     |
 
 ## Exams
