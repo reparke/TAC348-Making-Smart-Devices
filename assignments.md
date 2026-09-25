@@ -3,6 +3,7 @@ title: Assignments
 layout: single
 category: assignments
 classes: wide
+description: "Hands-on electronics, embedded programming, connected-device, and physical computing assignments for TAC 348 Making Smart Devices."
 ---
 
 

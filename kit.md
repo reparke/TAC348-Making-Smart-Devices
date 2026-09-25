@@ -2,6 +2,7 @@
 title: Course Kit
 layout: single
 classes: wide
+description: "The custom electronics and smart-device prototyping kit used in TAC 348, including a Particle Photon 2, sensors, motors, displays, and circuit components."
 ---
 
 <!-- NB: When updating the part URLs from a spreadsheet, markdown won't interpret the URLs as links. To fix this, copy the table source code into a text editor and do regex find / replace.

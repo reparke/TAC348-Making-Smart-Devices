@@ -2,6 +2,7 @@
 title: Pre-Lecture Videos and Readings
 layout: single
 category: Readings
+description: "Weekly preparation videos and readings for TAC 348 Making Smart Devices, a project-based physical computing course at USC."
 toc: true
 toc_label: "Quick Links"
 toc_icon: "bookmark"  # corresponding Font Awesome icon name (without fa prefix)

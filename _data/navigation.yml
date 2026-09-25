@@ -1,22 +1,22 @@
 main:
   - title: "Schedule"
     url: /schedule
-  - title: "Videos"
-    url: /readings
   - title: "Assignments"
     url: /assignments
-  - title: "Exercises"
-    url: https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises
+  - title: "Videos"
+    url: /readings
+  - title: "Lectures"
+    url: /lectures
   - title: "Reference"
     url: /reference
+  - title: "Exercises"
+    url: https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises
   - title: "Brightspace"
     url: https://Brightspace.usc.edu
   - title: "Piazza"
-    url: https://piazza.com/usc/fall2025/tac348/home
+    url: https://piazza.com/class/msp1ek2y6pd4o8#
   - title: "Kit"
     url: /kit
-  - title: "Lectures"
-    url: /lectures
   - title: "Resources"
     url: /resources
   - title: "Syllabus"

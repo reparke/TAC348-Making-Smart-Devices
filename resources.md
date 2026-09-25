@@ -2,6 +2,7 @@
 title: Resources
 layout: single
 category: Resources
+description: "Physical computing, electronics, embedded C++, IoT, Bluetooth, Fritzing, and project-development resources for TAC 348."
 toc: true
 toc_label: "Quick Links"
 toc_icon: "bookmark"  # corresponding Font Awesome icon name (without fa prefix)

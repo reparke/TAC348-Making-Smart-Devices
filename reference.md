@@ -3,6 +3,7 @@ title: Reference
 category: reference
 layout: single
 classes: wide
+description: "Illustrated wiring, component, sensor, motor, and embedded-programming reference guides for physical computing students and educators."
 
 ---
 

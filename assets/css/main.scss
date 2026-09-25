@@ -7,3 +7,199 @@
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+body {
+  background-color: #ecefed;
+}
+
+.masthead {
+  background-color: #fff !important;
+  border-top: 6px solid #990000;
+  border-bottom: 1px solid #c9ceca;
+  box-shadow: 0 4px 12px rgba(34, 40, 49, 0.13);
+}
+
+.greedy-nav {
+  background-color: #fff !important;
+}
+
+.greedy-nav .site-title {
+  color: #990000 !important;
+}
+
+.greedy-nav .visible-links a,
+.search__toggle {
+  color: #30343a !important;
+}
+
+.greedy-nav .visible-links a:hover,
+.search__toggle:hover {
+  color: #990000 !important;
+}
+
+.greedy-nav .visible-links a::before {
+  background-color: #ffcc00 !important;
+}
+
+.greedy-nav .hidden-links {
+  background-color: #fff !important;
+  border: 1px solid #deded8;
+  box-shadow: 0 4px 12px rgba(34, 40, 49, 0.12);
+}
+
+.greedy-nav .hidden-links a {
+  color: #30343a !important;
+}
+
+.greedy-nav .hidden-links .masthead__menu-item a:hover {
+  color: #990000 !important;
+  background-color: #f5f5f3 !important;
+}
+
+.greedy-nav__toggle {
+  background-color: #990000 !important;
+}
+
+.greedy-nav__toggle .navicon,
+.greedy-nav__toggle .navicon::before,
+.greedy-nav__toggle .navicon::after {
+  background-color: #fff !important;
+}
+
+.greedy-nav__toggle:hover .navicon,
+.greedy-nav__toggle:hover .navicon::before,
+.greedy-nav__toggle:hover .navicon::after {
+  background-color: #990000 !important;
+}
+
+.home-refresh .page__hero--overlay {
+  min-height: 25rem;
+  display: flex;
+  align-items: flex-end;
+  background-position: center;
+}
+
+.home-refresh .page__hero--overlay .wrapper {
+  padding-bottom: 2.5rem;
+}
+
+.home-refresh .page__hero--overlay .page__title {
+  max-width: 12em;
+  margin-bottom: 0.35em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+.home-refresh .page__hero--overlay .page__lead {
+  max-width: 42rem;
+  font-size: 1.15em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+.home-refresh .page__inner-wrap > header {
+  display: none;
+}
+
+.home-refresh .page__content > p:first-child {
+  max-width: 52rem;
+  margin: 0 auto 2rem;
+  font-size: 1.08em;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.home-refresh .page__content h2 {
+  margin-top: 2.75rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 3px solid #ffcc00;
+}
+
+.home-quick-links {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 2rem 0 2.75rem;
+}
+
+.home-quick-links a {
+  display: flex;
+  min-height: 7rem;
+  padding: 1rem 0.8rem;
+  flex-direction: column;
+  justify-content: center;
+  color: #222831;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #deded6;
+  border-top: 4px solid #990000;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 7px rgba(34, 40, 49, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.home-quick-links a:hover,
+.home-quick-links a:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(34, 40, 49, 0.14);
+}
+
+.home-quick-links strong {
+  color: #990000;
+  font-size: 1em;
+  letter-spacing: -0.015em;
+}
+
+.home-quick-links span {
+  margin-top: 0.4rem;
+  color: #5f6368;
+  font-size: 0.78em;
+  line-height: 1.35;
+}
+
+.home-link-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.home-link-groups section {
+  padding: 0.25rem 1.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.62);
+  border-left: 4px solid #990000;
+}
+
+.home-link-groups h3 {
+  margin-top: 0.8rem;
+}
+
+.home-link-groups li + li {
+  margin-top: 0.65rem;
+}
+
+@media (max-width: 700px) {
+  .home-refresh .page__hero--overlay {
+    min-height: 22rem;
+  }
+
+  .home-refresh .page__hero--overlay .wrapper {
+    padding-bottom: 1.5rem;
+  }
+
+  .home-quick-links,
+  .home-link-groups {
+    grid-template-columns: 1fr;
+  }
+
+  .home-quick-links {
+    gap: 0.55rem;
+  }
+
+  .home-quick-links a {
+    min-height: 0;
+    padding: 0.9rem 1rem;
+  }
+
+  .home-refresh .page__content > p:first-child {
+    text-align: left;
+  }
+}

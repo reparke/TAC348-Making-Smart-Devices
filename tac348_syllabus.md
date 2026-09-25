@@ -2,6 +2,7 @@
 title: Syllabus
 layout: single
 category: syllabus
+description: "Current syllabus, learning objectives, course structure, assessment, and policies for TAC 348 Making Smart Devices at USC."
 toc: true
 toc_label: "Quick Links"
 toc_icon: "bookmark"  # corresponding Font Awesome icon name (without fa prefix)
@@ -366,4 +367,3 @@ A safe and confidential place to share your USC-related issues with a University
 
 Confidential Lifestyle Redesign services for USC students to support health promoting habits and routines that enhance quality of life and academic performance. 
 
- 

@@ -2,6 +2,7 @@
 title: Lectures
 category: lectures
 layout: single
+description: "Lecture materials for electronics, embedded C++, sensors, motors, cloud communication, Bluetooth, APIs, wearables, and physical computing."
 toc: true
 toc_label: "Quick Links"
 toc_icon: "bookmark"  # corresponding Font Awesome icon name (without fa prefix)
