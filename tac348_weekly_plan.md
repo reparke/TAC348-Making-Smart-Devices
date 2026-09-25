@@ -128,7 +128,12 @@ Week 10 idea:
 ## Pre-semester
 
 - [ ] Send students kit pickup instructions
-- [ ] purchase items (see Evernote pre-semester tasks)
+
+
+
+## Course website changes
+
+* Review weeks 2-4 (content + readings) because I had to shuffle around for Fall 2026 because of Labor Day and Tapia
 
 
 
@@ -320,12 +325,12 @@ Week 10 idea:
 
 Fall 2026 Plan
 
-|      | MW (normal)                                 | TTh                                         |
-| ---- | ------------------------------------------- | ------------------------------------------- |
-| w3d1 | *holiday*                                   | buttons, latches, RGB                       |
-| w3d2 | buttons, latches, RGB                       | multitasking (change publish to serial mon) |
-| w4d1 | multitasking (change publish to serial mon) | photoresistors, publish (video)             |
-| w4d2 | photoresistors, publish (video)             | *class cancelled* for Tapia                 |
+|      | MW (normal)                                                  | TTh                                                          |
+| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| w3d1 | *holiday*                                                    | buttons, latches, RGB<br /> (build: button+RGB)              |
+| w3d2 | buttons, latches, RGB <br />(build: button+RGB)              | multitasking (change publish to serial mon)<br />(build: two LEDs + button) |
+| w4d1 | multitasking (change publish to serial mon)<br />(build: two LEDs + button) | photoresistors, publish (video)<br />(build: two PR + RGB)   |
+| w4d2 | photoresistors, publish (video)<br />(build: two PR + RGB)   | *class cancelled* for Tapia                                  |
 
 ### Announcements
 

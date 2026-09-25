@@ -34,7 +34,7 @@ show_in_list: true
 
 * As you turn the knob, Photon 2 will measure a voltage change on analog input (due to voltage divider)
 * Since this is an analog input, we use **analog to digital conversion** to read input
-* Voltage on pin will varies 0v to 3.v, and Photon 2 will read 0 to 4095 
+* Voltage on pin will varies 0v to 3.3v, and Photon 2 will read 0 to 4095 
 
 ## Code
 
