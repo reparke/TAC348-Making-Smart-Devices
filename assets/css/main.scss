@@ -102,25 +102,27 @@ body {
 
 .home-hero__toggle {
   position: absolute;
-  right: 1rem;
-  bottom: 1rem;
+  right: 0.75rem;
+  bottom: 0.65rem;
   z-index: 2;
-  padding: 0.45rem 0.65rem;
+  padding: 0.3rem 0.5rem;
   color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  background: rgba(0, 0, 0, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.88);
+  font-size: 0.62rem;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.48);
   border-radius: 0.25rem;
   cursor: pointer;
+  opacity: 0.72;
 }
 
 .home-hero__toggle:hover,
 .home-hero__toggle:focus {
   color: #fff;
-  background: rgba(0, 0, 0, 0.92);
+  background: rgba(0, 0, 0, 0.82);
   outline: 3px solid #ffcc00;
   outline-offset: 2px;
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -233,7 +235,7 @@ body {
 
   .home-hero__toggle {
     right: auto;
-    bottom: 0.75rem;
+    bottom: 0.5rem;
     left: 50%;
     transform: translateX(-50%);
   }

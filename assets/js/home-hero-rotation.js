@@ -13,7 +13,6 @@
   var interval = 10000;
   var timer = null;
   var userPaused = false;
-  var hovering = false;
 
   if (!Number.isInteger(current) || current < 0 || current >= images.length) {
     current = 0;
@@ -64,7 +63,7 @@
 
   function scheduleNext() {
     stopTimer();
-    if (!userPaused && !hovering && !reduceMotion.matches && !document.hidden) {
+    if (!userPaused && !reduceMotion.matches && !document.hidden) {
       timer = window.setTimeout(showNext, interval);
     }
   }
@@ -84,16 +83,6 @@
   toggle.addEventListener("click", function () {
     userPaused = !userPaused;
     updateToggle();
-    scheduleNext();
-  });
-
-  hero.addEventListener("mouseenter", function () {
-    hovering = true;
-    stopTimer();
-  });
-
-  hero.addEventListener("mouseleave", function () {
-    hovering = false;
     scheduleNext();
   });
 
