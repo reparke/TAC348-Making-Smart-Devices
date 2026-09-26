@@ -1,0 +1,18 @@
+{% if page.classes contains "home-refresh" %}
+<script>
+  document.documentElement.dataset.homeHero = String(Math.floor(Math.random() * 3));
+</script>
+<style>
+  html[data-home-hero="0"] .home-refresh .page__hero--overlay {
+    background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-motion-and-robotics.jpg' | relative_url }}") !important;
+  }
+
+  html[data-home-hero="1"] .home-refresh .page__hero--overlay {
+    background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-human-centered-devices.jpg' | relative_url }}") !important;
+  }
+
+  html[data-home-hero="2"] .home-refresh .page__hero--overlay {
+    background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-environment-and-light.jpg' | relative_url }}") !important;
+  }
+</style>
+{% endif %}

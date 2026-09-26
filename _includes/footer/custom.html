@@ -8,4 +8,14 @@
 	<p>Images and content are my own work, in the public domain, or licensed under <a href="https://creativecommons.org/">Creative Commons</a>. If any content isn't licensed properly, please let me know and I will take it down.</p>
 
 </div> 
+{% if page.classes contains "home-refresh" %}
+<script>
+  window.homeHeroImages = [
+    "{{ '/assets/images/hero-motion-and-robotics.jpg' | relative_url }}",
+    "{{ '/assets/images/hero-human-centered-devices.jpg' | relative_url }}",
+    "{{ '/assets/images/hero-environment-and-light.jpg' | relative_url }}"
+  ];
+</script>
+<script src="{{ '/assets/js/home-hero-rotation.js' | relative_url }}"></script>
+{% endif %}
 <!-- end custom footer snippets -->

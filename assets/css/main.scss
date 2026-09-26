@@ -77,6 +77,56 @@ body {
   display: flex;
   align-items: flex-end;
   background-position: center;
+  overflow: hidden;
+}
+
+.home-refresh .page__hero--overlay .home-hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.home-refresh .page__hero--overlay .home-hero__image.is-active {
+  opacity: 1;
+}
+
+.home-refresh .page__hero--overlay .wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.home-hero__toggle {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  padding: 0.45rem 0.65rem;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.home-hero__toggle:hover,
+.home-hero__toggle:focus {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.92);
+  outline: 3px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-refresh .page__hero--overlay .home-hero__image {
+    transition: none;
+  }
 }
 
 .home-refresh .page__hero--overlay .wrapper {
@@ -179,6 +229,13 @@ body {
 @media (max-width: 700px) {
   .home-refresh .page__hero--overlay {
     min-height: 22rem;
+  }
+
+  .home-hero__toggle {
+    right: auto;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .home-refresh .page__hero--overlay .wrapper {

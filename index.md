@@ -4,9 +4,9 @@ classes: home-refresh
 tagline: "Build connected, responsive devices through electronics, embedded programming, and hands-on prototyping."
 description: "Open course materials for TAC 348 Making Smart Devices at USC, including physical computing lectures, electronics projects, embedded C++ exercises, and IoT reference guides."
 header:
-  overlay_image: /assets/images/header.png
+  overlay_image: /assets/images/hero-motion-and-robotics.jpg
   overlay_filter: rgba(0,0,0,0.58)
-  image_description: "Student smart-device projects including an interactive sculpture, robot car, and wearable electronics"
+  image_description: "A rotating collage of student-built smart devices, robots, interactive objects, and environmental projects"
   actions:
     - label: "View the Schedule"
       url: /schedule
