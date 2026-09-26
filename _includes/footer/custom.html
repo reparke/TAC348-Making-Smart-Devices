@@ -10,11 +10,18 @@
 </div> 
 {% if page.classes contains "home-refresh" %}
 <script>
-  window.homeHeroImages = [
-    "{{ '/assets/images/hero-motion-and-robotics.jpg' | relative_url }}",
-    "{{ '/assets/images/hero-human-centered-devices.jpg' | relative_url }}",
-    "{{ '/assets/images/hero-environment-and-light.jpg' | relative_url }}"
-  ];
+  window.homeHeroImageSets = {
+    desktop: [
+      "{{ '/assets/images/hero-motion-and-robotics.jpg' | relative_url }}",
+      "{{ '/assets/images/hero-human-centered-devices.jpg' | relative_url }}",
+      "{{ '/assets/images/hero-environment-and-light.jpg' | relative_url }}"
+    ],
+    mobile: [
+      "{{ '/assets/images/hero-mobile-r2d2.jpg' | relative_url }}",
+      "{{ '/assets/images/hero-mobile-stress-helper.jpg' | relative_url }}",
+      "{{ '/assets/images/hero-mobile-bluetooth-car.jpg' | relative_url }}"
+    ]
+  };
 </script>
 <script src="{{ '/assets/js/home-hero-rotation.js' | relative_url }}"></script>
 {% endif %}

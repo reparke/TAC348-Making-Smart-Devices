@@ -105,15 +105,15 @@ body {
   right: 0.75rem;
   bottom: 0.65rem;
   z-index: 2;
-  padding: 0.3rem 0.5rem;
-  color: #fff;
-  font-size: 0.62rem;
+  padding: 0.24rem 0.42rem;
+  color: rgba(220, 220, 220, 0.82);
+  font-size: 0.56rem;
   font-weight: 500;
   background: rgba(0, 0, 0, 0.38);
-  border: 1px solid rgba(255, 255, 255, 0.48);
+  border: 1px solid rgba(205, 205, 205, 0.34);
   border-radius: 0.25rem;
   cursor: pointer;
-  opacity: 0.72;
+  opacity: 0.62;
 }
 
 .home-hero__toggle:hover,

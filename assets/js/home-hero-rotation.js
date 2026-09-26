@@ -2,7 +2,10 @@
   "use strict";
 
   var hero = document.querySelector(".home-refresh .page__hero--overlay");
-  var images = window.homeHeroImages || [];
+  var imageSets = window.homeHeroImageSets || {};
+  var mobileLayout = window.matchMedia("(max-width: 700px)");
+  var images = mobileLayout.matches ? imageSets.mobile : imageSets.desktop;
+  images = images || [];
 
   if (!hero || images.length < 2) {
     return;

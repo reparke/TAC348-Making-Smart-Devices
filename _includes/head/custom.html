@@ -14,5 +14,19 @@
   html[data-home-hero="2"] .home-refresh .page__hero--overlay {
     background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-environment-and-light.jpg' | relative_url }}") !important;
   }
+
+  @media (max-width: 700px) {
+    html[data-home-hero="0"] .home-refresh .page__hero--overlay {
+      background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-mobile-r2d2.jpg' | relative_url }}") !important;
+    }
+
+    html[data-home-hero="1"] .home-refresh .page__hero--overlay {
+      background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-mobile-stress-helper.jpg' | relative_url }}") !important;
+    }
+
+    html[data-home-hero="2"] .home-refresh .page__hero--overlay {
+      background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-mobile-bluetooth-car.jpg' | relative_url }}") !important;
+    }
+  }
 </style>
 {% endif %}
