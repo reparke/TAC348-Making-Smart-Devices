@@ -339,3 +339,141 @@ body {
     gap: 1rem;
   }
 }
+
+/*
+   Screen-like PDF / print output
+   ========================================================================== */
+
+@page {
+  margin: 0.3in;
+}
+
+@media print {
+  html,
+  body,
+  #main,
+  .masthead,
+  .page,
+  .page__inner-wrap,
+  .page__content,
+  .page__footer {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background-color: #ecefed !important;
+    color: #222831 !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 2em 0 0.5em;
+    color: #222831 !important;
+  }
+
+  h1 {
+    margin-top: 0;
+    font-size: 1.563em;
+  }
+
+  h2 {
+    font-size: 1.25em;
+  }
+
+  h3 {
+    font-size: 1.125em;
+  }
+
+  h4 {
+    font-size: 1.0625em;
+  }
+
+  h5 {
+    font-size: 1.03125em;
+  }
+
+  h6 {
+    font-size: 1em;
+  }
+
+  a,
+  a:visited {
+    color: #990000 !important;
+  }
+
+  a[href^='http://']::after,
+  a[href^='https://']::after,
+  a[href^='ftp://']::after {
+    content: none !important;
+  }
+
+  .masthead {
+    position: static !important;
+    display: block !important;
+    height: auto !important;
+    background-color: #fff !important;
+    border-top: 6px solid #990000 !important;
+    border-bottom: 1px solid #c9ceca !important;
+    box-shadow: 0 4px 12px rgba(34, 40, 49, 0.13) !important;
+  }
+
+  .greedy-nav {
+    background-color: #fff !important;
+  }
+
+  .greedy-nav .site-title,
+  .greedy-nav .visible-links a,
+  .search__toggle {
+    color: #990000 !important;
+  }
+
+  .greedy-nav__toggle {
+    background-color: #990000 !important;
+  }
+
+  .greedy-nav__toggle .navicon,
+  .greedy-nav__toggle .navicon::before,
+  .greedy-nav__toggle .navicon::after {
+    background-color: #fff !important;
+  }
+
+  thead {
+    display: table-header-group;
+    background-color: #ffcc00 !important;
+  }
+
+  table {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  [style*='color:#146c2e'] {
+    color: #146c2e !important;
+  }
+
+  [style*='color:#b42318'] {
+    color: #b42318 !important;
+  }
+
+  .page__footer {
+    display: block !important;
+    height: auto !important;
+    color: #fff !important;
+    background-color: #000 !important;
+  }
+
+  .page__footer a,
+  .page__footer-license a {
+    color: #ffcc00 !important;
+  }
+}

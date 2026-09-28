@@ -1,0 +1,105 @@
+/* @theme tac */
+
+@import 'itp';
+
+:root {
+  --tac-cardinal: #990000;
+  --tac-cardinal-dark: #6d0000;
+  --tac-gold: #ffcc00;
+  --tac-ink: #202124;
+  --tac-code: #425660;
+  --tac-cardinal-wash: rgba(153, 0, 0, 0.06);
+}
+
+/*
+ * Global refinements deliberately avoid changing typography metrics,
+ * spacing, or slide geometry so existing content keeps its current flow.
+ */
+section {
+  color: var(--tac-ink);
+  box-shadow:
+    inset 0 10px 0 var(--tac-cardinal),
+    inset 0 -3px 0 var(--tac-gold);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--tac-cardinal);
+  text-transform: none;
+}
+
+li::marker {
+  color: var(--tac-cardinal);
+}
+
+a {
+  color: var(--tac-cardinal-dark);
+  text-decoration-color: var(--tac-gold);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.08em;
+}
+
+table thead tr,
+table thead th {
+  background: var(--tac-cardinal);
+  color: #ffffff;
+}
+
+table tbody tr:nth-child(odd) td {
+  background: var(--tac-cardinal-wash);
+}
+
+pre {
+  background: var(--tac-code);
+  border-radius: 0.15em;
+}
+
+pre > code {
+  background: var(--tac-code);
+  border-radius: inherit;
+  box-shadow: inset 0.14em 0 var(--tac-gold);
+}
+
+:not(pre) > code {
+  border-radius: 0.12em;
+  box-shadow: inset 0 -0.08em var(--tac-gold);
+}
+
+/* Optional layouts. Existing slides are unaffected until a class is added. */
+section.lead {
+  background: var(--tac-cardinal);
+  color: #ffffff;
+  box-shadow: inset 0 -10px 0 var(--tac-gold);
+}
+
+section.lead h1,
+section.lead h2,
+section.lead h3,
+section.lead a,
+section.lead li::marker {
+  color: var(--tac-gold);
+}
+
+section.section-title {
+  background: linear-gradient(135deg, var(--tac-cardinal), var(--tac-cardinal-dark));
+  color: #ffffff;
+  box-shadow: inset 0 -6px 0 var(--tac-gold);
+}
+
+section.section-title h1,
+section.section-title h2,
+section.section-title h3 {
+  color: #ffffff;
+}
+
+section.accent {
+  background: linear-gradient(135deg, #ffffff 0 72%, var(--tac-cardinal-wash) 72% 100%);
+}
+
+section.compact {
+  font-size: 90%;
+}
