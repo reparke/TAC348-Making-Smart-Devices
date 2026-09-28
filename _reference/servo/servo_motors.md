@@ -1,7 +1,7 @@
 ---
 
 marp: true
-theme: itp
+theme: tac
 
 category: reference
 title: (Reference) Servo Motors

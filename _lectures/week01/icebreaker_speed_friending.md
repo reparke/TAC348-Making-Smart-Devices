@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: itp
+theme: tac
 paginate: true
 week: 1
 show_in_list: false

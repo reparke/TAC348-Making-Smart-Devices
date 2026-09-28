@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: itp
+theme: tac
 class: 
 paginate: true
 

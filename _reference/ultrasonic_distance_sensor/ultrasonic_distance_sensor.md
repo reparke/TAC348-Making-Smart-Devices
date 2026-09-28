@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: itp
+theme: tac
 
 category: reference
 title:  (Reference) Ultrasonic Distance Sensor

@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: itp
+theme: tac
 
 week: 1
 category: lectures

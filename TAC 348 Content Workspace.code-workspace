@@ -6,8 +6,10 @@
 	],
 	"settings": {
 		"markdown.marp.themes": [
-			"marp-custom-themes/itp.css"
+			"marp-custom-themes/itp.css",
+			"marp-custom-themes/tac.css"
 		],
+		"markdown.marp.diagnostics.slideContentOverflow": true,
 		"files.autoSave": "afterDelay",
 		"editor.wordWrap": "on",
 		"markdown.marp.exportType": "html",

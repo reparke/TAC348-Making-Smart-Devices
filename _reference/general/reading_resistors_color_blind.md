@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: itp
+theme: tac
  
 category: reference
 title: Reading Resistors for People who are Color Blind

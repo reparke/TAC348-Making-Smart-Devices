@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: itp
+theme: tac
 
 category: reference
 title: Powering 5V Devices from a Battery

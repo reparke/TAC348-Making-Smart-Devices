@@ -1,6 +1,6 @@
 ---
 _marp: false
-theme: itp
+theme: tac
 
 week: 15
 show_in_list: false

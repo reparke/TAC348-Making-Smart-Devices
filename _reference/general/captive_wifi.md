@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: itp
+theme: tac
  
 category: reference
 title: Captive Wifi Networks

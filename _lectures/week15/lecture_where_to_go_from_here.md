@@ -1,6 +1,6 @@
 ---
 marp: false
-theme: itp
+theme: tac
 
 week: 15
 category: lecturespart

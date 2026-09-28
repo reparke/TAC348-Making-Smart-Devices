@@ -1,12 +1,12 @@
 ---
 marp: true
-theme: itp
+theme: tac
 
 week: 10
 category: lectures
 title: Ultrasonic Distance Sensor + OLED Graphics
 show_in_list: false
-published: false
+
 ---
 
 <!-- headingDivider: 2 -->
@@ -25,7 +25,7 @@ published: false
 
 # Ultrasonic Distance Sensor
 
-<img src="lecture_ultrasonic_distance_sensor.assets/1574364327550.png" alt="Ultrasonic distance sensor" style="width:800px;" />
+<img src="lecture_ultrasonic_distance_sensor.assets/1574364327550.png" alt="Ultrasonic distance sensor" style="width:500px;" />
 
 ## Ultrasonic Distance Sensor
 
@@ -127,7 +127,7 @@ int time = pulseIn(D2, HIGH);
 
 # OLED Screen Graphics
 
-<img src="lecture_oled_graphics.assets/IMG_9092.jpg" alt="OLED screen displaying a graphic" style="width:500px;" />
+<img src="lecture_oled_graphics.assets/IMG_9092.jpg" alt="OLED screen displaying a graphic" style="width:300px;" />
 
 ## Screen Parameters
 

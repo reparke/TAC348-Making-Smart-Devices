@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: itp
+theme: tac
 
 category: reference
 title: ِ(Reference) Accelerometer MMA8452Q
