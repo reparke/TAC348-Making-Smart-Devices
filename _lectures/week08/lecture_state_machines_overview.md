@@ -12,7 +12,7 @@ title: State Machines Part 1 - Overview
 # State Machines
 ### TAC 348 - Making Smart Devices
 
-![bg opacity:.85 left:60%](lecture_state_machines_overview.assets/image-20200303153612762.png)
+![bg opacity:.85 left:60%](lecture_state_machines_overview.assets/images.jpeg)
 
 ## Learning Objectives
 * Understand what a state machine is
@@ -64,8 +64,8 @@ title: State Machines Part 1 - Overview
 | Traffic Stopping | Yellow                   |
 | Traffic Stopped  | Red                      |
 
-## Example #2 Sprinkles Cupcake ATM 
-![bg opacity:.85 right:60%](lecture_state_machines_overview.assets/image-20200303153612762-1614475019108.png)
+## Example #2 Boba Vending Machine 
+![bg opacity:.85 right:60%](lecture_state_machines_overview.assets/images.jpeg))
 
 <!--
 <img src="lecture_finite_state_machines.assets/image-20200303153612762.png" alt="image-20200303153612762" style="width:800px;" />
@@ -82,12 +82,12 @@ dispense |cupcake remains| dispense
 dispense +cupcake taken| idle
 -->
 
-## Example #2 Sprinkles Cupcake ATM Diagram
+## Example #2 Boba Vending Machine Diagram
 * Similar to soft drink vending machine
 * What states are there?
 * How do we transition to new states?
 
-## Example #2 Sprinkles Cupcake ATM
+## Example #2 Boba Vending Machine ATM
 
 | State               | Input              | Next State          |
 | ------------------- | ------------------ | ------------------- |
@@ -96,10 +96,10 @@ dispense +cupcake taken| idle
 | Display choices     | Choice available   | Process credit card |
 | Display choices     | Choice unavailable | Display choices     |
 | Display choices     | Cancel             | Idle                |
-| Process credit card | Card valid         | Dispense cupcake    |
+| Process credit card | Card valid         | Dispense boba       |
 | Process credit card | Card invalid       | Process credit card |
-| Dispense cupcake    | Cupcake taken      | Idle                |
-| Dispense cupcake    | Cupcake remains    | Dispense cupcake    |
+| Dispense boba       | Boba taken         | Idle                |
+| Dispense boba       | Boba remains       | Dispense boba       |
 
 
 ## State Machines in Photon 2
@@ -129,7 +129,7 @@ dispense +cupcake taken| idle
 
 | State               | Input        | Next State          |
 | ------------------- | ------------ | ------------------- |
-| Process credit card | Card valid   | Dispense cupcake    |
+| Process credit card | Card valid   | Dispense boba       |
 | Process credit card | Card invalid | Process credit card |
 
 ## State Transition Logic Example
@@ -167,7 +167,6 @@ void updateNextState() {
 * [Bill Siever](http://siever.info) - [CS132 FSM](http://siever.info/cse132/guides/intro-to-FSMs.html)  (Washington University at St. Louis) 
 * [Bill Siever](http://siever.info) - [CS132 Delta Timing](http://siever.info/cse132/weeks/3/)  (Washington University at St. Louis) 
 * [USC EE109 State Machines](http://bits.usc.edu/files/ee109/)
-* Photo by Laurie Parke
 * Photo by [Michael Olsen](https://unsplash.com/@mganeolsen)</a> on [Unsplash](https://unsplash.com/)
 * Photo by [Free To Use Sounds](https://unsplash.com/@freetousesoundscom?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 * Photo by [NON](https://unsplash.com/@non_creation?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
