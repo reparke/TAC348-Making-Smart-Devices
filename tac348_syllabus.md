@@ -9,8 +9,6 @@ toc_icon: "bookmark"  # corresponding Font Awesome icon name (without fa prefix)
 toc_sticky: true
 ---
 
-> **Revision legend:** <span style="color:#b42318;"><strong><s>Red strikethrough text</s></strong></span> is the original wording. <span style="color:#146c2e;"><strong>Green text</strong></span> is the proposed correction or replacement. Unmarked text is approved.
-
 ## Syllabus Fall 2026
 
 ### Course Info
