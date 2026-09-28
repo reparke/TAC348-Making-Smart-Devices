@@ -32,7 +32,7 @@ toc_sticky: true
 This course introduces students to the fundamental concepts of physical
 computing systems through hands-on, real-life applications. Physical computing
 forms the basis of **smart devices**, **wearables** like smart watches,
-**e-textiles / fashion**, **IoT (Internet of Things) devices**, and <span style="color:#b42318; text-decoration:line-through;">hardware start-up</span> <span style="color:#146c2e;">hardware startups.</span>
+**e-textiles / fashion**, **IoT (Internet of Things) devices**, and **hardware startups**.
 
 This course is designed specifically for a **general audience** and **all
 majors**. You will learn to design electronic devices that interact with the
@@ -89,15 +89,15 @@ before the course begins**.
 
 ### Course Kit
 
-Students will be required to purchase a custom kit from <span style="color:#b42318; text-decoration:line-through;">Sparkfun</span> <span style="color:#146c2e;">SparkFun</span> (link will be provided to students directly). This kit is created specifically for the course and must be purchased during the first week of class. Additional components will be provided by the instructor<span style="color:#146c2e;">.</span>
+Students will be required to purchase a custom kit from SparkFun (link will be provided to students directly). This kit is created specifically for the course and must be purchased during the first week of class. Additional components will be provided by the instructor.
 
 ### Required Videos
 
-Videos for each week are posted on the course website and should be watched prior to class that week<span style="color:#146c2e;">.</span>
+Videos for each week are posted on the course website and should be watched prior to class that week.
 
 #### Supplementary Books
 
-- Scherz, Paul, <span style="color:#b42318; text-decoration:line-through;">et. al</span> <span style="color:#146c2e;">et al.</span> *Practical Electronics for Inventors (3rd Edition)*.
+- Scherz, Paul, et al. *Practical Electronics for Inventors (3rd Edition)*.
   McGraw-Hill Education, 2013. ISBN: 978-0071771337  
   [Amazon](https://www.amazon.com/Practical-Electronics-Inventors-Third-Scherz/dp/0071771336/ref=sr_1_2?keywords=Practical+Electronics+for+Inventors&qid=1554593678&s=books&sr=1-2)
 
@@ -143,75 +143,42 @@ Students may use tutorials, libraries, and examples, but they must cite and adap
 
 #### Project Grading Breakdown
 
-> **[ORIGINAL SYLLABUS GRADING]**
->
-> Each criterion will be evaluated as **Exemplary**, **Proficient**, **Developing**, **Beginning**, or **No evidence**.
->
-> | Criterion | Points |
-> | --- | ---: |
-> | **Proposal and Design Review** |  |
-> | Need and audience | 3 |
-> | Goals and system plan | 4 |
-> | Feasibility | 3 |
-> | Design review response | 3 |
-> | **Project Milestone** |  |
-> | Schematic | 5 |
-> | Working part and next step | 5 |
-> | **Final Device** |  |
-> | Environmental interaction | 14 |
-> | Cloud data and dashboard | 8 |
-> | Remote control | 8 |
-> | Integration and reliability | 14 |
-> | Coherent and complete device | 8 |
-> | Code quality | 5 |
-> | **Final Presentation** |  |
-> | In-person demonstration | 10 |
-> | **Documentation** |  |
-> | Developer documentation | 4 |
-> | Technical walkthrough video | 3 |
-> | Product highlight video | 3 |
-> | **Total** | **100** |
-{: style="color:#b42318; border-left:4px solid #b42318; padding-left:1rem; text-decoration:line-through;"}
+Each criterion will be evaluated using the following performance levels:
 
-> **[REVISED GRADING FROM FINAL PROJECT]**
->
-> Each criterion will be evaluated using the following performance levels:
->
-> - **Exemplary:** Complete, reliable, and well justified.
-> - **Proficient:** Meets the requirement with minor limitations.
-> - **Developing:** Partially meets the requirement, but important problems remain.
-> - **Beginning:** Shows limited progress toward the requirement.
-> - **No evidence:** The required element is absent or cannot be evaluated.
->
-> | Criterion | Evidence of achievement | Points |
-> | --- | --- | ---: |
-> | **Proposal and Design Review** |  |  |
-> | **Proposal: need and audience** | Identifies the need, audience, and why the device is an appropriate response. | **3** |
-> | **Proposal: goals and system plan** | Explains the project goals, inputs, outputs, components, interactions, and connected services. | **4** |
-> | **Proposal: feasibility** | Includes a realistic budget, scope, risks, schedule, and fallback plan. | **3** |
-> | **Design-review response** | Summarizes the most useful feedback and identifies one planned change. | **3** |
-> |  |  |  |
-> | **Project Milestone** |  |  |
-> | **Milestone: schematic** | Includes a complete and accurate Fritzing diagram of the current design. | **5** |
-> | **Milestone: progress** | Shows that one important part works and identifies the next step. | **5** |
-> |  |  |  |
-> | **Final Device** |  |  |
-> | **Environmental interaction** | Inputs and physical outputs function reliably and serve the device’s purpose. | **14** |
-> | **Cloud data and dashboard** | The device sends useful data to the cloud and displays it in a clear dashboard. | **8** |
-> | **Remote control** | An approved interface reliably changes the device’s physical behavior. | **8** |
-> | **Integration and reliability** | Hardware, firmware, connectivity, and interface operate together reliably. | **14** |
-> | **Coherent and complete device** | Features work together and address the need identified in the proposal. | **8** |
-> | **Code quality** | Code is organized, consistent, commented, and understandable. | **5** |
-> |  |  |  |
-> | **Final Presentation** |  |  |
-> | **In-person demonstration** | Explains the project and demonstrates the required functionality. | **10** |
-> |  |  |  |
-> | **Documentation** |  |  |
-> | **Developer documentation** | Allows a future TAC 348 student to set up, understand, and modify the project. | **4** |
-> | **Technical walkthrough video** | Shows each required feature working and explains the key technical elements. | **3** |
-> | **Product highlight video** | Clearly communicates the device’s purpose and major features. | **3** |
-> | **Total** |  | **100** |
-{: style="color:#146c2e; border-left:4px solid #146c2e; padding-left:1rem;"}
+- **Exemplary:** Complete, reliable, and well justified.
+- **Proficient:** Meets the requirement with minor limitations.
+- **Developing:** Partially meets the requirement, but important problems remain.
+- **Beginning:** Shows limited progress toward the requirement.
+- **No evidence:** The required element is absent or cannot be evaluated.
+
+| Criterion | Evidence of achievement | Points |
+| --- | --- | ---: |
+| **Proposal and Design Review** |  |  |
+| **Proposal: need and audience** | Identifies the need, audience, and why the device is an appropriate response. | **3** |
+| **Proposal: goals and system plan** | Explains the project goals, inputs, outputs, components, interactions, and connected services. | **4** |
+| **Proposal: feasibility** | Includes a realistic budget, scope, risks, schedule, and fallback plan. | **3** |
+| **Design-review response** | Summarizes the most useful feedback and identifies one planned change. | **3** |
+|  |  |  |
+| **Project Milestone** |  |  |
+| **Milestone: schematic** | Includes a complete and accurate Fritzing diagram of the current design. | **5** |
+| **Milestone: progress** | Shows that one important part works and identifies the next step. | **5** |
+|  |  |  |
+| **Final Device** |  |  |
+| **Environmental interaction** | Inputs and physical outputs function reliably and serve the device’s purpose. | **14** |
+| **Cloud data and dashboard** | The device sends useful data to the cloud and displays it in a clear dashboard. | **8** |
+| **Remote control** | An approved interface reliably changes the device’s physical behavior. | **8** |
+| **Integration and reliability** | Hardware, firmware, connectivity, and interface operate together reliably. | **14** |
+| **Coherent and complete device** | Features work together and address the need identified in the proposal. | **8** |
+| **Code quality** | Code is organized, consistent, commented, and understandable. | **5** |
+|  |  |  |
+| **Final Presentation** |  |  |
+| **In-person demonstration** | Explains the project and demonstrates the required functionality. | **10** |
+|  |  |  |
+| **Documentation** |  |  |
+| **Developer documentation** | Allows a future TAC 348 student to set up, understand, and modify the project. | **4** |
+| **Technical walkthrough video** | Shows each required feature working and explains the key technical elements. | **3** |
+| **Product highlight video** | Clearly communicates the device’s purpose and major features. | **3** |
+| **Total** |  | **100** |
 
 #### Project Demonstration
 
@@ -234,7 +201,7 @@ Knowledge checks and quizzes cover key concepts. In-class labs cover application
 
 ### Grading Scale
 
-Course final grades will be determined using the following scale<span style="color:#146c2e;">:</span>
+Course final grades will be determined using the following scale:
 
 - A 93-100
 - A- 90-92
@@ -270,7 +237,7 @@ Students have one week after receiving feedback to ask for a score to be reconsi
 -   Students are given 5 “grace days” (self-granted extensions) which may be
     used for extra time without penalty
 -   Grace days may be used for assignments only, **not the final project**
--   Grace days may be used for one assignment, <span style="color:#b42318; text-decoration:line-through;">distributed them</span> <span style="color:#146c2e;">distributed</span> across several
+-   Grace days may be used for one assignment, distributed across several
     assignments, or even better, saved for a crisis that thankfully never
     comes
 -   Instructor-granted extensions are only considered after all grace days are
@@ -322,12 +289,12 @@ The impact of academic dishonesty is far-reaching and is considered a serious of
 
  
 
-For more information about academic integrity see the [student handbook](https://policy.usc.edu/studenthandbook/) or the [Office of Academic Integrity’s website](https://academicintegrity.usc.edu/), and university policies on [Research and Scholarship Misconduct](https://policy.usc.edu/research-and-scholarship-misconduct/)<span style="color:#146c2e;">.</span>
+For more information about academic integrity see the [student handbook](https://policy.usc.edu/studenthandbook/) or the [Office of Academic Integrity’s website](https://academicintegrity.usc.edu/), and university policies on [Research and Scholarship Misconduct](https://policy.usc.edu/research-and-scholarship-misconduct/).
 
 ### Use of AI Generators
 
 - AI generators such as ChatGPT are powerfully useful tools that have great application in software and engineering
-- However, the purpose of this class <span style="color:#b42318; text-decoration:line-through;">is to specifically to develop</span> <span style="color:#146c2e;">is to develop</span> creative and critical thinking skills as well as practical knowledge of building devices
+- However, the purpose of this class is to develop creative and critical thinking skills as well as practical knowledge of building devices
 - Therefore, using AI-generated tools is prohibited in this course, will be identified as plagiarism, and will be reported to the Office of Academic Integrity
 
 ## Course Content Distribution and Synchronous Session Recordings Policies 
@@ -336,11 +303,11 @@ USC has policies that prohibit recording and distribution of any synchronous and
 
  
 
-Recording a university class without the express permission of the instructor and announcement to the class, or unless conducted pursuant to an Office of Student Accessibility Services (OSAS) accommodation<span style="color:#146c2e;">, is prohibited</span>. Recording can inhibit free discussion in the future, and thus infringe on the academic freedom of other students as well as the instructor. ([Living our Unifying Values: The USC Student Handbook](https://policy.usc.edu/studenthandbook/), page 13).
+Recording a university class without the express permission of the instructor and announcement to the class, or unless conducted pursuant to an Office of Student Accessibility Services (OSAS) accommodation, is prohibited. Recording can inhibit free discussion in the future, and thus infringe on the academic freedom of other students as well as the instructor. ([Living our Unifying Values: The USC Student Handbook](https://policy.usc.edu/studenthandbook/), page 13).
 
  
 
-Distribution or use of notes, recordings, exams, or other intellectual property, based on university classes or lectures without the express permission of the instructor for purposes other than individual or group study<span style="color:#146c2e;">, is prohibited</span>. This includes but is not limited to providing materials for distribution by services publishing course materials. This restriction on unauthorized use also applies to all information, which had been distributed to students or in any way had been displayed for use in relationship to the class, whether obtained in class, via email, on the internet, or via any other media. ([Living our Unifying Values: The USC Student Handbook](https://policy.usc.edu/studenthandbook/), page 13).
+Distribution or use of notes, recordings, exams, or other intellectual property, based on university classes or lectures without the express permission of the instructor for purposes other than individual or group study, is prohibited. This includes but is not limited to providing materials for distribution by services publishing course materials. This restriction on unauthorized use also applies to all information, which had been distributed to students or in any way had been displayed for use in relationship to the class, whether obtained in class, via email, on the internet, or via any other media. ([Living our Unifying Values: The USC Student Handbook](https://policy.usc.edu/studenthandbook/), page 13).
 
 ## Students and Disability Accommodations: 
 
@@ -370,7 +337,7 @@ Information about how to get help or help someone affected by harassment or disc
 
 ### [*Reporting Incidents of Bias or Harassment*](http://usc-advocate.symplicity.com/care_report) *- (213) 740-5086 or (213) 821-8298*
 
-Avenue to report incidents of bias, hate crimes, and microaggressions to the Office for Equity, Equal Opportunity, and Title<span style="color:#146c2e;"> IX</span> for appropriate investigation, supportive measures, and response.
+Avenue to report incidents of bias, hate crimes, and microaggressions to the Office for Equity, Equal Opportunity, and Title IX for appropriate investigation, supportive measures, and response.
 
  
 
@@ -404,7 +371,7 @@ Non-emergency assistance or information.
 
  
 
-### [*Office of the Ombuds*](http://ombuds.usc.edu/) *- (213) 821-9556 (UPC) / <span style="color:#b42318; text-decoration:line-through;">(323-442-0382</span> <span style="color:#146c2e;">(323) 442-0382</span> (HSC)* 
+### [*Office of the Ombuds*](http://ombuds.usc.edu/) *- (213) 821-9556 (UPC) / (323) 442-0382 (HSC)*
 
 A safe and confidential place to share your USC-related issues with a University Ombuds who will work with you to explore options or paths to manage your concern.
 
