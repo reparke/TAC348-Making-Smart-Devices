@@ -9,9 +9,11 @@ title: Ultrasonic Sensor + OLED Parking Sensor Lab
 ---
 
 <!-- headingDivider: 2 -->
-
 # Parking Sensor Lab
-<img src="lecture_ultrasonic_distance_sensor.assets/image-20260927234928192.png" alt="image-20260927234928192 left:60%" style="width:800px;" />
+### TAC 348 - Making Smart Devices
+
+![bg opacity:.85 left:60%](lecture_ultrasonic_distance_sensor.assets/image-20260927234928192.png)
+
 
 ## Lab Learning Objectives
 
@@ -95,7 +97,6 @@ return total / NUM_READINGS;
 
 ## Handling Bad Readings
 
-* 
 * If the reading is zero or outside the reliable range, skip the array update and keep the last good readings
 
 ## Handling Bad Readings: Corrected
@@ -166,7 +167,6 @@ int barFill = map((int)displayIn, 0, FAR_THRESHOLD_IN, BAR_W - 2, 0);
 * Specifications
   * Read distance from the ultrasonic sensor and return the raw value
   * Add a rolling average: store each reading in an array of 5 and return the average
-  * 
   * Improve the averaging: skip zero and out-of-range readings so the array keeps the last good values
   * Observe how the display changes with each version
 

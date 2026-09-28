@@ -52,4 +52,32 @@ Explore a selection of final projects created by TAC 348 students. Select a proj
     </span>
     <span class="past-project-card__title">Motorized Prosthetic Hand - Molly</span>
   </a>
+
+  <a class="past-project-card" href="https://robparke.com/smart-home-tomogatchi-johnny/">
+    <span class="past-project-card__image past-project-card__image--contain">
+      <img src="past_projects.assets/smart-home-tomogatchi-johnny.png" alt="Johnny's black smart home Tomogatchi device with an OLED display and control knob">
+    </span>
+    <span class="past-project-card__title">Smart Home Tomogatchi - Johnny</span>
+  </a>
+
+  <a class="past-project-card" href="https://robparke.com/guitar-tuner-and-metronome-fion/">
+    <span class="past-project-card__image past-project-card__image--contain">
+      <img src="past_projects.assets/guitar-tuner-and-metronome-fion.png" alt="Fion's guitar tuner and metronome circuit mounted on an acoustic guitar">
+    </span>
+    <span class="past-project-card__title">Guitar Tuner and Metronome - Fion</span>
+  </a>
+
+  <a class="past-project-card" href="https://robparke.com/itp-348-spring-2021-automatic_pepper/">
+    <span class="past-project-card__image past-project-card__image--contain">
+      <img src="past_projects.assets/automatic-pepper-seedling-incubator-armand.jpg" alt="Armand's automatic pepper seedling incubator with seed trays and tubing">
+    </span>
+    <span class="past-project-card__title">Automatic Pepper Seedling Incubator - Armand</span>
+  </a>
+
+  <a class="past-project-card" href="https://robparke.com/golf-putting-game/">
+    <span class="past-project-card__image past-project-card__image--contain">
+      <img src="past_projects.assets/golf-putting-game.jpg" alt="Golf putting game with artificial turf, sensors, and control electronics">
+    </span>
+    <span class="past-project-card__title">Golf Putting Game</span>
+  </a>
 </div>

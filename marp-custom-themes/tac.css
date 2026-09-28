@@ -103,3 +103,7 @@ section.accent {
 section.compact {
   font-size: 90%;
 }
+
+section.compact-table table {
+  font-size: 80%;
+}

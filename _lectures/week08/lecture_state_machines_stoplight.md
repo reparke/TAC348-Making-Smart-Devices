@@ -15,6 +15,14 @@ title: State Machines Part 2 - Stoplight Example
 
 <img src="lecture_state_machines_stoplight.assets/stoplight.jpg" alt="stoplight" style="height:500px;" /> <img src="lecture_state_machines_stoplight.assets/ped_signal.jpg" alt="ped_signal" style="width:400px;" />
 
+
+## Lab Learning Objectives
+
+* Model a traffic intersection as a state machine using enum values and state variables
+* Use millis() to create non-blocking timed state transitions 
+* Control two traffic signals and pedestrian LEDs
+* Control an independently blinking "Don’t Walk"
+
 ## In class Lab - Stoplight and Pedestrian Signal
   
 * We are going to build a stoplight and pedestrian signal for a intersection.
@@ -64,6 +72,8 @@ title: State Machines Part 2 - Stoplight Example
 
 
 ## Wiring Pin Guide
+
+<!-- _class: compact-table -->
 
 | RGB LED               | Photon 2 Pins |
 | ---------------------------- | ---- |

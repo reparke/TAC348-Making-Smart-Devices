@@ -349,6 +349,18 @@ body {
 }
 
 @media print {
+  .past-project-card {
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+
+  .past-project-card__image,
+  .past-project-card__image img,
+  .past-project-card__title {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
   html,
   body,
   #main,

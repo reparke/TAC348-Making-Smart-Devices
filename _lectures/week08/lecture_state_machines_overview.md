@@ -65,7 +65,7 @@ title: State Machines Part 1 - Overview
 | Traffic Stopped  | Red                      |
 
 ## Example #2 Boba Vending Machine 
-![bg opacity:.85 right:60%](lecture_state_machines_overview.assets/images.jpeg))
+![bg opacity:.85 right:60%](lecture_state_machines_overview.assets/images.jpeg)
 
 <!--
 <img src="lecture_finite_state_machines.assets/image-20200303153612762.png" alt="image-20200303153612762" style="width:800px;" />
@@ -88,6 +88,8 @@ dispense +cupcake taken| idle
 * How do we transition to new states?
 
 ## Example #2 Boba Vending Machine ATM
+
+<!-- _class: compact-table -->
 
 | State               | Input              | Next State          |
 | ------------------- | ------------------ | ------------------- |

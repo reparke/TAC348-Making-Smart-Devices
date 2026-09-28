@@ -12,8 +12,10 @@ show_in_list: false
 <!-- headingDivider: 2 -->
 
 # Ultrasonic Distance Sensor + OLED Graphics
+### TAC 348 - Making Smart Devices
 
-<img src="lecture_ultrasonic_distance_sensor.assets/image-20260927234928192.png" alt="image-20260927234928192 left:60%" style="width:800px;" />
+![bg opacity:.85 left:60%](lecture_ultrasonic_distance_sensor.assets/image-20260927234928192.png)
+
 
 ## Learning Objectives
 
@@ -191,6 +193,9 @@ const uint8_t heart_bmp[] = {
   - Canvas size: 64 x 48
   - Glyph: blank
   - Scaling: Scale fit, keeping proportions
+
+## Settings
+
 * Output
   - Code output format: Arduino code, single bitmap (later in the source, change the declaration to `const uint8_t <PUT BITMAP NAME HERE>[]`)
   - Draw mode: Vertical - 1 bit per pixel
