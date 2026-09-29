@@ -5,7 +5,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
 
 #define BLYNK_TEMPLATE_ID "ADD_YOUR_OWN"
-#define BLYNK_DEVICE_NAME "ADD_YOUR_OWN"
+#define BLYNK_TEMPLATE_NAME "ADD_YOUR_OWN"
 #define BLYNK_AUTH_TOKEN "ADD_YOUR_OWN"
 
 #include <blynk.h>  //library (need to import it in your own project)

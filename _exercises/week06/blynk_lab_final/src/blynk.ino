@@ -1,5 +1,5 @@
 #define BLYNK_TEMPLATE_ID "TMPL8pRjLGSG"
-#define BLYNK_DEVICE_NAME "Week 6 Lab"
+#define BLYNK_TEMPLATE_NAME "Week 6 Lab"
 #define BLYNK_AUTH_TOKEN "CXGdYkgREo9JvRwFIZ4d8y9WCZ83Zr2b"
 
 #include <blynk.h>

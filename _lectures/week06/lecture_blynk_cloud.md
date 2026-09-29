@@ -125,7 +125,7 @@ Copy this info to include in sketch below (**Note: this is just an example--use 
 
 ```c++
 #define BLYNK_TEMPLATE_ID "ADD_YOUR_OWN"
-#define BLYNK_DEVICE_NAME "ADD_YOUR_OWN"
+#define BLYNK_TEMPLATE_NAME "ADD_YOUR_OWN"
 #define BLYNK_AUTH_TOKEN "ADD_YOUR_OWN"
 ```
 
@@ -161,7 +161,7 @@ SYSTEM_THREAD(ENABLED);
 SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
 #define BLYNK_TEMPLATE_ID "ADD_YOUR_OWN"
-#define BLYNK_DEVICE_NAME "ADD_YOUR_OWN"
+#define BLYNK_TEMPLATE_NAME "ADD_YOUR_OWN"
 #define BLYNK_AUTH_TOKEN "ADD_YOUR_OWN"
 
 #include <blynk.h>

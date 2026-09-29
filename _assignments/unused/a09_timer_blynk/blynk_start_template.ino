@@ -3,7 +3,7 @@
 
 // Blynk configuration
 #define BLYNK_TEMPLATE_ID "ADD_YOUR_OWN"
-#define BLYNK_DEVICE_NAME "ADD_YOUR_OWN"
+#define BLYNK_TEMPLATE_NAME "ADD_YOUR_OWN"
 #define BLYNK_AUTH_TOKEN "ADD_YOUR_OWN"
 #define BLYNK_IP IPAddress(64, 225, 16, 22)  // https://ny3.blynk.cloud
 
