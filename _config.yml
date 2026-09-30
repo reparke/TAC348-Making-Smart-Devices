@@ -10,7 +10,7 @@ plugins:
   - jekyll-sitemap
   
 description: "TAC 348 - Making Smart Devices: Introduction to Electronics/Wearables @ USC (Open Educational Resource)"
-url: https://reparke.github.io
+url: https://makingsmartdevices.com
 repository: "reparke/TAC348-Making-Smart-Devices"
 # logo: "/assets/images/usc_monogram_gold_on_trans.png"
 breadcrumbs: false
@@ -26,11 +26,11 @@ breadcrumbs: false
 # small title that is at the top of every page
 # subtitle: Course Content
 
-# baseurl is the same as the name of the repository
-baseurl: /TAC348-Making-Smart-Devices
+# baseurl must be empty since the site is served at the root of the custom domain
+baseurl: ""
 
 # url where the useful documents are available to download
-resourcesUrl: "https://reparke.github.io/TAC348-Making-Smart-Devices" 
+resourcesUrl: "https://makingsmartdevices.com"
 
 # url where the student's grading info is kept 
 gradingUrl: "https://brightspace.usc.edu" 
