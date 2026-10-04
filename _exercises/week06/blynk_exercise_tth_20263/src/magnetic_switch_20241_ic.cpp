@@ -60,34 +60,65 @@ start PHOTON to APP
     syntax to send data to blynk is
 
     Blynk.virtualWrite(VIRTUAL_PIN, DATA)
+
+
+from APP to PHOTON <--- this is different
+    EVENT DRIVEN PROGRAMMING
+
+    we write a func ("event handler") but WE DO NOT EVER CALL the func
+    --> when the event happens, the photon will AUTOMAGICALLY call the func for
+us
+
+    syntax: create this func (aka event handler)
+    BLYNK_WRITE( VIRTUAL_PIN ) {
+    }
+
+    ex:
+    BLYNK_WRITE(V5) {       //this is the func that will get call automatically
+                            //when some data is received on V5
+    }
 */
+int counter = 0;
+// V5 is the Button value
+//  imagine that this is actually BLYNK_WRITE(V5, param) {
+BLYNK_WRITE(V5) {
+    // this func is called when button is PRESSED and RELEASED
+    // every BLYNK_WRITE get a "hidden" param called param
+    int buttonVal = param.asInt();  // or asString() or asFloat()
+    if (buttonVal == 1) {
+        counter = counter + 1;
+        Serial.println("Button activity: counter " + String(counter));
+    }
+}
+
 void setup() {
     pinMode(PIN_RED, OUTPUT);
     pinMode(PIN_GREEN, OUTPUT);
     pinMode(PIN_BLUE, OUTPUT);
     pinMode(PIN_SWITCH, INPUT);
 
-    delay(5000);                        //need short delay
+    delay(5000);  // need short delay
     Blynk.begin(BLYNK_AUTH_TOKEN);
 }
 void loop() {
-    Blynk.run();    // blynk.run should NOT be in millis timer
+    Blynk.run();  // blynk.run should NOT be in millis timer
 
     unsigned long currMillis = millis();
-    if(currMillis - prevMillis > INTERVAL) {
+    if (currMillis - prevMillis > INTERVAL) {
         prevMillis = currMillis;
 
-        int randNum = random(0,256);    //generate a random number from 0-255
+        int randNum = random(0, 256);  // generate a random number from 0-255
         Blynk.virtualWrite(V6, randNum);
     }
 
     int currSwitchVal = digitalRead(PIN_SWITCH);
     if (currSwitchVal == LOW && prevSwitchVal == HIGH) {
         Serial.println("switch was closed");
-    }
-    else if (currSwitchVal == HIGH && prevSwitchVal == LOW) {
+        Blynk.virtualWrite(V3, "closed");
+    } else if (currSwitchVal == HIGH && prevSwitchVal == LOW) {
         Serial.println("Switch was opened");
+        Blynk.virtualWrite(V3, "opened");
     }
-    //important!
+    // important!
     prevSwitchVal = currSwitchVal;
 }

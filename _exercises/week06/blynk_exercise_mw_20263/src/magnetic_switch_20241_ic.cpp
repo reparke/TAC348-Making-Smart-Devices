@@ -1,8 +1,8 @@
 
-//at very top, we need to setup our Blynk access (like api key)
-#define BLYNK_TEMPLATE_ID "TMPL2qVcHF4gR"
-#define BLYNK_AUTH_TOKEN "_SAYGrcuk2aJthK4RCSrvIKuNJgLI - xm"
-
+// at very top, we need to setup our Blynk access (like api key)
+#define BLYNK_TEMPLATE_ID "TMPL2YNk7BNmD"
+#define BLYNK_TEMPLATE_NAME "Week 6 MW Exercise"
+#define BLYNK_AUTH_TOKEN "WWeuPK5Ccjt25w3n4WRrise92RYcUaGJ"
 
 // need to add the library
 #include <blynk.h>
@@ -56,7 +56,50 @@ with Blynk, we can send from PHOTON to APP, and from APP to PHOTON
 
     Syntax for this is REALLY easy
     Blynk.virtualWrite(VIRTUAL_PIN, DATA)
+
+
+data from APP to PHOTON --> this is different!!!
+    EVENT DRIVEN PROGRAMMING
+
+    We write a funct ("event handler") but we DO NOT EVER CALL THE FUNCTION
+    --> instead
+    when the photon detect the specific "event", the PHOTON will call
+        the function
+                        AUTOMAGICALLY!!!
+
+    syntax: we create this specific function
+    BLYNK_WRITE(VIRTUAL_PIN)
+
+    ex
+    BLYNK_WRITE(V9) {
+        //this func is called automaticlaly when data is set from APP to PHOTON
+on virtual pin V9
+    }
+
+
 */
+
+// when user presses button on blynk app, let's show a random LED color
+void changeLedColor(int r, int g, int b) {
+    analogWrite(PIN_RED, r);
+    analogWrite(PIN_GREEN, g);
+    analogWrite(PIN_BLUE, b);
+}
+
+// the event handler for when button is pressed on app
+BLYNK_WRITE(V5) {
+//pretend that the function looks like this    BLYNK_WRITE(V5, param)
+    // fn is called EVERY TIME the button on app is pressed OR released
+    Serial.println("Button Activity");
+
+    // hidden in this func is a var called param
+    // param contains whatever value was sent from the app
+    // lets get the hidden value sent from
+    int buttonVal = param.asInt();  // or .asString() or .asFloat()
+    if (buttonVal == 0) {
+        changeLedColor(random(0, 256), random(0, 256), random(0, 265));
+    }
+}
 
 void setup() {
     pinMode(PIN_RED, OUTPUT);
@@ -64,7 +107,7 @@ void setup() {
     pinMode(PIN_BLUE, OUTPUT);
     pinMode(PIN_SWITCH, INPUT);
     Serial.begin(9600);
-    //need a short delay for Blynk to start
+    // need a short delay for Blynk to start
     delay(5000);
     Blynk.begin(BLYNK_AUTH_TOKEN);  // start communication with the Blynk server
 }
@@ -75,21 +118,20 @@ void loop() {
     unsigned long currMillis = millis();
     if (currMillis - prevMillis > INTERVAL) {
         prevMillis = currMillis;
-        int randNum = random(0,256);    //rand number from [0-255]
-        //send to blynk
+        int randNum = random(0, 256);  // rand number from [0-255]
+        // send to blynk
         Blynk.virtualWrite(V6, randNum);
-
     }
     int currSwitchVal = digitalRead(PIN_SWITCH);
 
-    //H -> LOW (falling edge)
+    // H -> LOW (falling edge)
     if (currSwitchVal == HIGH && prevSwitchVal == LOW) {
+        Blynk.virtualWrite(V3, "opened");
         Serial.println("Switch was just opened");
-    }
-    else if (currSwitchVal == LOW && prevSwitchVal == HIGH) {
+    } else if (currSwitchVal == LOW && prevSwitchVal == HIGH) {
         Serial.println("Switch was closed");
+        Blynk.virtualWrite(V3, "closed");
     }
-    //dont forget
+    // dont forget
     prevSwitchVal = currSwitchVal;
-
 }
