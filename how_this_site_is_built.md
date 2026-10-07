@@ -1,39 +1,32 @@
-# TAC 348 – Making Smart Devices
+---
+title: How This Site Is Built
+layout: single
+toc: true
+toc_label: "On This Page"
+toc_sticky: true
+description: "How TAC 348 course materials are authored in Markdown, organized with Jekyll and Minimal Mistakes, and published through GitHub Pages."
+---
 
-==**More information to be added later**==
+This site keeps the course's student-facing pages and their source files in one [public repository](https://github.com/reparke/TAC348-Making-Smart-Devices). Faculty can browse the published materials, inspect the Markdown behind them, and see how the pages are organized and revised.
 
-In designing this course in electronics / internet of things (IoT), and
-I wanted the content to be accessible for all users and I wanted to share it publicly. I hope you might find this useful for how to set up a similar system.
+## Authoring the Materials
 
-Special thanks to [Ryan Straight](https://ryanstraight.com/) for all his suggestions!
+Rob authors course materials directly in [Typora](https://typora.io/) as Markdown. The repository contains the source for the [weekly schedule](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/schedule.md), [assignments](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_assignments), [lectures](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_lectures), [readings](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_readings), and [reference guides](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_reference). Images and diagrams sit beside many of the Markdown pages in matching `.assets` folders, so the source and its illustrations can be inspected together.
 
-## My desired features are
+The repository also keeps [exercise code](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises) and [archived syllabi and weekly plans](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/archive). The archive is available in the repository for comparison; the Jekyll configuration excludes it from the published site build.
 
-- accessible output (lecture notes and slides)
-- limit extra work (single file for publishable lecture notes,  in-class slide presentations, and web-viewable)
-- easy to edit (when editing lecture notes, I want to focus on the content not the formatting or markup)
-- a reliable tool that has community support and will exist in the future
-- easy to convert notes to slides (ideally an add-on for the editor I’m using,  but at least it should be a quick conversion that can be run)
-- drag and drop support for images (a bonus)
-- compatible with GitHub readable markdown (since I want to make the content  open-source. Ideally I would like it to automatically create GitHub HTML)
-- able to make illustrations / flowcharts / line drawings
+## From Markdown to Site Pages
 
-#### My Lecture Creation Process
+[Jekyll](https://jekyllrb.com/) builds the website using the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) theme. The site's [_config.yml](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/_config.yml) defines collections for assignments, lectures, readings, and reference pages, along with shared layout defaults. Index pages such as [Assignments](/assignments.html) and [Reference](/reference.html) draw from those collections.
 
-- Create / edit markdown files in Typora (images can be drag-and-dropped; simple graphics can be created in Inkscape)
-- Open completed lecture files in VSCode. Use Marpit plugin to generate HTML (or PDF) slideshows
-- Use GitHub to push changed files to course repository. Website will be auto-generated
+Site-specific presentation lives in [stylesheets](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_sass), [assets](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/assets), and [custom includes](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_includes). These extend the theme without changing the Markdown source of each lesson. The [Gemfile](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/Gemfile) lists the Jekyll and GitHub Pages dependencies used for a local build.
 
-#### My Assignment Creation Process
+## Lecture Source and Slides
 
-- Create / edit assignment writeups in Word.
-- Export DOCX files from Word as markdown files using Writeage plugin
-- GitHub to push changed files to course repository. Website will be auto-generated
+Lecture Markdown files include Marp-compatible front matter. For example, the [Electricity lecture](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/_lectures/week01/lecture_electricity.md) sets `marp: true` and selects the `tac` theme. The repository includes [custom Marp themes](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/marp-custom-themes). These files document the source format and styling; they do not establish a required slide-export routine for other instructors.
 
-#### Getting Started
+## Publishing and Versions
 
-##### GitHub Site
+Approved changes are merged into the repository's `main` branch. GitHub Pages then builds and deploys the site. The [_config.yml](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/_config.yml) URL and [CNAME](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/CNAME) point the published site to [makingsmartdevices.com](https://makingsmartdevices.com/). The repository's [term tags](https://github.com/reparke/TAC348-Making-Smart-Devices/tags) and [Course History](/course_history.html) offer starting points for comparing versions.
 
-- [Starting GitHub Pages Site](https://github.com/jan-martinek/gh-syllabus) This was an invaluable resource. I adapted ("forked") this site and added my own content
-- [GitHub Jekyll Template Help](https://jekyllrb.com/tutorials/navigation/#scenario-8-retrieving-items-based-on-front-matter-properties) In order to customize the system, I needed to adapt the GitHub Pages theme, which is called Jekyll
-
+For an educator adapting this structure, the useful pattern is a Markdown source for each page, Jekyll collections for recurring material, and a repository that preserves both current files and dated course versions. The specific hardware, services, and course sequence are described in [For Educators](/for_educators.html).
