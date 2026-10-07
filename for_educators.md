@@ -46,11 +46,11 @@ Later weeks include JSON and APIs, multi-component devices, wearables, and final
 
 ## Representative Course Evidence
 
-- **[Weekly Schedule](schedule.html):** Lists each week's preparation, lectures, and assignments, including project work later in the semester.
-- **[Environment Monitor and Dashboard](/assignments/a06_environment_monitor/a6_environment_monitor.html):** Requires temperature and humidity readings, an OLED display, Particle cloud events, and a cloud dashboard.
-- **[State Machine Tea Brewer](/assignments/a08_tea_brewer_state_machine_blynk_v3/a8_tea_brewer_state_machine_blynk.html):** Requires tea-brewing states and a Blynk interface for feedback and control.
-- **[Final Project requirements](/assignments/project/final_project.html):** Specify a proposal, design review, working technical milestone, connected device and interface, documentation, and final demonstration.
-- **[Past Projects](/assignments/project/past_projects.html):** Shows selected student final projects with links to their posts and demonstrations.
+- [Weekly Schedule](schedule.html): Lists each week's preparation, lectures, and assignments, including project work later in the semester.
+- [Environment Monitor and Dashboard](/assignments/a06_environment_monitor/a6_environment_monitor.html): Requires temperature and humidity readings, an OLED display, Particle cloud events, and a cloud dashboard.
+- [State Machine Tea Brewer](/assignments/a08_tea_brewer_state_machine_blynk_v3/a8_tea_brewer_state_machine_blynk.html): Requires tea-brewing states and a Blynk interface for feedback and control.
+- [Final Project requirements](/assignments/project/final_project.html): Specify a proposal, design review, working technical milestone, connected device and interface, documentation, and final demonstration.
+- [Past Projects](/assignments/project/past_projects.html): Shows selected student final projects with links to their posts and demonstrations.
 
 ## Explore the Complete Materials
 

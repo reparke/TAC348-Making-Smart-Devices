@@ -2,6 +2,10 @@
 title: Course Information & Student Tools
 layout: single
 permalink: /course_info.html
+toc: true
+toc_label: "Quick Links"
+toc_icon: "bookmark"
+toc_sticky: true
 ---
 
 This page collects course platforms, required information, materials, and support links in one place.
