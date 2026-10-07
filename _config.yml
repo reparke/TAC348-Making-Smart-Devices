@@ -1,5 +1,6 @@
 #added for new theme
 title: "TAC 348: Making Smart Devices"
+masthead_title: "Making Smart Devices"
 #may need to use course name and title
 name: "Rob Parke"
 remote_theme: "mmistakes/minimal-mistakes@4.19.3"

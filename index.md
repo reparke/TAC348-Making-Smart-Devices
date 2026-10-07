@@ -10,24 +10,35 @@ header:
   actions:
     - label: "View the Schedule"
       url: /schedule
-    - label: "See Assignments"
-      url: /assignments
 ---
 
 TAC 348 is a project-based course in the [Technology and Applied Computing Program](https://tac.usc.edu/) at USC. Students learn electronics, embedded C++, sensors, motors, wireless communication, and cloud-connected services by building increasingly capable smart devices.
 
-<nav class="home-quick-links" aria-label="Frequently used course links">
+<style>
+.home-refresh .home-quick-links {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 700px) {
+  .home-refresh .home-quick-links {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+## Current Students
+
+<nav class="home-quick-links" aria-label="Quick access to course work">
   <a href="schedule.html">
     <strong>Schedule</strong>
-    <span>What we're doing each week</span>
+    <span>Weekly preparation, class work, and assignments</span>
   </a>
   <a href="assignments.html">
     <strong>Assignments</strong>
     <span>Project briefs and due dates</span>
   </a>
   <a href="readings.html">
-    <strong>Videos</strong>
-    <span>Prepare before class</span>
+    <strong>Class Prep</strong>
+    <span>Videos and readings before class</span>
   </a>
   <a href="lectures.html">
     <strong>Lectures</strong>
@@ -35,9 +46,11 @@ TAC 348 is a project-based course in the [Technology and Applied Computing Progr
   </a>
 </nav>
 
+Use [Brightspace](https://brightspace.usc.edu) to submit assignments and [Piazza](https://piazza.com/class/msp1ek2y6pd4o8#) for class discussions and assignment questions.
+
 ## Course Materials
 
-Everything students need for class remains available in the familiar sections below.
+Lectures, assignments, references, and support links are grouped below.
 
 <div class="home-link-groups">
   <section>
@@ -63,15 +76,12 @@ Everything students need for class remains available in the familiar sections be
   </section>
 </div>
 
-## Current Students
+## For Educators
 
-Use [Brightspace](https://brightspace.usc.edu) to submit assignments and [Piazza](https://piazza.com/class/msp1ek2y6pd4o8#) for class discussions and assignment questions.
+The [For Educators overview](for_educators.html) maps the course sequence, selected assignments, final-project requirements, and ways to use the materials.
 
-## About This Open Course
-
-- [Syllabus](tac348_syllabus.md): course plan, learning outcomes, and policies
-- [For educators](for_educators.md): guidance for using or adapting the course materials
-- [Course history](course_history.md): how the curriculum and open resources have developed
+- [Syllabus](tac348_syllabus.html): course plan, prerequisites, and policies
+- [Past Projects](/assignments/project/past_projects.html): selected student final projects
+- [Course History](course_history.html): a timeline of course changes
 - [GitHub repository](https://github.com/reparke/TAC348-Making-Smart-Devices): source files and in-class code
 - [Building your own course site](https://robparke.com/creating-accessible-open-educational-resources/): notes on creating accessible, open educational resources
-- [Contact and feedback](https://parke.wufoo.com/forms/feedback-form/): share how you are using these materials or report an issue

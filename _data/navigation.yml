@@ -1,25 +1,15 @@
 main:
   - title: "Schedule"
     url: /schedule
+  - title: "Class Prep"
+    url: /readings
   - title: "Assignments"
     url: /assignments
-  - title: "Videos"
-    url: /readings
-  - title: "Lectures"
-    url: /lectures
-  - title: "Reference"
-    url: /reference
   - title: "Exercises"
     url: https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises
-  - title: "Brightspace"
-    url: https://Brightspace.usc.edu
-  - title: "Piazza"
-    url: https://piazza.com/class/msp1ek2y6pd4o8#
-  - title: "Kit"
-    url: /kit
-  - title: "Resources"
-    url: /resources
-  - title: "Syllabus"
-    url: /tac348_syllabus
-  - title: "Contact"
-    url: https://parke.wufoo.com/forms/feedback-form/
+  - title: "Reference"
+    url: /reference
+  - title: "For Educators"
+    url: /for_educators
+  - title: "Course Info"
+    url: /course_info.html
