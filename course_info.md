@@ -20,4 +20,3 @@ This page collects course platforms, required information, materials, and suppor
 ## Policies and communication
 
 - [Syllabus](/tac348_syllabus)
-- [Contact/feedback](https://parke.wufoo.com/forms/feedback-form/)
