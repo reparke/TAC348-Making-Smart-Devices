@@ -10,7 +10,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   
-description: "TAC 348 - Making Smart Devices: Introduction to Electronics/Wearables @ USC (Open Educational Resource)"
+description: "Open course materials for TAC 348 Making Smart Devices at USC, covering physical computing, embedded programming, and connected devices."
 url: https://makingsmartdevices.com
 repository: "reparke/TAC348-Making-Smart-Devices"
 # logo: "/assets/images/usc_monogram_gold_on_trans.png"

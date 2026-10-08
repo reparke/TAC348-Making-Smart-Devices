@@ -1,5 +1,6 @@
 ---
 title: Course Information & Student Tools
+description: "Course platforms, materials, policies, and support links for TAC 348 Making Smart Devices students."
 layout: single
 permalink: /course_info.html
 toc: true

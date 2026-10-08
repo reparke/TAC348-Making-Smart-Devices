@@ -7,7 +7,7 @@ toc_sticky: true
 description: "How TAC 348 course materials are authored in Markdown, organized with Jekyll and Minimal Mistakes, and published through GitHub Pages."
 ---
 
-This site keeps the course's student-facing pages and their source files in one [public repository](https://github.com/reparke/TAC348-Making-Smart-Devices). Faculty can browse the published materials, inspect the Markdown behind them, and see how the pages are organized and revised.
+This site keeps the course's student-facing pages and their source files in one [public repository](https://github.com/reparke/TAC348-Making-Smart-Devices). Faculty can browse the published materials, inspect the Markdown behind them, and see how the pages are organized and revised. For the course overview and examples of its materials, see [For Educators](/for_educators.html).
 
 ## Authoring the Materials
 
@@ -29,4 +29,4 @@ Lecture Markdown files include Marp-compatible front matter. For example, the [E
 
 Approved changes are merged into the repository's `main` branch. GitHub Pages then builds and deploys the site. The [_config.yml](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/_config.yml) URL and [CNAME](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/CNAME) point the published site to [makingsmartdevices.com](https://makingsmartdevices.com/). The repository's [term tags](https://github.com/reparke/TAC348-Making-Smart-Devices/tags) and [Course History](/course_history.html) offer starting points for comparing versions.
 
-For an educator adapting this structure, the useful pattern is a Markdown source for each page, Jekyll collections for recurring material, and a repository that preserves both current files and dated course versions. The specific hardware, services, and course sequence are described in [For Educators](/for_educators.html).
+For an educator adapting this structure, the useful pattern is a Markdown source for each page, Jekyll collections for recurring material, and a repository that preserves both current files and dated course versions.

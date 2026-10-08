@@ -35,4 +35,4 @@ The [Fall 2025 weekly plan](https://github.com/reparke/TAC348-Making-Smart-Devic
 
 ## Explore the Versions
 
-The repository's [term tags](https://github.com/reparke/TAC348-Making-Smart-Devices/tags) preserve dated snapshots, while its [commit history](https://github.com/reparke/TAC348-Making-Smart-Devices/commits/main/) records individual revisions. Archived syllabi and weekly plans are kept in the [archive directory](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/archive).
+The repository's [term tags](https://github.com/reparke/TAC348-Making-Smart-Devices/tags) preserve dated snapshots, while its [commit history](https://github.com/reparke/TAC348-Making-Smart-Devices/commits/main/) records individual revisions. Archived syllabi and weekly plans are kept in the [archive directory](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/archive). [How This Site Is Built](/how_this_site_is_built.html) explains how the current materials are authored and published.
