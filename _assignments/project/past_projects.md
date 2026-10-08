@@ -8,7 +8,7 @@ description: "Selected final projects created by students in TAC 348 Making Smar
 show_in_list: false
 ---
 
-Explore a selection of final projects created by TAC 348 students. Select a project to read the full post and watch its demonstration.
+These selected TAC 348 student projects link to individual project posts.
 
 <div class="past-project-grid">
   <a class="past-project-card" href="https://robparke.com/beverage-tracker-madelyn/">
@@ -81,3 +81,7 @@ Explore a selection of final projects created by TAC 348 students. Select a proj
     <span class="past-project-card__title">Golf Putting Game</span>
   </a>
 </div>
+
+For the current assignment, see the [Final Project requirements](/assignments/project/final_project.html). For a course overview, see [For Educators](/for_educators.html).
+
+Student-project text, images, and media are not covered by the site's general course-content reuse statement. See [License and Reuse](/license.html) for guidance.
