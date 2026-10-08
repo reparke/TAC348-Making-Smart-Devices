@@ -105,15 +105,15 @@ body {
   right: 0.75rem;
   bottom: 0.65rem;
   z-index: 2;
-  padding: 0.24rem 0.42rem;
-  color: rgba(220, 220, 220, 0.82);
-  font-size: 0.56rem;
+  padding: 0.4rem 0.55rem;
+  color: #fff;
+  font-size: 0.75rem;
   font-weight: 500;
-  background: rgba(0, 0, 0, 0.38);
-  border: 1px solid rgba(205, 205, 205, 0.34);
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #fff;
   border-radius: 0.25rem;
   cursor: pointer;
-  opacity: 0.62;
+  opacity: 1;
 }
 
 .home-hero__toggle:hover,
@@ -126,8 +126,22 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .masthead {
+    -webkit-animation: none;
+    animation: none;
+  }
+
   .home-refresh .page__hero--overlay .home-hero__image {
     transition: none;
+  }
+
+  .home-quick-links a {
+    transition: none;
+  }
+
+  .home-quick-links a:hover,
+  .home-quick-links a:focus {
+    transform: none;
   }
 }
 

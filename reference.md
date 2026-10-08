@@ -7,6 +7,8 @@ description: "Illustrated wiring, component, sensor, motor, and embedded-program
 
 ---
 
+These course-produced technical guides cover components, wiring, and embedded programming while building and debugging projects. For external documentation, tools, books, and project ideas, see [Resources](/resources).
+
 
 <ul>
 {% assign all_reference = site.reference | sort: "title" %}

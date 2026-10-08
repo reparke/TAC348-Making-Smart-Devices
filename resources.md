@@ -10,9 +10,11 @@ toc_sticky: true
 
 ---
 
+This collection brings together external documentation, books, tools, project ideas, and related learning material. For course-produced guides to components, wiring, and embedded programming, see [Reference](/reference).
 
 
-## References
+
+## Technical Help and Documentation
 
 ### Debugging Tips
 - [TAC-348 Photon 2 troubleshooting guide](https://docs.google.com/document/d/12_kRqHdNPQmiGWF4pe0LWZbBaEmdoF-bbJtCxojCN74/edit#heading=h.7fjmqgnpux8d) This is a super useful document with the most common issues and solutions encountered in TAC 348
