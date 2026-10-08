@@ -66,7 +66,7 @@ The public materials include:
 
 ## Adapting the Materials
 
-The materials on this site are shared as an open educational resource. Educators are welcome to use or adapt individual lessons, assignments, reference guides, or the broader course sequence under the terms of [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Rob's original course content, such as lesson text, assignment instructions, and reference guides, is offered under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) unless otherwise noted. Educators can use or adapt those materials at the scales below; see [License and Reuse](/license.html) for attribution and exceptions.
 
 The materials can be used at several scales:
 
@@ -79,11 +79,11 @@ The current implementation uses the Particle Photon 2 and Particle Workbench. Ma
 
 ## Course Evolution and Production
 
-[Course History](course_history.html) gives a timeline of course changes. The public [GitHub repository](https://github.com/reparke/TAC348-Making-Smart-Devices) contains the source files; its [releases and tags](https://github.com/reparke/TAC348-Making-Smart-Devices/tags) provide version points.
+[Course History](course_history.html) gives a timeline of course changes. [How This Site Is Built](how_this_site_is_built.html) explains the authoring and publishing workflow. The public [GitHub repository](https://github.com/reparke/TAC348-Making-Smart-Devices) contains the source files; its [releases and tags](https://github.com/reparke/TAC348-Making-Smart-Devices/tags) provide version points.
 
-## Licensing, Attribution, and Contact
+## Licensing and Attribution
 
-Unless otherwise noted, the original course materials are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Some pages also include third-party images, code, or resources governed by their own licenses.
+The [License and Reuse](/license.html) page links to the official CC BY-NC-SA 4.0 summary and legal code and provides a short reuse guide. Third-party images, external resources, libraries, and other incorporated materials retain their own terms. Student-project text, images, and media are outside the general course-content reuse statement unless explicitly noted or permission has been obtained. Code and libraries may be covered by separate terms. Check the applicable file or library notices before reuse; do not assume the course-content license applies.
 
 A suggested attribution is:
 

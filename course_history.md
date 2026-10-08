@@ -4,35 +4,35 @@ layout: single
 toc: true
 toc_label: "Course Timeline"
 toc_sticky: true
-description: "The development of TAC 348 Making Smart Devices and its open course materials since 2019."
+description: "A documented timeline of TAC 348 Making Smart Devices and its open course materials from 2019 onward."
 ---
 
-TAC 348 and its public course site have developed through repeated classroom use, changes in technology, and feedback from students. Archived syllabi and weekly plans are retained in the repository so that the development of the course remains documented.
+TAC 348 and its public course materials have changed since the first published semester in 2019. This timeline gives faculty a way to examine that development through archived course plans, dated repository versions, and examples of the materials themselves. It highlights selected changes; the repository history records the fuller sequence of edits. The links document what was published, not the effects of those changes on students.
 
 ## 2019: Public Course Materials
 
-The first complete public version of the course site was developed for Fall 2019. The course introduced students from across the university to physical computing through circuits, embedded programming, sensors, motors, cloud communication, and a final device project.
+The [Fall 2019 syllabus](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/archive/20193_itp348_syllabus.md) and [weekly plan](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/archive/20193_itp348_weekly_plan.md) show the early course sequence: circuits and embedded programming, sensors and connected devices, and a final project. The [2019_3 repository tag](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/2019_3) preserves a dated version of the public materials.
 
 ## 2020: Remote and Online Instruction
 
-In March 2020, the weekly plan and instructional materials were reorganized for remote teaching. The public site became a more central source for lectures, assignments, build instructions, and preparation materials. Additional videos and documentation were developed to support students working outside the classroom.
+The [Spring 2020 plan prepared before the move online](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/archive/20201_itp348_weekly_plan_before_moving_online.md) and the [2020_1 repository version](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/2020_1) provide points of comparison for the remote-teaching period. Course materials from this period included lectures, assignments, build instructions, and preparation that students could access through the public site.
 
 ## 2021: Technical Reference Library
 
-A dedicated quick-reference collection was introduced in Fall 2021. These pages separate frequently needed wiring, component, and programming guidance from individual lectures and assignments, allowing students to find technical help when they need it.
+By the [Fall 2021 repository version](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/2021_3/_reference), the site had a separate technical reference collection. It brought component and programming guidance, such as the [LED reference at that version](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/2021_3/_reference/leds/leds.md), alongside the weekly lectures and assignments rather than relying on those pages alone.
 
-## 2022–2023: Curriculum and Project Refinement
+## 2022–2023: Assignments and Integrated Devices
 
-Existing material on cloud-connected devices, Bluetooth communication, APIs, JSON data, mobile interfaces, and data visualization was updated and reorganized. Assignments and build guides were revised to provide clearer milestones between foundational circuit work and larger integrated devices such as the Bluetooth car and smart watch.
+Ongoing updates to course material (lectures, assignments, exercises and videos)
 
 ## 2024: Photon 2 Transition
 
-Course materials were updated for the Particle Photon 2 platform. Lectures, exercises, component references, setup instructions, and troubleshooting resources were revised to support the new hardware while retaining the course's emphasis on transferable electronics and embedded-programming concepts.
+The current [Photon 2 reference pages](/reference.html) and [course kit](/kit.html) show how the platform appears in today's materials.
 
-## 2025–2026: Continued Refinement
+## 2025–2026: Current Course Materials
 
-Recent work has focused on improving technical references, updating the custom course kit, revising project instructions, maintaining current cloud and wireless examples, and expanding optional material. The site continues to be updated during each semester in response to classroom experience and changes in the supporting technology.
+The [Fall 2025 weekly plan](https://github.com/reparke/TAC348-Making-Smart-Devices/blob/main/archive/20251_itp348_weekly_plan.md) and [2025_3 repository tag](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/2025_3) provide a recent dated comparison. The current [weekly schedule](/schedule.html), [course kit](/kit.html), and [Final Project requirements](/assignments/project/final_project.html) show the materials now used to organize preparation, device work, and project documentation.
 
-## Archives and Version History
+## Explore the Versions
 
-The repository includes archived syllabi and weekly plans beginning with Fall 2019. The full [GitHub repository](https://github.com/reparke/TAC348-Making-Smart-Devices) provides a detailed history of additions and revisions to the open course materials.
+The repository's [term tags](https://github.com/reparke/TAC348-Making-Smart-Devices/tags) preserve dated snapshots, while its [commit history](https://github.com/reparke/TAC348-Making-Smart-Devices/commits/main/) records individual revisions. Archived syllabi and weekly plans are kept in the [archive directory](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/archive). [How This Site Is Built](/how_this_site_is_built.html) explains how the current materials are authored and published.
