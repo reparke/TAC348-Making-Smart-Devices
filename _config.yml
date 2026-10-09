@@ -41,6 +41,10 @@ search: true
 #enable full-text search (could slow page load)
 search_full_content: true
 
+# Load the theme script without its unavailable Font Awesome kit.
+footer_scripts:
+  - /assets/js/main.min.js
+
 analytics:
   provider: "google-gtag"
   google:
@@ -130,6 +134,7 @@ calendar:
 # Speed up build by excluding folders
 exclude:
   - archive
+  - scratch
 #   - _site
 #   - .sass-cache
 #   - .jekyll-cache

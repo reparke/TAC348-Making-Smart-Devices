@@ -7,8 +7,7 @@ description: "Final project requirements for TAC 348 Making Smart Devices, inclu
 date_due: Proposal due Sun Nov-08 @ 11:59 pm; Milestone due Sun Nov-29 @ 11:59 pm; Finished device and presentation during the Final Exam Time listed in the Schedule of Classes (in person) Fri Dec-11 @ 11am-1pm for MW class and Tue Dec-15 @ 8-10am for TTh class
 ---
 
-Final Project
-=============
+<span id="final-project"></span>
 
 [Submit on Brightspace](https://brightspace.usc.edu/)
 
@@ -206,4 +205,4 @@ Each criterion will be evaluated using the following performance levels:
 ## Acknowledgements
 
 - Thanks to Bill Siever for project format ideas
-  (<https://classes.engineering.wustl.edu/cse222s/schedule/>)
+  ([CSE 222S course schedule](https://classes.engineering.wustl.edu/cse222s/schedule/))

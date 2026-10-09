@@ -27,6 +27,12 @@ body {
   color: #990000 !important;
 }
 
+@media (min-width: 701px) {
+  .greedy-nav .site-title {
+    flex-shrink: 0;
+  }
+}
+
 .greedy-nav .visible-links a,
 .search__toggle {
   color: #30343a !important;
@@ -41,6 +47,10 @@ body {
   background-color: #ffcc00 !important;
 }
 
+.greedy-nav .visible-links a[aria-current="page"]::before {
+  transform: scaleX(1) translate3d(0, 0, 0) !important;
+}
+
 .greedy-nav .hidden-links {
   background-color: #fff !important;
   border: 1px solid #deded8;
@@ -49,6 +59,11 @@ body {
 
 .greedy-nav .hidden-links a {
   color: #30343a !important;
+}
+
+.greedy-nav .hidden-links a[aria-current="page"] {
+  font-weight: 700;
+  border-left: 3px solid #990000;
 }
 
 .greedy-nav .hidden-links .masthead__menu-item a:hover {

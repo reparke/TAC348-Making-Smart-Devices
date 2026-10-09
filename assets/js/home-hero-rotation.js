@@ -16,6 +16,7 @@
   var interval = 10000;
   var timer = null;
   var userPaused = false;
+  var imageSetChange = 0;
 
   if (!Number.isInteger(current) || current < 0 || current >= images.length) {
     current = 0;
@@ -53,9 +54,30 @@
   function updateToggle() {
     var paused = userPaused || reduceMotion.matches;
     toggle.textContent = paused ? "Resume images" : "Pause images";
-    toggle.setAttribute("aria-pressed", String(paused));
     toggle.hidden = reduceMotion.matches;
   }
+
+  mobileLayout.addEventListener("change", function () {
+    images = mobileLayout.matches ? imageSets.mobile : imageSets.desktop;
+    var change = ++imageSetChange;
+    var replacement = new Image();
+
+    replacement.addEventListener("load", function () {
+      if (change !== imageSetChange) {
+        return;
+      }
+      var activeLayer = firstLayer.classList.contains("is-active") ? firstLayer : secondLayer;
+      activeLayer.style.backgroundImage = backgroundFor(images[current]);
+    }, { once: true });
+    replacement.src = images[current];
+
+    images.forEach(function (url, index) {
+      if (index !== current) {
+        var image = new Image();
+        image.src = url;
+      }
+    });
+  });
 
   function stopTimer() {
     if (timer !== null) {

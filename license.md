@@ -4,7 +4,7 @@ layout: single
 description: "License, attribution, and reuse guidance for original TAC 348 Making Smart Devices course content."
 ---
 
-# License and Reuse
+<span id="license-and-reuse"></span>
 
 Rob's original course content, such as lesson text, assignment instructions, and reference guides, is offered under CC BY-NC-SA 4.0 unless otherwise noted. Read the official [license summary](https://creativecommons.org/licenses/by-nc-sa/4.0/) and [legal code](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode) for the terms.
 
