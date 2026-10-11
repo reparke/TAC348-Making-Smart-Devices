@@ -82,7 +82,7 @@ Add Photon 2 device to your Particle account
 
 -   Follow the instructions to claim your Photon 2 and link it to your account:
 
-    <https://docs.particle.io/quickstart/photon 2/#1-set-up-your-photon 2>
+    <https://docs.particle.io/photon-2/>
 
 -   Complete only step \#1 (setting up Photon 2) and do not proceed any further.
 

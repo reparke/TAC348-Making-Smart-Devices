@@ -59,7 +59,9 @@ title: Particle + Gemini Integration
 
 ## The API JSON Structure
 
-<img src="https://ai.google.dev/static/site-assets/images/marketing/copy-code-illustration.png" alt="api_structure" style="width:400px;" />
+```json
+{"contents":[{"parts":[{"text":"Temp: {{temp}}"}]}]}
+```
 
 - Sending prompts via a webhook requires a specific JSON format
 - The structure follows a nested hierarchy that the Google Cloud Console expects

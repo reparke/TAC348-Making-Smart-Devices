@@ -734,7 +734,7 @@
 ### Reading
 
 - Motors
-  - [https://www.electronicproducts.com/Electromechanical_Components/Motors_and_Controllers/Motor_control_design_an_introduction_to_motors_and_controllers.aspx](https://www.electronicproducts.com/Electromechanical_Components/Motors_and_Controllers/Motor_control_design_an_introduction_to_motors_and_controllers.aspx)
+  - [https://www.ti.com/lit/pdf/swrp185](https://www.ti.com/lit/pdf/swrp185)
 
 ### Day 1
 

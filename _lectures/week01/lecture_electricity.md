@@ -171,7 +171,7 @@ or Voltage = Current * Resistance
 
 - <a href="https://www.flickr.com/photos/59275783@N04/47522354472/">Mabacam</a> Flickr via <a href="http://compfight.com">Compfight</a> <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">cc</a> 
 - <a href="https://www.flickr.com/photos/161816492@N07/47312501852/">PickComfort</a> Flickr via <a href="http://compfight.com">Compfight</a> <a href="https://creativecommons.org/licenses/by/2.0/">cc</a> 
-- <a href="https://www.flickr.com/photos/160866001@N07/46688229715/">verchmarco</a> Flickr via <a href="http://compfight.com">Compfight</a> <a href="https://creativecommons.org/licenses/by/2.0/">cc</a> 
+- verchmarco Flickr via <a href="http://compfight.com">Compfight</a> <a href="https://creativecommons.org/licenses/by/2.0/">cc</a>
 - <a href="https://www.flickr.com/photos/34327409@N04/47730722082/">Craig Walkowicz</a> Flickr via <a href="http://compfight.com">Compfight</a> <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">cc</a> 
 - Images created with [Fritzing](https://fritzing.org/home/)
 

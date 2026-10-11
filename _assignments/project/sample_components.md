@@ -13,7 +13,7 @@ This list include the components we covered in the course. You can also use comp
 ## Sensors
 
 -   Temperature sensors
-    -   [TMP 36](https://www.sparkfun.com/products/10988)
+    -   [TMP 36](https://cdn.sparkfun.com/assets/learn_tutorials/2/7/0/TMP35_36_37.pdf)
     -   [DHT 20](https://www.sparkfun.com/products/10167)
 -   Humidity sensor: [DHT 20](https://www.sparkfun.com/products/10167)
 -   [Ultrasonic distance sensor](https://www.sparkfun.com/products/15569)

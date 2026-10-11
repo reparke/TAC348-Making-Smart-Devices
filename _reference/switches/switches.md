@@ -61,6 +61,6 @@ void loop() {
 
 ## Credit
 
-- [Sparkfun](https://learn.sparkfun.com/tutorials/switch-basics/all) has some great illustrations on this for a deep dive into switches
+- [Sparkfun](https://learn.sparkfun.com/tutorials/button-and-switch-basics/all) has some great illustrations on this for a deep dive into switches
 - Images created with [Fritzing](https://fritzing.org/home/)
 

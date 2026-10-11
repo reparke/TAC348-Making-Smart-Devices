@@ -42,7 +42,7 @@ Students will work in pairs and sign up for a time slot throughout the semester 
 - Summarize the story and key issues in your own words
 - Write at least three questions for discussion
   - Questions should not be simple yes / no questions, but should be open-ended and lead to conversations
-  - For some tips to writing questions, see [https://teachingcommons.stanford.edu/resources/teaching/student-teacher-communication/designing-effective-discussion-questions](https://teachingcommons.stanford.edu/resources/teaching/student-teacher-communication/designing-effective-discussion-questions)
+  - Ask about a specific choice or tradeoff in the article, invite different viewpoints, and ask classmates to explain their reasoning.
 
 ## Sample Submission
 

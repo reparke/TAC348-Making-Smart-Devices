@@ -96,7 +96,7 @@ void loop() {
 ## Credit
 
 - [Analog datasheet](https://cdn.sparkfun.com/datasheets/Sensors/Temp/TMP35_36_37.pdf)
-- [Sparkfun](https://www.sparkfun.com/products/10988)
+- [Sparkfun](https://cdn.sparkfun.com/assets/learn_tutorials/2/7/0/TMP35_36_37.pdf)
 - Images created with [Fritzing](https://fritzing.org/home/)
 
 

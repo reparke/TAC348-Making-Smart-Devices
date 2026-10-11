@@ -114,9 +114,9 @@ Note that I can not vouch for most of these projects or sensors personally.
 
 ### Air Quality and Environment Sensors
 
-* [Great resource on Seeed air sensors](http://wiki.seeedstudio.com/Seeed_Gas_Sensor_Selection_Guide/CCS811) 
+* [Great resource on Seeed air sensors](https://wiki.seeedstudio.com/Seeed_Gas_Sensor_Selection_Guide/)
 * [Sample Workbench project](https://community.particle.io/t/argon-powered-air-quality-monitor/48932)
-* [HPM particle sensor](https://www.sparkfun.com/products/14959) ($40)
+* HPM particle sensor ($40)
   * This sensor is challenging to physically connect and to code for 
 * [Grove dust sensor](https://www.seeedstudio.com/Grove-Dust-Sensor-PPD42NS.html) ($12)
   * [Sample code / project](https://airquality406.wordpress.com/code/)

@@ -113,6 +113,6 @@ title: Push Buttons
 
 ## Credit
 
-- [Sparkfun](https://learn.sparkfun.com/tutorials/switch-basics/momentary-switches)
+- [Sparkfun](https://learn.sparkfun.com/tutorials/button-and-switch-basics/all)
 - [SVG]()
 - Images created with [Fritzing](https://fritzing.org/home/)

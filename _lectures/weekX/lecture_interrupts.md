@@ -176,4 +176,4 @@ void loop() {
 
 ## Credits
 
-  * [Particle Documentation](https://docs.particle.io/reference/device-os/firmware/photon/interrupts/)
+  * [Particle Documentation](https://docs.particle.io/reference/device-os/api/interrupts/attachinterrupt/)
