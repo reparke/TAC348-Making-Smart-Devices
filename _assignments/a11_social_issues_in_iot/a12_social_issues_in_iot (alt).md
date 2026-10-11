@@ -35,9 +35,9 @@ Students will work in pairs and sign up for a time slot throughout the semester 
 
 - [Uber uses techniques to evade government regulators](https://www.nytimes.com/2017/03/03/technology/uber-greyball-program-evade-authorities.html)
 - [Some mobile and tech companies ban violent / hateful groups from their service](https://www.theguardian.com/technology/2017/aug/16/daily-stormer-forced-dark-web-reddit-facebook-ban-hate-groups)
-- [Snapchat creates potentially offensive filters](http://www.bbc.com/news/world-asia-37042475)
+- [Snapchat creates potentially offensive filters](https://www.bbc.com/news/world-asia-37042475)
 - [Silicon Valley companies provide free products and services to elementary-school teachers for endorsements](https://www.nytimes.com/2017/09/02/technology/silicon-valley-teachers-tech.html?ribbon-ad-idx=2&amp;rref=technology&amp;module=ArrowsNav&amp;contentCollection=Technology&amp;action=swipe&amp;region=FixedRight&amp;pgtype=article)
-- [AT&amp;T accused of digital redlining in Cleveland](http://www.cleveland.com/business/index.ssf/2017/08/clevelanders_file_fcc_complain.html) (denying high speed internet to low-income neighborhoods)
+- [AT&amp;T accused of digital redlining in Cleveland](https://www.cleveland.com/business/2017/08/clevelanders_file_fcc_complain.html) (denying high speed internet to low-income neighborhoods)
 
 **Requirements**
 

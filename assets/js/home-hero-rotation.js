@@ -17,6 +17,7 @@
   var timer = null;
   var userPaused = false;
   var imageSetChange = 0;
+  var initialReady = false;
 
   if (!Number.isInteger(current) || current < 0 || current >= images.length) {
     current = 0;
@@ -33,11 +34,53 @@
     return "linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url(\"" + url + "\")";
   }
 
-  firstLayer.style.backgroundImage = backgroundFor(images[current]);
   hero.insertBefore(secondLayer, hero.firstChild);
   hero.insertBefore(firstLayer, hero.firstChild);
-  delete document.documentElement.dataset.homeHero;
-  hero.style.backgroundImage = "none";
+
+  function loadImage(url, onReady) {
+    var image = new Image();
+    image.addEventListener("load", function () {
+      if (typeof image.decode === "function") {
+        image.decode().then(onReady, function () {});
+      } else {
+        onReady();
+      }
+    }, { once: true });
+    image.src = url;
+  }
+
+  function revealInitialImage(change) {
+    var selectedUrl = images[current];
+    firstLayer.style.backgroundImage = backgroundFor(selectedUrl);
+    loadImage(selectedUrl, function () {
+      if (change !== imageSetChange) {
+        return;
+      }
+      delete document.documentElement.dataset.homeHero;
+      hero.style.backgroundImage = "none";
+      initialReady = true;
+      updateToggle();
+      scheduleNext();
+    });
+  }
+
+  revealInitialImage(imageSetChange);
+
+  function updateActiveImage(change) {
+    var selectedIndex = current;
+    var selectedUrl = images[selectedIndex];
+    loadImage(selectedUrl, function () {
+      if (change !== imageSetChange) {
+        return;
+      }
+      if (selectedIndex !== current) {
+        updateActiveImage(change);
+        return;
+      }
+      var activeLayer = firstLayer.classList.contains("is-active") ? firstLayer : secondLayer;
+      activeLayer.style.backgroundImage = backgroundFor(selectedUrl);
+    });
+  }
 
   images.forEach(function (url, index) {
     if (index !== current) {
@@ -54,22 +97,17 @@
   function updateToggle() {
     var paused = userPaused || reduceMotion.matches;
     toggle.textContent = paused ? "Resume images" : "Pause images";
-    toggle.hidden = reduceMotion.matches;
+    toggle.hidden = !initialReady || reduceMotion.matches;
   }
 
   mobileLayout.addEventListener("change", function () {
     images = mobileLayout.matches ? imageSets.mobile : imageSets.desktop;
     var change = ++imageSetChange;
-    var replacement = new Image();
-
-    replacement.addEventListener("load", function () {
-      if (change !== imageSetChange) {
-        return;
-      }
-      var activeLayer = firstLayer.classList.contains("is-active") ? firstLayer : secondLayer;
-      activeLayer.style.backgroundImage = backgroundFor(images[current]);
-    }, { once: true });
-    replacement.src = images[current];
+    if (!initialReady) {
+      revealInitialImage(change);
+    } else {
+      updateActiveImage(change);
+    }
 
     images.forEach(function (url, index) {
       if (index !== current) {
@@ -88,7 +126,7 @@
 
   function scheduleNext() {
     stopTimer();
-    if (!userPaused && !reduceMotion.matches && !document.hidden) {
+    if (initialReady && !userPaused && !reduceMotion.matches && !document.hidden) {
       timer = window.setTimeout(showNext, interval);
     }
   }

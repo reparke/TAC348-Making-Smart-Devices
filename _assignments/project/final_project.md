@@ -100,7 +100,7 @@ Deliverables
     building supplies, other sensors, etc.)
 * *Note: You can modify your project later but you must submit a revised proposal for approval. Failure to do so will result in a 10% deduction*
 
-* [Sample proposal](https://reparke.github.io/TAC348-Making-Smart-Devices/assignments/project/samples/project_proposal_sample.pdf)
+* [Sample proposal](/assignments/project/samples/project_proposal_sample.pdf)
 
 ### External Design Review and Design-Review Response
 
@@ -138,7 +138,7 @@ The part you demonstrate does not need to be polished or integrated into the com
     - What would they need to know to set up your project and get it running?
     - What would they need to know to modify it? (Assume that they don’t want to read through all your code; they want some sort of a quick start guide that will help them identify where they should start looking/working first)
     - Give a general overview of all aspects of your project with sufficient detail for them to know where to look to make modifications.
-  - [Sample developer documentation](https://reparke.github.io/TAC348-Making-Smart-Devices/assignments/project/samples/project_developer_guide_sample.pdf)
+  - [Sample developer documentation](/assignments/project/samples/project_developer_guide_sample.pdf)
 - Sizzle reel / product highlight video (include YouTube link in submission)
   - A short, polished video that showcases your device (30–60 seconds)
   - Demonstrates the device’s purpose and major features in a visually appealing way

@@ -25,7 +25,7 @@ title: Pre-Lecture Activities
 - DC motor with fan blade and motor driver
 - Servo motor
 - Lithium ion battery
-- *You can see what parts look like visually by checking out the [kit page](https://reparke.github.io/TAC348-Making-Smart-Devices/kit)*
+- *You can see what parts look like visually by checking out the [kit page](/kit.html)*
 
 ### Install before class all week 
 

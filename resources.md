@@ -32,7 +32,7 @@ This collection brings together external documentation, books, tools, project id
 
 ### C++ Language 
 
-- [C plus plus](http://www.cplusplus.com/)
+- [C plus plus](https://cplusplus.com/)
 - [C++ Reference](https://en.cppreference.com/w/)
 
 
@@ -47,7 +47,7 @@ This collection brings together external documentation, books, tools, project id
 
 ### Fritzing
 
-* [Fritzing Software](http://fritzing.org/home/)
+* [Fritzing Software](https://fritzing.org/)
 * Particle Library Parts: [Direct download](https://github.com/reparke/Fritzing-Parts/raw/main/Particle_Mesh_Parts.fzbz) and [GitHub repository](https://reparke.github.io/Fritzing-Parts/)
 * AdaFruit Library Parts (useful for OLEDs): [Direct download](https://github.com/adafruit/Fritzing-Library/raw/master/AdaFruit.fzbz) and [GitHub repository](https://github.com/adafruit/Fritzing-Library)
 * RFID MFC522 Part: [Fritzing page](https://fritzing.org/projects/mfrc522)

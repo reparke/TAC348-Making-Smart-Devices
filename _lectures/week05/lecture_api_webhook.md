@@ -36,7 +36,7 @@ title: APIs and Webhooks
 
 * Weather data - [https://weatherstack.com](https://weatherstack.com)
 * Dictionaries - [Merriam-Webste](https://dictionaryapi.com/)
-* Transit data - [Bay Area Rapid Transit](http://api.bart.gov)
+* Transit data - [Bay Area Rapid Transit](https://api.bart.gov/docs/overview/index.aspx)
 * Useful lists of public APIs
   * [https://github.com/toddmotto/public-apis](https://github.com/toddmotto/public-apis)
   * [https://github.com/abhishekbanthia/Public-APIs](https://github.com/abhishekbanthia/Public-APIs)

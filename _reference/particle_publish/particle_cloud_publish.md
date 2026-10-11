@@ -14,7 +14,7 @@ show_in_list: true
 ## Operation
 
 * Events are messages sent from an Photon 2 to the cloud **as often as you choose**
-* Events can be accessed in [Particle console]([https://console.particle.io/](https://console.particle.io/)), app, or by other devices (subscribing)
+* Events can be accessed in [Particle console](https://console.particle.io/), app, or by other devices (subscribing)
 
 ### Viewing Events in Particle Console
 

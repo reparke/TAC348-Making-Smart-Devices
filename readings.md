@@ -43,7 +43,7 @@ toc_sticky: true
 </ul>
 {% endif %}
 {% if index >= 16 %}
-<h2 id="#bonus_material">Bonus Material<a class="header-link" href="#bonus_material" title="Permalink"></a></h2>
+<h2 id="bonus_material">Bonus Material<a class="header-link" href="#bonus_material" title="Permalink"></a></h2>
 <ul>
     {% assign items = week.items | sort: 'order' %}
     {% for item in items %}

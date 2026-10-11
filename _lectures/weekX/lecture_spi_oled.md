@@ -58,7 +58,7 @@ https://learn.sparkfun.com/tutorials/micro-oled-breakout-hookup-guide#using-the-
 
 ## OLED screen
 
-![bg opacity:.85 right:40%](lecture_spi_oled.assets/OLED_only.jpg)
+![bg opacity:.85 right:40%](lecture_spi_oled.assets/oled_only.jpg)
 * Blue text on black screen
 * 64 pixels (H) x 48 pixels (W)
 * Operates at 3.3v

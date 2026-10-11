@@ -12,7 +12,7 @@ show_in_list: false
 
 Below are examples of complete programs using functions, arrays / lists, and classes in C++, Python, and Java. Each group of programs performs the same functionality so you can compare C++ to a language you might be more familiar with.
 
-You can also download all the [source code](resources\c++_comparison\c++_comparison.zip) directly.
+You can also download all the [source code](/resources/c++_comparison/c++_comparison.zip) directly.
 
 **Note:** In programming the Photon 2 for this course, we will not use the standard input / output in C++ (e.g. `cin` and `cout`) and we will be creating custom classes, but they are included below.
 
@@ -20,7 +20,7 @@ You can also download all the [source code](resources\c++_comparison\c++_compari
 
 ## Basic Syntax
 
-### Basic Syntax: C++ ([driver.cpp](resources\c++_comparison\1_syntax\c++\driver.cpp))
+### Basic Syntax: C++ ([driver.cpp](/resources/c++_comparison/1_syntax/c++/driver.cpp))
 
 ```c++
 // Comments: single line
@@ -216,7 +216,7 @@ int main()
 
 ```
 
-### Basic Syntax: Python ([main.cpp](resources\c++_comparison\1_syntax\python\main.py))
+### Basic Syntax: Python ([main.py](/resources/c++_comparison/1_syntax/python/main.py))
 
 ```python
 #define main function
@@ -281,7 +281,7 @@ main()
 
 
 
-### Basic Syntax: Java ([Program.java](resources\c++_comparison\1_syntax\java\Program.java))
+### Basic Syntax: Java ([Program.java](/resources/c++_comparison/1_syntax/java/Program.java))
 
 ```java
 import java.util.Scanner;
@@ -359,7 +359,7 @@ public class Program {
 
 ## Functions
 
-### Functions: C++ ([driver.cpp](resources\c++_comparison\2_functions\c++\driver.cpp))
+### Functions: C++ ([driver.cpp](/resources/c++_comparison/2_functions/c++/driver.cpp))
 
 ```c++
 
@@ -473,7 +473,7 @@ int main()
 
 
 
-### Functions: Python ([main.py](resources\c++_comparison\2_functions\python\main.py))
+### Functions: Python ([main.py](/resources/c++_comparison/2_functions/python/main.py))
 
 ```python
 #define main function
@@ -507,7 +507,7 @@ main()
 
 
 
-### Functions: Java ([Program.java](resources\c++_comparison\2_functions\java\Program.java))
+### Functions: Java ([Program.java](/resources/c++_comparison/2_functions/java/Program.java))
 
 ```java
 

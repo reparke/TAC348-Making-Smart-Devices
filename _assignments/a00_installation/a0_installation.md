@@ -94,7 +94,7 @@ Setup Your Device
 
 - Choose your Wifi network.  If you are on campus, use **USC Guest Wireless**, and **leave the password blank**. If it doesn't connect to Wifi on the first try, it often works if you try it again.
 
-  - If you are off-campus and need to login to a website before you can connect to Wifi, you will need to do a couple things before you can get the Photon 2 online. You can follow these [instructions](https://reparke.github.io/TAC348-Making-Smart-Devices/reference/general/captive_wifi.html) or reach out to course staff for assistance. 
+  - If you are off-campus and need to login to a website before you can connect to Wifi, you will need to do a couple things before you can get the Photon 2 online. You can follow these [instructions](/reference/general/captive_wifi.html) or reach out to course staff for assistance.
 
 
 ![image-20230803165937445](a0_installation.assets/image-20230803165937445.png)

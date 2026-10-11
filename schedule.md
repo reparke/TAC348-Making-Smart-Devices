@@ -108,7 +108,7 @@ Consider revising and possibly using Liquid sort function
 
   {% assign current_dates = dates_array[index] | split: '|' %}
   {% if index == 16 %}
-  <h2 id="#bonus_material">Bonus Material<a class="header-link" href="#bonus_material" title="Permalink"></a></h2>
+  <h2 id="bonus_material">Bonus Material<a class="header-link" href="#bonus_material" title="Permalink"></a></h2>
   <div class="weekly_schedule_content_area">
     <h3 class="no_toc weekly_schedule_content_label">Pre-Lecture Activities / Reading / Video</h3>
     <ul>

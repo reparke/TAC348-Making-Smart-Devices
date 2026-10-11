@@ -17,7 +17,7 @@ title: Smart Watch
 
 ## Starting Project
 
-  * For assembly and wiring, refer to [these instructions](guide_build_watch.md)
+  * For assembly and wiring, refer to [these instructions](/assignments/a10_smart_watch_build/guide_build_watch.html)
   * Download starting code: Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
     * Paste the following link into the top right
       https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week12/smart_watch_pulse_sensor_start
@@ -71,13 +71,13 @@ title: Smart Watch
 
 2. Draw clock bitmap `clock_16x12`
 
-3. Display date format  ([formatting guide](http://www.cplusplus.com/reference/ctime/strftime/))
+3. Display date format  ([formatting guide](https://cplusplus.com/reference/ctime/strftime/))
     <!-- String dateFormat = "%a %d";-->
   ```c++
   oled.println(Time.format(<<DATE_FORMAT_STRING>>));
   ```
 
-4. Display time format ([formatting guide](http://www.cplusplus.com/reference/ctime/strftime/))
+4. Display time format ([formatting guide](https://cplusplus.com/reference/ctime/strftime/))
     <!-- String timeFormat = "%I:%M%p"; -->
 
     ```c++

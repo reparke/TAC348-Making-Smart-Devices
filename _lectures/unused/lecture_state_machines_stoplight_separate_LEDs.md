@@ -91,8 +91,8 @@ You'll need
 
 ## Credits
 
-* [Bill Siever](http://siever.info) - [CS132 FSM](http://siever.info/cse132/guides/intro-to-FSMs.html)  (Washington University at St. Louis) 
-* [Bill Siever](http://siever.info) - [CS132 Delta Timing](http://siever.info/cse132/weeks/3/)  (Washington University at St. Louis) 
+* [Bill Siever](https://siever.info/home/) - [CS132 FSM](http://siever.info/cse132/guides/intro-to-FSMs.html)  (Washington University at St. Louis)
+* [Bill Siever](https://siever.info/home/) - [CS132 Delta Timing](http://siever.info/cse132/weeks/3/)  (Washington University at St. Louis)
 * [USC EE109 State Machines](http://bits.usc.edu/files/ee109/)
 * Photo by Laurie Parke
 * Photo by [Michael Olsen](https://unsplash.com/@mganeolsen)</a> on [Unsplash](https://unsplash.com/)

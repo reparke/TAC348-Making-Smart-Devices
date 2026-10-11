@@ -56,7 +56,7 @@ Consider revising and possibly using Liquid sort function
 {% assign index = week.name | times: 1 %} 
 {% assign current_dates = dates_array[index] | split: '|' %}
 {% if index == 16 %}
-<h2 id="#bonus_material">Bonus Material<a class="header-link" href="#bonus_material" title="Permalink"></a></h2>
+<h2 id="bonus_material">Bonus Material<a class="header-link" href="#bonus_material" title="Permalink"></a></h2>
 <ul>
     {% assign items = week.items | sort: 'order' %}
     {% for item in items %}

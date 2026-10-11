@@ -70,7 +70,7 @@ Here is an example:
 
 ###  Stage 2: DHT20 
 
--   [DHT 20 notes and example](https://reparke.github.io/TAC348-Making-Smart-Devices/lectures/weekX/lecture_dht20.html)
+-   [DHT 20 notes and example](/lectures/weekX/lecture_dht20.html)
 -   Using the notes and examples provided, measure the current temperature and humidity
 -   Store the max and min of the temperature and humidity readings
 

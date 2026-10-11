@@ -16,7 +16,7 @@ title: C++ Syntax
 ## C++ Compared to Python, Matlab, and Java
 
 * For comparison of programs side-by-side using functions, arrays / lists, and functions using C++, Python, and Java, see this page:
-  [C++ comparison](https://reparke.github.io/TAC348-Making-Smart-Devices/c++_comparison)
+  [C++ comparison](/c++_comparison.html)
 
 ## C++ and Other Languages
 
@@ -334,5 +334,5 @@ for (int i = 0; <span style="color:#990000">**i < 10**</span>; i++) {
 
 ## Resources on C++ Language
 
-* [C plus plus](http://www.cplusplus.com/)
+* [C plus plus](https://cplusplus.com/)
 * [C++ Reference](https://en.cppreference.com/w/)

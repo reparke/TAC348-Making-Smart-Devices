@@ -76,7 +76,7 @@ title: Next Steps After TAC 348
 ## PCB Design Software
 
 - [Altium](https://www.altium.com): expensive but free for students
-- [KiCad](www.kicad.org)
+- [KiCad](https://www.kicad.org/)
 - [Eagle](https://www.autodesk.com/products/eagle/overview?term=1-YEAR&tab=subscription)
 
 ## Credits

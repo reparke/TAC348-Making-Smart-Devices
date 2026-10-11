@@ -102,6 +102,6 @@ title: State Machines Part 3 - Washing Machine Example
 
 ## Credits
 
-* [Bill Siever](http://siever.info) for the lab idea
+* [Bill Siever](https://siever.info/home/) for the lab idea
 * Photo by [Nathan Dumlao](https://unsplash.com/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/dishes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 * Photo by Laurie Parke

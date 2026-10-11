@@ -78,7 +78,7 @@ Deliverables
     building supplies, other sensors, etc.)
 * *Note: You can modify your project later but you must submit a revised proposal for approval. Failure to do will lose 10%*
 
-* [Sample proposal](https://reparke.github.io/TAC348-Making-Smart-Devices/assignments/project/samples/project_proposal_sample.pdf)
+* [Sample proposal](/assignments/project/samples/project_proposal_sample.pdf)
 
 ### Project Milestone Deliverables
 
@@ -103,7 +103,7 @@ Deliverables
         -   Give a general overview of all aspects of your project with
                 sufficient detail for them to know where to look to make
                 modifications.
-    -   [Sample developer documentation](https://reparke.github.io/TAC348-Making-Smart-Devices/assignments/project/samples/project_developer_guide_sample.pdf)
+    -   [Sample developer documentation](/assignments/project/samples/project_developer_guide_sample.pdf)
 -   User documentation
     -   Assume a non-technical person would like to use your device. What do
         they need to know to get started and to use specific features? (You can

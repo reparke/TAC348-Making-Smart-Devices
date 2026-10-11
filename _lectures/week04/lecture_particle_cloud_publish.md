@@ -18,7 +18,7 @@ title: Cloud Communication - Publish
 
 * Events are messages sent from a Photon 2 to the cloud **as often as you choose**
 * Events are private (viewable by only by you and devices in your account) 
-* Events can be accessed in [Particle console]([https://console.particle.io/](https://console.particle.io/)), app, or by other devices (subscribing)
+* Events can be accessed in [Particle console](https://console.particle.io/), app, or by other devices (subscribing)
 
 ## Events in Particle Console
 

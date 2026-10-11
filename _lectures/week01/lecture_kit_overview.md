@@ -23,7 +23,7 @@ title: Kit Overview
   - #2 you purchased from Sparkfun (link was emailed to you). Please purchased this **as soon as possible**
 
 - This includes all the most of the components we will discuss during the semester
-- [Kit parts and pictures](https://reparke.github.io/TAC348-Making-Smart-Devices/kit)
+- [Kit parts and pictures](/kit.html)
 
 ## Student Responsibilities
 

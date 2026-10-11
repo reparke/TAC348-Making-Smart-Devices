@@ -107,7 +107,7 @@ Screw on Wheels to DC Motors and add the wheel rubber tires.
 * The breadboard can then be attached to the battery
 
 <img src="guide_build_chassis_robot_chassis.assets/IMG_8467.JPG" style="400px" />
-<img src="guide_build_chassis.assets/IMG_8468.JPG" alt="IMG_8468" style="width:400px" />
+<img src="guide_build_chassis_robot_chassis.assets/IMG_8468.JPG" alt="IMG_8468" style="width:400px" />
 
 <img src="guide_build_chassis_robot_chassis.assets/car_lipo_hookup_no_wires_bb.png" style="width:500px;" />
 

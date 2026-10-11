@@ -103,11 +103,11 @@ Videos for each week are posted on the course website and should be watched prio
 
 - Hughes, John M. Arduino in a Nutshell: A Handbook for Technicians,
   Engineers, and Makers. 2015. ISBN: 978-1491921760  
-  Amazon: <http://a.co/dkklYgg>
+  Amazon: <https://a.co/dkklYgg>
 
 - Purdum, Jack. *Beginning C for Arduino, Second Edition: Learn C Programming for
   the Arduino*. Apress, 2015. ISBN: 978-1484209417  
-  Amazon: <http://a.co/9NcBY1V>
+  Amazon: <https://a.co/9NcBY1V>
 
 ## Course Deliverables
 
@@ -319,7 +319,7 @@ USC welcomes students with disabilities into all of the University’s education
 
 Free and confidential mental health treatment for students, including short-term psychotherapy, group counseling, stress fitness workshops, and crisis intervention. 
 
-### [*988 Suicide and Crisis Lifeline*](http://988lifeline.org/) *- 988 for both calls and text messages – 24/7 on call*
+### [*988 Suicide and Crisis Lifeline*](https://988lifeline.org/) *- 988 for both calls and text messages – 24/7 on call*
 
 The 988 Suicide and Crisis Lifeline (formerly known as the National Suicide Prevention Lifeline) provides free and confidential emotional support to people in suicidal crisis or emotional distress 24 hours a day, 7 days a week, across the United States. The Lifeline is comprised of a national network of over 200 local crisis centers, combining custom local care and resources with national standards and best practices. The new, shorter phone number makes it easier for people to remember and access mental health crisis services (though the previous 1 (800) 273-8255 number will continue to function indefinitely) and represents a continued commitment to those in crisis.
 

@@ -74,13 +74,13 @@ Note: This specifically references using the MAX30101 sensor
 
 2. Draw clock bitmap `clock_16x12`
 
-3. Display date format  ([formatting guide](http://www.cplusplus.com/reference/ctime/strftime/))
+3. Display date format  ([formatting guide](https://cplusplus.com/reference/ctime/strftime/))
     <!-- String dateFormat = "%a %d";-->
   ```c++
   oled.println(Time.format(<<DATE_FORMAT_STRING>>));
   ```
 
-4. Display time format ([formatting guide](http://www.cplusplus.com/reference/ctime/strftime/))
+4. Display time format ([formatting guide](https://cplusplus.com/reference/ctime/strftime/))
     <!-- String timeFormat = "%I:%M%p"; -->
 
     ```c++
