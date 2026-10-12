@@ -200,7 +200,7 @@ const uint8_t heart_bmp[] = {
   - Code output format: Arduino code, single bitmap (later in the source, change the declaration to `const uint8_t <PUT BITMAP NAME HERE>[]`)
   - Draw mode: Vertical - 1 bit per pixel
 
-## Example: Converting an Image with [Image2CPP](https://javl.github.io/image2cpp/)
+## Convert an Image with [Image2CPP](https://javl.github.io/image2cpp/)
 
 <img src="lecture_oled_graphics.assets/image-20200317223318751.png" alt="Image2CPP image selection" style="width:1000px;" />
 

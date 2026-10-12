@@ -21,7 +21,7 @@ Goals
 
 ## Overview
 
-This assignment is to create a device that simulates brewing tea using state machines and a Blynk interface. The state machine machine logic will control how the device moves through the tea brewing states, and feedback and control will be available through the Blynk app. When brewing is finished, a song will optionally play on the Photon 2 through a speaker.
+This assignment is to create a device that simulates brewing tea using state machines and a Blynk interface. The state machine logic will control how the device moves through the tea brewing states, and feedback and control will be available through the Blynk app. When brewing is finished, a song will optionally play on the Photon 2 through a speaker.
 
 Here is a video overview: [https://youtu.be/lqQhFIVWDR0](https://youtu.be/lqQhFIVWDR0)
 
@@ -50,7 +50,7 @@ Here is a video overview: [https://youtu.be/lqQhFIVWDR0](https://youtu.be/lqQhFI
 
 ## State Machine Logic
 
-There are 5 states in the brewing process. Note that we will use **seconds** in places of **minutes**
+There are 5 states in the brewing process. Note that we will use **seconds** in place of **minutes**
 
 1. **Idle**: nothing is happening until *Start button* on Blynk app is pressed to start brewing
 2. **Heat**: water is heating up (takes 6 seconds)
@@ -68,7 +68,7 @@ There are 5 states in the brewing process. Note that we will use **seconds** in 
 | Steep | 3 sec      | Brew_Active == false                                    | Idle       |
 | Steep | 3 sec      | (Brew_Active == true) and (Brew_Time >= Goal_Brew_Time) | Hold       |
 | Hold  | indefinite | Brew_Active == false                                    | Idle       |
-| Hold  | indefinite | ((Brew_Active == true)  and (Cup_Present == false)      | Hold       |
+| Hold  | indefinite | (Brew_Active == true)  and (Cup_Present == false)      | Hold       |
 | Hold  | indefinite | (Brew_Active == true)  and (Cup_Present == true)        | Pour       |
 | Pour  | 4 sec      | Brew_Active == false                                    | Idle       |
 | Pour  | 4 sec      | (Brew_Active == true) and (Pour_Time >= Goal_Pour_Time) | Idle       |
@@ -84,7 +84,7 @@ There are 5 states in the brewing process. Note that we will use **seconds** in 
 
 ### Cup Status
 
-* Displays if the magnetic switch status
+* Displays the magnetic switch status
 
   * Switch closed means cup is present and brewing can continue
   * Switch open means cup is missing and pouring should not proceed
@@ -130,8 +130,8 @@ There are 5 states in the brewing process. Note that we will use **seconds** in 
 
 ## Requirements
 
--   Create a Fritzing breadboard prototype of your design. No sample is provided so it is up to you to layout the components
--   Once you are are finished, build the device
+-   Create a Fritzing breadboard prototype of your design. No sample is provided so it is up to you to lay out the components
+-   Once you are finished, build the device
 -   It is recommended to code the device in stages, and test at each stage
 
 ### Stage 1: Create State Machine States and Transition Logic
@@ -171,7 +171,7 @@ There are 5 states in the brewing process. Note that we will use **seconds** in 
 - There are two app elements that send information from the app to the Photon 2
   - `Button Start Brew`
   - `Button Sound`
-- Write the code that receives the infomation from the app and updates your code variables as necessary
+- Write the code that receives the information from the app and updates your code variables as necessary
 
 #### Testing stage 3
 
@@ -180,10 +180,10 @@ There are 5 states in the brewing process. Note that we will use **seconds** in 
 
 ### Stage 4: Enable communication between Photon 2 and app
 
-- There are two app elements that receive information from the app
+- There are two app elements that receive information from the Photon 2
   - `String State`
   - `String Cup Status`
-- Write the code that the sends the appropriate infomation to the app
+- Write the code that sends the appropriate information to the app
 - Remember that all updates FROM Photon 2 TO app should take place in the `loop()` function inside a `millis()` block
 
 #### Testing Stage 4
@@ -193,15 +193,15 @@ There are 5 states in the brewing process. Note that we will use **seconds** in 
 
 ### Stage 5: Play Song
 
-- Create a melody that will play when the **Pour** state finishes. Melody should at least 16 notes. You can use the list of musical notes and frequencies (or do something different).
-- Recommendation: Store melody notes in a array such as `int melodyNotes[16]` and note durations in array such as `int melodyNotesDuration[16]`. Note that `16` is just an example number of notes. You have have more notes in your song
+- Create a melody that will play when the **Pour** state finishes. The melody should have at least 16 notes. You can use the list of musical notes and frequencies (or do something different).
+- Recommendation: Store melody notes in an array such as `int melodyNotes[16]` and note durations in array such as `int melodyNotesDuration[16]`. Note that `16` is just an example number of notes. You can have more notes in your song
 
 #### Testing Stage 5
 
 - Make sure that when **Pour** state finishes, your melody plays
 - Make sure that Blynk app button enables / disables a variable that allows song to play or not
 
-**Naming convention **
+**Naming convention**
 
 *(replace \# with the current assignment number)*
 
@@ -215,7 +215,7 @@ There are 5 states in the brewing process. Note that we will use **seconds** in 
 
 - [ ] Pressing *Start button* on Blynk app (and it functions properly)
 - [ ] States transitioning
-- [ ] Pressing *Sound* on / off button* on Blynk app (and it functions properly)
+- [ ] Pressing *Sound* on/off button on Blynk app (and it functions properly)
 - [ ] Sound of melody playing
 
 Deliverables
@@ -241,8 +241,8 @@ Deliverables
    - Upload zip file to Brightspace site for our course
 
 3. A photograph of your device connected to USB with the cyan light on (indicating it is connected).
-4. ==A screenshot of your custom Blynk app==
-5. ==A screenshot of your custom datastream table from website==
+4. **A screenshot of your custom Blynk app**
+5. **A screenshot of your custom datastream table from website**
 6. A video demonstrating your project functioning (either upload this to separate from the zip file, or upload to YouTube / Google Drive / Dropbox and provide the link in your submission). 
 
 Grading
@@ -257,12 +257,12 @@ Grading
 | State duration logic / correct state durations               | 10     |
 | Magnetic switch holds the brewing state change               | 5      |
 | **Stage 2: Connect Blynk, Set Up Datastreams, and Design Blynk App** | **4**  |
-| Datastreams correct configured                               | 2      |
+| Datastreams correctly configured                               | 2      |
 | Blynk user interface app elements                            | 2      |
-| **Stage 3: Enable communication between Blynk app and Photon 2** | **6**  |
+| **Stage 3: Enable communication between Blynk app and Photon 2** | **4**  |
 | `Button Start Brew` starts and stops brewing process         | 2      |
 | `Button Sound` enables / disables sound playing              | 2      |
-| **Stage 4: Enable communication between Photon 2 and app**   | **6**  |
+| **Stage 4: Enable communication between Photon 2 and app**   | **4**  |
 | `String State` changes with correct state                    | 2      |
 | `String Cup Status` updates                                  | 2      |
 | **Stage 5: Play Song**                                       | **4**  |

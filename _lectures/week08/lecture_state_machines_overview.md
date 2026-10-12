@@ -20,16 +20,18 @@ title: State Machines Part 1 - Overview
 * Analyze a real-world situation to create states, transitions, and input
 * Implement a state machine in Photon 2 firmware
 
+<!-- _class: compact -->
+
 ## What's the main point?
 
-* Our devices should operate remotely without constant user intervention
-* Our devices can receive various sensor data (**input**) in different situations (**states**), which results in different actions (**outputs**)
-* Tracking and organizing all these possibilities can become very complicated
-* **State machines** provide a way of thinking about and designing for the various situations that arise
+* Devices should work remotely without constant user intervention
+* Sensor readings (**inputs**) and situations (**states**) lead to actions (**outputs**)
+* Tracking every possibility becomes complicated
+* **State machines** help organize and design for these situations
 
 ## State Machine
 
-* A state machine (or *finite state machine*) is mental **model** to help us make decisions
+* A state machine (or *finite state machine*) is a mental **model** to help us make decisions
   * It is not just hardware or just software code
 * Examine
   * What has happened previously (**state**)
@@ -46,7 +48,7 @@ title: State Machines Part 1 - Overview
 ## Example #1 Stoplight
 
 * Consider a simplified stoplight without any pedestrians
-* Lights changed after a fixed time
+* Lights change after a fixed time
 * What states are there?
 * How do we transition to new states?
 
@@ -87,7 +89,7 @@ dispense +cupcake taken| idle
 * What states are there?
 * How do we transition to new states?
 
-## Example #2 Boba Vending Machine ATM
+## Boba Vending Machine: Transitions
 
 <!-- _class: compact-table -->
 
@@ -127,7 +129,7 @@ dispense +cupcake taken| idle
   * use current state and any input to determine the next state 
 
 ## State Transition Logic Example
-* Let's look at just one piece of the Sprinkles vending machine, namely processing valid and invalid credit cards
+* Let's look at just one piece of the boba vending machine, namely processing valid and invalid credit cards
 
 | State               | Input        | Next State          |
 | ------------------- | ------------ | ------------------- |
@@ -146,6 +148,8 @@ bool cardValid;   //is customer card valid
 enum State {IDLE, DISPLAY, PROCESS, DISPENSE }; //all possible states
 State currentState;   //state the machine is in right now 
 ```
+
+<!-- _class: compact -->
 
 ## State Transition Logic Example
 * State transition: conditional logic to move to next state based on `currentState` and `cardValid`

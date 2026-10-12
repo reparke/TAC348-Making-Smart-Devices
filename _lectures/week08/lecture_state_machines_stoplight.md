@@ -25,7 +25,7 @@ title: State Machines Part 2 - Stoplight Example
 
 ## In class Lab - Stoplight and Pedestrian Signal
   
-* We are going to build a stoplight and pedestrian signal for a intersection.
+* We are going to build a stoplight and pedestrian signal for an intersection.
 * Car traffic goes North-South.
 * Pedstrian traffic goes East-West
 * Green lights, red lights, and the walk signal will stay on for 5 sec (`LONG_LIGHT_DURATION`)
@@ -65,7 +65,7 @@ title: State Machines Part 2 - Stoplight Example
 <img src="lecture_state_machines_stoplight.assets/Screenshot 2024-06-19 at 12.07.42 PM.png" style="width:800px" alt="Screenshot 2024-06-19 at 12.07.42 PM" />
 
 ## Components
-* 1 RGB LEDs
+* 1 RGB LED
 * MicroOLED
 * 3 x 330 Ohm resistors
 

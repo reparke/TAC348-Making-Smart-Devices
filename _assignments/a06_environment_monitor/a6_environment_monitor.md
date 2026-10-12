@@ -53,7 +53,7 @@ Here is an example:
 -   The device will read temperature and humidity from DHT 20 sensor
 -   The device will display current temperature and humidity on OLED
 -   When button is pressed, device will display high (max) and low (min) temperature and humidity values measured since device turned on via OLED
-    -   The means when you are reading the temperature, you should be computing the highs and lows
+    -   This means when you are reading the temperature, you should be computing the highs and lows
 -   Device will send current temperature and humidity to Initial State using Particle webhooks
 -   Note: this assignment intentionally uses a sensor not used in class (DHT20). However, notes and examples are provided below
 -   It is recommended to code the device in stages, and test at each stage.
@@ -114,7 +114,7 @@ Here is an example:
 
 - You can track the historical max and min by using global variables that are updated when values are read
 
-- Hint: You can control how many decimals display in the output via when casting a float using `String`
+- Hint: You can control how many decimals display in the output when casting a float using `String`
 
   - Consider `float tempFahr = 59.299283`
   - `String(tempFahr, 3)` will display `59.299` with 3 decimal places
@@ -128,7 +128,7 @@ Here is an example:
 
 -   Go to [Initial State](https://www.initialstate.com/) and create a new bucket
 -   Using the Initial State API URL, go to [Particle console](https://console.particle.io/) and configure webhooks
-    -   Hint: The label that Initial State gives the data widget is determined by how you configure the webhook. Since we are need to send two different pieces of data, how many webhooks should you create?
+    -   Hint: The label that Initial State gives the data widget is determined by how you configure the webhook. Since we need to send two different pieces of data, how many webhooks should you create?
 -   In your firmware, publish the current temperature and humidity to Initial State.
 
 #### Testing Stage 4
@@ -146,7 +146,7 @@ Here is an example:
     * Historical humidity as a graph
 -   For each of these four widgets used, you should set appropriate minimums and maximums based on the type of data displayed
 
-**Naming convention **
+**Naming convention**
 
 *(replace \# with the current assignment number)*
 
@@ -162,15 +162,15 @@ To install the new part, you can complete the following steps
 
 - Open Fritzing
   - On **Parts** panel on the right side of the screen, click the small dropdown menu and choose **Import …**
-- Navigate to the folder with the file you downloaded the file and open it
+- Navigate to the folder containing the file you downloaded and open it
 
-- If you want to save the mesh library for future use, click the small dropdown menu on the **Parts** panel again and chose **Save Bin**
+- If you want to save the mesh library for future use, click the small dropdown menu on the **Parts** panel again and choose **Save Bin**
 
 Video Submission Checklist
 ------------
 
 - [ ] OLED screen showing current data
-- [ ] Button pressed trigger OLED historical data
+- [ ] Pressing the button displays historical data on the OLED
 - [ ] Initial State dashboard receiving data
 
 Deliverables
@@ -196,7 +196,7 @@ Deliverables
    - Upload zip file to Brightspace site for our course
 
 3. A photograph of your device connected to USB with the cyan light on (indicating it is connected).
-4. **==A screenshot of your Initial State dashboard.==**
+4. **A screenshot of your Initial State dashboard.**
 5. A video demonstrating your project functioning (either upload this to separate from the zip file, or upload to YouTube / Google Drive / Dropbox and provide the link in your submission). 
 
 Grading
