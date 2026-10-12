@@ -10,10 +10,11 @@ title: State Machines Part 2 - Stoplight Example
 ---
 <!-- headingDivider: 2 -->
 
-# State Machines
-## In class Lab - Stoplight and Pedestrian Signal
 
-<img src="lecture_state_machines_stoplight.assets/stoplight.jpg" alt="stoplight" style="height:500px;" /> <img src="lecture_state_machines_stoplight.assets/ped_signal.jpg" alt="ped_signal" style="width:400px;" />
+# Stoplight and Pedestrian Signal Lab
+### TAC 348 - Making Smart Devices
+
+![bg opacity:.85 left:60%](lecture_state_machines_stoplight.assets/image-20261011165854518.png)
 
 
 ## Lab Learning Objectives
@@ -24,7 +25,7 @@ title: State Machines Part 2 - Stoplight Example
 * Control an independently blinking "Don’t Walk"
 
 ## In class Lab - Stoplight and Pedestrian Signal
-  
+
 * We are going to build a stoplight and pedestrian signal for an intersection.
 * Car traffic goes North-South.
 * Pedstrian traffic goes East-West

@@ -133,6 +133,8 @@ int barFill = map(inches, 0, 24, 60, 0);
 
 * Notice `toLow` and `toHigh` are **reversed**: as distance increases, the bar shrinks
 
+
+
 ## Clamping Before `map()`
 
 * `map()` does **not** clamp; if the input is out of range, the output will be too
