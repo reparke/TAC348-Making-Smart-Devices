@@ -149,7 +149,7 @@ JSON
 
 * Under **Query Parameters**, add
   * **Key: ** `key`
-  * **Value:** `YOUR_API_KEY_FROM_GOOGLE_CLOUD_CONSOLE"
+  * **Value:** `YOUR_API_KEY"
 
 
 
