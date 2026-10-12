@@ -97,7 +97,7 @@ JSON
     {
       "parts": [
         {
-          "text": "You are a concise assistant. Sensor data: {{data}}. Task: Summarize."
+          "text": "You are a concise assistant. Sensor data: {% raw %}{{data}}{% endraw %}. Task: Summarize."
         }
       ]
     }
@@ -136,7 +136,7 @@ JSON
     {
       "parts": [
         {
-          "text": "You are a concise, witty weather assistant. Based on a weather code of {{code}}, a humidity percentage of {{humidity}}, and a temperature of {% raw %}{{temp}}{% endraw %} degrees Fahrenheit, provide a single, short, descriptive phrase (max 10 words). Do not include the code or temperature in your final phrase. For example, 'A beautiful 76 degrees for a Sunday stroll.'"
+          "text": "You are a concise, witty weather assistant. Based on a weather code of {% raw %}{{code}}{% endraw %}, a humidity percentage of {% raw %}{{humidity}}{% endraw %}, and a temperature of {% raw %}{{temp}}{% endraw %} degrees Fahrenheit, provide a single, short, descriptive phrase (max 10 words). Do not include the code or temperature in your final phrase. For example, 'A beautiful 76 degrees for a Sunday stroll.'"
         }
       ]
     }
