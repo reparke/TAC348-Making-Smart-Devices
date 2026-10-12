@@ -20,7 +20,6 @@ title: State Machines Part 1 - Overview
 * Analyze a real-world situation to create states, transitions, and input
 * Implement a state machine in Photon 2 firmware
 
-<!-- _class: compact -->
 
 ## What's the main point?
 
@@ -149,7 +148,6 @@ enum State {IDLE, DISPLAY, PROCESS, DISPENSE }; //all possible states
 State currentState;   //state the machine is in right now 
 ```
 
-<!-- _class: compact -->
 
 ## State Transition Logic Example
 * State transition: conditional logic to move to next state based on `currentState` and `cardValid`
