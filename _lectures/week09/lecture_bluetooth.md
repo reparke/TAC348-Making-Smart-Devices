@@ -171,6 +171,6 @@ Sometimes the Photon 2 doesn't properly disconnect from app. When app is then op
 
 * [Sparkfun](https://learn.sparkfun.com/tutorials/bluetooth-basics/all)
 * [Bluetooth](https://en.wikipedia.org/wiki/Bluetooth)
-* [Nordic Semiconductor](https://devzone.nordicsemi.com/nordic/nordic-blog/b/blog/posts/bluetooth-smart-and-the-nordics-softdevices-part-1)
+* [Nordic Semiconductor](https://devzone.nordicsemi.com/guides/short-range-guides/b/bluetooth-low-energy/posts/bluetooth-smart-and-the-nordics-softdevices-part-1)
 
 * Images created with [Fritzing](https://fritzing.org/home/)
