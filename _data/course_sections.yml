@@ -1,0 +1,18 @@
+lectures:
+  label: Lectures
+  url: /lectures.html
+assignments:
+  label: Assignments
+  url: /assignments.html
+readings:
+  label: Class Prep
+  url: /readings.html
+reference:
+  label: Reference
+  url: /reference.html
+resources:
+  label: Resources
+  url: /resources.html
+syllabus:
+  label: Syllabus
+  url: /tac348_syllabus.html

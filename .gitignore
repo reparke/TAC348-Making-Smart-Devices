@@ -14,7 +14,7 @@ scratch/
 # Force include all files and subfolders in custom 
 # site layout HTML
 !_includes/**
-!_layout/**
+!_layouts/**
 
 
 # =============================
