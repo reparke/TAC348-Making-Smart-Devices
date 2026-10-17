@@ -89,4 +89,4 @@ A suggested attribution is:
 
 > Rob Parke, *TAC 348: Making Smart Devices*, University of Southern California, <https://makingsmartdevices.com/>, CC BY-NC-SA 4.0.
 
-Questions, corrections, and suggestions about these materials are welcome.
+Questions, corrections, and suggestions about these materials are welcome. [Email Rob Parke](mailto:parke@usc.edu) with questions about reuse, licensing, or permissions for student-project material.
