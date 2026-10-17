@@ -324,6 +324,8 @@ input, textarea, select { color: var(--color-text); border-color: var(--color-bo
 }
 
 /* Match the approved home composition without changing its content or grid items. */
+/* Full-bleed surfaces use the scrollbar-excluding root width. */
+html { container-type: inline-size; }
 .home-refresh #main { max-width: 1032px; }
 .home-refresh #main > .page {
   float: none;
@@ -348,6 +350,7 @@ input, textarea, select { color: var(--color-text); border-color: var(--color-bo
   bottom: 0;
   left: 50%;
   width: 100vw;
+  width: 100cqi;
   transform: translateX(-50%);
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
@@ -458,7 +461,9 @@ body.past-projects { background: var(--color-surface-wash) !important; }
 #main > .page-band {
   position: relative;
   width: 100vw;
+  width: 100cqi;
   margin-left: calc(50% - 50vw);
+  margin-left: calc(50% - 50cqi);
   color: #fff;
   background-color: #04343D;
   background-image:
