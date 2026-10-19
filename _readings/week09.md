@@ -55,7 +55,7 @@ The goal is to build a rotating fan. Here is the circuit wiring, and photos are 
 #### Wiring for Potentiometer
 
 - 3.3v
-- `A0`
+- `A1`
 - GND
 
 #### Wiring for Servo

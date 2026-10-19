@@ -190,8 +190,8 @@ void setup() {
 
 void loop() {
     // TODO: comment out this function after verifying OLED and RGB LED work
-    // testLightandOLED();
+    testLightandOLED();
 
     // TODO: uncomment to start state machine
-    updateNextState();
+    // updateNextState();
 }

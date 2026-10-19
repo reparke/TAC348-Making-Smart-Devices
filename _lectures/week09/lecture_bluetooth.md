@@ -12,7 +12,7 @@ title: Bluetooth
 
 # Bluetooth
 
- <img src="lecture_bluetooth.assets/5213ccb1757b7f4c568b4568.jpg" alt="https://cdn.sparkfun.com/assets/4/b/e/e/9/5213ccb1757b7f4c568b4568.jpg" style="width:500px" /> 
+ <img src="lecture_bluetooth.assets/5213ccb1757b7f4c568b4568.jpg" alt="https://cdn.sparkfun.com/assets/4/b/e/e/9/5213ccb1757b7f4c568b4568.jpg" /> 
 
 ## What is Bluetooth?
 
