@@ -31,7 +31,7 @@
   secondLayer.setAttribute("aria-hidden", "true");
 
   function backgroundFor(url) {
-    return "linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url(\"" + url + "\")";
+    return "var(--hero-overlay-active), url(\"" + url + "\")";
   }
 
   hero.insertBefore(secondLayer, hero.firstChild);

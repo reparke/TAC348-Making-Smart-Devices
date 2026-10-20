@@ -148,7 +148,7 @@ Note that I can not vouch for most of these projects or sensors personally.
 * [Lilypad](https://www.sparkfun.com/products/14631) - another sewable microcontroller
 * [Conductive velcro](https://www.adafruit.com/product/1324)
 * [Conductive thread](https://www.adafruit.com/product/640)
-* [Project](https://particle.hackster.io/4189/magoo-e4ff24): Obstacle-detection and GPS-navigation headset for visually-impaired users
+* [Project](https://www.hackster.io/4189/magoo-e4ff24): Obstacle-detection and GPS-navigation headset for visually-impaired users
 * [Project](https://www.hackster.io/news/diy-google-glass-for-under-10-1abea579ccf5): A cool but rather involved pair of DIY smart glasses
 
 

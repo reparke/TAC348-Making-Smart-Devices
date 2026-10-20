@@ -1,51 +1,48 @@
-
 #include "Particle.h"
+
+// DC motor
+const int AIN1 = D3;  // motor direction
+const int AIN2 = D4;  // motor dir
+const int PWMA = A5;  // speed
+
+// pot
+const int PIN_POT = A1;  // IMPORTANT
+
+/* connecting servo
+    create servo obj
+    attach pin
+    write
+*/
+const int PIN_SERVO = A2;
+Servo servo;  // servo obj
+
+unsigned long prevMillis = 0;
+const unsigned long INTERVAL = 1000;
+int servoAngle = 15;
+bool isIncreasing = true;
 
 SYSTEM_MODE(AUTOMATIC);
 SYSTEM_THREAD(ENABLED);
 SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
-// motor pin
-const int AIN1 = D3;  // motor dir
-const int AIN2 = D4;  // motor dir
-const int PWMA = A5;  // speed
-
-// pot
-const int PIN_POT = A1;
-
-// photon --> motor driver --> motor
-
-// servo part 1
-Servo fanServo;  // declare the Servo obj
-const int PIN_SERVO = A2;
-
-// fan variables
-unsigned long prevMillis = 0;
-const unsigned long INTERVAL = 1000;
-// what other two var?
-int servoAngle = 15;
-const int MAX_ANGLE = 165;
-const int MIN_ANGLE = 15;
-bool isIncreasing = true;
-
 void basicDCMotor() {
+    // what controls the motor?
     /*
-        PWMA will control the speed (0-255)
+        PWMA for speed
 
-        AIN1    AIN2       What does motor do?
-        L       H       -- spin!
-        H       L       -- spin the other way
-        L       L       -- no spin
-        H       H       -- BAD!
+        AIN1        AIN2        What does motor do?
+        H           L               goes one dir
+        L           H               goes other dir
+        L           L               stops
+        H           H               BAD! could damage
     */
-
     // spin motor at full speed
     digitalWrite(AIN1, HIGH);
     digitalWrite(AIN2, LOW);
     analogWrite(PWMA, 255);
     delay(5000);
 
-    // reverse at half speed
+    // reverse motor at half speed for 5s
     digitalWrite(AIN1, LOW);
     digitalWrite(AIN2, HIGH);
     analogWrite(PWMA, 127);
@@ -58,113 +55,110 @@ void basicDCMotor() {
     delay(5000);
 }
 
+// make the potentiometer control the motor speed
 void potDCMotor() {
-    // how can we use pot to control the DC motor?
+    // pick dir
     digitalWrite(AIN1, HIGH);
     digitalWrite(AIN2, LOW);
 
+    // use pot to control speed
     int potVal = analogRead(PIN_POT);
     int motorSpeed = map(potVal, 0, 4095, 0, 255);
+    analogWrite(PWMA, motorSpeed);
     Serial.println("pot: " + String(potVal) + "; PWM: " + String(motorSpeed));
-    analogWrite(PWMA, 0);
 }
 
 void basicServo() {
-    // servo step 3: fanServo.write(..)
-    //  servo angle range: 0-180
-    //           safe range: 15-165
-    fanServo.write(15);
-    delay(1000);
-    fanServo.write(90);
-    delay(1000);
-    fanServo.write(165);
-    delay(1000);
-    fanServo.write(90);
-    delay(90);
-}
+    // servo step 3: write(angle)
+    //  servo range: 0-180
+    //  safe range: 15-165
 
-void potServo() {
-    // skip
-    // map pot to 15-165 and writing
+    servo.write(15);
+    delay(1000);
+    servo.write(90);
+    delay(1000);
+    servo.write(165);
+    delay(1000);
+    servo.write(90);
+    delay(1000);
 }
 
 void simpleFan() {
-    /*
-        input: pot
-        output: servo, dc motor
+/*
+    green: work independently in break out room
+    red: design together in class
 
-        goal:
-        -make servo rotate automatically back and forth
-        -make pot control fan blade speed
+    input: pot
+    output: dc motor, servo 
 
-        solution:
-        -use pot to control motor speed
+    fan to rotate automatically and be able to control speed
 
-        how do we make the servo rotate automatically?
-        idea 1: increase / decrease servo position each loops cycle
-        idea 2: millis timer to increase / decreaese
-        idea 3: for loop <-- problem is that we would to use delay() -- AVOID
+    solution:
+        use pot to control
+        use millis to control servo automatically
+            we do not want to use delay or for loop
 
-        servo starts at 15, increase by fixed amount each time timer goes off
-        when servo get to 165, start to decrease until 15, then repeat
-    */
-    // control fan blade
+    how do we use millis to control servo position?
+
+    start at 15, increment by XX each time in millis block
+        eg. 15 30 45 60 75 ...
+
+
+DC motors and servo both use PWM
+    BUT at DIFFERENT FREQUENCIES
+
+if we need to control DC and servos IN THE SAME PROJECT
+    --> we need to specify the PWM frequency for the DC Motor
+    for DC motor
+    analogWrite(PIN, VALUE, 50);  <--- 50 is the correct freq
+
+*/
+    //control fan speed
     digitalWrite(AIN1, HIGH);
     digitalWrite(AIN2, LOW);
     int potVal = analogRead(PIN_POT);
-    int motorSpeed = map(potVal, 0, 4095, 0, 255);
-    // analogWrite(PWMA, motorSpeed);  // we will come back
-    analogWrite(PWMA, motorSpeed, 50);  
+    int motorspeed = map(potVal, 0, 4094, 0, 255);
+    // analogWrite(PWMA, motorspeed);
+    analogWrite(PWMA, motorspeed, 50);
+    Serial.println("pot: " + String(potVal) + "; PWM: " + String(motorspeed));
 
-    /*
-    DC motors and servos both use PWM at DIFFERENT FREQUENCIES
-        --> these diff freq are NOT COMPATIBLE
-    if in the same project we use both servo and DC motor
-        --> we need to specify the PWM frequency for the DC motor
-
-        analogWrite(PIN, PWM_VALUE, 50); <----
-    */
-
-    
+    //let rotate the servos 
     unsigned long currMillis = millis();
-
-    if (currMillis - prevMillis > INTERVAL) {
+    if (currMillis - prevMillis > INTERVAL){
         prevMillis = currMillis;
 
-        // if increasing, increase angle to 165
-        // if decreasing, decrease angle to 15
-        // if > 165, switch direction to decr
-        // if < 15, switch direct to incr
         if (isIncreasing == true) {
-            servoAngle = servoAngle + 10;
-
-        } else {  // decrease
-            servoAngle = servoAngle - 10;
+            servoAngle = servoAngle + 20;
+        }
+        else {
+            servoAngle = servoAngle - 20;
         }
 
-        if (servoAngle > MAX_ANGLE) {
-            servoAngle = MAX_ANGLE;
+        if (servoAngle > 165) {
+            servoAngle = 165;
             isIncreasing = false;
-        } else if (servoAngle < MIN_ANGLE) {
-            servoAngle = MIN_ANGLE;
+        }
+        else if (servoAngle < 15) {
+            servoAngle = 15;
             isIncreasing = true;
         }
-        fanServo.write(servoAngle);
+        servo.write(servoAngle);
     }
+
 }
 
 void setup() {
     Serial.begin(9600);
     pinMode(PIN_POT, INPUT);
-    pinMode(AIN1, OUTPUT);  // output or input?
+    pinMode(AIN1, OUTPUT);
     pinMode(AIN2, OUTPUT);
     pinMode(PWMA, OUTPUT);
-    // servo part 2
-    fanServo.attach(PIN_SERVO);  // no pinMode
+    // to use servo, instead of PINMODE, we ATTACH the PIN
+    servo.attach(PIN_SERVO);
 }
 void loop() {
-    // basicDCMotor();
-    potDCMotor();
+    basicDCMotor();
+    // potDCMotor();
     // basicServo();
-    // simpleFan();
+    // simpleFan(); 
 }

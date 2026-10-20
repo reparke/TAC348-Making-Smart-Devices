@@ -1,34 +1,46 @@
 <link rel="stylesheet" href="{{ '/assets/css/local-icons.css' | relative_url }}">
+<link rel="preload" href="{{ '/assets/fonts/ibm-plex/IBMPlexSans-Regular-Latin1.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ '/assets/fonts/ibm-plex/IBMPlexSans-Bold-Latin1.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ '/assets/css/ibm-plex.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/visual-theme.css' | relative_url }}">
+<link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="48x48">
+<link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="icon" href="{{ '/favicon-32x32.png' | relative_url }}" type="image/png" sizes="32x32">
+<link rel="icon" href="{{ '/favicon-16x16.png' | relative_url }}" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
+<meta name="theme-color" content="#07687A">
+{% if page.collection == 'lectures' %}<script>document.documentElement.classList.add('lecture-theme');</script>{% endif %}
 {% if page.classes contains "home-refresh" %}
 <script>
   document.documentElement.dataset.homeHero = String(Math.floor(Math.random() * 3));
 </script>
 <style>
   html[data-home-hero="0"] .home-refresh .page__hero--overlay {
-    background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-motion-and-robotics.jpg' | relative_url }}") !important;
+    background-image: var(--hero-overlay), url("{{ '/assets/images/hero-motion-and-robotics.jpg' | relative_url }}") !important;
   }
 
   html[data-home-hero="1"] .home-refresh .page__hero--overlay {
-    background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-human-centered-devices.jpg' | relative_url }}") !important;
+    background-image: var(--hero-overlay), url("{{ '/assets/images/hero-human-centered-devices.jpg' | relative_url }}") !important;
   }
 
   html[data-home-hero="2"] .home-refresh .page__hero--overlay {
-    background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-environment-and-light.jpg' | relative_url }}") !important;
+    background-image: var(--hero-overlay), url("{{ '/assets/images/hero-environment-and-light.jpg' | relative_url }}") !important;
   }
 
   @media (max-width: 700px) {
     html[data-home-hero="0"] .home-refresh .page__hero--overlay {
-      background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-mobile-r2d2.jpg' | relative_url }}") !important;
+      background-image: var(--hero-overlay-vertical), url("{{ '/assets/images/hero-mobile-r2d2.jpg' | relative_url }}") !important;
     }
 
     html[data-home-hero="1"] .home-refresh .page__hero--overlay {
-      background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-mobile-stress-helper.jpg' | relative_url }}") !important;
+      background-image: var(--hero-overlay-vertical), url("{{ '/assets/images/hero-mobile-stress-helper.jpg' | relative_url }}") !important;
     }
 
     html[data-home-hero="2"] .home-refresh .page__hero--overlay {
-      background-image: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)), url("{{ '/assets/images/hero-mobile-bluetooth-car.jpg' | relative_url }}") !important;
+      background-image: var(--hero-overlay-vertical), url("{{ '/assets/images/hero-mobile-bluetooth-car.jpg' | relative_url }}") !important;
     }
   }
 </style>
 {% endif %}
 <script src="{{ '/assets/js/navigation-accessibility.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/table-scroll.js' | relative_url }}" defer></script>

@@ -48,7 +48,7 @@ title: Soldering
 
 For much more in-depth information and tips, checkout
 
-* [How to Solder Metal](https://kylarmack.com/blogs/news/how-to-solder-metal) (thanks to Brendan and Grace from the [Tech Ed Lab](https://techedlab.com/) for the suggestion!)
+* [How to Solder Metal](https://kylarmack.com/blogs/news/how-to-solder-metal) (thanks to Brendan and Grace from the Tech Ed Lab for the suggestion!)
 * Adafruit [Soldering Guide](https://learn.adafruit.com/adafruit-guide-excellent-soldering?view=all) (features common mistakes, useful tools)
 * Sparkfun [Soldering Guide](https://learn.sparkfun.com/tutorials/how-to-solder-through-hole-soldering)
 

@@ -62,7 +62,7 @@
       }
       var first = visible.querySelector("a");
       var last = visible.lastElementChild.querySelector("a");
-      return first.getBoundingClientRect().left >= brand.getBoundingClientRect().right + 8 &&
+      return first.getBoundingClientRect().left >= brand.getBoundingClientRect().right + 20 &&
         last.getBoundingClientRect().right <= search.getBoundingClientRect().left - 8;
     }
 
@@ -112,6 +112,9 @@
     });
     window.addEventListener("resize", scheduleRepair);
     window.addEventListener("load", scheduleRepair, { once: true });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scheduleRepair);
+    }
     observer = new MutationObserver(scheduleRepair);
     observer.observe(visible, { childList: true });
     observer.observe(hidden, { childList: true });

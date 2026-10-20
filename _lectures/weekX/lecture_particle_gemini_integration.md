@@ -60,12 +60,12 @@ title: Particle + Gemini Integration
 ## The API JSON Structure
 
 ```json
-{"contents":[{"parts":[{"text":"Temp: {{temp}}"}]}]}
+{"contents":[{"parts":[{"text":"Temp: {% raw %}{{temp}}{% endraw %}"}]}]}
 ```
 
 - Sending prompts via a webhook requires a specific JSON format
 - The structure follows a nested hierarchy that the Google Cloud Console expects
-- In Particle, we use placeholders like `{{temp}}` to inject real sensor data into the prompt
+- In Particle, we use placeholders like `{% raw %}{{temp}}{% endraw %}` to inject real sensor data into the prompt
 
 ## JSON Anatomy: Contents and Parts
 
@@ -97,7 +97,7 @@ JSON
     {
       "parts": [
         {
-          "text": "You are a concise assistant. Sensor data: {{data}}. Task: Summarize."
+          "text": "You are a concise assistant. Sensor data: {% raw %}{{data}}{% endraw %}. Task: Summarize."
         }
       ]
     }
@@ -136,7 +136,7 @@ JSON
     {
       "parts": [
         {
-          "text": "You are a concise, witty weather assistant. Based on a weather code of {{code}}, a humidity percentage of {{humidity}}, and a temperature of {{temp}} degrees Fahrenheit, provide a single, short, descriptive phrase (max 10 words). Do not include the code or temperature in your final phrase. For example, 'A beautiful 76 degrees for a Sunday stroll.'"
+          "text": "You are a concise, witty weather assistant. Based on a weather code of {% raw %}{{code}}{% endraw %}, a humidity percentage of {% raw %}{{humidity}}{% endraw %}, and a temperature of {% raw %}{{temp}}{% endraw %} degrees Fahrenheit, provide a single, short, descriptive phrase (max 10 words). Do not include the code or temperature in your final phrase. For example, 'A beautiful 76 degrees for a Sunday stroll.'"
         }
       ]
     }
@@ -149,7 +149,7 @@ JSON
 
 * Under **Query Parameters**, add
   * **Key: ** `key`
-  * **Value:** `YOUR_API_KEY_FROM_GOOGLE_CLOUD_CONSOLE"
+  * **Value:** `YOUR_API_KEY"
 
 
 

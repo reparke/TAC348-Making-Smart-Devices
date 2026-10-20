@@ -1,0 +1,40 @@
+{% assign band_title = page.title %}
+{% assign parent_key = nil %}
+{% if page.parent_section %}
+  {% assign override_key = page.parent_section | downcase %}
+  {% if site.data.course_sections[override_key] %}{% assign parent_key = override_key %}{% endif %}
+{% else %}
+  {% assign parent_count = 0 %}
+  {% assign category_key = page.category | default: '' | downcase %}
+  {% if site.data.course_sections[category_key] %}
+    {% assign candidate_key = category_key %}
+    {% assign parent_count = 1 %}
+  {% endif %}
+  {% assign category_list = page.categories | join: '|' | split: '|' %}
+  {% for item in category_list %}
+    {% assign item_key = item | downcase %}
+    {% if site.data.course_sections[item_key] and item_key != candidate_key %}
+      {% assign parent_count = parent_count | plus: 1 %}
+      {% assign candidate_key = item_key %}
+    {% endif %}
+  {% endfor %}
+  {% if parent_count == 1 %}
+    {% assign parent_key = candidate_key %}
+  {% elsif parent_count == 0 and page.collection %}
+    {% assign collection_key = page.collection | downcase %}
+    {% if site.data.course_sections[collection_key] %}{% assign parent_key = collection_key %}{% endif %}
+  {% endif %}
+{% endif %}
+{% assign parent = site.data.course_sections[parent_key] %}
+{% if parent %}
+  {% assign current_path = page.url | relative_url | replace: '.html', '' | append: '/' | replace: '//', '/' %}
+  {% assign index_path = parent.url | relative_url | replace: '.html', '' | append: '/' | replace: '//', '/' %}
+  {% if current_path == index_path %}{% assign parent = nil %}{% endif %}
+{% endif %}
+<div class="page-band">
+  <div class="page-band__inner">
+    {% if parent %}<nav class="page-band__parent" aria-label="Section"><a href="{{ parent.url | relative_url }}">{{ parent.label }}</a></nav>{% endif %}
+    <h1 id="page-title" class="page-band__title" itemprop="headline">{{ band_title | markdownify | remove: '<p>' | remove: '</p>' }}</h1>
+    <span class="page-band__rule" aria-hidden="true"></span>
+  </div>
+</div>
