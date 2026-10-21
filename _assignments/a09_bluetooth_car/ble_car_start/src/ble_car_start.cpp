@@ -46,7 +46,7 @@ void onDataReceived(const uint8_t* data, size_t len, const BlePeerDevice& peer,
 }
 
 void setup() {
-    argon_ble_setup();
+    particle_ble_setup();
 
     Serial.begin(9600);  // begin serial communication
 }

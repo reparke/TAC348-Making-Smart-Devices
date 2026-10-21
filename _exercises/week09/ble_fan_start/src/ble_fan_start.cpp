@@ -39,7 +39,7 @@ void onDataReceived(const uint8_t* data, size_t len, const BlePeerDevice& peer,
 
 
 void setup() {
-    argon_ble_setup();  // BLE setup
+    particle_ble_setup();  // BLE setup
 
     pinMode(PIN_LED, OUTPUT);
     pinMode(AIN1, OUTPUT);

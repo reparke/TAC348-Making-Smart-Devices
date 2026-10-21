@@ -201,7 +201,7 @@ void onDataReceived(const uint8_t* data, size_t len, const BlePeerDevice& peer,
 
 void setup() {
     /* === START BLE SETUP === */
-    argon_ble_setup();
+    particle_ble_setup();
     /* === END BLE SETUP === */
     pinMode(AIN1, OUTPUT);
     pinMode(AIN2, OUTPUT);

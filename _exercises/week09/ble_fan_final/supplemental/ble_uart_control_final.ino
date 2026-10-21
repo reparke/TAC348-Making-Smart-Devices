@@ -1,4 +1,4 @@
-#include "argon_ble_setup.h"
+#include "particle_ble_setup.h"
 // doesn't include servo
 
 /*
@@ -30,7 +30,7 @@ const int PIN_LED = D7;
 
 void setup() {
   /* === START BLE SETUP === */
-  argon_ble_setup();
+  particle_ble_setup();
   /* === END BLE SETUP === */
 
   pinMode(PIN_LED, OUTPUT);

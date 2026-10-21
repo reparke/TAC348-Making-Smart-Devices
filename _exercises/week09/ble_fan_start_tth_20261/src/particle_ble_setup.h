@@ -59,7 +59,7 @@ BleCharacteristic rxCharacteristic("rx",
   ===========================================================
 */
 // call this function from within SETUP
-void argon_ble_setup() {
+void particle_ble_setup() {
     BLE.addCharacteristic(txCharacteristic);
     BLE.addCharacteristic(rxCharacteristic);
 

@@ -1,6 +1,10 @@
 #include "Particle.h"
 
-const String DEVICE_NAME = "dev1";  // CHANGE THIS
+/* This is what shows up in Bluefruit
+   You can change this to something that is short
+   only has letters (no spaces, numbers, or special characters)
+*/
+const String DEVICE_NAME = "Photon2";
 
 /*
 1) ADD BLUETOOTH SERVICES ===============================
@@ -55,28 +59,25 @@ BleCharacteristic rxCharacteristic("rx",
   ===========================================================
 */
 // call this function from within SETUP
-void argon_ble_setup() {
-  BLE.addCharacteristic(txCharacteristic);
-  BLE.addCharacteristic(rxCharacteristic);
+void particle_ble_setup() {
+    BLE.addCharacteristic(txCharacteristic);
+    BLE.addCharacteristic(rxCharacteristic);
 
-  BleAdvertisingData data;              // build peripheral's advertising data
-  data.appendServiceUUID(serviceUuid);  // advertise serial / UART service
-  data.appendLocalName(DEVICE_NAME);  // include custom name visible in mobile app
-  BLE.advertise(&data);          // advertise to mobile app (central device)
+    BleAdvertisingData data;              // build peripheral's advertising data
+    data.appendServiceUUID(serviceUuid);  // advertise serial / UART service
+    data.appendLocalName(
+        DEVICE_NAME);      // include custom name visible in mobile app
+    BLE.advertise(&data);  // advertise to mobile app (central device)
 }
 
+/*-------------------- DEBUG FUNCTIONS -----------------------*/
 /*
-  btSerialDebug
+  bluetoothSerialDebug
       used for printing debug info to serial monitor ===
 */
 void bluetoothSerialDebug(const uint8_t* data, size_t len) {
-    for (size_t ii = 0; ii < len; ii++) {
-        Serial.print(data[ii]);
-        Serial.print(" ");
-    }
-    Serial.println();
-    for (size_t ii = 0; ii < len; ii++) {
-        Serial.write(data[ii]);
+    for (size_t index = 0; index < len; index++) {
+        Serial.print((char)data[index]);
         Serial.print(" ");
     }
     Serial.println();

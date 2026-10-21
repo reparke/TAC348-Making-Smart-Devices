@@ -3,7 +3,7 @@ SYSTEM_MODE(AUTOMATIC);
 SYSTEM_THREAD(ENABLED);
 SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
-#include "argon_ble_setup.h"
+#include "particle_ble_setup.h"
 /*
 Use Adafruit Bluefruit app
 (https://learn.adafruit.com/bluefruit-le-connect/controller)
@@ -195,7 +195,7 @@ void onDataReceived(const uint8_t* data, size_t len, const BlePeerDevice& peer,
 
 void setup() {
     /* === START BLE SETUP === */
-    argon_ble_setup();
+    particle_ble_setup();
     /* === END BLE SETUP === */
     pinMode(AIN1, OUTPUT);
     pinMode(AIN2, OUTPUT);
