@@ -1,0 +1,43 @@
+{
+  "event": "TODO W1: pulsecheck_<your USC username>, must match EVENT_NAME in the firmware",
+  "url": "https://generativelanguage.googleapis.com/v1beta/models/TODO_W2_MODEL_NAME:generateContent",
+  "requestType": "POST",
+  "noDefaults": true,
+  "rejectUnauthorized": true,
+  "headers": {
+    "Content-Type": "application/json",
+    "x-goog-api-key": "TODO W3: paste your Gemini API key here in the Particle Console only, never in the repository"
+  },
+  "json": {
+    "systemInstruction": {
+      "parts": [
+        {
+          "text": "TODO W4: write the prompt. Tell Gemini what data it receives, which states to choose from, when to set alert, and how to write msg (at most 40 characters)."
+        }
+      ]
+    },
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          { "text": "{{{PARTICLE_EVENT_VALUE}}}" }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 0.2,
+      "thinkingConfig": { "thinkingLevel": "minimal" },
+      "responseMimeType": "application/json",
+      "responseSchema": {
+        "type": "OBJECT",
+        "properties": {
+          "state": { "type": "STRING", "enum": ["TODO W5: list the four states the firmware understands"] },
+          "alert": { "type": "BOOLEAN" },
+          "msg":   { "type": "STRING" }
+        },
+        "required": ["state", "alert", "msg"]
+      }
+    }
+  },
+  "responseTemplate": "{{#candidates}}{{#content}}{{#parts}}{{{text}}}{{/parts}}{{/content}}{{/candidates}}"
+}
