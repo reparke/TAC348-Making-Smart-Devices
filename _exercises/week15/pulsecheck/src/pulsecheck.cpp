@@ -5,12 +5,16 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
 #include "pulsecheck_setup.h"
 /*
-  PulseCheck: fake smartwatch data -> Particle webhook -> Gemini -> LED
+  PulseCheck: Fitbit data -> Particle webhook -> Gemini -> RGB LED
 
-  pulsecheck_setup.h does the plumbing: it makes an hour of fake heart rate
-  and step data, publishes it to your webhook when you tap MODE, reads
-  Gemini's JSON reply, and handles timeouts. You don't need to change it,
-  except EVENT_NAME at the top (your webhook's event name).
+  pulsecheck_setup.h does the plumbing: it holds five 10-minute windows of
+  real Fitbit heart rate and step data, publishes the next one to your
+  webhook when you press the button, reads Gemini's JSON reply, and handles
+  timeouts. You don't need to change it, except EVENT_NAME at the top
+  (your webhook's event name).
+
+  Wiring: RGB LED on SCL (red), MISO (green), MOSI (blue), each with a
+  330 Ohm resistor. Button on D5 with a 10k Ohm resistor.
 
   Your job: complete TODO 1 below. TODO 2 is optional.
 
@@ -24,7 +28,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
     alert is true when Gemini or your safety rule raised an alert
     msg   is a short note from Gemini
 
-    TODO 1: show the answer on the LED with showColor(r, g, b)
+    TODO 1: show the answer on the RGB LED with changeLedColor(r, g, b)
       alert          red      (255, 0, 0)    it blinks automatically
       "resting"      green    (0, 255, 0)
       "walking"      yellow   (255, 200, 0)
@@ -41,8 +45,8 @@ void onGeminiReply(String state, bool alert, String msg) {
     heartRate[i] and stepsPerMin[i] hold the data for minute i (0 to MINUTES - 1).
 
     It already uses the ready-made rule, defaultSafetyRule() in
-    pulsecheck_setup.h: the last 15 minutes' heart rate is 30+ bpm above the
-    first 30 minutes while steps stay under 10 per minute.
+    pulsecheck_setup.h: the heart rate of the last quarter of the window is
+    30+ bpm above the first half while steps stay under 10 per minute.
 
     TODO 2 (optional): replace it with your own rule, for example a different
     threshold or a check for a heart rate that is too low. Test it with the

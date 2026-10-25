@@ -7,50 +7,57 @@
 const char* EVENT_NAME = "pulsecheck";
 
 /*
-1) SETTINGS ===================================================
-  How much data to send and how often
+1) PINS AND SETTINGS ==========================================
+  RGB LED: 330 Ohm resistor on each color
+  Button: 10k Ohm resistor (reads LOW when pressed)
   ===============================================================
 */
-const int MINUTES = 60;                          // one heart rate and step reading per minute
-const unsigned long AUTO_SEND_MS = 0;            // 0 = send only when you tap MODE; 30000 = every 30 s
+const int PIN_RED = SCL;
+const int PIN_GREEN = MISO;  // on board its MI
+const int PIN_BLUE = MOSI;   // on board its MO
+const int PIN_BUTTON = D5;
+
+const int MINUTES = 10;                          // one heart rate and step reading per minute
 const unsigned long MIN_GAP_MS = 10000;          // at most one request every 10 s (free-tier quota)
 const unsigned long REPLY_TIMEOUT_MS = 20000;    // no reply after 20 s = error
 
 /*
-2) FAKE SMARTWATCH DATA =======================================
-  Five scenarios. The scenario name is NOT sent to Gemini, so it
-  works as an answer key in the serial monitor.
-  Each scenario is the same fixed batch every time.
+2) FITBIT DATA ================================================
+  Five 10-minute windows of real Fitbit data from a public dataset:
+  Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016).
+  Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016. Zenodo.
+  https://doi.org/10.5281/zenodo.53894 (CC BY 4.0)
+
+  Each button press sends the next window. The scenario name is NOT
+  sent to Gemini, so it works as an answer key in the serial monitor.
   ===============================================================
 */
-const char* SCENARIOS[] = {"resting", "walking", "workout", "sleep", "anomaly"};
 const int NUM_SCENARIOS = 5;
+const char* SCENARIOS[NUM_SCENARIOS] = {"resting", "walking", "workout", "sleep", "anomaly"};
 
-int heartRate[MINUTES];                          // beats per minute
-int stepsPerMin[MINUTES];                        // steps per minute
-int scenario = 0;                                // index into SCENARIOS
+const int FITBIT_HR[NUM_SCENARIOS][MINUTES] = {
+    {72, 70, 71, 72, 75, 74, 75, 72, 73, 75},            // resting: user 2022484408, 2016-04-13 13:00
+    {100, 97, 100, 104, 104, 100, 96, 100, 100, 97},     // walking: user 4558609924, 2016-04-30 19:00
+    {154, 155, 156, 158, 159, 156, 160, 157, 154, 153},  // workout: user 2022484408, 2016-04-17 09:30
+    {42, 42, 43, 42, 42, 43, 42, 43, 43, 43},            // sleep:   user 5577150313, 2016-04-17 03:10
+    {70, 68, 66, 68, 65, 68, 144, 143, 143, 138},        // anomaly: user 2347167796, 2016-04-12 17:20,
+};                                                       //          +75 bpm added to the last 4 minutes
+const int FITBIT_STEPS[NUM_SCENARIOS][MINUTES] = {
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {103, 104, 99, 100, 99, 88, 100, 100, 100, 101},
+    {172, 169, 166, 170, 174, 171, 171, 173, 172, 171},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+};
 
-int noise(int range) { return random(-range, range + 1); }
+int heartRate[MINUTES];                          // the window being sent, beats per minute
+int stepsPerMin[MINUTES];                        // the window being sent, steps per minute
+int scenario = -1;                               // index into SCENARIOS; the first press sends 0
 
-void generateFakeData() {
-    randomSeed(348 + scenario);
+void loadData() {
     for (int i = 0; i < MINUTES; i++) {
-        if (scenario == 0) {             // resting
-            heartRate[i] = 68 + noise(4);
-            stepsPerMin[i] = random(0, 6);
-        } else if (scenario == 1) {      // walking
-            heartRate[i] = 98 + noise(6);
-            stepsPerMin[i] = 100 + noise(10);
-        } else if (scenario == 2) {      // workout: heart rate climbs from 110 to 155
-            heartRate[i] = 110 + i * 45 / (MINUTES - 1) + noise(4);
-            stepsPerMin[i] = 150 + noise(15);
-        } else if (scenario == 3) {      // sleep
-            heartRate[i] = 54 + noise(3);
-            stepsPerMin[i] = 0;
-        } else {                         // anomaly: heart rate jumps while sitting still
-            heartRate[i] = (i < MINUTES * 6 / 10) ? 70 + noise(3) : 145 + noise(5);
-            stepsPerMin[i] = random(0, 4);
-        }
+        heartRate[i] = FITBIT_HR[scenario][i];
+        stepsPerMin[i] = FITBIT_STEPS[scenario][i];
     }
 }
 
@@ -67,22 +74,20 @@ String buildPayload() {
 /*
 2b) READY-MADE SAFETY RULE ====================================
   Gemini sometimes calls a heart rate spike at rest a "workout".
-  This returns true when the average heart rate of the last 15
-  minutes is 30+ bpm above the first 30 minutes while steps stay
+  This returns true when the average heart rate of the last quarter
+  of the window is 30+ bpm above the first half while steps stay
   under 10 per minute. Your safetyRule() can just return this.
   ===============================================================
 */
 bool defaultSafetyRule() {
+    const int half = MINUTES / 2, tail = MINUTES / 4;
     long early = 0, late = 0, steps = 0;
-    for (int i = 0; i < MINUTES / 2; i++) early += heartRate[i];         // first half hour
-    for (int i = MINUTES * 3 / 4; i < MINUTES; i++) {                     // last 15 minutes
+    for (int i = 0; i < half; i++) early += heartRate[i];               // first half
+    for (int i = MINUTES - tail; i < MINUTES; i++) {                      // last quarter
         late += heartRate[i];
         steps += stepsPerMin[i];
     }
-    early /= MINUTES / 2;
-    late /= MINUTES / 4;
-    steps /= MINUTES / 4;
-    return late - early >= 30 && steps < 10;     // heart rate up 30+ while sitting still
+    return late / tail - early / half >= 30 && steps / tail < 10;        // heart rate up 30+ while sitting still
 }
 
 /*
@@ -106,9 +111,10 @@ bool waitingForReply = false;
 bool alertOn = false;
 bool ruleFired = false;
 
-void showColor(uint8_t r, uint8_t g, uint8_t b) {
-    RGB.control(true);
-    RGB.color(r, g, b);
+void changeLedColor(int r, int g, int b) {
+    analogWrite(PIN_RED, r);
+    analogWrite(PIN_GREEN, g);
+    analogWrite(PIN_BLUE, b);
 }
 
 // Bad reply, webhook error, or timeout: magenta, or red if the safety rule fired.
@@ -116,7 +122,7 @@ void showError(const char* why) {
     Log.error("%s", why);
     waitingForReply = false;
     alertOn = ruleFired;
-    showColor(255, 0, ruleFired ? 0 : 255);
+    changeLedColor(255, 0, ruleFired ? 0 : 255);
 }
 
 /*
@@ -127,15 +133,15 @@ void showError(const char* why) {
 */
 unsigned long lastSendMs = 0;
 bool hasSent = false;
-volatile bool buttonPressed = false;
+int prevButtonVal = HIGH;
 
 void sendData() {
     if (waitingForReply || (hasSent && millis() - lastSendMs < MIN_GAP_MS)) {
         Log.warn("Too soon, request skipped");
         return;
     }
-    scenario = (scenario + 1) % NUM_SCENARIOS;   // next scenario
-    generateFakeData();
+    scenario = (scenario + 1) % NUM_SCENARIOS;   // next window
+    loadData();
     ruleFired = safetyRule();
     if (ruleFired) Log.warn("Safety rule: alert");
     String payload = buildPayload();
@@ -146,7 +152,7 @@ void sendData() {
     alertOn = false;
     hasSent = true;
     lastSendMs = millis();
-    showColor(255, 255, 255);                    // white = waiting for Gemini
+    changeLedColor(255, 255, 255);               // white = waiting for Gemini
     if (!Particle.publish(EVENT_NAME, payload)) showError("Could not publish");
 }
 
@@ -189,41 +195,43 @@ void onWebhookError(const char* event, const char* data) {
     if (waitingForReply) showError("Webhook error");
 }
 
-void onModeButton(system_event_t event, int clicks) { buttonPressed = true; }
-
 /*
 6) SETUP AND LOOP =============================================
   Call pulsecheck_setup() in setup() and pulsecheck_loop() in loop()
   ===============================================================
 */
 void pulsecheck_setup() {
+    pinMode(PIN_RED, OUTPUT);
+    pinMode(PIN_GREEN, OUTPUT);
+    pinMode(PIN_BLUE, OUTPUT);
+    pinMode(PIN_BUTTON, INPUT);
     Particle.subscribe(String("hook-response/") + EVENT_NAME, onWebhookReply);
     Particle.subscribe(String("hook-error/") + EVENT_NAME, onWebhookError);
-    System.on(button_click, onModeButton);
 }
 
 void pulsecheck_loop() {
-    bool autoDue = AUTO_SEND_MS > 0 && !waitingForReply && Particle.connected() &&
-                   millis() - lastSendMs >= AUTO_SEND_MS;
-    if (buttonPressed || autoDue) {
-        buttonPressed = false;
-        sendData();                              // a press that is too soon is skipped, not counted
+    // one press = button goes from HIGH (not pressed) to LOW (pressed)
+    int currButtonVal = digitalRead(PIN_BUTTON);
+    if (prevButtonVal == HIGH && currButtonVal == LOW) {
+        sendData();
     }
+    prevButtonVal = currButtonVal;
+
     if (waitingForReply && millis() - lastSendMs > REPLY_TIMEOUT_MS) {
         showError("No reply from webhook (timeout)");
     }
     if (alertOn) {
-        showColor((millis() / 250) % 2 ? 255 : 0, 0, 0);   // blink red
+        changeLedColor((millis() / 250) % 2 ? 255 : 0, 0, 0);   // blink red
     }
 }
 
 /*-------------------- DEBUG FUNCTIONS -----------------------*/
 /*
   printData
-      prints the current data to the serial monitor ===
+      prints the current window to the serial monitor ===
 */
 void printData() {
     for (int i = 0; i < MINUTES; i++) {
-        Serial.printlnf("minute %2d: heart rate %3d, steps %3d", i, heartRate[i], stepsPerMin[i]);
+        Serial.printlnf("minute %d: heart rate %3d, steps %3d", i, heartRate[i], stepsPerMin[i]);
     }
 }
