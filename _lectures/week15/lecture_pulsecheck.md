@@ -116,6 +116,15 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
   - [JSON Overview](/lectures/week11/lecture_json_overview.html)
   - [Retrieving Data from APIs using Mustache Templates](/lectures/week11/lecture_retrieving_data_mustache_templates.html): the webhook's `responseTemplate` pulls Gemini's answer out of its reply the same way
 
+## Starter Code
+
+- Download the [starter code](/resources/pulsecheck/pulsecheck_start.zip) directly
+- Unzip it and open the `pulsecheck_start` folder in Particle Workbench
+  - `src/pulsecheck.cpp`: your code
+  - `src/pulsecheck_setup.h`: the plumbing
+  - `pulsecheck_webhook_starter.json`: the webhook template
+  - `README.md`: step-by-step setup and the answer key
+
 ## Your Job
 
 - `pulsecheck_setup.h` does the plumbing: the Fitbit data, the button, publishing, reading the reply, timeouts
