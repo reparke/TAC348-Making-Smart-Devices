@@ -114,16 +114,16 @@ const uint8_t heart_bmp[] = {
 
 * Use library to display bitmap
 
-## Lab
+## Exercise
+
+##### Part 1
 
 * Convert `tac348_full_screen.jpg` to bitmap and load as startup graphic (*image is in the starting folder*)
-* Using the ultrasonic distance sensor, display graphics and distance measurement on the OLED
-  * Large error graphic when out of range (`no_full_screen.png`)
-  * Small warning message when less than 5 inches (`warning_half_screen.png`)
-  * Small graphics and distance message otherwise (`yes_half_screen.png`)
-* Bitmaps are provided in starting project folder 
 
- <img src="lecture_oled_graphics.assets/Photo%20Mar%2030,%2010%2021%2005%20PM.jpg" alt="Photo Mar 30, 10 21 05 PM" style="width:200px;" /> <img src="lecture_oled_graphics.assets/Photo%20Mar%2030,%2010%2021%2024%20PM.jpg" alt="Photo Mar 30, 10 21 24 PM" style="width:200px;" /> <img src="lecture_oled_graphics.assets/Photo%20Mar%2030,%2010%2020%2059%20PM.jpg" alt="Photo Mar 30, 10 20 59 PM" style="width:200px;" />
+##### Part 2
+
+* Animate a filled in circle around the screen
+* Then have the circle "erase" the background image  
 
 
 

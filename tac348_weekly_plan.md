@@ -909,27 +909,31 @@ Note: need to update exercies (start and final) since trigger and echo pins chan
 
 #### Lecture
 
-- project overview
 - Ultrasonic distance sensor 
+- OLED graphics
 
-#### Lab
+#### Exercise
 
-- Student design range finding with ultrasonic sensor. Provide starting project (same one that uses OLED later)
+- Provide starting project (same one that uses OLED later
+- Have student figure out how to calculate distance
+- Then discuss strengths and limitations of sensor (e.g. range, difficulty with small objects, differences from PIR)
+- Walk students through loading TAC 348 bitmap on splash screen
+- Walk students through animating circle around the screen
 
 ### Day 2 
 
 #### Lecture
 
-- OLED graphics
-- add sleep/wake from week 15 (need to add more)
+- Project overview
+- add sleep/wake from week 15?
 
 #### Lab
 
-- Student design range finding with ultrasonic sensor. Provide starting project (same one that uses OLED later)
+- Parking sensor lab
 
 ### Feedback Day 1
 
-- Went generally well. Ran out of time to talk about graphics.
+- 
 
 
 

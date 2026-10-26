@@ -20,6 +20,9 @@ const int ECHO_PIN = D5;
 const float SPEED_SOUND_CM = 0.03444;
 const float CM_TO_IN = 0.393701;
 
+unsigned long prevMillis = 0;
+const unsigned long INTERVAL = 100;
+
 // Distance thresholds in inches
 const int FAR_THRESHOLD_IN = 24;  // beyond this → FAR zone
 const int STOP_THRESHOLD_IN = 4;  // closer than this → STOP zone
@@ -160,13 +163,18 @@ void setup() {
 }
 
 void loop() {
-    float distanceIn = readDistanceIn();
+    unsigned long currMillis = millis();
 
-    oled.clear(PAGE);
-    drawDisplay(distanceIn);
-    drawBar(distanceIn);
-    oled.display();
+    if (currMillis - prevMillis >= INTERVAL) {
+        prevMillis = currMillis;
 
-    Serial.printlnf("Distance: %.1f in", distanceIn);
-    delay(100);
+        float distanceIn = readDistanceIn();
+
+        oled.clear(PAGE);
+        drawDisplay(distanceIn);
+        drawBar(distanceIn);
+        oled.display();
+
+        Serial.printlnf("Distance: %.1f in", distanceIn);
+    }
 }

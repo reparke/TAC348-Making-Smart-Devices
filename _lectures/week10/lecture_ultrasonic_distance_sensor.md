@@ -124,15 +124,12 @@ CONV_FACTOR_CM_TO_IN = 0.3437
 
 * Download project: Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
 * Paste the following link into the top right
-  https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week11/ultrasonic_oled_start
+  https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week10/ultrasonic_oled_start
 
-## Lab
+## Exercise
 
-* Connect the ultrasonic distance sensor
-* Using the serial monitor, display
-  * Error message when out of range
-  * Warning message when less than 5 inches
-  * Distance message otherwise
+* Use the documentation to calculation the distance usign the ultrasonic distance sensor
+* Display the distance on the serial monitor
 
 ## Wiring Diagram
 

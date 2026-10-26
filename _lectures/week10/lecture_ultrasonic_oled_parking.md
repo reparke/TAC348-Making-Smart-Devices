@@ -162,7 +162,7 @@ int barFill = map((int)displayIn, 0, FAR_THRESHOLD_IN, BAR_W - 2, 0);
 * Download the starting code
   * Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
   * Paste the project link into the top right:
-    [Parking sensor starting code](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week10/ultrasonic_oled_parking_sensor_start)
+    https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week10/ultrasonic_oled_parking_sensor_start
 
 ## Lab: Parking Sensor (Part 1)
 

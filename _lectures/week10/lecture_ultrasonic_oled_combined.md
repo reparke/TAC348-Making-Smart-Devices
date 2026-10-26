@@ -129,7 +129,7 @@ int time = pulseIn(D2, HIGH);
 
 # OLED Screen Graphics
 
-<img src="lecture_oled_graphics.assets/IMG_9092.jpg" alt="OLED screen displaying a graphic" style="width:300px;" />
+<img src="lecture_oled_graphics_i2c.assets/IMG_9092.jpg" alt="OLED screen displaying a graphic" style="width:300px;" />
 
 ## Screen Parameters
 
@@ -143,7 +143,7 @@ int time = pulseIn(D2, HIGH);
 
 | Original Image | Image Closeup to Show Pixels |
 | --- | --- |
-| <img src="lecture_oled_graphics.assets/image-20200330213307376.png" alt="Original image" style="width:400px;" /> | <img src="lecture_oled_graphics.assets/image-20200330213239875.png" alt="Closeup showing pixels" style="width:400px;" /> |
+| <img src="lecture_oled_graphics_i2c.assets/image-20200330213307376.png" alt="Original image" style="width:400px;" /> | <img src="lecture_oled_graphics_i2c.assets/image-20200330213239875.png" alt="Closeup showing pixels" style="width:400px;" /> |
 
 ## Bitmap
 
@@ -173,7 +173,7 @@ const uint8_t heart_bmp[] = {
 
 | Original Black / White Image | Bitmap on OLED |
 | --- | --- |
-| <img src="lecture_oled_graphics.assets/trojan.jpg" alt="Trojan source image" style="width:200px;" /> | <img src="lecture_oled_graphics.assets/trojan_cropped.jpg" alt="Trojan bitmap on OLED" style="width:200px;" /> |
+| <img src="lecture_oled_graphics_i2c.assets/trojan.jpg" alt="Trojan source image" style="width:200px;" /> | <img src="lecture_oled_graphics_i2c.assets/trojan_cropped.jpg" alt="Trojan bitmap on OLED" style="width:200px;" /> |
 
 * White is the color that will be displayed on the OLED
 
@@ -202,19 +202,19 @@ const uint8_t heart_bmp[] = {
 
 ## Convert an Image with [Image2CPP](https://javl.github.io/image2cpp/)
 
-<img src="lecture_oled_graphics.assets/image-20200317223318751.png" alt="Image2CPP image selection" style="width:1000px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20200317223318751.png" alt="Image2CPP image selection" style="width:1000px;" />
 
 ## Image2CPP Settings
 
-<img src="lecture_oled_graphics.assets/image-20200317223350648.png" alt="Image2CPP canvas settings" style="width:900px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20200317223350648.png" alt="Image2CPP canvas settings" style="width:900px;" />
 
 ## Image2CPP Preview
 
-<img src="lecture_oled_graphics.assets/image-20200317223446692.png" alt="Image2CPP preview" style="width:1000px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20200317223446692.png" alt="Image2CPP preview" style="width:1000px;" />
 
 ## Image2CPP Output
 
-<img src="lecture_oled_graphics.assets/image-20200317223504443.png" alt="Image2CPP code output" style="width:1000px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20200317223504443.png" alt="Image2CPP code output" style="width:1000px;" />
 
 ## Storing Byte Array
 
