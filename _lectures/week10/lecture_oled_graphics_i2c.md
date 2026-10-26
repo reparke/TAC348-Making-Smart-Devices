@@ -11,7 +11,7 @@ title: OLED Screen Graphics (I2C)
 
 ## OLED Screen Graphics
 
-<img src="lecture_oled_graphics.assets/IMG_9092.jpg" alt="IMG_9092" style="width:500px;" />
+<img src="lecture_oled_graphics_i2c.assets/IMG_9092.jpg" alt="IMG_9092" style="width:500px;" />
 
 
 
@@ -31,7 +31,7 @@ describe in one slide image vs canvas size
 
 | Original Image                                               | Image Closeup to Show Pixels                                 |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <img src="lecture_oled_graphics.assets/image-20200330213307376.png" alt="image-20200330213307376" style="width:400px;" /> | <img src="lecture_oled_graphics.assets/image-20200330213239875.png" alt="image-20200330213239875" style="width:400px;" /> |
+| <img src="lecture_oled_graphics_i2c.assets/image-20200330213307376.png" alt="image-20200330213307376" style="width:400px;" /> | <img src="lecture_oled_graphics_i2c.assets/image-20200330213239875.png" alt="image-20200330213239875" style="width:400px;" /> |
 
 ## Bitmap
 
@@ -62,7 +62,7 @@ const uint8_t heart_bmp[] = {
 
 | Original Black/White Image                                   | Bitmap on OLED                                               |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <img src="lecture_oled_graphics.assets/trojan.jpg" alt="trojan" style="width:200px;" /> | <img src="lecture_oled_graphics.assets/trojan_cropped.jpg" alt="trojan_cropped" style="width:200px;" /> |
+| <img src="lecture_oled_graphics_i2c.assets/trojan.jpg" alt="trojan" style="width:200px;" /> | <img src="lecture_oled_graphics_i2c.assets/trojan_cropped.jpg" alt="trojan_cropped" style="width:200px;" /> |
 
 * Color white is what will be displayed on OLED
 
@@ -73,39 +73,42 @@ const uint8_t heart_bmp[] = {
 * Note
   * The following settings are specific for the SparkFun Micro OLED
   * Sparkfun library requires that each bitmap be specified as 64x48 pixels or 384 bytes (**canvas size**), even if parts of the image is blank
-
 * Image settings
   - Canvas size: 64x48
-  - Glyph: blank
+  - Glyph name: blank
   - Scaling: Scale fit, keeping proportions
 * Output
-  - Code output format: Arduino code, single bitmap (later in source change declaration to `const uint8_t <PUT BITMAP NAME HERE> []`)
   - Draw mode: Vertical - 1 bit per pixel
+  - Identifier: `<variable name you'll use in your code>`
+  - Code output format: Arduino code, single bitmap
+  - ESP32 formatting: click checkbox
 
 
 
 ## Ex: Converting Image with [Image2CPP](https://javl.github.io/image2cpp/)
 
-<img src="lecture_oled_graphics.assets/image-20200317223318751.png" alt="image-20200317223318751" style="width:1200px;" />
+##
+
+![image-20261026154605362](lecture_oled_graphics_i2c.assets/image-20261026154605362.png)
 
 ## 
 
-<img src="lecture_oled_graphics.assets/image-20200317223350648.png" alt="image-20200317223350648" style="width:1100px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20261026154723234.png" alt="image-20200317223350648" style="width:1100px;" />
 
 ## 
 
-<img src="lecture_oled_graphics.assets/image-20200317223446692.png" alt="image-20200317223446692" style="width:1200px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20261026155118139.png" alt="image-20200317223504443" style="width:1200px;" />
 
 ## 
 
-<img src="lecture_oled_graphics.assets/image-20200317223504443.png" alt="image-20200317223504443" style="width:1200px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20261026155255580.png" alt="image-20200317223504443" style="width:500px;" />
 
 ## Storing Byte Array 
 
 * Create a `const uint8_t` array (byte array)
 
 ```c++
-const uint8_t heart_bmp[] = { 
+const uint8_t spongebob_bitmap[] = { 
   0x00, 0x00, 0x00, 0x00, 
   0x00, 0x00, 0x00, 0x80, 
   0xe0, 0xf0, 0xf8, 0xfc, 

@@ -202,19 +202,19 @@ const uint8_t heart_bmp[] = {
 
 ## Convert an Image with [Image2CPP](https://javl.github.io/image2cpp/)
 
-<img src="lecture_oled_graphics_i2c.assets/image-20200317223318751.png" alt="Image2CPP image selection" style="width:1000px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20261026154605362.png" alt="Image2CPP image selection" style="width:500px;" />
 
 ## Image2CPP Settings
 
-<img src="lecture_oled_graphics_i2c.assets/image-20200317223350648.png" alt="Image2CPP canvas settings" style="width:900px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20261026154723234.png" alt="Image2CPP canvas settings" style="width:700px;" />
 
 ## Image2CPP Preview
 
-<img src="lecture_oled_graphics_i2c.assets/image-20200317223446692.png" alt="Image2CPP preview" style="width:1000px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20261026155118139.png" alt="Image2CPP preview" style="width:1000px;" />
 
 ## Image2CPP Output
 
-<img src="lecture_oled_graphics_i2c.assets/image-20200317223504443.png" alt="Image2CPP code output" style="width:1000px;" />
+<img src="lecture_oled_graphics_i2c.assets/image-20261026155255580.png" alt="Image2CPP code output" style="width:300px;" />
 
 ## Storing Byte Array
 
