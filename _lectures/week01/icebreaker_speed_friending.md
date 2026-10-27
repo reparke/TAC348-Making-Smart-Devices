@@ -1,6 +1,7 @@
 ---
 marp: true
 theme: tac
+title: Speed Friending
 paginate: true
 week: 1
 show_in_list: false

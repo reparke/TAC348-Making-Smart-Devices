@@ -40,7 +40,7 @@ toc_sticky: true
   <h2 id="spring_break">Spring Break
   <a class="header-link" href="#spring_break" title="Permalink"></a></h2>
   {% endif %}
-  
+
   {% if index != 16 %}
 
   <h2 id="week_{{ week.name }}">Week {{ week.name }} ({{current_dates[2] | strip}} - {{current_dates[3] | strip}})

@@ -9,7 +9,7 @@ title: Multi Tasking
 
 <!-- headingDivider: 2 -->
 
-# Multi-Tasking: Delay
+# Multi-Tasking	
 
 ## First, a Clarification
 
