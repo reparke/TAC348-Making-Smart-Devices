@@ -120,7 +120,7 @@ CONV_FACTOR_CM_TO_IN = 0.3437
 * For example, air conditioning vents and other nearby ultrasonic sensors can cause interference
 * There should be **500 ms** delay between readings
 
-## Lab
+## Exercise
 
 * Download project: Go to [https://tinyurl.com/ProjectZipGH](https://tinyurl.com/ProjectZipGH)
 * Paste the following link into the top right
