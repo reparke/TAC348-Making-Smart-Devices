@@ -37,10 +37,10 @@ int readIndex = 0;
 // Bar graph dimensions //
 //   OLED is 64 x 48   //
 //////////////////////////
-const int BAR_X = 1;           // left edge of bar outline
-const int BAR_Y = 40;          // top edge of bar outline
-const int BAR_MAX_WIDTH = 60;  // maximum width of the fill
-const int BAR_HEIGHT = 4;      // height of the fill
+const int BAR_X = 1;   // left edge of bar outline
+const int BAR_Y = 40;  // top edge of bar outline
+const int BAR_W = 62;  // total width of bar outline
+const int BAR_H = 6;   // height of bar outline
 
 float readDistanceIn() {
     digitalWrite(TRIG_PIN, LOW);
@@ -87,6 +87,11 @@ float readDistanceIn() {
     return total / NUM_READINGS;
 }
 
+//   map(inches, 0, FAR_THRESHOLD_IN, BAR_W, 0)
+//       inches=0   → barFill = BAR_W  (full — object is right here)
+//       inches=FAR → barFill = 0      (empty — object is far away)
+
+// don't display distance when far away because we clamp it
 void drawDisplay(float inches) {
     oled.setCursor(0, 0);
     if (inches >= FAR_THRESHOLD_IN) {  // far
@@ -102,26 +107,45 @@ void drawDisplay(float inches) {
     }
 }
 
-int distanceToBarWidth(float inches) {
-    // Keep the distance in the range represented by the bar.
-    inches = constrain(inches, 0, FAR_THRESHOLD_IN);
-
-    // Close object = wide bar; far object = narrow bar.
-    return map(int(inches), 0, FAR_THRESHOLD_IN, BAR_MAX_WIDTH, 0);
-}
-
 void drawBar(float inches) {
-    int fillWidth = distanceToBarWidth(inches);
+    // Clamp displayIn to [0, FAR_THRESHOLD_IN] before calling map().
+    //
+    // map() does NOT clamp — it extrapolates linearly beyond the input range.
+    // If inches > FAR_THRESHOLD_IN (e.g. hand is 30 in away):
+    //   map(30, 0, 24, 60, 0) = -15   ← negative width passed to rectFill!
+    // If inches < 0 (shouldn't happen with averaging, but just in case):
+    //   map(-5, 0, 24, 60, 0) = 72    ← wider than the bar outline!
+    //
+    // Both cases draw pixels outside the outline box.
+    // Clamping first guarantees the output of map() stays in [0, 60].
+    float displayIn = inches;
 
-    // Draw a 1-pixel outline around the fill area.
-    oled.rect(BAR_X, BAR_Y, BAR_MAX_WIDTH + 2, BAR_HEIGHT + 2);
+    if (displayIn < 0) {
+        displayIn = 0;
+    } else if (displayIn > FAR_THRESHOLD_IN) {
+        displayIn = FAR_THRESHOLD_IN;
+    }
 
-    // Draw the bar inside the outline.
-    oled.rectFill(BAR_X + 1, BAR_Y + 1, fillWidth, BAR_HEIGHT);
+    // map() converts the distance range to a pixel fill width:
+    //   displayIn = 0  (hand right here) → barFill = BAR_W-2 = 60 px (full)
+    //   displayIn = 24 (hand far away)   → barFill = 0 px        (empty)
+    // Output is BAR_W-2, not BAR_W, to leave 1 px of inset on each side.
+    int barFill = map(int(displayIn), 0, FAR_THRESHOLD_IN, BAR_W - 2, 0);
 
-    // Mark the distance at which the driver should stop.
-    int stopX = BAR_X + 1 + distanceToBarWidth(STOP_THRESHOLD_IN);
-    oled.line(stopX, BAR_Y - 2, stopX, BAR_Y + BAR_HEIGHT + 3);
+    // Outline
+    oled.rect(BAR_X, BAR_Y, BAR_W, BAR_H);
+
+    // Fill (1 px inset so it sits inside the outline)
+    oled.rectFill(BAR_X + 1, BAR_Y + 1, barFill, BAR_H - 2);
+
+    // Tick mark showing where the STOP zone begins on the bar.
+    // Same map() logic as barFill — asks "at what pixel does STOP_THRESHOLD_IN
+    // fall?"
+    //   STOP_THRESHOLD_IN=4 → map(4, 0, 24, 60, 0) = 50 → stopTickX = 1+1+50 =
+    //   52
+    int stopTickX =
+        BAR_X + 1 + map(STOP_THRESHOLD_IN, 0, FAR_THRESHOLD_IN, BAR_W - 2, 0);
+    oled.line(stopTickX, BAR_Y - 2, stopTickX, BAR_Y + BAR_H + 1);
 }
 
 void setup() {

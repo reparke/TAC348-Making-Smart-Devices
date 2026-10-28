@@ -19,6 +19,20 @@ const int ECHO_PIN = D5;
 const float SPEED_SOUND_CM = 0.03444;
 const float CM_TO_IN = 0.393701;
 
+
+/*
+    part 1) clean up the sensor reading
+        -ignore bad readings
+        -smooth out good readings with an average (of last 5)
+
+    part 2) display bitmaps and distance
+        - for NEAR and STOP distance, display distance in inchess on oled
+        - for STOP, display X graphic
+        - for NEAR, display warning graphic
+        - for FAR, display yes graphic
+*/
+
+
 // TODO: Thresholds
 
 // TODO: drawDisplay
