@@ -112,14 +112,17 @@ void drawBar(float inches) {
     //
     // map() does NOT clamp — it extrapolates linearly beyond the input range.
     // If inches > FAR_THRESHOLD_IN (e.g. hand is 30 in away):
-    //   map(30, 0, 24, 60, 0) = -75   ← negative width passed to rectFill!
+    //   map(30, 0, 24, 60, 0) = -15   ← negative width passed to rectFill!
     // If inches < 0 (shouldn't happen with averaging, but just in case):
     //   map(-5, 0, 24, 60, 0) = 72    ← wider than the bar outline!
     //
     // Both cases draw pixels outside the outline box.
     // Clamping first guarantees the output of map() stays in [0, 60].
     float displayIn = inches;
-    if (displayIn > FAR_THRESHOLD_IN) {
+
+    if (displayIn < 0) {
+        displayIn = 0;
+    } else if (displayIn > FAR_THRESHOLD_IN) {
         displayIn = FAR_THRESHOLD_IN;
     }
 
@@ -133,9 +136,7 @@ void drawBar(float inches) {
     oled.rect(BAR_X, BAR_Y, BAR_W, BAR_H);
 
     // Fill (1 px inset so it sits inside the outline)
-    if (barFill > 0) {
-        oled.rectFill(BAR_X + 1, BAR_Y + 1, barFill, BAR_H - 2);
-    }
+    oled.rectFill(BAR_X + 1, BAR_Y + 1, barFill, BAR_H - 2);
 
     // Tick mark showing where the STOP zone begins on the bar.
     // Same map() logic as barFill — asks "at what pixel does STOP_THRESHOLD_IN

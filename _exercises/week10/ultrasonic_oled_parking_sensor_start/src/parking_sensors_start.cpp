@@ -1,7 +1,6 @@
 #include "Particle.h"
 #include "SparkFunMicroOLED.h"
 
-
 SYSTEM_THREAD(ENABLED);
 
 //////////////////////////////////
@@ -28,8 +27,14 @@ void drawDisplay(float inches) {}
 // TODO: drawBar
 void drawBar(float inches) {}
 
-/* fn: readDistanceIn
+// TODO: convertDdistanceToBarWidth
+// This function is a helper function that isn't streicly necessary
+// but makes the code easier to read
+int convertDdistanceToBarWidth(float inches);
+
+/* fn: readDistanceIn()
     returns float distance to object
+    THIS FUNCTION IS ALREADY DONE FOR YOU
 */
 float readDistanceIn() {
     digitalWrite(TRIG_PIN, LOW);
@@ -53,7 +58,7 @@ void setup() {
     pinMode(ECHO_PIN, INPUT);
 
     oled.begin();
-    delay(100);  // Delay 1000 ms
+    delay(1000);  // Delay 1000 ms
 }
 
 void loop() {}

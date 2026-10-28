@@ -41,14 +41,14 @@ By the end of this lab, you will be able to:
 
 ## What We're Building
 
-* The OLED shows three things at once
+* The OLED shows up to three things at once
   * A **bitmap** that changes based on zone (FAR / NEAR / STOP!)
-  * The **distance** in inches
+  * The **distance** in inches when in the NEAR or STOP zone
   * A **bar graph** that fills as your hand gets closer
 * Three zones based on distance
-  * **FAR**: more than 24 inches (green check graphic)
-  * **NEAR**: between 4 and 24 inches (warning graphic)
-  * **STOP!**: closer than 4 inches (red X graphic)
+  * **FAR**: 24 inches or farther (check graphic)
+  * **NEAR**: more than 4 inches but less than 24 inches (warning graphic)
+  * **STOP!**: 4 inches or closer (X graphic)
 
 ## OLED Layout
 
@@ -123,12 +123,13 @@ return total / NUM_READINGS;
 map(value, fromLow, fromHigh, toLow, toHigh)
 ```
 
-* Example: Convert a distance (0 to 24 in) to a bar width (0 to 60 px)
+* Example: Convert a distance (0 to 24 in) to a bar width (60 to 0 px)
 
 ```c++
-int barFill = map(inches, 0, 24, 60, 0);
-// inches = 0:  barFill = 60 (full bar; hand is close)
-// inches = 24: barFill = 0  (empty bar; hand is far away)
+int fillWidth =
+    map(int(inches), 0, FAR_THRESHOLD_IN, BAR_MAX_WIDTH, 0);
+// inches = 0:  fillWidth = 60 (full bar; hand is close)
+// inches = 24: fillWidth = 0  (empty bar; hand is far away)
 ```
 
 * Notice `toLow` and `toHigh` are **reversed**: as distance increases, the bar shrinks
@@ -140,21 +141,31 @@ int barFill = map(inches, 0, 24, 60, 0);
 * `map()` does **not** clamp; if the input is out of range, the output will be too
 
 ```c++
-// Without clamping, a reading of 30 in gives a negative barFill
-int barFill = map(30, 0, 24, 60, 0);  // Result: -15
+// Without clamping, a reading of 30 in gives a negative fillWidth
+int fillWidth = map(30, 0, 24, 60, 0);  // Result: -15
 ```
 
 * Always clamp the input first
 
 ```c++
-if (displayIn > FAR_THRESHOLD_IN) {
-    displayIn = FAR_THRESHOLD_IN;
+if (inches < 0) {
+    inches = 0;
+} else if (inches > FAR_THRESHOLD_IN) {
+    inches = FAR_THRESHOLD_IN;
 }
-
-int barFill = map((int)displayIn, 0, FAR_THRESHOLD_IN, BAR_W - 2, 0);
 ```
 
-* If you skip this step, the bar can draw outside its outline box
+* If you skip this step, `map()` can produce a width outside the valid 0–60 pixel range
+
+## Clamping Before `map()`
+
+* `constrain()` clamps a value to a min and max range
+
+```c++
+inches = constrain(inches, 0, FAR_THRESHOLD_IN);
+```
+
+
 
 ## Lab: Parking Sensor
 
@@ -175,18 +186,19 @@ int barFill = map((int)displayIn, 0, FAR_THRESHOLD_IN, BAR_W - 2, 0);
 ## Lab: Parking Sensor (Part 2)
 
 * Specifications
-  * Display the distance in inches on the OLED
+  * Display the distance in inches in the NEAR and STOP zones
   * Display a different bitmap based on zone
-    * FAR (> 24 in) - green check bitmap
-    * STOP! (< 4 in) - red X bitmap
+    * FAR (24 in or farther) - check bitmap
+    * STOP! (4 in or closer) - X bitmap
     * NEAR (everything else) - warning bitmap
 
 ## Lab: Parking Sensor (Part 3)
 
 * Specifications
   * Draw a bar graph outline at the bottom of the screen
-  * Calculate `barFill` using `map()` so the bar grows as the hand approaches
-  * Clamp `displayIn` before calling `map()` so the bar never overflows
+  * Create `distanceToBarWidth()` to convert distance into pixel width
+  * Clamp `inches` with `constrain()` before calling `map()`
+  * Store the converted width in `fillWidth`
   * Fill the bar using `oled.rectFill()`
   * Optional challenge: Add a tick mark on the bar at the STOP threshold position
 
