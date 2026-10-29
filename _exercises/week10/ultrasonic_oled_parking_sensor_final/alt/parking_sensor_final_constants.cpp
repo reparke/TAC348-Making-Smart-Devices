@@ -102,7 +102,7 @@ void drawDisplay(float inches) {
     }
 }
 
-int convertDdistanceToBarWidth(float inches) {
+int convertInchesToBarWidth(float inches) {
     // Keep the distance in the range represented by the bar.
     inches = constrain(inches, 0, FAR_THRESHOLD_IN);
 
@@ -111,7 +111,7 @@ int convertDdistanceToBarWidth(float inches) {
 }
 
 void drawBar(float inches) {
-    int fillWidth = convertDdistanceToBarWidth(inches);
+    int fillWidth = convertInchesToBarWidth(inches);
 
     // BAR_X/Y place it; +2 adds a 1-pixel border on each side of the fill.
     oled.rect(BAR_X, BAR_Y, BAR_MAX_WIDTH + 2, BAR_HEIGHT + 2);
@@ -120,7 +120,7 @@ void drawBar(float inches) {
     oled.rectFill(BAR_X + 1, BAR_Y + 1, fillWidth, BAR_HEIGHT);
 
     // Start at the fill's left edge, then move to the mapped STOP position.
-    int stopX = BAR_X + 1 + convertDdistanceToBarWidth(STOP_THRESHOLD_IN);
+    int stopX = BAR_X + 1 + convertInchesToBarWidth(STOP_THRESHOLD_IN);
 
     // line(x1, y1, x2, y2): same x makes it vertical; y extends 2 px past the bar.
     oled.line(stopX, BAR_Y - 2, stopX, BAR_Y + BAR_HEIGHT + 3);

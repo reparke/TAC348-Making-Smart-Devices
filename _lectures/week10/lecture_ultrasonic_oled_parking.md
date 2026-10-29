@@ -101,13 +101,15 @@ return total / NUM_READINGS;
 
 ## Handling Bad Readings: Corrected
 
-<pre><code class="language-cpp">if (distanceIn != 0 && distanceIn &lt; MAX_RANGE_IN) {
+```c++
+if (distanceIn != 0 && distanceIn <= MAX_RANGE_IN) {
     readings[readIndex] = distanceIn;
     readIndex = readIndex + 1;
-    if (readIndex &gt;= NUM_READINGS) {
+    if (readIndex >= NUM_READINGS) {
         readIndex = 0;
     }
-}</code></pre>
+}
+```
 
 ## Bitmaps
 
@@ -147,6 +149,10 @@ int fillWidth = map(30, 0, 24, 60, 0);  // Result: -15
 
 * Always clamp the input first
 
+## Clamping (Two Way)
+
+* Use `if` statemnts
+
 ```c++
 if (inches < 0) {
     inches = 0;
@@ -155,13 +161,11 @@ if (inches < 0) {
 }
 ```
 
-* If you skip this step, `map()` can produce a width outside the valid 0–60 pixel range
-
-## Clamping Before `map()`
-
-* `constrain()` clamps a value to a min and max range
+* Use`constrain()` clamps a value to a min and max range
 
 ```c++
+//syntax: result = contrain(value, MIN, MAX);
+	
 inches = constrain(inches, 0, FAR_THRESHOLD_IN);
 ```
 
@@ -196,11 +200,11 @@ inches = constrain(inches, 0, FAR_THRESHOLD_IN);
 
 * Specifications
   * Draw a bar graph outline at the bottom of the screen
-  * Create `distanceToBarWidth()` to convert distance into pixel width
-  * Clamp `inches` with `constrain()` before calling `map()`
-  * Store the converted width in `fillWidth`
-  * Fill the bar using `oled.rectFill()`
-  * Optional challenge: Add a tick mark on the bar at the STOP threshold position
+  * Constrain the distance
+  * Convert inches to pixels
+  * Draw outer rectangle
+  * Draw fill rectangle
+  * Optional: draw tick line
 
 ## Completion Checklist
 

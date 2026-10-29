@@ -19,19 +19,24 @@ const int ECHO_PIN = D5;
 const float SPEED_SOUND_CM = 0.03444;
 const float CM_TO_IN = 0.393701;
 
-
 /*
     part 1) clean up the sensor reading
-        -ignore bad readings
-        -smooth out good readings with an average (of last 5)
+        - ignore bad readings
+        - collect sensor readings
+        - smooth out good readings with an average (of last 5)
 
     part 2) display bitmaps and distance
-        - for NEAR and STOP distance, display distance in inchess on oled
-        - for STOP, display X graphic
-        - for NEAR, display warning graphic
-        - for FAR, display yes graphic
-*/
+        - for STOP, display X graphic and distance in inches
+        - for NEAR, display warning graphic and distance in inches
+        - for FAR,  display yes graphic
 
+    part 3) display the bar
+        - constrain the distance
+        - convert inches to pixels
+        - draw outer rectangle
+        - draw fill rectangle
+        - optional: draw tick line
+*/
 
 // TODO: Thresholds
 
@@ -40,11 +45,6 @@ void drawDisplay(float inches) {}
 
 // TODO: drawBar
 void drawBar(float inches) {}
-
-// TODO: convertDdistanceToBarWidth
-// This function is a helper function that isn't streicly necessary
-// but makes the code easier to read
-int convertDdistanceToBarWidth(float inches);
 
 /* fn: readDistanceIn()
     returns float distance to object
