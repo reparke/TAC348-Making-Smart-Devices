@@ -4,7 +4,7 @@ number: 12
 category: assignments
 title: Final Project
 description: "Final project requirements for TAC 348 Making Smart Devices, including a proposal, technical milestone, connected device, documentation, and demonstration."
-date_due: Proposal due Sun Nov-08 @ 11:59 pm; Milestone due Sun Nov-29 @ 11:59 pm; Finished device and presentation during the Final Exam Time listed in the Schedule of Classes (in person) Fri Dec-11 @ 11am-1pm for MW class and Tue Dec-15 @ 8-10am for TTh class
+date_due: Proposal due Sun Nov-08 @ 11:59 pm; Design Review Response due Sun Nov-15 @ 11:59 pm; Milestone due Sun Nov-29 @ 11:59 pm; Finished device and presentation during the Final Exam Time listed in the Schedule of Classes (in person) Fri Dec-11 @ 11am-1pm for MW class and Tue Dec-15 @ 8-10am for TTh class
 ---
 
 <span id="final-project"></span>
@@ -143,6 +143,7 @@ The part you demonstrate does not need to be polished or integrated into the com
   - A short, polished video that showcases your device (30–60 seconds)
   - Demonstrates the device’s purpose and major features in a visually appealing way
   - Think of this as something for your portfolio
+  - [Sample sizzle reel](https://www.youtube.com/watch?v=ApcieeOp0U0)
 
 ### Project - Final Presentation (10 minutes)
 
@@ -179,7 +180,7 @@ Each criterion will be evaluated using the following performance levels:
 | **Proposal: need and audience** | Identifies the need, audience, and why the device is an appropriate response. | **3** |
 | **Proposal: goals and system plan** | Explains the project goals, inputs, outputs, components, interactions, and connected services. | **4** |
 | **Proposal: feasibility** | Includes a realistic budget, scope, risks, schedule, and fallback plan. | **3** |
-| **Design-review response** | Summarizes the most useful feedback and identifies one planned change. | **3** |
+| **Design review response** | Summarizes the most useful feedback and identifies one planned change. | **3** |
 |  |  |  |
 | **Project Milestone** |  |  |
 | **Milestone: schematic** | Includes a complete and accurate Fritzing diagram of the current design. | **5** |

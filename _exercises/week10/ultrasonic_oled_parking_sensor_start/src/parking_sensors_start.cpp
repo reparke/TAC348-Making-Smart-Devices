@@ -48,7 +48,7 @@ void drawBar(float inches) {}
 
 /* fn: readDistanceIn()
     returns float distance to object
-    THIS FUNCTION IS ALREADY DONE FOR YOU
+
 */
 float readDistanceIn() {
     digitalWrite(TRIG_PIN, LOW);
