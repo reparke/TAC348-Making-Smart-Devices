@@ -40,6 +40,7 @@ JsonDocument doc;
 ## Step 2: Create the Outer Array
 
 - In the JSON example at the top, the outer container is a JSON **array** and starts with `[` and ends with `]`
+
 ```json
 [
     
