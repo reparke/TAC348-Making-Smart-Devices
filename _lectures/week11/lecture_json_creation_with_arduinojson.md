@@ -26,10 +26,48 @@ title: Creating JSON with ArduinoJson Library
 ##  Creating JSON with a Library:  `ArduinoJson` 
 
 - `ArduinoJson` is a popular library for generating JSON code and can be installed from **Workbench**
+- Our goal is to create the JSON string shown above, then send it with `Particle.publish()`
 
-* Use the sample code below
+## Step 1: Create the JsonDocument
 
-### Configuration of `ArduinoJson`
+```c++
+JsonDocument doc;
+```
+
+- This container will store all the JSON data we are creating before we publish it
+
+
+## Step 2: Create the Outer Array
+
+- In the JSON example at the top, the outer container is a JSON **array** and starts with `[` and ends with `]`
+```json
+[
+    
+]
+```
+- We start by creating the same outer container in C++:
+
+```c++
+JsonArray readings = doc.to<JsonArray>();
+```
+
+## Step 3: Add the First Object
+
+- The first item inside the array is a JSON **object** and starts with `{` and ends with `}`
+```json
+[
+ {"key":"temperature", "value":79.000000}
+]
+```
+- Add an object to the array, then give it a key and value:
+
+```c++
+JsonObject obj0 = readings.add<JsonObject>();
+obj0["key"] = "temperature";
+obj0["value"] = 79.000000;
+```
+
+## Configuration of `ArduinoJson` Library
 
 - Import library and set up Arduino compatibility (make sure these lines go AFTER `#include "Particle.h`")
 
@@ -38,33 +76,34 @@ title: Creating JSON with ArduinoJson Library
 #include <ArduinoJson.h> 
 ```
 
-### Photon 2 code
+## Photon 2 code Example
 
 ```c++
 void loop() {
-  StaticJsonDocument<1024> doc; // object to store JSON response
-  String output; 			   // will store JSON string which is used for Particle.publish()
+  JsonDocument doc; // container for our JSON data
+  JsonArray readings = doc.to<JsonArray>(); // create the outer array [ ]
+  String output; // will store the JSON string for Particle.publish()
 
   /* Here is where JSON creation code goes */
-    //create first JSON object
-  JsonObject obj0 = doc.createNestedObject();
+  //create first JSON object inside the array
+  JsonObject obj0 = readings.add<JsonObject>();
   obj0["key"] = "temperature";
   obj0["value"] = 79.000000;
 
   //create second JSON object
-  JsonObject obj1 = doc.createNestedObject();
+  JsonObject obj1 = readings.add<JsonObject>();
   obj1["key"] = "humidity";
   obj1["value"] = 22.000000;
 
   //create third JSON object
-  JsonObject obj2 = doc.createNestedObject();
+  JsonObject obj2 = readings.add<JsonObject>();
   obj2["key"] = "weather";
   obj2["value"] = "sunny";
 
   serializeJson(doc, output); //create JSON string
   
   //make sure to change the event name below to match the webhook you created  
-  Particle.publish("inital_state_json", output);
+  Particle.publish("initial_state_json", output);
   delay(60000);	//use delay or millis to avoid publishing too frequently
 }
 ```

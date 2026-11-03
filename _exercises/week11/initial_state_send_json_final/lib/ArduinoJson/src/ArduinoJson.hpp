@@ -1,5 +1,5 @@
 // ArduinoJson - https://arduinojson.org
-// Copyright © 2014-2023, Benoit BLANCHON
+// Copyright © 2014-2026, Benoit BLANCHON
 // MIT License
 
 #pragma once
@@ -26,27 +26,40 @@
 #  endif
 #endif
 
+// Remove true and false macros defined by some cores, such as Arduino Due's
+// See issues #2181 and arduino/ArduinoCore-sam#50
+#ifdef true
+#  undef true
+#endif
+#ifdef false
+#  undef false
+#endif
+
 #include "ArduinoJson/Array/JsonArray.hpp"
 #include "ArduinoJson/Object/JsonObject.hpp"
 #include "ArduinoJson/Variant/JsonVariantConst.hpp"
 
-#include "ArduinoJson/Document/DynamicJsonDocument.hpp"
-#include "ArduinoJson/Document/StaticJsonDocument.hpp"
+#include "ArduinoJson/Document/JsonDocument.hpp"
 
+#include "ArduinoJson/Array/ArrayImpl.hpp"
 #include "ArduinoJson/Array/ElementProxy.hpp"
-#include "ArduinoJson/Array/JsonArrayImpl.hpp"
 #include "ArduinoJson/Array/Utilities.hpp"
 #include "ArduinoJson/Collection/CollectionImpl.hpp"
-#include "ArduinoJson/Object/JsonObjectImpl.hpp"
+#include "ArduinoJson/Memory/ResourceManagerImpl.hpp"
 #include "ArduinoJson/Object/MemberProxy.hpp"
+#include "ArduinoJson/Object/ObjectImpl.hpp"
 #include "ArduinoJson/Variant/ConverterImpl.hpp"
+#include "ArduinoJson/Variant/JsonVariantCopier.hpp"
 #include "ArduinoJson/Variant/VariantCompare.hpp"
 #include "ArduinoJson/Variant/VariantImpl.hpp"
+#include "ArduinoJson/Variant/VariantRefBaseImpl.hpp"
 
 #include "ArduinoJson/Json/JsonDeserializer.hpp"
 #include "ArduinoJson/Json/JsonSerializer.hpp"
 #include "ArduinoJson/Json/PrettyJsonSerializer.hpp"
+#include "ArduinoJson/MsgPack/MsgPackBinary.hpp"
 #include "ArduinoJson/MsgPack/MsgPackDeserializer.hpp"
+#include "ArduinoJson/MsgPack/MsgPackExtension.hpp"
 #include "ArduinoJson/MsgPack/MsgPackSerializer.hpp"
 
 #include "ArduinoJson/compatibility.hpp"
