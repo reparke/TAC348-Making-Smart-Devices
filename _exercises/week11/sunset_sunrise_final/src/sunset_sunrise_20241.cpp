@@ -24,13 +24,15 @@ Photon receives response and immediately (automatically) calls myHandler
 */
 
 void myHandler(const char* event, const char* data) {
-    String fullJson = json_webhook_response_helper(event, data);
+    // String fullJson = json_webhook_response_helper(event, data); //don't need helper function
+    String fullJson = String(data);
     JsonDocument doc;
     DeserializationError error = deserializeJson(doc, fullJson);
 
     if (!error) {  // Test to see if was successful
-        String sunrise = doc["results"]["sunrise"];
-        String sunset = doc["results"]["sunset"];
+        String sunrise = doc["sunrise"];
+
+        String sunset = doc["sunset"];
 
         Serial.println("The sunset in LA is " + sunset + " and the sunrise is " + sunrise);
     }
