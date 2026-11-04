@@ -145,7 +145,7 @@
   /* ---- Disabled and status (not in mockups) ---- */
   --color-disabled-background:   #E4E1DB;  /* [PROPOSED] */
   --color-disabled-text:         #6B7A7E;  /* [PROPOSED] not subject to contrast rules, but keep legible */
-  --color-selection-background:  #D2E4E7;  /* [PROPOSED] ::selection */
+  --color-selection-background:  #FFA95C;  /* [PROPOSED] ::selection */
   --color-selection-text:        #14262C;  /* [PROPOSED] */
 
   /* ---- Typography ---- */
