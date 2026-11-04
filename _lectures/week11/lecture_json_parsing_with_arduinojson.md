@@ -12,23 +12,35 @@ title: Parsing JSON with ArduinoJson Library
 
 ## JSON Example Data
 
-- Consider the following JSON data is being received by the Photon 2
+- Consider this shortened [Open-Meteo](https://open-meteo.com/) response received by the Photon 2
+- This example assumes the webhook requests temperature in Fahrenheit
 
 ```json
 {
-  "place": {
-    "city": "los angeles",
-    "state": "california"
-  },
-  "temperature": [
-    78,
-    89,
-    93,
-    77
-  ]
+  "current": {
+    "temperature_2m": 72.4,
+    "relative_humidity_2m": 45,
+    "weather_code": 1
+  }
 }
 ```
 
+## Publishing and Subscribing
+
+```c++
+void setup() {
+  // Subscribe to the integration response event
+  Particle.subscribe("hook-response/open_meteo_json", myHandler,
+                     MY_DEVICES);
+}
+
+void loop() {
+  // Trigger the integration
+  Particle.publish("open_meteo_json", "");
+  // Wait 10 seconds
+  delay(10000);
+}
+```
 
 
 ## Parsing JSON with a Library:  `ArduinoJson` 
@@ -38,7 +50,7 @@ title: Parsing JSON with ArduinoJson Library
 * The first part allows for responses from the webhook that come in multiple parts (you don't need to change this)
 * The second part is where you can adapt your own code
 
-### Configuration of `ArduinoJson`
+## Configuration of `ArduinoJson`
 
 - Import library and set up Arduino compatibility
 
@@ -47,47 +59,20 @@ title: Parsing JSON with ArduinoJson Library
 #include <ArduinoJson.h> 
 ```
 
-## Publishing and Subscribing
+## Helper File
+
+- A long webhook response may arrive in several parts
+- Download the library [`json_webhook_response_helper.h`](json_webhook_response_helper.h)
+- The library includes a helper function`json_webhook_response_helper()` which puts the parts together and returns the complete JSON as a `String`
+- Until all the parts arrive, it returns an empty `String`
 
 ```c++
-void setup() {
-  // Subscribe to the integration response event
-  Particle.subscribe("hook-response/JSONWeatherStack", myHandler,
-                     MY_DEVICES);
-}
-
-void loop() {
-  // Get some data
-  String data = "90089";
-  // Trigger the integration
-  Particle.publish("JSONWeatherStack", data, PRIVATE);
-  // Wait 60 seconds
-  delay(60000);
-}
+#include "json_webhook_response_helper.h"
 ```
 
 
 
-## Parsing with `ArduinoJson`
-
-### Example: Consider the following JSON
-
-```json
-{
-  "place": {
-    "city": "los angeles",
-    "state": "california"
-  },
-  "temperature": [
-    78,
-    89,
-    93,
-    77
-  ]
-}
-```
-
-### Configuration of `ArduinoJson`
+## Configuration of `ArduinoJson` Library
 
 - Import library and set up Arduino compatibility
 ```c++
@@ -97,8 +82,10 @@ void loop() {
 
 
 
-### Configuration of Event Handler
-- The JSON will be passed to the `data` parameter of event handler 
+
+## Configuration of Event Handler
+- Each time the event handler runs, `data` contains one part of the webhook response. A short response fits in one part
+- The helper puts the parts together in `fullJson`
 ```c++
 void myHandler(const char *event, const char *data) 
 ```
@@ -108,42 +95,47 @@ Here is an template for `myHandler`
 
 ```c++
 void myHandler(const char *event, const char *data) {
-//Part 1 allows for webhook responses to be delivered in multple "chunks"; you don't need to change this
-    static String jsonBuffer; //store json response
-    int responseIndex = 0;
-    const char* slashOffset = strrchr(event, '/');
-    if (slashOffset) responseIndex = atoi(slashOffset + 1);
-    if (responseIndex == 0) jsonBuffer = "";
-    jsonBuffer += data;
+// Part 1: helper function allows for webhook responses to be delivered in multple "chunks"; you don't need to change these lines
+    String fullJson = json_webhook_response_helper(event, data);
+    JsonDocument doc;
+    DeserializationError error = deserializeJson(doc, fullJson);
 
 // Part 2 is where you can parse the actual data; you code goes in the IF
-    DynamicJsonDocument doc(12288);
-    DeserializationError error = deserializeJson(doc, jsonBuffer);
-
-    if (!error) { // Test to see if was successful
+    if (!error) {
         
     /*          ============ 
     Here is where your parsing code goes 
     	        ============
     */
-        
-
     }
 }
 ```
-### Parsing JSON
+## Parsing JSON
 
 * Add you code to parse JSON to `myHandler`
 * Each JSON response will look different
-* Here is an example
+* Here is how to read the temperature from the Open-Meteo response above
 
 ```c++
-    String city = doc["place"]["city"];  // "los angeles"
-    int temp = doc["temperature"][1];  // 89
-    Serial.println("The second temperature for " + city + " is " + String(temp));
+    float tempF = doc["current"]["temperature_2m"];  // 72.4
+    Serial.println("The temperature is " + String(tempF, 1) + " F");
 ```
 
+* Try reading `relative_humidity_2m` from the same `current` object
 
+## Exercise: Sunrise Sunset API
+
+* Download the [sunset_sunrise_start project](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week11/sunset_sunrise_start)
+  * Go to [ProjectZipGH](https://tinyurl.com/ProjectZipGH)
+  * Paste this GitHub folder URL into the top right:
+    `https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week11/sunset_sunrise_start`
+
+## Lab: Open-Meteo
+
+* Download the [open-meteo_start project](https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week11/open-meteo_start)
+  * Go to [ProjectZipGH](https://tinyurl.com/ProjectZipGH)
+  * Paste this GitHub folder URL into the top right:
+    `https://github.com/reparke/TAC348-Making-Smart-Devices/tree/main/_exercises/week11/open-meteo_start`
 
 ## Useful Links
 
