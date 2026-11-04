@@ -38,10 +38,10 @@ void myHandler(const char* event, const char* data) {
 
 void setup() {
     Serial.begin(9600);
-    Particle.subscribe("hook-response/open_meteo_json", myHandler, MY_DEVICES);
+    Particle.subscribe("hook-response/open_meteo", myHandler, MY_DEVICES);
 }
 
 void loop() {
-    Particle.publish("open_meteo_json", "");
+    Particle.publish("open_meteo", "");
     delay(10000);
 }
