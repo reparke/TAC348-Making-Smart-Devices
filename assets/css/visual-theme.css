@@ -84,6 +84,7 @@
   --color-code-copy-hover:       #FF9B3D;  /* [PROPOSED] */
   --color-code-inline-background: #D2E4E7; /* [APPROVED] inline code on light surfaces */
   --color-code-inline-text:      #14262C;  /* [APPROVED] */
+  --color-code-comment:          #B8B0A5;  /* [APPROVED] */
   --color-code-keyword:          #FFA95C;  /* lamp orange */
   --color-code-string:           #B9E5C7;  /* light teal-green */
   --color-code-number:           #FFE08A;  /* light lamp yellow */
@@ -624,7 +625,7 @@ figure.highlight .highlight :is(.nf, .fm, .nl, .na) {
 }
 div.highlighter-rouge .highlight :is(.c, .cm, .c1, .cs),
 figure.highlight .highlight :is(.c, .cm, .c1, .cs) {
-  color: var(--color-text-inverse-muted);
+  color: var(--color-code-comment);
 }
 div.highlighter-rouge pre.highlight .btn, figure.highlight pre.highlight .btn {
   display: inline-flex;
