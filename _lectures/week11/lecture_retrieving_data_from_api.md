@@ -16,58 +16,78 @@ title: Retrieving Data from APIs
 - APIs provide useful data we can use in our device (e.g. weather and location data)
 - Each API will be configured slightly differently but the process to connect is generally similar
 
-## 
+##
 
-<img src="lecture_json_overview.assets/Screenshot 2024-06-22 at 1.05.34 AM.png" alt="Screenshot 2024-06-22 at 1.05.34 AM" style="width:1000px;" />
+<img src="lecture_json_overview.assets/Screenshot 2024-06-22 at 1.05.34 AM.png" alt="Photon 2, Particle Cloud, and weather API" style="width:1000px;" />
 
-## 
+##
 
-<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-06-29 at 10.43.49 PM.png" alt="Screenshot 2024-06-29 at 10.43.49 PM" style="width:1000px;" />
+<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-06-29 at 10.43.49 PM.png" alt="Photon 2 publishes an event to the Particle Cloud" style="width:1000px;" />
 
+##
 
+<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-06-29 at 10.44.46 PM.png" alt="Particle webhook requests data from the weather API" style="width:1000px;" />
 
-## 
+##
 
-<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-06-29 at 10.44.46 PM.png" alt="Screenshot 2024-06-29 at 10.44.46 PM" style="width:1000px;" />
+<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-06-29 at 10.46.13 PM.png" alt="Weather API returns JSON to the Particle Cloud" style="width:1000px;" />
 
-## 
+##
 
-<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-06-29 at 10.46.13 PM.png" alt="Screenshot 2024-06-29 at 10.46.13 PM" style="width:1000px;" />
-
-## 
-
-<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-06-29 at 10.47.42 PM.png" alt="Screenshot 2024-06-29 at 10.47.42 PM" style="width:1000px;" />
-
-
+<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-06-29 at 10.47.42 PM.png" alt="Photon 2 receives the JSON response through Particle.subscribe" style="width:1000px;" />
 
 ## Steps to Connect Photon 2 and API
 
-0. Determine how to use the API
-1. Create an integration -> webhook on [Particle console](https://console.particle.io/integrations) 
-2. Use `Particle.publish` to trigger webhook
-3. Use `Particle.subscribe` to "listen" for response from webhook
-4. **Optional:** Mustache template that tells the Particle Cloud to which relevant data from the response should be to the Photon 2 (and the rest of the data will be ignored)
-5. Create **function handler** that is used by `Particle.subscribe` to process JSON
+0. Read the API documentation
+1. Create a webhook in the [Particle Console](https://console.particle.io/integrations)
+2. Use `Particle.publish()` to trigger the webhook
+3. Use `Particle.subscribe()` to receive its response
+4. Create a function handler to process the JSON
 
-## Step 0: How to use the API
+* Optional: a [Mustache response template](lecture_retrieving_data_mustache_templates) could send less data to the Photon 2. Our class webhook does not use one.
+
+## Step 0: How to Use the API
 
 - Each API is different, but they will usually have documentation that describes how to connect
 - Typically, this will include
   - Endpoint (URL you communicate with)
-  - Parameters to include in your request (e.g. name of city you want weather data for)
+  - Parameters to include in your request (e.g. latitude and longitude for weather data)
   - How to obtain an API key (if necessary)
 
-## Step 0: How to Use the API
+## Step 0: Open-Meteo Example
 
-Example: WeatherStack
+* [Open-Meteo's weather forecast API documentation](https://open-meteo.com/en/docs)
+* Endpoint: `https://api.open-meteo.com/v1/forecast`
+* Location: `latitude=34.0522` and `longitude=-118.2437` (Los Angeles)
+* Current data: temperature, humidity, precipitation, weather code, wind speed
+* Daily data: maximum UV index
 
-<img src="lecture_retrieving_data_from_api.assets/image-20201017181859930.png" alt="image-20201017181859930" style="zoom:50%;" />
+## Step 0: More Request Settings
 
-## Step 1: Create Webhook In Particle Console
+* `timezone=America/Los_Angeles`
+* `forecast_days=1`
+* `wind_speed_unit=mph`
+* `temperature_unit=fahrenheit`
 
-**Particle integration settings**
+[Open the request used by our class webhook](https://api.open-meteo.com/v1/forecast?latitude=34.0522&longitude=-118.2437&daily=uv_index_max&current=temperature_2m%2Crelative_humidity_2m%2Cprecipitation%2Cweather_code%2Cwind_speed_10m&timezone=America%2FLos_Angeles&forecast_days=1&wind_speed_unit=mph&temperature_unit=fahrenheit).
 
-![image-20200405005837141](lecture_weatherstack_integration.assets/image-20200405005837141.png)
+## Step 1: Create Webhook in Particle Console
+
+**Our class webhook settings**
+
+| Setting | Value |
+| --- | --- |
+| Name | Open-Meteo Full JSON |
+| Event name | `open_meteo_json` |
+| Request type | `GET` |
+| URL | The [Open-Meteo request above](https://api.open-meteo.com/v1/forecast?latitude=34.0522&longitude=-118.2437&daily=uv_index_max&current=temperature_2m%2Crelative_humidity_2m%2Cprecipitation%2Cweather_code%2Cwind_speed_10m&timezone=America%2FLos_Angeles&forecast_days=1&wind_speed_unit=mph&temperature_unit=fahrenheit) |
+| Response template | None |
+
+The location is in the webhook URL, so the Photon 2 can publish an empty event value. The webhook sends the full JSON response back to the Photon 2.
+
+##
+
+<a href="lecture_retrieving_data_from_api.assets/open-meteo-webhook-settings.png"><img src="lecture_retrieving_data_from_api.assets/open-meteo-webhook-settings.png" alt="Particle Console settings for the Open-Meteo Full JSON webhook" style="height:640px;" /></a>
 
 ## Part 2: Publish Event to Trigger Webhook
 
@@ -75,78 +95,57 @@ Example: WeatherStack
 
 ```c++
 void loop() {
-  String data = "90089";	//USC zip code
-  
-   // Trigger the integration
-  Particle.publish("JSONWeatherStack", data, PRIVATE);
- 
-   // Wait 60 seconds
-  delay(60000);
-}
+  // Trigger the Open-Meteo webhook
+  Particle.publish("open_meteo_json", "");
 
+  // Wait 10 seconds
+  delay(10000);
+}
 ```
 
-## Part 3: Subscribe to JSON response from Weather Stack
+## Part 3: Subscribe to the Open-Meteo Response
 
 **Photon 2 firmware**
 
 ```c++
 void setup() {
   // Subscribe to the integration response event
-  Particle.subscribe("hook-response/JSONWeatherStack",
-                      jsonSubscriptionHandler, MY_DEVICES);
+  Particle.subscribe("hook-response/open_meteo_json",
+                     myHandler, MY_DEVICES);
 }
 ```
 
+The webhook response arrives as a Particle event. A long response can arrive in several parts.
 
+## Example: Open-Meteo JSON Response
 
-## Example: Entire Weather Stack JSON Response
+* This is the `current` section of a real response for Los Angeles, captured November 3, 2026 (Pacific time)
+* [View the complete response](lecture_retrieving_data_from_api.assets/open-meteo-los-angeles-response.json)
 
-![image-20200405005641533](lecture_retrieving_data_from_api.assets/image-20200405005641533.png)
-
-
-## Weather Stack JSON Response (partial)
 ```json
 {
   "current": {
-    "observation_time": "04:30 AM",
-    "temperature": 61,
-    "weather_code": 122,
+    "time": "2026-11-03T22:45",
+    "interval": 900,
+    "temperature_2m": 59.9,
+    "relative_humidity_2m": 74,
+    "precipitation": 0.0,
+    "weather_code": 0,
+    "wind_speed_10m": 4.8
   }
 }
 ```
-![right:50%](lecture_weatherstack_integration.assets/image-20200405005641533_temperature.png)
 
+## Part 4: Create a Function Handler
 
-
-## Part 4: Creating the function handler to receive and parse the JSON
-
-* The last step is to create Photon 2 code to handle / parse the JSON response
-* While it is possible to manually parse JSON in C++, it is considered unsafe due to potential for security vulnerabilities
-* **Instead, use a library**
-* [Instruction and examples for parsing JSON with `ArduinoJson`](lecture_json_parsing_with_arduinojson)
-
-
-
-<!--Since JSON is `String` data, it is possible to parse it using C-language techniques like `strtok`, `strcpy`, `atoi` 
-However Buffer overrun if the response from the webserver was larger than expected or malformed-->
-
-
+* The handler receives the webhook response and reads values from the JSON
+* The [JSON parsing lecture](lecture_json_parsing_with_arduinojson) shows the `ArduinoJson` code and the helper for responses that arrive in several parts
+* To read this temperature: `doc["current"]["temperature_2m"]`
 
 ## Resources
 
+* [Open-Meteo documentation](https://open-meteo.com/en/docs)
+* [Particle webhook reference](https://docs.particle.io/reference/cloud-apis/webhooks/)
 * [Mustache Tester](https://rickkas7.github.io/mustache/)
 * [Mustache Variable Reference](https://docs.particle.io/firmware/best-practices/json/#mustache-variables)
-* [JSON Validator and formatter](https://jsonformatter.org/) 
-* [Weatherstack documentation](https://weatherstack.com/documentation)
-
-## Credits
-
-* Photo by [Inset Agency](https://unsplash.com/@inset_agency?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/rain-umbrella?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-
-
-
-<!--Alternate weather integration service
-http://303.itpwebdev.com/~molld/assignment6/list.html
-http://303.itpwebdev.com/~molld/assignment6/main.js
- -->
+* [JSON Validator and formatter](https://jsonformatter.org/)

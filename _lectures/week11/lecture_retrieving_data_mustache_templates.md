@@ -13,119 +13,80 @@ title: Retrieving Data from APIs using Mustache Templates (optional)
 
 ## Overview
 
-- This is an **optional** step where you filter the JSON response in the Particle cloud before sending the JSON resposne to the Photon 2
-- This saves processing and bandwidth because you are only sending the Photon 2 the exact JSON data you want, not the whole JSON response
-- This is a good practice, but not explicitly required in our class.
+- This is an **optional** step where you filter the JSON response in the Particle Cloud before sending it to the Photon 2
+- This sends the Photon 2 only the data you want instead of the entire response
+- Our class Open-Meteo webhook does not have a response template. This is an optional example.
 
+##
 
+<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-07-01 at 10.11.13 PM.png" alt="Focus on the JSON sent from the weather API to the Photon 2" style="width:1000px;" />
 
-## Part 3: Subscribe to JSON response from Weather Stack
+## Open-Meteo Response
+
+* The [complete Open-Meteo response](lecture_retrieving_data_from_api.assets/open-meteo-los-angeles-response.json) contains location, units, and current weather data
+* This is the `current` section of that real response, captured November 3, 2026 (Pacific time)
+
+```json
+{
+  "current": {
+    "time": "2026-11-03T22:45",
+    "interval": 900,
+    "temperature_2m": 59.9,
+    "relative_humidity_2m": 74,
+    "precipitation": 0.0,
+    "weather_code": 0,
+    "wind_speed_10m": 4.8
+  }
+}
+```
+
+## What if We Only Want the Temperature?
+
+* The temperature is inside the `current` object
+* Its path in the response is `current.temperature_2m`
+* A webhook response template can send just that value
+
+## Create a Mustache Response Template
+
+* If you want to try this, create a separate test webhook in [Particle Console Integrations](https://console.particle.io/integrations)
+* Find **Webhook Responses → Response Template**
+* Put the template below in that field
+
+<!-- {% raw %} -->
+```json
+{"temp":{{{current.temperature_2m}}}}
+```
+<!-- {% endraw %} -->
+
+The triple braces insert the value without changing it to HTML text. For this example, `59.9` stays a JSON number.
+
+## What the Photon 2 Receives
+
+For the captured Open-Meteo response, the template produces:
+
+```json
+{"temp":59.9}
+```
+
+* The response is smaller, but the JSON shape has changed
+* With this template, read the temperature using `doc["temp"]`
+* Without the template, use `doc["current"]["temperature_2m"]` as shown in the [JSON parsing lecture](lecture_json_parsing_with_arduinojson)
+
+## Subscribe to the Response
 
 **Photon 2 firmware**
 
 ```c++
 void setup() {
-  // Subscribe to the integration response event
-  Particle.subscribe("hook-response/JSONWeatherStack",
-                      jsonSubscriptionHandler, MY_DEVICES);
+  Particle.subscribe("hook-response/open_meteo_json",
+                     myHandler, MY_DEVICES);
 }
 ```
 
-## 
-
-<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-07-01 at 10.11.13 PM.png" alt="Screenshot 2024-07-01 at 10.11.13 PM" style="width:1000px;" />
-
-## 
-
-<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-07-01 at 10.15.08 PM.png" alt="Screenshot 2024-07-01 at 10.15.08 PM" style="width:1000px;" />
-
-## 
-
-<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-07-01 at 10.16.55 PM.png" alt="Screenshot 2024-07-01 at 10.16.55 PM" style="width:1000px;" />
-
-## 
-
-<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-07-01 at 10.19.36 PM.png" alt="Screenshot 2024-07-01 at 10.19.36 PM" style="width:1000px;" />
-
-## 
-
-<img src="lecture_retrieving_data_from_api.assets/Screenshot 2024-07-01 at 10.22.14 PM.png" alt="Screenshot 2024-07-01 at 10.22.14 PM" style="width:1000px;" />
-
-
-
-## Part 4 : Create Mustache template
-
-- Often we might only want a few items from the JSON, but the webserver sends the entire message
-- This extra data can waste time, bandwidth, power, and the response size can create errors
-- Instead, we can have Particle webserver send us only the data we actually want by creating **Mustache templates**
-
-<!-- {% raw %} -->
-<!-- Inserting a variable with double braces {{a}} will do HTML escaping of the characters &<>"'. To avoid this, use triple braces {{{a}}} -->
-<!-- {% endraw %} -->
-
-## Example: Entire Weather Stack JSON Response
-
-![image-20200405005641533](lecture_retrieving_data_from_api.assets/image-20200405005641533.png)
-
-## Example: What if we only want the temperature?
-
-![right:50%](lecture_retrieving_data_from_api.assets/image-20200405005641533_temperature.png)
-
-
-
-### Creating Mustache Webhook Response Templates
-
-**Particle Console Webhook**
-
-![image-20231012134414124](lecture_retrieving_data_from_api.assets/image-20231012134414124.png)
-
-## Example: Mustache Format
-
-![right:50%](lecture_retrieving_data_from_api.assets/image-20200405005641533_temperature.png)
-
-- If we are only interested in the `temperature` value which is nested in the `current` object, we could create a template like the following
-
-<!-- {% raw %} -->
-```json
-  {"temp":"{{{current.temperature}}}"}
-```
-<!-- {% endraw %} -->
-
-- Now instead of the server sending entire JSON response, it will only send the following
-```json
-  {"temp":"61"}
-```
-
-- For webhook response templates, make sure the template will always result in valid JSON (i.e. `{"name":"value"}`)
-
-## Part 5: Creating the function handler to receive and parse the JSON
-
-* The last step is to create Photon 2 code to handle / parse the JSON response
-* While it is possible to manually parse JSON in C++, it is considered unsafe due to potential for security vulnerabilities
-* **Instead, use a library**
-* [Instruction and examples for parsing JSON with `ArduinoJson`](lecture_json_parsing_with_arduinojson)
-
-
-
-<!--Since JSON is `String` data, it is possible to parse it using C-language techniques like `strtok`, `strcpy`, `atoi` 
-However Buffer overrun if the response from the webserver was larger than expected or malformed-->
-
-
+The event name stays the same. The response template changes only the JSON sent back to the device.
 
 ## Resources
 
-* [Mustache Tester](https://rickkas7.github.io/mustache/)
-* [Mustache Variable Reference](https://docs.particle.io/firmware/best-practices/json/#mustache-variables)
-* [JSON Validator and formatter](https://jsonformatter.org/) 
-* [Weatherstack documentation](https://weatherstack.com/documentation)
-
-## Credits
-
-* Photo by [Inset Agency](https://unsplash.com/@inset_agency?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/rain-umbrella?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-
-
-
-<!--Alternate weather integration service
-http://303.itpwebdev.com/~molld/assignment6/list.html
-http://303.itpwebdev.com/~molld/assignment6/main.js
- -->
+* [Particle webhook response templates](https://docs.particle.io/reference/cloud-apis/webhooks/#responsetemplate)
+* [Particle Mustache variables](https://docs.particle.io/firmware/best-practices/json/#mustache-variables)
+* [Open-Meteo documentation](https://open-meteo.com/en/docs)
