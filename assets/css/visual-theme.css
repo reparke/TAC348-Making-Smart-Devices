@@ -84,6 +84,10 @@
   --color-code-copy-hover:       #FF9B3D;  /* [PROPOSED] */
   --color-code-inline-background: #D2E4E7; /* [APPROVED] inline code on light surfaces */
   --color-code-inline-text:      #14262C;  /* [APPROVED] */
+  --color-code-keyword:          #FFA95C;  /* lamp orange */
+  --color-code-string:           #B9E5C7;  /* light teal-green */
+  --color-code-number:           #FFE08A;  /* light lamp yellow */
+  --color-code-function:         #FFC4B6;  /* light oxide tint */
 
   /* ---- Table ---- */
   --color-table-header-background: #04343D; /* [APPROVED] */
@@ -602,11 +606,24 @@ div.highlighter-rouge pre, figure.highlight pre {
   color: var(--color-code-text);
   background: transparent;
 }
-div.highlighter-rouge .highlight [class], figure.highlight .highlight [class] {
-  color: var(--color-code-text);
+div.highlighter-rouge .highlight :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .cp),
+figure.highlight .highlight :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .cp) {
+  color: var(--color-code-keyword);
 }
-div.highlighter-rouge .highlight .c, div.highlighter-rouge .highlight .cm,
-div.highlighter-rouge .highlight .c1, figure.highlight .highlight .c {
+div.highlighter-rouge .highlight :is(.s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sr, .ss, .cpf),
+figure.highlight .highlight :is(.s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sr, .ss, .cpf) {
+  color: var(--color-code-string);
+}
+div.highlighter-rouge .highlight :is(.m, .mi, .mf, .mh, .mo, .il),
+figure.highlight .highlight :is(.m, .mi, .mf, .mh, .mo, .il) {
+  color: var(--color-code-number);
+}
+div.highlighter-rouge .highlight :is(.nf, .fm, .nl, .na),
+figure.highlight .highlight :is(.nf, .fm, .nl, .na) {
+  color: var(--color-code-function);
+}
+div.highlighter-rouge .highlight :is(.c, .cm, .c1, .cs),
+figure.highlight .highlight :is(.c, .cm, .c1, .cs) {
   color: var(--color-text-inverse-muted);
 }
 div.highlighter-rouge pre.highlight .btn, figure.highlight pre.highlight .btn {
