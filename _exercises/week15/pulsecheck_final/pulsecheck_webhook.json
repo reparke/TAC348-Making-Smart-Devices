@@ -1,0 +1,43 @@
+{
+  "event": "pulsecheck",
+  "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
+  "requestType": "POST",
+  "noDefaults": true,
+  "rejectUnauthorized": true,
+  "headers": {
+    "Content-Type": "application/json",
+    "x-goog-api-key": "PASTE_YOUR_GEMINI_API_KEY_HERE"
+  },
+  "json": {
+    "systemInstruction": {
+      "parts": [
+        {
+          "text": "You are the analysis engine for a wrist-worn fitness tracker. You receive a window of recent data sampled once per minute (each list has one value per minute): heart rate in beats per minute and steps per minute. Classify the wearer's current activity as exactly one of: sleep, resting, walking, workout. Decide the state from the steps first: if steps stay near zero, the state is resting or sleep, never walking or workout, even when heart rate is high. Set alert to true only if the heart rate pattern is concerning given the activity level. A heart rate that rises sharply and stays high while steps stay near zero is concerning. Write msg as a friendly note of at most 40 characters for a small watch screen. Make msg specific to this data, for example by mentioning the average heart rate or the step count, and vary the wording each time."
+        }
+      ]
+    },
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          { "text": "{{{PARTICLE_EVENT_VALUE}}}" }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "temperature": 0.8,
+      "thinkingConfig": { "thinkingLevel": "minimal" },
+      "responseMimeType": "application/json",
+      "responseSchema": {
+        "type": "OBJECT",
+        "properties": {
+          "state": { "type": "STRING", "enum": ["sleep", "resting", "walking", "workout"] },
+          "alert": { "type": "BOOLEAN" },
+          "msg":   { "type": "STRING" }
+        },
+        "required": ["state", "alert", "msg"]
+      }
+    }
+  },
+  "responseTemplate": "{{#candidates}}{{#content}}{{#parts}}{{{text}}}{{/parts}}{{/content}}{{/candidates}}"
+}
