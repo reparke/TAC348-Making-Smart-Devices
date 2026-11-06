@@ -17,6 +17,7 @@ Send 10 minutes of real Fitbit heart rate and step data to Google Gemini through
 | RGB LED red | SCL | 330 Ohm |
 | RGB LED green | MISO (MI on the board) | 330 Ohm |
 | RGB LED blue | MOSI (MO on the board) | 330 Ohm |
+| RGB LED common (long leg) | 3V3 | none |
 | Button | D5 | 10k Ohm |
 
 Same wiring as the RGB LED and button exercise. The button reads `LOW` when pressed.

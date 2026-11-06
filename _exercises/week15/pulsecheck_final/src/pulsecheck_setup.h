@@ -111,10 +111,11 @@ bool waitingForReply = false;
 bool alertOn = false;
 bool ruleFired = false;
 
+// Common anode RGB LED: the long leg goes to 3V3, so LOW = on. Flip the values.
 void changeLedColor(int r, int g, int b) {
-    analogWrite(PIN_RED, r);
-    analogWrite(PIN_GREEN, g);
-    analogWrite(PIN_BLUE, b);
+    analogWrite(PIN_RED, 255 - r);
+    analogWrite(PIN_GREEN, 255 - g);
+    analogWrite(PIN_BLUE, 255 - b);
 }
 
 // Bad reply, webhook error, or timeout: magenta, or red if the safety rule fired.
@@ -204,6 +205,7 @@ void pulsecheck_setup() {
     pinMode(PIN_RED, OUTPUT);
     pinMode(PIN_GREEN, OUTPUT);
     pinMode(PIN_BLUE, OUTPUT);
+    changeLedColor(0, 0, 0);  // off at boot
     pinMode(PIN_BUTTON, INPUT);
     Particle.subscribe(String("hook-response/") + EVENT_NAME, onWebhookReply);
     Particle.subscribe(String("hook-error/") + EVENT_NAME, onWebhookError);
