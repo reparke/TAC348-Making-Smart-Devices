@@ -1,13 +1,13 @@
 # PulseCheck
 
-Send 10 minutes of real Fitbit heart rate and step data to Google Gemini through a Particle webhook, and show Gemini's answer on an RGB LED. See the [PulseCheck lecture](https://makingsmartdevices.com/lectures/week15/lecture_pulsecheck.html) for how it works.
+Send 10 minutes of real Fitbit data to Google Gemini through a Particle webhook, and show Gemini's answer on an RGB LED. See the [PulseCheck lecture](https://makingsmartdevices.com/lectures/week15/lecture_pulsecheck.html) for how it works.
 
 ## Files
 
 | File | What it is |
 |------|------------|
 | `src/pulsecheck.cpp` | Your code: TODO 1, and optional TODO 2 |
-| `src/pulsecheck_setup.h` | The plumbing: five windows of Fitbit data, the button, publishing, reading Gemini's reply, timeouts. Change only `EVENT_NAME` at the top |
+| `src/pulsecheck_setup.h` | The plumbing: the Fitbit datasets (A-E for Part 1, F-H for Part 2), the button, publishing, reading Gemini's reply, timeouts. Change only `EVENT_NAME` and, for Part 2, `PART` at the top |
 | `pulsecheck_webhook_starter.json` | The webhook template, with blanks W1–W5 |
 
 ## 1. Wire the RGB LED and button
@@ -52,29 +52,32 @@ Open this folder in Particle Workbench, configure it for your Photon 2, and flas
 | TODO | Goal | How to check it |
 |------|------|-----------------|
 | 1 | Show Gemini's answer on the RGB LED in `onGeminiReply()` with `changeLedColor(r, g, b)` | Press the button: the LED turns white, then the color for Gemini's answer |
-| 2 (optional) | Write your own safety rule in `safetyRule()` | The `anomaly` scenario logs "Safety rule: alert" and blinks red |
+| 2 (optional) | Write your own safety rule in `safetyRule()` | When it fires, the serial monitor shows "Safety rule: alert" and the LED blinks red |
 
 `safetyRule()` starts with the ready-made `defaultSafetyRule()`, so the alert works even if you skip TODO 2.
 
-## 6. Run it
+## 6. Run Part 1
 
-* **Press the button** to send the next window of Fitbit data: resting, walking, workout, sleep, anomaly. Wait 10 seconds between presses.
-* Watch the serial monitor: `particle serial monitor --follow`. Each press prints the hidden window name next to Gemini's answer:
+* **Press the button** to send the next dataset: A, B, C, D, E, then back to A. Wait 10 seconds between presses.
+* Each dataset is 10 minutes of a real person: resting, walking, a workout, sleep, or something concerning. The letter is not sent to Gemini.
+* Watch the serial monitor: `particle serial monitor --follow`. Each press prints the letter next to Gemini's answer:
 
   ```
-  Hidden scenario: walking
-  Answer key: walking | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
+  Sending dataset A
+  Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
   ```
 
-Check Gemini's answers against the answer key:
+* Write Gemini's answer for each dataset on the handout, then check it against the answer key at the end of the [PulseCheck lecture](https://makingsmartdevices.com/lectures/week15/lecture_pulsecheck.html#check-your-answers).
 
-| # | Window | Correct `state` | Correct `alert` | Safety rule fires? |
-|---|--------|-----------------|-----------------|--------------------|
-| 1 | resting | `resting` | `false` | no |
-| 2 | walking | `walking` | `false` | no |
-| 3 | workout | `workout` | `false` | no |
-| 4 | sleep | `sleep` | `false` | no |
-| 5 | anomaly | `resting` | `true` | **yes** |
+## 7. Run Part 2
+
+1. Set `PART` to `2` at the top of `src/pulsecheck_setup.h` and flash. The button now sends datasets F, G, H.
+2. Each Part 2 dataset adds two signals:
+   * `mets`: energy use from the motion sensor. 1.0 = sitting still, 3 or more = exercise, even with no steps
+   * `sleep`: `awake`, `asleep`, or `restless` for each minute
+3. Update your prompt (W4) in the Console so Gemini knows what `mets` and `sleep` mean.
+4. The safety rule is ready-made: in Part 2, `defaultSafetyRule()` checks METs instead of steps.
+5. Write Gemini's answers on the handout and check them against the answer key.
 
 | LED | Meaning |
 |-----|---------|

@@ -18,6 +18,11 @@ title: PulseCheck - Smart Devices and AI
   - Press the button to send 10 minutes of real Fitbit heart rate and step data to **Google Gemini**
   - Gemini decides what the wearer is doing and whether anything looks wrong
   - The Photon 2 shows the answer on an RGB LED
+- Two parts
+  - **Part 1**: five mystery datasets with heart rate and steps
+  - **Part 2**: three harder datasets with two more signals, METs and sleep
+- For each dataset, you write down what Gemini says, then check it against the answer key
+- Handout: [PulseCheck Student Handout](lecture_pulsecheck_handout.html)
 
 ## How It Works
 
@@ -71,34 +76,21 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
 
 - Note: no double quotes in the data, or it breaks the webhook's JSON
 
-## Five Windows
+## Part 1: Five Mystery Datasets
 
-- Each button press sends the next window
+- Each button press sends the next dataset: **A**, **B**, **C**, **D**, **E**, then back to A
+- Each one is 10 minutes of a real person: resting, walking, a workout, sleep, or something concerning
+  - We don't tell you which is which
+- Only the numbers are sent to Gemini, never the letter
+- The serial monitor prints the letter next to Gemini's answer
 
-| # | Window | Heart rate (bpm) | Steps per minute |
-|---|--------|------------------|------------------|
-| 1 | resting | 70 to 75 | 0 |
-| 2 | walking | 96 to 104 | 88 to 104 |
-| 3 | workout | 153 to 160 | 166 to 174 |
-| 4 | sleep | 42 to 43 | 0 |
-| 5 | anomaly | 63 to 70, then 138 to 144 for the last 4 minutes | 0 |
+```
+Sending dataset A
+Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
+```
 
-- The window name is **not** sent to Gemini
-- The serial monitor prints it next to Gemini's answer, so you can grade the model
-- Note: the dataset has no real emergencies, so the anomaly is a real resting window with 75 bpm added to the last 4 minutes
-
-## Answer Key
-
-| # | Window | Correct `state` | Correct `alert` | Safety rule fires? |
-|---|--------|-----------------|-----------------|--------------------|
-| 1 | resting | `resting` | `false` | no |
-| 2 | walking | `walking` | `false` | no |
-| 3 | workout | `workout` | `false` | no |
-| 4 | sleep | `sleep` | `false` | no |
-| 5 | anomaly | `resting` | `true` | **yes** |
-
-- Note: 42 bpm while asleep is normal for a fit person
-- In our tests, Gemini 3.5 Flash-Lite matched this key on all five windows, three times each
+- Write Gemini's answer for each dataset on the handout, then check it in [Check Your Answers](#check-your-answers)
+- Tip: before you press the button, look at the numbers in `pulsecheck_setup.h` and make your own guess
 
 ## Gemini's Answer
 
@@ -124,15 +116,17 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
   - `src/pulsecheck.cpp`: your code
   - `src/pulsecheck_setup.h`: the plumbing
   - `pulsecheck_webhook_starter.json`: the webhook template
-  - `README.md`: step-by-step setup and the answer key
+  - `README.md`: step-by-step setup
 
-## Your Job
+## Part 1: Your Job
 
 - `pulsecheck_setup.h` does the plumbing: the Fitbit data, the button, publishing, reading the reply, timeouts
   - You only change `EVENT_NAME` at the top
+- Write your prompt in the webhook (blank **W4**)
 - In `pulsecheck.cpp`:
   - **TODO 1**: show Gemini's answer on the RGB LED in `onGeminiReply()` with `changeLedColor(r, g, b)`
   - **TODO 2** (optional): write your own `safetyRule()`
+- Run datasets A to E and fill in Part 1 of the handout
 
 ## When Gemini Gets It Wrong
 
@@ -161,6 +155,37 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
 - `defaultSafetyRule()` in `pulsecheck_setup.h` is a ready-made version
 - Let the model interpret the data. Keep safety checks in code you can test
 
+## Part 2: More Signals
+
+- Heart rate and steps alone can't tell everything apart
+  - Lying awake and sleeping look the same
+  - Cycling or rowing has a high heart rate but almost no steps, so it looks like a spike at rest
+- Real watches send more. Part 2 adds two signals from the same Fitbit dataset
+
+| Signal | What it means | Example |
+|--------|---------------|---------|
+| `mets` | Energy use from the motion sensor. 1.0 = sitting still, 3+ = exercise, even with no steps | `mets=[9.0,9.0,7.6,...]` |
+| `sleep` | Fitbit's sleep tracking for each minute: `awake`, `asleep`, or `restless` | `sleep=[asleep,asleep,...]` |
+
+- Three new datasets: **F**, **G**, **H**
+  - All three have zero steps the whole time
+  - All three are real, unedited Fitbit data
+
+```
+hr_bpm=[62,62,...] steps_per_min=[0,0,...] mets=[1.0,1.0,...] sleep=[asleep,asleep,...] interval=1min
+```
+
+## Part 2: Your Job
+
+- Set `PART` to `2` at the top of `pulsecheck_setup.h` and flash
+- Update your prompt (W4) so Gemini knows what `mets` and `sleep` mean
+  - Without it, Gemini has to guess what the new numbers are
+- The safety rule is ready-made: `defaultSafetyRule()` switches to METs in Part 2
+  - Part 1: still = steps under 10 per minute
+  - Part 2: still = METs at 1.5 or below
+  - Steps miss exercise like cycling. METs do not
+- Run datasets F to H and fill in Part 2 of the handout
+
 ## Free Tier Limits
 
 <img src="lecture_pulsecheck.assets/gemini-free-tier-limits.webp" alt="Gemini API rate limit page in Google AI Studio, free tier" style="width:700px;" />
@@ -176,11 +201,28 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
 - The daily limit resets at midnight Pacific time
 - Ran out (error 429)? Switch the webhook to another model. Each model has its own quota
 
+## Check Your Answers
+
+| Dataset | What it is | Correct `state` | Correct `alert` | Safety rule fires? |
+|---------|------------|-----------------|-----------------|--------------------|
+| A | walking | `walking` | `false` | no |
+| B | sleep | `sleep` | `false` | no |
+| C | heart rate spike at rest | `resting` | `true` | **yes** |
+| D | resting | `resting` | `false` | no |
+| E | workout (running) | `workout` | `false` | no |
+| F | heart rate spike while asleep | `sleep` | `true` | **yes** |
+| G | workout with no steps (like cycling) | `workout` | `false` | no |
+| H | heart rate spike while sitting awake | `resting` | `true` | **yes** |
+
+- Note: 42 bpm while asleep (B) is normal for a fit person
+- Note: C is a real resting window with 75 bpm added to the last 4 minutes, to make the spike obvious
+- F and H are real heart rate jumps with no movement. A spike like this can have a harmless cause, but a watch should still flag it
+- G is why METs matter: heart rate near 190 with zero steps looks like an emergency, until you see METs of 14
+
 ## Going Further
 
-- **More signals**: real rings also track heart rate variability, skin temperature, blood oxygen, breathing, and sleep stages
-  - Adding these did not stop Gemini from missing the anomaly. The safety rule still caught it
+- **Even more signals**: real rings also track heart rate variability, skin temperature, blood oxygen, and breathing
+  - In our tests with these, Gemini still missed some spikes at rest. The safety rule still caught them
 - **More Fitbit data**: test more windows from the same dataset
-  - Gemini mixes up lying awake and sleeping, since heart rate and steps alone can't tell them apart
 - **Real sensors**: replace the Fitbit data with readings from your smart watch build
 - Note: PulseCheck is not a medical device. Do not send real personal health data to the free tier
