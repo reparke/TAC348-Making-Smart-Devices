@@ -7,15 +7,15 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 /*
   PulseCheck: Fitbit data -> Particle webhook -> Gemini -> RGB LED
 
-  Press the button to send the next 10-minute window of real Fitbit data
-  (resting, walking, workout, sleep, anomaly). Gemini answers with the
-  activity, an alert, and a short message, and onGeminiReply() below shows
-  it on the RGB LED.
+  Press the button to send the next 10-minute dataset of real Fitbit data
+  (A-E for Part 1, F-H for Part 2; set PART in pulsecheck_setup.h). Gemini
+  answers with the activity, an alert, and a short message, and
+  onGeminiReply() below shows it on the RGB LED.
 
   Wiring: RGB LED on SCL (red), MISO (green), MOSI (blue), each with a
   330 Ohm resistor. Button on D5 with a 10k Ohm resistor.
 
-  Open the serial monitor to see the answer key next to Gemini's answer:
+  Open the serial monitor to see Gemini's answer for each dataset:
     particle serial monitor --follow
 
   LED
@@ -46,6 +46,7 @@ void onGeminiReply(String state, bool alert, String msg) {
     Gemini sometimes calls a heart rate spike at rest a "workout".
     Return true to raise the alert yourself, whatever Gemini says.
     heartRate[i] and stepsPerMin[i] hold the data for minute i.
+    In Part 2, mets10[i] (METs x10) and sleepStage[i] are filled in too.
     defaultSafetyRule() in pulsecheck_setup.h is a ready-made rule.
 */
 bool safetyRule() {
