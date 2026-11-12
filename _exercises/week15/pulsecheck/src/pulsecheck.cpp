@@ -7,18 +7,17 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 /*
   PulseCheck: Fitbit data -> Particle webhook -> Gemini -> RGB LED
 
-  pulsecheck_setup.h does the plumbing: it holds five 10-minute windows of
-  real Fitbit heart rate and step data, publishes the next one to your
-  webhook when you press the button, reads Gemini's JSON reply, and handles
-  timeouts. You don't need to change it, except EVENT_NAME at the top
-  (your webhook's event name).
+  pulsecheck_setup.h does the plumbing: it holds 10-minute datasets of real
+  Fitbit data (A-E for Part 1, F-H for Part 2), publishes the next one to
+  your webhook when you press the button, reads Gemini's JSON reply, and
+  handles timeouts. You only change PART at the top, for Part 2.
 
   Wiring: RGB LED on SCL (red), MISO (green), MOSI (blue), each with a
   330 Ohm resistor. Button on D5 with a 10k Ohm resistor.
 
   Your job: complete TODO 1 below. TODO 2 is optional.
 
-  Open the serial monitor to see the answer key next to Gemini's answer:
+  Open the serial monitor to see Gemini's answer for each dataset:
     particle serial monitor --follow
 */
 
@@ -43,15 +42,16 @@ void onGeminiReply(String state, bool alert, String msg) {
     Gemini sometimes calls a heart rate spike at rest a "workout" and gives
     no alert. Return true to raise the alert yourself, whatever Gemini says.
     heartRate[i] and stepsPerMin[i] hold the data for minute i (0 to MINUTES - 1).
+    In Part 2, kcal10[i], intensity[i], mets10[i], and sleepStage[i] are filled in too.
 
     It already uses the ready-made rule, defaultSafetyRule() in
     pulsecheck_setup.h: the heart rate of the last quarter of the window is
-    30+ bpm above the first half while steps stay under 10 per minute.
+    30+ bpm above the first half while the body stays still (Part 1: steps
+    under 10 per minute, Part 2: METs at 1.5 or below).
 
     TODO 2 (optional): replace it with your own rule, for example a different
-    threshold or a check for a heart rate that is too low. Test it with the
-    "anomaly" scenario: the serial monitor shows "Safety rule: alert" and the
-    LED blinks red.
+    threshold or a check for a heart rate that is too low. When it fires, the
+    serial monitor shows "Safety rule: alert" and the LED blinks red.
 */
 bool safetyRule() {
     return defaultSafetyRule();
