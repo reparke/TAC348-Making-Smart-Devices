@@ -121,8 +121,8 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 ## Part 1: Your Job
 
 - `pulsecheck_setup.h` does the plumbing: the Fitbit data, the button, publishing, reading the reply, timeouts
-  - You only change `EVENT_NAME` at the top
-- Write your prompt in the webhook (blank **W4**)
+  - You don't need to change it for Part 1
+- Write your prompt in the webhook (blank **W3**)
 - In `pulsecheck.cpp`:
   - **TODO 1**: show Gemini's answer on the RGB LED in `onGeminiReply()` with `changeLedColor(r, g, b)`
   - **TODO 2** (optional): write your own `safetyRule()`
@@ -178,7 +178,7 @@ hr_bpm=[62,62,...] steps_per_min=[0,0,...] mets=[1.0,1.0,...] sleep=[asleep,asle
 ## Part 2: Your Job
 
 - Set `PART` to `2` at the top of `pulsecheck_setup.h` and flash
-- Update your prompt (W4) so Gemini knows what `mets` and `sleep` mean
+- Update your prompt (W3) so Gemini knows what `mets` and `sleep` mean
   - Without it, Gemini has to guess what the new numbers are
 - The safety rule is ready-made: `defaultSafetyRule()` switches to METs in Part 2
   - Part 1: still = steps under 10 per minute

@@ -16,7 +16,7 @@ Times are a guide. If you run late, the cut list is at the end.
 | 0:00 | 1. Hook and demo |
 | 0:07 | 2. How it works, and why a webhook |
 | 0:15 | 3. Wiring |
-| 0:25 | 4. Starter code and event name |
+| 0:25 | 4. Starter code |
 | 0:32 | 5. Gemini key and webhook |
 | 0:45 | 6. Part 1: five mystery datasets |
 | 0:58 | 7. When Gemini gets it wrong, and the safety rule |
@@ -106,11 +106,11 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 | Colors inverted after flashing (white when it should be off) | The LED is common cathode, or the long leg is on ground |
 | One color never lights | That leg's resistor or wire is in the wrong row |
 
-## 4. Starter Code and Event Name (0:25 to 0:32)
+## 4. Starter Code (0:25 to 0:32)
 
 **Show:** the starter zip link, then the `pulsecheck_start` folder open in Workbench.
 
-**Say:** "There are two files in `src`. `pulsecheck.cpp` is yours. `pulsecheck_setup.h` is the plumbing, the same idea as the setup headers we've used before: the data, the button, publishing, reading the reply, timeouts. You change one line in it now, the event name."
+**Say:** "There are two files in `src`. `pulsecheck.cpp` is yours. `pulsecheck_setup.h` is the plumbing, the same idea as the setup headers we've used before: the data, the button, publishing, reading the reply, timeouts. You don't change anything in it for Part 1."
 
 **Show:** the top of `pulsecheck_setup.h`.
 
@@ -118,33 +118,32 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 const char* EVENT_NAME = "pulsecheck";
 ```
 
-**Say:** "Change it to `pulsecheck_` and your USC username, like `pulsecheck_ttrojan`."
+**Say:** "This is the event the Photon publishes. Your webhook listens for the same name. It's already set in both places, so leave it."
 
-**Ask:** "Why can't we all use the same event name?"
-**Expect:** every device in the class product shares one event stream. With the same name, one press would trigger everyone's webhook and spend everyone's quota.
+**Ask:** "What happens if the event name in the code and the one in the webhook don't match?"
+**Expect:** the webhook never fires, so no reply comes back. The LED stays white and then turns magenta after 20 seconds.
 
-**Students do:** download, unzip, open the folder, set `EVENT_NAME`.
+**Students do:** download, unzip, open the folder, and read through `pulsecheck.cpp`.
 
 ## 5. Gemini Key and Webhook (0:32 to 0:45)
 
 **Show:** Google AI Studio's API key page, then `pulsecheck_webhook_starter.json`.
 
-**Say:** "Make a Gemini API key with your own Google account. Then open the webhook starter file. There are five blanks, W1 to W5."
+**Say:** "Make a Gemini API key with your own Google account. Then open the webhook starter file. There are four blanks, W1 to W4."
 
 | Blank | What goes in it |
 |-------|-----------------|
-| W1 | your event name, exactly the same as `EVENT_NAME` |
-| W2 | `gemini-3.5-flash-lite` |
-| W3 | your API key, pasted **in the Particle Console only** |
-| W4 | your prompt |
-| W5 | `"sleep", "resting", "walking", "workout"` |
+| W1 | `gemini-3.5-flash-lite` |
+| W2 | your API key, pasted **in the Particle Console only** |
+| W3 | your prompt |
+| W4 | `"sleep", "resting", "walking", "workout"` |
 
-**Say:** "W4 is the interesting one. That's your prompt. Tell Gemini what the data is, the four states to choose from, when to set alert, and to keep msg under 40 characters. Write your own. Keep it simple for now. We'll improve it later."
+**Say:** "W3 is the interesting one. That's your prompt. Tell Gemini what the data is, the four states to choose from, when to set alert, and to keep msg under 40 characters. Write your own. Keep it simple for now. We'll improve it later."
 
-**Ask:** "W5 is a list of the only four values `state` is allowed to be. Why limit Gemini like that?"
+**Ask:** "W4 is a list of the only four values `state` is allowed to be. Why limit Gemini like that?"
 **Expect:** so the firmware always gets a value it knows. Otherwise Gemini might answer "jogging" or "Resting." and the `if` statements wouldn't match.
 
-**Show:** the Particle Console: class product, Integrations, Add integration, Webhook, **Custom template** tab. Paste the file. Replace W3 with the key. Save.
+**Show:** the Particle Console: your product, Integrations, Add integration, Webhook, **Custom template** tab. Paste the file. Replace W2 with the key. Save.
 
 **Say:** "Use the Custom template tab, not Webhook Builder. Then do TODO 1 in `pulsecheck.cpp`: set the LED color for each state with `changeLedColor`. Flash it."
 
@@ -152,10 +151,10 @@ const char* EVENT_NAME = "pulsecheck";
 
 | If you see | Fix |
 |------------|-----|
-| White, then magenta after 20 seconds | The event name in the webhook doesn't match `EVENT_NAME` |
+| White, then magenta after 20 seconds | No webhook, or its event isn't `pulsecheck` |
 | Error 400 or `API_KEY_INVALID` | Key missing or wrong, or the template was pasted into Webhook Builder |
-| Error 404 | The model was retired. Use the current Flash-Lite model in W2 |
-| Error 429 | Quota used up. Wait a minute, or switch W2 to another model for today |
+| Error 404 | The model was retired. Use the current Flash-Lite model in W1 |
+| Error 429 | Quota used up. Wait a minute, or switch W1 to another model for today |
 | LED breathing magenta, nothing runs | Safe mode. Run `particle update` over USB, then flash again |
 | Nothing happens on a press | Button wiring. Check D5, the 10k resistor, and the diagonal legs |
 
@@ -199,7 +198,7 @@ hr_bpm=[70,68,66,68,65,68,144,143,143,138] steps_per_min=[0,0,0,0,0,0,0,0,0,0]
 
 > Decide the state from the steps first: if steps stay near zero, the state is resting or sleep, never walking or workout, even when heart rate is high.
 
-**Students do (2 minutes):** add that sentence to W4 in the Console, save, press through to C again.
+**Students do (2 minutes):** add that sentence to W3 in the Console, save, press through to C again.
 
 **Ask:** "Did C change?"
 **Expect:** yes for most pairs: now `resting` with `alert` true.
@@ -252,7 +251,7 @@ const int PART = 1;
 
 **Students do (3 minutes):** set `PART = 2`, flash, handout questions 7 and 8.
 
-**Say:** "Now run F, G, H, but don't change your prompt yet. Write down what Gemini says. Then update W4 so Gemini knows what `mets` and `sleep` mean, and run all three again."
+**Say:** "Now run F, G, H, but don't change your prompt yet. Write down what Gemini says. Then update W3 so Gemini knows what `mets` and `sleep` mean, and run all three again."
 
 **Students do (9 minutes):** handout questions 9 and 10.
 

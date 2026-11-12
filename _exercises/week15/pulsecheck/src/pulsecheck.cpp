@@ -10,8 +10,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
   pulsecheck_setup.h does the plumbing: it holds 10-minute datasets of real
   Fitbit data (A-E for Part 1, F-H for Part 2), publishes the next one to
   your webhook when you press the button, reads Gemini's JSON reply, and
-  handles timeouts. You only change EVENT_NAME (your webhook's event name)
-  and, for Part 2, PART at the top.
+  handles timeouts. You only change PART at the top, for Part 2.
 
   Wiring: RGB LED on SCL (red), MISO (green), MOSI (blue), each with a
   330 Ohm resistor. Button on D5 with a 10k Ohm resistor.

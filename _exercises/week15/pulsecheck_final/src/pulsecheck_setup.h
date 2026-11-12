@@ -1,8 +1,7 @@
 #include "Particle.h"
 
 /* This is the event your webhook listens for.
-   Change it to pulsecheck_ followed by your USC username, for example
-   pulsecheck_ttrojan. It must match the "event" in your webhook exactly.
+   It must match the "event" in your webhook exactly.
 */
 const char* EVENT_NAME = "pulsecheck";
 
