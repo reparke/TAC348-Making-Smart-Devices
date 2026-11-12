@@ -22,7 +22,7 @@ const unsigned long REPLY_TIMEOUT_MS = 20000;    // no reply after 20 s = error
 
 /* Which part of the exercise you are on:
      1 = Part 1: datasets A-E, heart rate and steps
-     2 = Part 2: datasets F-H, heart rate, steps, METs, and sleep
+     2 = Part 2: datasets F-H, heart rate, steps, calories, intensity, METs, and sleep
 */
 const int PART = 1;
 
@@ -56,10 +56,12 @@ const int STEPS_PART1[NUM_PART1][MINUTES] = {
     {172, 169, 166, 170, 174, 171, 171, 173, 172, 171},
 };
 
-// Part 2: heart rate, steps, METs, and sleep
-//   METs = energy use from the motion sensor: 1.0 = sitting still, 3+ = exercise
-//          (stored x10, so 12 means 1.2)
-//   sleep = 0 awake, 1 asleep, 2 restless (from Fitbit's sleep tracking)
+// Part 2: heart rate and steps, plus four more signals from the same Fitbit data
+//   calories  = calories burned per minute (stored x10, so 12 means 1.2)
+//   intensity = Fitbit's activity level: 0 sedentary, 1 light, 2 moderate, 3 very active
+//   METs      = energy use compared to rest: 1.0 = sitting still, 3+ = exercise
+//               (stored x10, so 12 means 1.2)
+//   sleep     = 0 awake, 1 asleep, 2 restless (from Fitbit's sleep tracking)
 const int NUM_PART2 = 3;
 const char* LABELS_PART2[NUM_PART2] = {"F", "G", "H"};
 const int HR_PART2[NUM_PART2][MINUTES] = {
@@ -70,6 +72,16 @@ const int HR_PART2[NUM_PART2][MINUTES] = {
 const int STEPS_PART2[NUM_PART2][MINUTES] = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+};
+const int KCAL10_PART2[NUM_PART2][MINUTES] = {
+    {9, 9, 9, 9, 9, 9, 9, 10, 11, 9},
+    {124, 124, 105, 127, 193, 193, 193, 187, 172, 161},
+    {10, 11, 10, 10, 10, 10, 10, 13, 13, 13},
+};
+const int INTENSITY_PART2[NUM_PART2][MINUTES] = {
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 };
 const int METS10_PART2[NUM_PART2][MINUTES] = {
@@ -86,6 +98,8 @@ const char* SLEEP_NAMES[] = {"awake", "asleep", "restless"};
 
 int heartRate[MINUTES];                          // the dataset being sent, beats per minute
 int stepsPerMin[MINUTES];                        // steps per minute
+int kcal10[MINUTES];                             // calories per minute x10 (Part 2 only)
+int intensity[MINUTES];                          // 0 sedentary to 3 very active (Part 2 only)
 int mets10[MINUTES];                             // METs x10 (Part 2 only)
 int sleepStage[MINUTES];                         // 0 awake, 1 asleep, 2 restless (Part 2 only)
 int dataset = -1;                                // which dataset; the first press sends 0
@@ -98,11 +112,15 @@ void loadData() {
         if (PART == 1) {
             heartRate[i] = HR_PART1[dataset][i];
             stepsPerMin[i] = STEPS_PART1[dataset][i];
+            kcal10[i] = 0;
+            intensity[i] = 0;
             mets10[i] = 0;
             sleepStage[i] = 0;
         } else {
             heartRate[i] = HR_PART2[dataset][i];
             stepsPerMin[i] = STEPS_PART2[dataset][i];
+            kcal10[i] = KCAL10_PART2[dataset][i];
+            intensity[i] = INTENSITY_PART2[dataset][i];
             mets10[i] = METS10_PART2[dataset][i];
             sleepStage[i] = SLEEP_PART2[dataset][i];
         }
@@ -111,16 +129,19 @@ void loadData() {
 
 // The text sent to the webhook. No double quotes, so it fits inside the webhook's JSON.
 String buildPayload() {
-    String hr = "hr_bpm=[", steps = "steps_per_min=[", mets = "mets=[", sleep = "sleep=[";
+    String hr = "hr_bpm=[", steps = "steps_per_min=[", kcal = "calories_per_min=[";
+    String level = "intensity=[", mets = "mets=[", sleep = "sleep=[";
     for (int i = 0; i < MINUTES; i++) {
         String sep = i < MINUTES - 1 ? "," : "]";
         hr += String(heartRate[i]) + sep;
         steps += String(stepsPerMin[i]) + sep;
+        kcal += String(kcal10[i] / 10) + "." + String(kcal10[i] % 10) + sep;
+        level += String(intensity[i]) + sep;
         mets += String(mets10[i] / 10) + "." + String(mets10[i] % 10) + sep;
         sleep += String(SLEEP_NAMES[sleepStage[i]]) + sep;
     }
     if (PART == 1) return hr + " " + steps + " interval=1min";
-    return hr + " " + steps + " " + mets + " " + sleep + " interval=1min";
+    return hr + " " + steps + " " + kcal + " " + level + " " + mets + " " + sleep + " interval=1min";
 }
 
 /*
@@ -291,7 +312,8 @@ void pulsecheck_loop() {
 */
 void printData() {
     for (int i = 0; i < MINUTES; i++) {
-        Serial.printlnf("minute %d: heart rate %3d, steps %3d, METs %d.%d, %s", i, heartRate[i],
-                        stepsPerMin[i], mets10[i] / 10, mets10[i] % 10, SLEEP_NAMES[sleepStage[i]]);
+        Serial.printlnf("minute %d: heart rate %3d, steps %3d, calories %d.%d, intensity %d, METs %d.%d, %s",
+                        i, heartRate[i], stepsPerMin[i], kcal10[i] / 10, kcal10[i] % 10, intensity[i],
+                        mets10[i] / 10, mets10[i] % 10, SLEEP_NAMES[sleepStage[i]]);
     }
 }

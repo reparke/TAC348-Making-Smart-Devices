@@ -77,10 +77,12 @@ Open this folder in Particle Workbench, configure it for your Photon 2, and flas
 ## 6. Run Part 2
 
 1. Set `PART` to `2` at the top of `src/pulsecheck_setup.h` and flash. The button now sends datasets F, G, H.
-2. Each Part 2 dataset adds two signals:
-   * `mets`: energy use from the motion sensor. 1.0 = sitting still, 3 or more = exercise, even with no steps
+2. Each Part 2 dataset adds four signals:
+   * `calories_per_min`: calories burned each minute. About 1 at rest, 10 or more in hard exercise
+   * `intensity`: Fitbit's activity level. 0 sedentary, 1 light, 2 moderate, 3 very active
+   * `mets`: energy use compared to rest. 1.0 = sitting still, 3 or more = exercise, even with no steps
    * `sleep`: `awake`, `asleep`, or `restless` for each minute
-3. Update your prompt in the Console (**Edit**, then **Extra settings > JSON data**) so Gemini knows what `mets` and `sleep` mean.
+3. Update your prompt in the Console (**Edit**, then **Extra settings > JSON data**) so Gemini knows what the four new signals mean.
 4. The safety rule is ready-made: in Part 2, `defaultSafetyRule()` checks METs instead of steps.
 5. Write Gemini's answers on the handout and check them against the answer key.
 

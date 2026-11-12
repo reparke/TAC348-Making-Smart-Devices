@@ -20,7 +20,7 @@ title: PulseCheck - Smart Devices and AI
   - The Photon 2 shows the answer on an RGB LED
 - Two parts
   - **Part 1**: five mystery datasets with heart rate and steps
-  - **Part 2**: three harder datasets with two more signals, METs and sleep
+  - **Part 2**: three harder datasets with four more signals: calories, intensity, METs, and sleep
 - For each dataset, you write down what Gemini says, then check it against the answer key
 - Handout: [PulseCheck Student Handout](lecture_pulsecheck_handout.html)
 
@@ -81,6 +81,15 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
 - Each button press sends the next dataset: **A**, **B**, **C**, **D**, **E**, then back to A
 - Each one is 10 minutes of a real person: resting, walking, a workout, sleep, or something concerning
   - We don't tell you which is which
+
+| Dataset | Heart rate (bpm) | Steps per minute |
+|---------|------------------|------------------|
+| A | 96 to 104 | 88 to 104 |
+| B | 42 to 43 | 0 |
+| C | 63 to 70, then 138 to 144 for the last 4 minutes | 0 |
+| D | 70 to 75 | 0 |
+| E | 153 to 160 | 166 to 174 |
+
 - Only the numbers are sent to Gemini, never the letter
 - The serial monitor prints the letter next to Gemini's answer
 
@@ -90,7 +99,7 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 ```
 
 - Write Gemini's answer for each dataset on the handout, then check it in [Check Your Answers](#check-your-answers)
-- Tip: before you press the button, look at the numbers in `pulsecheck_setup.h` and make your own guess
+- Tip: before you press the button, look at the table and make your own guess. The full numbers are in `pulsecheck_setup.h`
 
 ## Gemini's Answer
 
@@ -229,25 +238,34 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 - Heart rate and steps alone can't tell everything apart
   - Lying awake and sleeping look the same
   - Cycling or rowing has a high heart rate but almost no steps, so it looks like a spike at rest
-- Real watches send more. Part 2 adds two signals from the same Fitbit dataset
+- Real watches send more. Part 2 adds four signals from the same Fitbit dataset, for six in total
 
 | Signal | What it means | Example |
 |--------|---------------|---------|
-| `mets` | Energy use from the motion sensor. 1.0 = sitting still, 3+ = exercise, even with no steps | `mets=[9.0,9.0,7.6,...]` |
-| `sleep` | Fitbit's sleep tracking for each minute: `awake`, `asleep`, or `restless` | `sleep=[asleep,asleep,...]` |
+| <code style="white-space:nowrap">calories_per_min</code> | Calories burned each minute. About 1 at rest, 10 or more in hard exercise | <code style="white-space:nowrap">[12.4,12.4,10.5,...]</code> |
+| <code style="white-space:nowrap">intensity</code> | Fitbit's activity level: 0 sedentary, 1 light, 2 moderate, 3 very active | <code style="white-space:nowrap">[3,3,3,...]</code> |
+| <code style="white-space:nowrap">mets</code> | Energy use compared to rest. 1.0 = sitting still, 3+ = exercise, even with no steps | <code style="white-space:nowrap">[9.0,9.0,7.6,...]</code> |
+| <code style="white-space:nowrap">sleep</code> | Fitbit's sleep tracking for each minute: awake, asleep, or restless | <code style="white-space:nowrap">[asleep,asleep,...]</code> |
 
+- Note: Fitbit works out calories, intensity, and METs from its motion sensor, so they tend to move together. Sleep comes from its sleep tracking
 - Three new datasets: **F**, **G**, **H**
   - All three have zero steps the whole time
   - All three are real, unedited Fitbit data
 
+| Dataset | Heart rate (bpm) | Steps | Calories per minute | Intensity | METs | Sleep |
+|---------|------------------|-------|---------------------|-----------|------|-------|
+| F | 60 to 63, then 96 to 97 for the last 3 minutes | 0 | 0.9 to 1.1 | 0 | 1.0 to 1.2 | asleep |
+| G | 132 to 191 | 0 | 10.5 to 19.3 | 3 | 7.6 to 14.0 | awake |
+| H | 65 to 74, then 90 to 100 for the last 4 minutes | 0 | 1.0 to 1.3 | 0 | 1.0 to 1.2 | awake |
+
 ```
-hr_bpm=[62,62,...] steps_per_min=[0,0,...] mets=[1.0,1.0,...] sleep=[asleep,asleep,...] interval=1min
+hr_bpm=[62,62,...] steps_per_min=[0,0,...] calories_per_min=[0.9,0.9,...] intensity=[0,0,...] mets=[1.0,1.0,...] sleep=[asleep,asleep,...] interval=1min
 ```
 
 ## Part 2: Your Job
 
 - Set `PART` to `2` at the top of `pulsecheck_setup.h` and flash
-- Update your prompt so Gemini knows what `mets` and `sleep` mean
+- Update your prompt so Gemini knows what the four new signals mean
   - Without it, Gemini has to guess what the new numbers are
 - The safety rule is ready-made: `defaultSafetyRule()` switches to METs in Part 2
   - Part 1: still = steps under 10 per minute

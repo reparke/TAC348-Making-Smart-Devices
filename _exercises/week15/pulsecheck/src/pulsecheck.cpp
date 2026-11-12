@@ -42,7 +42,7 @@ void onGeminiReply(String state, bool alert, String msg) {
     Gemini sometimes calls a heart rate spike at rest a "workout" and gives
     no alert. Return true to raise the alert yourself, whatever Gemini says.
     heartRate[i] and stepsPerMin[i] hold the data for minute i (0 to MINUTES - 1).
-    In Part 2, mets10[i] (METs x10) and sleepStage[i] are filled in too.
+    In Part 2, kcal10[i], intensity[i], mets10[i], and sleepStage[i] are filled in too.
 
     It already uses the ready-made rule, defaultSafetyRule() in
     pulsecheck_setup.h: the heart rate of the last quarter of the window is

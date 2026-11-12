@@ -55,11 +55,11 @@ Before you write your prompt in the webhook body, plan the five parts of your pr
 
 ## Part 2: More Signals
 
-7. What does a METs value of 1.0 mean? __ <!-- sitting still --> What about 14? __ <!-- very hard exercise -->
+7. What does a METs value of 1.0 mean? __ <!-- sitting still --> What about 14? __ <!-- very hard exercise --> What does an intensity of 3 mean? __ <!-- very active -->
 
-8. Datasets F, G, and H all have **zero steps** the whole time. Look only at `HR_PART2` and `STEPS_PART2` for G. What would you guess? __ <!-- a dangerous heart rate spike at rest: about 190 bpm with no steps --> Now look at `METS10_PART2` for G. What changes your mind? __ <!-- METs of 9 to 14 mean hard exercise, like cycling, so it's a workout -->
+8. Datasets F, G, and H all have **zero steps** the whole time. Look only at `HR_PART2` and `STEPS_PART2` for G. What would you guess? __ <!-- a dangerous heart rate spike at rest: about 190 bpm with no steps --> Now look at G's calories, intensity, and METs. What changes your mind? __ <!-- 10 to 19 calories a minute, intensity 3, and METs of 9 to 14 all mean hard exercise, like cycling, so it's a workout -->
 
-9. Set `PART` to `2`, flash, and run F, G, H **with your Part 1 prompt** (don't change it yet). Then update your prompt to explain `mets` and `sleep`, and run them again.
+9. Set `PART` to `2`, flash, and run F, G, H **with your Part 1 prompt** (don't change it yet). Then update your prompt to explain the four new signals, and run them again.
 
 | Dataset | Your guess: state / alert | Gemini, Part 1 prompt: `state` / `alert` | Gemini, updated prompt: `state` / `alert` | Correct? |
 |---------|---------------------------|------------------------------------------|-------------------------------------------|----------|
@@ -69,7 +69,7 @@ Before you write your prompt in the webhook body, plan the five parts of your pr
 
 <!-- F sleep true (safety rule fires) | G workout false | H resting true (safety rule fires) -->
 
-10. Copy the sentences you added to your prompt for `mets` and `sleep`. __ <!-- e.g. "mets is energy use: 1.0 is still, 3+ is exercise even with zero steps. sleep says asleep, restless, or awake each minute; if mostly asleep, the state is sleep." -->
+10. Copy the sentences you added to your prompt for the new signals. __ <!-- e.g. "calories_per_min is about 1 at rest. intensity is 0 sedentary to 3 very active. mets is energy use: 1.0 is still, 3+ is exercise even with zero steps. sleep says asleep, restless, or awake each minute; if mostly asleep, the state is sleep." -->
 
 11. In Part 2, the safety rule checks METs instead of steps. Why? __ <!-- Steps miss exercise like cycling or rowing. A rule based on steps could raise a false alarm during a bike ride; METs show the body is working -->
 

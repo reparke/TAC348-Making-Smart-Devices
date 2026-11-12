@@ -260,7 +260,10 @@ hr_bpm=[70,68,66,68,65,68,144,143,143,138] steps_per_min=[0,0,0,0,0,0,0,0,0,0]
 
 **Show:** the "Part 2: More Signals" table.
 
-**Say:** "Real watches send more than two signals. Part 2 adds two from the same Fitbit dataset. METs is how hard the body is working, measured by the motion sensor: 1.0 is sitting still, 3 or more is exercise, even with no steps. Sleep is Fitbit's sleep tracking for each minute: awake, asleep, or restless."
+**Say:** "Real watches send more than two signals. Part 2 adds four from the same Fitbit dataset, so six in total. Calories per minute: about 1 at rest, 10 or more in hard exercise. Intensity: Fitbit's own activity level from 0, sedentary, to 3, very active. METs: how hard the body is working compared to rest, where 1.0 is sitting still and 3 or more is exercise, even with no steps. And sleep: Fitbit's sleep tracking for each minute, awake, asleep, or restless."
+
+**Ask:** "Calories, intensity, and METs all come from the motion sensor. Why send three signals that mostly agree?"
+**Expect:** they back each other up. If one is noisy or missing, the others still show whether the body is working. But it also means more for the prompt to explain.
 
 **Show:** the top of `pulsecheck_setup.h`.
 
@@ -272,13 +275,13 @@ const int PART = 1;
 
 **Students do (3 minutes):** set `PART = 2`, flash, handout questions 7 and 8.
 
-**Say:** "Now run F, G, H, but don't change your prompt yet. Write down what Gemini says. Then update your prompt so Gemini knows what `mets` and `sleep` mean, and run all three again."
+**Say:** "Now run F, G, H, but don't change your prompt yet. Write down what Gemini says. Then update your prompt so Gemini knows what the four new signals mean, and run all three again."
 
 **Students do (9 minutes):** handout questions 9 and 10.
 
 What to expect (confirm against your own run before class):
 
-| Dataset | With the Part 1 prompt | After the prompt explains `mets` and `sleep` |
+| Dataset | With the Part 1 prompt | After the prompt explains the new signals |
 |---------|------------------------|-----------------------------------------------|
 | F | often `resting` with an alert, sometimes `sleep` | `sleep`, alert true |
 | G | `resting` with an alert: a false alarm | `workout`, alert false |
@@ -288,7 +291,7 @@ What to expect (confirm against your own run before class):
 **Expect:** it broke G. Steps are zero, so the prompt says never workout, but the person is exercising hard. A rule that was right for one dataset was wrong for another.
 
 **Ask:** "What did you add to your prompt?" (have one or two pairs read theirs)
-**Expect:** something like: mets is energy use, 1.0 is still and 3 or more is exercise even with no steps; sleep is asleep, restless, or awake each minute, and if it's mostly asleep the state is sleep.
+**Expect:** something like: calories is about 1 at rest; intensity goes from 0 sedentary to 3 very active; mets is energy use, 1.0 is still and 3 or more is exercise even with no steps; sleep is asleep, restless, or awake each minute, and if it's mostly asleep the state is sleep.
 
 **Ask:** "The safety rule in Part 2 checks METs instead of steps. Why?"
 **Expect:** steps miss exercise like cycling or rowing. A rule that only looks at steps could raise a false alarm in the middle of a bike ride.
