@@ -17,9 +17,9 @@ Times are a guide. If you run late, the cut list is at the end.
 | 0:07 | 2. How it works, and why a webhook |
 | 0:15 | 3. Wiring |
 | 0:25 | 4. Starter code |
-| 0:32 | 5. Gemini key and webhook |
-| 0:45 | 6. Part 1: five mystery datasets |
-| 0:58 | 7. When Gemini gets it wrong, and the safety rule |
+| 0:32 | 5. Gemini key, prompt, and webhook |
+| 0:48 | 6. Part 1: five mystery datasets |
+| 0:59 | 7. When Gemini gets it wrong, and the safety rule |
 | 1:05 | 8. Check Part 1 |
 | 1:08 | 9. Part 2: more signals |
 | 1:23 | 10. Check Part 2 |
@@ -125,7 +125,7 @@ const char* EVENT_NAME = "pulsecheck";
 
 **Students do:** download, unzip, open the folder, and read through `pulsecheck.cpp`.
 
-## 5. Gemini Key and Webhook (0:32 to 0:45)
+## 5. Gemini Key, Prompt, and Webhook (0:32 to 0:48)
 
 **Show:** Google AI Studio's API key page, then `pulsecheck_webhook_starter.json`.
 
@@ -138,7 +138,21 @@ const char* EVENT_NAME = "pulsecheck";
 | W3 | your prompt |
 | W4 | `"sleep", "resting", "walking", "workout"` |
 
-**Say:** "W3 is the interesting one. That's your prompt. Tell Gemini what the data is, the four states to choose from, when to set alert, and to keep msg under 40 characters. Write your own. Keep it simple for now. We'll improve it later."
+**Say:** "W3 is the interesting one. That's your prompt: the instructions Gemini reads before it sees the data. Gemini only knows what you tell it."
+
+**Show:** the "Writing Your Prompt" table on the lecture page, then the one-line prompt: *Tell me what this person is doing.*
+
+**Ask:** "If this were the whole prompt, what would Gemini have to guess?"
+**Expect:** what the numbers are and their units, which words it's allowed to answer with, what counts as an alert, and how long the message can be.
+
+**Say:** "A good prompt answers five questions. Role: who is Gemini here? Input: what is the data and what units? Choices: what answers are allowed? Rules: how does it decide, and when is it an alert? Output: what should the reply look like? Plan one sentence for each on the handout, then type them into W3."
+
+**Ask:** "Your code checks for the word `resting`. What happens if your prompt tells Gemini to answer `at rest`?"
+**Expect:** the words wouldn't match. Use the same words in the prompt as in the code. (W4 also forces the four exact values.)
+
+**Say:** "Two more tips. Don't use double quotes inside the prompt, because it sits inside JSON. And keep your first version simple. We write prompts like code: test, find the mistake, change one sentence, test again."
+
+**Students do:** fill in "Plan Your Prompt" on the handout, then W3.
 
 **Ask:** "W4 is a list of the only four values `state` is allowed to be. Why limit Gemini like that?"
 **Expect:** so the firmware always gets a value it knows. Otherwise Gemini might answer "jogging" or "Resting." and the `if` statements wouldn't match.
@@ -158,9 +172,9 @@ const char* EVENT_NAME = "pulsecheck";
 | LED breathing magenta, nothing runs | Safe mode. Run `particle update` over USB, then flash again |
 | Nothing happens on a press | Button wiring. Check D5, the 10k resistor, and the diagonal legs |
 
-**Checkpoint at 0:45:** every pair's LED should turn white and then a color. Pairs that are stuck can watch a neighbor for Part 1 and catch up after.
+**Checkpoint at 0:48:** every pair's LED should turn white and then a color. Pairs that are stuck can watch a neighbor for Part 1 and catch up after.
 
-## 6. Part 1: Five Mystery Datasets (0:45 to 0:58)
+## 6. Part 1: Five Mystery Datasets (0:48 to 0:59)
 
 **Show:** the Part 1 arrays in `pulsecheck_setup.h` (`HR_PART1` and `STEPS_PART1`).
 
@@ -170,7 +184,7 @@ const char* EVENT_NAME = "pulsecheck";
 
 **Say:** "Now press the button once per dataset. Wait ten seconds between presses. Copy Gemini's state, alert, and msg from the serial monitor into the table."
 
-**Students do (7 minutes):** run A to E, fill in handout questions 2 to 5.
+**Students do (5 minutes):** run A to E, fill in handout questions 2 to 5.
 
 **Ask** (when most pairs are done): "Which dataset was the easiest to guess, and why?"
 **Expect:** E. Heart rate in the 150s and about 170 steps a minute is clearly running. A is also easy: about 100 steps a minute is a walk.
@@ -181,7 +195,7 @@ const char* EVENT_NAME = "pulsecheck";
 **Ask:** "What did Gemini say for C? Did anyone get something different from their neighbor?"
 **Expect:** mixed answers. That's the point. Many will have `workout` with no alert. Some will have `resting` with an alert. Write both on the board.
 
-## 7. When Gemini Gets It Wrong, and the Safety Rule (0:58 to 1:05)
+## 7. When Gemini Gets It Wrong, and the Safety Rule (0:59 to 1:05)
 
 **Show:** dataset C's numbers.
 

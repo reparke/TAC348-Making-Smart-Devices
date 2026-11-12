@@ -118,11 +118,40 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
   - `pulsecheck_webhook_starter.json`: the webhook template
   - `README.md`: step-by-step setup
 
+## Writing Your Prompt
+
+- The prompt is the instructions Gemini reads before it sees the data
+  - It goes in blank **W3** of the webhook
+- Gemini only knows what you tell it. A good prompt answers five questions
+
+| Part | Question it answers | Example |
+|------|---------------------|---------|
+| Role | Who is Gemini in this job? | You are the analysis engine for a fitness tracker |
+| Input | What is the data, and in what units? | Two lists, one value per minute: heart rate in beats per minute and steps per minute |
+| Choices | What answers are allowed? | Classify the activity as exactly one of: sleep, resting, walking, workout |
+| Rules | How should it decide, and when is it an alert? | Set alert to true only if the heart rate pattern is concerning for that activity |
+| Output | What should the reply look like? | Write msg as a friendly note of at most 40 characters |
+
+- Compare
+
+> Tell me what this person is doing.
+
+> You are the analysis engine for a fitness tracker. You receive heart rate in beats per minute and steps per minute, one value per minute. Classify the activity as exactly one of: sleep, resting, walking, workout. ...
+
+- The first one leaves Gemini guessing: what do the numbers mean? what words can it answer with?
+- Tips
+  - Be specific: say "beats per minute", not "the numbers"
+  - Use the same words as your code: if the firmware checks for `"resting"`, the prompt must say `resting`
+  - Don't put double quotes inside the prompt, or it breaks the webhook's JSON
+- Prompts are written like code: **test, find the mistake, change one thing, test again**
+  - If Gemini gets a dataset wrong, ask what it didn't know, and add one sentence that tells it
+  - Change one sentence at a time, so you know what fixed it
+
 ## Part 1: Your Job
 
 - `pulsecheck_setup.h` does the plumbing: the Fitbit data, the button, publishing, reading the reply, timeouts
   - You don't need to change it for Part 1
-- Write your prompt in the webhook (blank **W3**)
+- Write your prompt in the webhook (blank **W3**), using the five parts above
 - In `pulsecheck.cpp`:
   - **TODO 1**: show Gemini's answer on the RGB LED in `onGeminiReply()` with `changeLedColor(r, g, b)`
   - **TODO 2** (optional): write your own `safetyRule()`

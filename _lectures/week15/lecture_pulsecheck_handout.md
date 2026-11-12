@@ -15,6 +15,20 @@ Name _________________________________________  Partner ________________________
 
 Follow along with the [PulseCheck lecture](lecture_pulsecheck.html). Don't look at **Check Your Answers** until you finish each part.
 
+## Plan Your Prompt
+
+Before you fill in blank W3 of the webhook, plan the five parts of your prompt. One short sentence each is enough.
+
+| Part | Your sentence |
+|------|---------------|
+| Role: who is Gemini in this job? | |
+| Input: what is the data, and in what units? | |
+| Choices: what answers are allowed for `state`? | |
+| Rules: how should it decide, and when should `alert` be true? | |
+| Output: what should `msg` look like? | |
+
+<!-- e.g. Role: You are the analysis engine for a fitness tracker. Input: heart rate in beats per minute and steps per minute, one value per minute. Choices: exactly one of sleep, resting, walking, workout. Rules: alert only if the heart rate is concerning for the activity. Output: msg is a friendly note of at most 40 characters. -->
+
 ## Part 1: Five Mystery Datasets
 
 1. Open `src/pulsecheck_setup.h` and look at the heart rate and step numbers for datasets A to E. **Before you press the button**, write your own guess for each one in the table below.

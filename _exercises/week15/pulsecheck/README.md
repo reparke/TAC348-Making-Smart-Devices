@@ -30,7 +30,7 @@ Follow [Particle + Gemini Integration](https://makingsmartdevices.com/lectures/w
 
 1. Fill in the blanks in `pulsecheck_webhook_starter.json`:
    * **W1** `gemini-3.5-flash-lite`
-   * **W3** your prompt: what the data is, the four states to choose from, when to set `alert`, and how to write `msg` (40 characters at most)
+   * **W3** your prompt. Cover five parts: Gemini's role, what the data is and its units, the four states to choose from, when to set `alert`, and how to write `msg` (40 characters at most). Don't use double quotes inside it. See [Writing Your Prompt](https://makingsmartdevices.com/lectures/week15/lecture_pulsecheck.html#writing-your-prompt)
    * **W4** `"sleep", "resting", "walking", "workout"`
 2. In the Particle Console, open your product, then **Integrations**, **Add integration**, **Webhook**.
 3. Click the **Custom template** tab (not Webhook Builder), delete what is there, and paste your file.
