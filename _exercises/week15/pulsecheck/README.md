@@ -7,7 +7,9 @@ Send 10 minutes of real Fitbit data to Google Gemini through a Particle webhook,
 | File | What it is |
 |------|------------|
 | `src/pulsecheck.cpp` | Your code: TODO 1, and optional TODO 2 |
-| `src/pulsecheck_setup.h` | The plumbing: the Fitbit datasets (A-E for Part 1, F-H for Part 2), the button, publishing, reading Gemini's reply, timeouts. Change only `PART` at the top, for Part 2 |
+| `src/fitbit_data.h` | The Fitbit datasets (A-E for Part 1, F-H for Part 2), compiled into the firmware |
+| `data/fitbit_windows.csv` | The same numbers as a spreadsheet, for you to look at. The Photon 2 does not read this file |
+| `src/pulsecheck_setup.h` | The plumbing: the button, publishing, reading Gemini's reply, timeouts. Change only `PART` at the top, for Part 2 |
 | `pulsecheck_webhook_body_starter.json` | The JSON body for your webhook, with two blanks: `TODO PROMPT` and `TODO STATES` |
 
 ## 1. Wire the RGB LED and button

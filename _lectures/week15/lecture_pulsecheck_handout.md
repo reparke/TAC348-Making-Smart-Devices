@@ -31,7 +31,7 @@ Before you write your prompt in the webhook body, plan the five parts of your pr
 
 ## Part 1: Five Mystery Datasets
 
-1. Open `src/pulsecheck_setup.h` and look at the heart rate and step numbers for datasets A to E. **Before you press the button**, write your own guess for each one in the table below.
+1. Open `data/fitbit_windows.csv` (it opens in Excel or Google Sheets) and look at the heart rate and step numbers for datasets A to E. **Before you press the button**, write your own guess for each one in the table below.
 
 2. Press the button once per dataset (wait 10 seconds between presses). Copy Gemini's answer from the serial monitor.
 
@@ -57,7 +57,7 @@ Before you write your prompt in the webhook body, plan the five parts of your pr
 
 7. What does a METs value of 1.0 mean? __ <!-- sitting still --> What about 14? __ <!-- very hard exercise --> What does an intensity of 3 mean? __ <!-- very active -->
 
-8. Datasets F, G, and H all have **zero steps** the whole time. Look only at `HR_PART2` and `STEPS_PART2` for G. What would you guess? __ <!-- a dangerous heart rate spike at rest: about 190 bpm with no steps --> Now look at G's calories, intensity, and METs. What changes your mind? __ <!-- 10 to 19 calories a minute, intensity 3, and METs of 9 to 14 all mean hard exercise, like cycling, so it's a workout -->
+8. Datasets F, G, and H all have **zero steps** the whole time. In `data/fitbit_windows.csv`, look only at the heart rate and steps columns for G. What would you guess? __ <!-- a dangerous heart rate spike at rest: about 190 bpm with no steps --> Now look at G's calories, intensity, and METs. What changes your mind? __ <!-- 10 to 19 calories a minute, intensity 3, and METs of 9 to 14 all mean hard exercise, like cycling, so it's a workout -->
 
 9. Set `PART` to `2`, flash, and run F, G, H **with your Part 1 prompt** (don't change it yet). Then update your prompt to explain the four new signals, and run them again.
 

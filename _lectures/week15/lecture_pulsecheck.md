@@ -99,7 +99,7 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 ```
 
 - Write Gemini's answer for each dataset on the handout, then check it in [Check Your Answers](#check-your-answers)
-- Tip: before you press the button, look at the table and make your own guess. The full numbers are in `pulsecheck_setup.h`
+- Tip: before you press the button, look at the table and make your own guess. The full numbers are in `data/fitbit_windows.csv`
 
 ## Gemini's Answer
 
@@ -124,6 +124,8 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 - Unzip it and open the `pulsecheck_start` folder in Particle Workbench
   - `src/pulsecheck.cpp`: your code
   - `src/pulsecheck_setup.h`: the plumbing
+  - `src/fitbit_data.h`: the Fitbit numbers, compiled into the firmware
+  - `data/fitbit_windows.csv`: the same numbers as a spreadsheet, for you to look at
   - `pulsecheck_webhook_body_starter.json`: the JSON body for your webhook, with two blanks
   - `README.md`: step-by-step setup
 
@@ -198,7 +200,7 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 
 ## Part 1: Your Job
 
-- `pulsecheck_setup.h` does the plumbing: the Fitbit data, the button, publishing, reading the reply, timeouts
+- `pulsecheck_setup.h` does the plumbing: the button, publishing, reading the reply, timeouts
   - You don't need to change it for Part 1
 - Write your prompt using the five parts above, and create the webhook
 - In `pulsecheck.cpp`:

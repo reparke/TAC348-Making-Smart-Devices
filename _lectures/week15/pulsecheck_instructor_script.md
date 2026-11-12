@@ -110,7 +110,7 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 
 **Show:** the starter zip link, then the `pulsecheck_start` folder open in Workbench.
 
-**Say:** "There are two files in `src`. `pulsecheck.cpp` is yours. `pulsecheck_setup.h` is the plumbing, the same idea as the setup headers we've used before: the data, the button, publishing, reading the reply, timeouts. You don't change anything in it for Part 1."
+**Say:** "There are three files in `src`. `pulsecheck.cpp` is yours. `fitbit_data.h` holds the Fitbit numbers. `pulsecheck_setup.h` is the plumbing, the same idea as the setup headers we've used before: the data, the button, publishing, reading the reply, timeouts. You don't change anything in it for Part 1."
 
 **Show:** the top of `pulsecheck_setup.h`.
 
@@ -183,7 +183,7 @@ const char* EVENT_NAME = "pulsecheck";
 
 ## 6. Part 1: Five Mystery Datasets (0:48 to 0:59)
 
-**Show:** the Part 1 arrays in `pulsecheck_setup.h` (`HR_PART1` and `STEPS_PART1`).
+**Show:** `data/fitbit_windows.csv` open in a spreadsheet, rows A to E. Then the same numbers in `src/fitbit_data.h`.
 
 **Say:** "There are five datasets, A to E. Each one is ten minutes of a real person's heart rate and steps, one reading per minute. One is resting, one is walking, one is a workout, one is sleep, and one is something a watch should worry about. I'm not telling you which is which. Before you press anything, look at the numbers and write your own guess on the handout, question 1."
 
