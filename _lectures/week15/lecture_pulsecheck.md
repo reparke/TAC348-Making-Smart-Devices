@@ -115,13 +115,14 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 - Unzip it and open the `pulsecheck_start` folder in Particle Workbench
   - `src/pulsecheck.cpp`: your code
   - `src/pulsecheck_setup.h`: the plumbing
-  - `pulsecheck_webhook_starter.json`: the webhook template
+  - `pulsecheck_webhook_body_starter.json`: the JSON body for your webhook, with two blanks
   - `README.md`: step-by-step setup
 
 ## Writing Your Prompt
 
 - The prompt is the instructions Gemini reads before it sees the data
-  - It goes in blank **W3** of the webhook
+  - It goes in the `TODO PROMPT` blank of `pulsecheck_webhook_body_starter.json`
+  - Review: [Prompt Engineering for IoT](/lectures/weekX/lecture_particle_gemini_integration.html#prompt-engineering-for-iot)
 - Gemini only knows what you tell it. A good prompt answers five questions
 
 | Part | Question it answers | Example |
@@ -147,11 +148,50 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
   - If Gemini gets a dataset wrong, ask what it didn't know, and add one sentence that tells it
   - Change one sentence at a time, so you know what fixed it
 
+## Creating the Webhook
+
+- Same steps as [Particle + Gemini Integration](/lectures/weekX/lecture_particle_gemini_integration.html)
+- Open `pulsecheck_webhook_body_starter.json` and fill in the two blanks
+  - `TODO PROMPT`: your prompt
+  - `TODO STATES`: `"sleep", "resting", "walking", "workout"`
+- In the [Particle console](https://console.particle.io/), go to **Cloud services > Integrations > Add new integration** and choose **Custom Webhook**
+
+<img src="lecture_pulsecheck.assets/webhook-1-custom-webhook.png" alt="Choosing Custom Webhook in the Particle console" style="width:600px;" />
+
+- Stay on the **Webhook Builder** tab and use the following settings
+  - **Name**: `PulseCheck`
+  - **Event name**: `pulsecheck`
+  - **URL**: `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent`
+  - **Request type**: `POST`
+  - **Request format**: `JSON`
+  - Leave "Only the device that triggers the webhook should receive its response" unchecked
+
+<img src="lecture_pulsecheck.assets/webhook-2-builder.png" alt="Webhook Builder settings for PulseCheck" style="width:700px;" />
+
+- Go to **Extra settings**
+  - Under **JSON data**, choose **Custom**, delete what is there, and paste your whole body file
+
+<img src="lecture_pulsecheck.assets/webhook-3-json-data.png" alt="Custom JSON data in Extra settings" style="width:700px;" />
+
+  - Under **HTTP headers**, add
+    - **Key**: `x-goog-api-key`
+    - **Value**: your Gemini API key
+  - Under **Response template**, add
+
+```
+{% raw %}{{#candidates}}{{#content}}{{#parts}}{{{text}}}{{/parts}}{{/content}}{{/candidates}}{% endraw %}
+```
+
+- Click **Enable integration**
+- Note: in the body, `{% raw %}{{{PARTICLE_EVENT_VALUE}}}{% endraw %}` is where Particle puts the data your Photon 2 published
+- Note: the response template pulls just Gemini's answer out of its reply, so the Photon 2 receives only `{"state", "alert", "msg"}`
+- To change your prompt later, open the webhook, click **Edit**, and change it under **Extra settings > JSON data**
+
 ## Part 1: Your Job
 
 - `pulsecheck_setup.h` does the plumbing: the Fitbit data, the button, publishing, reading the reply, timeouts
   - You don't need to change it for Part 1
-- Write your prompt in the webhook (blank **W3**), using the five parts above
+- Write your prompt using the five parts above, and create the webhook
 - In `pulsecheck.cpp`:
   - **TODO 1**: show Gemini's answer on the RGB LED in `onGeminiReply()` with `changeLedColor(r, g, b)`
   - **TODO 2** (optional): write your own `safetyRule()`
@@ -207,7 +247,7 @@ hr_bpm=[62,62,...] steps_per_min=[0,0,...] mets=[1.0,1.0,...] sleep=[asleep,asle
 ## Part 2: Your Job
 
 - Set `PART` to `2` at the top of `pulsecheck_setup.h` and flash
-- Update your prompt (W3) so Gemini knows what `mets` and `sleep` mean
+- Update your prompt so Gemini knows what `mets` and `sleep` mean
   - Without it, Gemini has to guess what the new numbers are
 - The safety rule is ready-made: `defaultSafetyRule()` switches to METs in Part 2
   - Part 1: still = steps under 10 per minute

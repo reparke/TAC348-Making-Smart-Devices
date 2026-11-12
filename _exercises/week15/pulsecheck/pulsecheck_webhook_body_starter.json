@@ -1,0 +1,31 @@
+{
+  "systemInstruction": {
+    "parts": [
+      {
+        "text": "TODO PROMPT: write the prompt. Tell Gemini what data it receives, which states to choose from, when to set alert, and how to write msg (at most 40 characters)."
+      }
+    ]
+  },
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        { "text": "{{{PARTICLE_EVENT_VALUE}}}" }
+      ]
+    }
+  ],
+  "generationConfig": {
+    "temperature": 0.2,
+    "thinkingConfig": { "thinkingLevel": "minimal" },
+    "responseMimeType": "application/json",
+    "responseSchema": {
+      "type": "OBJECT",
+      "properties": {
+        "state": { "type": "STRING", "enum": ["TODO STATES: list the four states the firmware understands"] },
+        "alert": { "type": "BOOLEAN" },
+        "msg":   { "type": "STRING" }
+      },
+      "required": ["state", "alert", "msg"]
+    }
+  }
+}

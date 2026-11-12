@@ -127,48 +127,55 @@ const char* EVENT_NAME = "pulsecheck";
 
 ## 5. Gemini Key, Prompt, and Webhook (0:32 to 0:48)
 
-**Show:** Google AI Studio's API key page, then `pulsecheck_webhook_starter.json`.
+**Show:** Google AI Studio's API key page, then `pulsecheck_webhook_body_starter.json`.
 
-**Say:** "Make a Gemini API key with your own Google account. Then open the webhook starter file. There are four blanks, W1 to W4."
+**Say:** "Make a Gemini API key with your own Google account. Then open the webhook body file. It's the JSON we send to Gemini, and it has two blanks: `TODO PROMPT` and `TODO STATES`."
 
-| Blank | What goes in it |
-|-------|-----------------|
-| W1 | `gemini-3.5-flash-lite` |
-| W2 | your API key, pasted **in the Particle Console only** |
-| W3 | your prompt |
-| W4 | `"sleep", "resting", "walking", "workout"` |
-
-**Say:** "W3 is the interesting one. That's your prompt: the instructions Gemini reads before it sees the data. Gemini only knows what you tell it."
+**Say:** "The prompt is the interesting one. It's the instructions Gemini reads before it sees the data. Gemini only knows what you tell it."
 
 **Show:** the "Writing Your Prompt" table on the lecture page, then the one-line prompt: *Tell me what this person is doing.*
 
 **Ask:** "If this were the whole prompt, what would Gemini have to guess?"
 **Expect:** what the numbers are and their units, which words it's allowed to answer with, what counts as an alert, and how long the message can be.
 
-**Say:** "A good prompt answers five questions. Role: who is Gemini here? Input: what is the data and what units? Choices: what answers are allowed? Rules: how does it decide, and when is it an alert? Output: what should the reply look like? Plan one sentence for each on the handout, then type them into W3."
+**Say:** "A good prompt answers five questions. Role: who is Gemini here? Input: what is the data and what units? Choices: what answers are allowed? Rules: how does it decide, and when is it an alert? Output: what should the reply look like? Plan one sentence for each on the handout, then type them into `TODO PROMPT`."
 
 **Ask:** "Your code checks for the word `resting`. What happens if your prompt tells Gemini to answer `at rest`?"
-**Expect:** the words wouldn't match. Use the same words in the prompt as in the code. (W4 also forces the four exact values.)
+**Expect:** the words wouldn't match. Use the same words in the prompt as in the code. (The `TODO STATES` list also forces the four exact values.)
 
 **Say:** "Two more tips. Don't use double quotes inside the prompt, because it sits inside JSON. And keep your first version simple. We write prompts like code: test, find the mistake, change one sentence, test again."
 
-**Students do:** fill in "Plan Your Prompt" on the handout, then W3.
+**Students do:** fill in "Plan Your Prompt" on the handout, then type it into `TODO PROMPT`.
 
-**Ask:** "W4 is a list of the only four values `state` is allowed to be. Why limit Gemini like that?"
+**Ask:** "`TODO STATES` is a list of the only four values `state` is allowed to be. Why limit Gemini like that?"
 **Expect:** so the firmware always gets a value it knows. Otherwise Gemini might answer "jogging" or "Resting." and the `if` statements wouldn't match.
 
-**Show:** the Particle Console: your product, Integrations, Add integration, Webhook, **Custom template** tab. Paste the file. Replace W2 with the key. Save.
+**Show:** the "Creating the Webhook" section, then do it live in the Particle Console: Cloud services, Integrations, Add new integration, Custom Webhook.
 
-**Say:** "Use the Custom template tab, not Webhook Builder. Then do TODO 1 in `pulsecheck.cpp`: set the LED color for each state with `changeLedColor`. Flash it."
+| Field | Value |
+|-------|-------|
+| Name | `PulseCheck` |
+| Event name | `pulsecheck` |
+| URL | `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent` |
+| Request type | `POST` |
+| Request format | `JSON` |
+| Extra settings: JSON data | **Custom**, then paste the whole body file |
+| Extra settings: HTTP headers | key `x-goog-api-key`, value your API key |
+| Extra settings: Response template | `{{#candidates}}{{#content}}{{#parts}}{{{text}}}{{/parts}}{{/content}}{{/candidates}}` |
+
+**Say:** "This is the same Webhook Builder you used in the Gemini lecture. Three things go under Extra settings: the body, the key as a header, and the response template. Then do TODO 1 in `pulsecheck.cpp`: set the LED color for each state with `changeLedColor`. Flash it."
+
+**Ask:** "The body has `{{{PARTICLE_EVENT_VALUE}}}` in it. What does Particle put there?"
+**Expect:** the data string the Photon published: the heart rate and steps lists.
 
 **Students do:** key, webhook, TODO 1, flash, first button press.
 
 | If you see | Fix |
 |------------|-----|
 | White, then magenta after 20 seconds | No webhook, or its event isn't `pulsecheck` |
-| Error 400 or `API_KEY_INVALID` | Key missing or wrong, or the template was pasted into Webhook Builder |
-| Error 404 | The model was retired. Use the current Flash-Lite model in W1 |
-| Error 429 | Quota used up. Wait a minute, or switch W1 to another model for today |
+| Error 400 or `API_KEY_INVALID` | The `x-goog-api-key` header is missing or wrong, or something other than the body file is in JSON data |
+| Error 404 | The model was retired. Use the current Flash-Lite model in the URL |
+| Error 429 | Quota used up. Wait a minute, or switch the URL to another model for today |
 | LED breathing magenta, nothing runs | Safe mode. Run `particle update` over USB, then flash again |
 | Nothing happens on a press | Button wiring. Check D5, the 10k resistor, and the diagonal legs |
 
@@ -212,7 +219,7 @@ hr_bpm=[70,68,66,68,65,68,144,143,143,138] steps_per_min=[0,0,0,0,0,0,0,0,0,0]
 
 > Decide the state from the steps first: if steps stay near zero, the state is resting or sleep, never walking or workout, even when heart rate is high.
 
-**Students do (2 minutes):** add that sentence to W3 in the Console, save, press through to C again.
+**Students do (2 minutes):** add that sentence to the prompt in the Console (Edit, Extra settings, JSON data), save, press through to C again.
 
 **Ask:** "Did C change?"
 **Expect:** yes for most pairs: now `resting` with `alert` true.
@@ -265,7 +272,7 @@ const int PART = 1;
 
 **Students do (3 minutes):** set `PART = 2`, flash, handout questions 7 and 8.
 
-**Say:** "Now run F, G, H, but don't change your prompt yet. Write down what Gemini says. Then update W3 so Gemini knows what `mets` and `sleep` mean, and run all three again."
+**Say:** "Now run F, G, H, but don't change your prompt yet. Write down what Gemini says. Then update your prompt so Gemini knows what `mets` and `sleep` mean, and run all three again."
 
 **Students do (9 minutes):** handout questions 9 and 10.
 

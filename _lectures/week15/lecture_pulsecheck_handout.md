@@ -17,7 +17,7 @@ Follow along with the [PulseCheck lecture](lecture_pulsecheck.html). Don't look 
 
 ## Plan Your Prompt
 
-Before you fill in blank W3 of the webhook, plan the five parts of your prompt. One short sentence each is enough.
+Before you write your prompt in the webhook body, plan the five parts of your prompt. One short sentence each is enough.
 
 | Part | Your sentence |
 |------|---------------|
@@ -49,7 +49,7 @@ Before you fill in blank W3 of the webhook, plan the five parts of your prompt. 
 
 4. Did Gemini get any dataset wrong? Which one, and what do you think confused it? __ <!-- Most often C: a high heart rate looks like a workout unless the prompt says to decide from steps first. B vs D can also be mixed up: both have zero steps -->
 
-5. Copy the sentence in your prompt (W3) that tells Gemini how to choose the state. __ <!-- e.g. "Decide the state from the steps first: if steps stay near zero, the state is resting or sleep..." -->
+5. Copy the sentence in your prompt that tells Gemini how to choose the state. __ <!-- e.g. "Decide the state from the steps first: if steps stay near zero, the state is resting or sleep..." -->
 
 6. Gemini's `msg` often mentions the average heart rate. Work out the real average heart rate for dataset E: __ <!-- 1562 / 10 = 156.2 bpm --> Did Gemini's number match? __ <!-- Often close but not exact: language models are not reliable at math -->
 
@@ -59,7 +59,7 @@ Before you fill in blank W3 of the webhook, plan the five parts of your prompt. 
 
 8. Datasets F, G, and H all have **zero steps** the whole time. Look only at `HR_PART2` and `STEPS_PART2` for G. What would you guess? __ <!-- a dangerous heart rate spike at rest: about 190 bpm with no steps --> Now look at `METS10_PART2` for G. What changes your mind? __ <!-- METs of 9 to 14 mean hard exercise, like cycling, so it's a workout -->
 
-9. Set `PART` to `2`, flash, and run F, G, H **with your Part 1 prompt** (don't change it yet). Then update your prompt (W3) to explain `mets` and `sleep`, and run them again.
+9. Set `PART` to `2`, flash, and run F, G, H **with your Part 1 prompt** (don't change it yet). Then update your prompt to explain `mets` and `sleep`, and run them again.
 
 | Dataset | Your guess: state / alert | Gemini, Part 1 prompt: `state` / `alert` | Gemini, updated prompt: `state` / `alert` | Correct? |
 |---------|---------------------------|------------------------------------------|-------------------------------------------|----------|
