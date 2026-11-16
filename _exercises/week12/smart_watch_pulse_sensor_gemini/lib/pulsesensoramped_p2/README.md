@@ -1,61 +1,66 @@
-About
-===
+# pulsesensoramped_p2
 
-This repo serves as the specification for what constitutes a valid Spark firmware library and an actual example library you can use as a reference when writing your own libraries.
+PulseSensor Amped support for Particle Photon 2 / P2, by Rob Parke, based on
+Bill Siever's PulseSensorAmped port.
 
-Particle Libraries can be used in the [Particle IDE](https://build.particle.io/build).
-_Soon_ you'll also be able to use them with the [Particle CLI](https://github.com/spark/particle-cli) and when compiling firmware locally with [Particle firmware](https://github.com/spark/firmware).
+## Usage
 
-## Table of Contents
+See `examples/basic_hr.cpp`. Attach the signal pin, call `start()` in `setup()`,
+and call `process()` regularly from `loop()` to deliver callbacks.
 
-This README describes how to create libraries as well as the Particle Library Spec.
+```cpp
+#include <PulseSensorAmped.h>
+PulseSensor PulseSensorAmped;
 
-The other files constitute the Particle Library itself:
+// In setup():
+// PulseSensorAmped.attach(A1);
+// PulseSensorAmped.start();
 
-  - file, class, and function [naming conventions](doc/firmware-code-conventions.md)
-  - [example apps](examples) that illustrate library in action
-  - recommended approaches for [test-driven embedded development](test/RUNNING_TESTS.md)
-  - [metadata](library.properties) to set authors, license, official names
-
-## Getting Started
-
-### 1. Install Particle CLI
-
-```
-$ npm install -g particle-cli
+// In loop():
+// PulseSensorAmped.process();
 ```
 
-### 2. Init new library
+Define either optional callback as needed:
 
-```
-$ particle library init this-is-my-library-name
-```
-
-- Replace `this-is-my-library-name` with the actual lib name. Your library's name should be lower-case, dash-separated.
-
-### 3. Edit the `library.properties`, firmware .h and .cpp files
-
-- Use this repo as your guide to good library conventions.
-
-### 4. Create a GitHub repo and push to it
-
-### 5. Validate and publish
-
-```
-$ particle library validate
+```cpp
+void PulseSensorAmped_data(int BPM, int IBI) {
+    // BPM averages ten intervals; IBI is the latest interval in milliseconds.
+}
+void PulseSensorAmped_lost() {
+    // No qualifying beat for 2.5 seconds, or a sampling gap over 20 ms.
+}
 ```
 
-and
+## Signal quality and diagnostics
 
+Version 0.0.2 filters the raw ADC signal, applies hysteresis, and requires a
+minimum filtered amplitude of 60 ADC counts (on the 0-4095 scale). Adjust with
+`setMinimumAmplitude(counts)` only after checking the waveform. The algorithm
+retains its original 250 ms beat guard; it does not clamp BPM to a resting range.
+
+`getDiagnostics()` returns the latest raw and filtered samples, threshold,
+filtered peak-to-peak swing, sample count, maximum sampling gap, and tracking
+state. Reading diagnostics resets the reporting-window counters. Tracking is
+a detector state, not a guarantee that each detected beat is correct.
+
+The library prints no debug output. User callbacks run on the application
+thread when `process()` is called. Do not add serial output inside the timer
+callback. A sustained weak or noisy signal may require sensor or wiring changes.
+
+## Release
+
+See `CHANGELOG.md`. From this library directory, use:
+
+```sh
+particle library upload
+particle library publish pulsesensoramped_p2
 ```
-$ particle library publish
+
+For cloud builds, pin the published version in the application project:
+
+```properties
+dependencies.pulsesensoramped_p2=0.0.2
 ```
 
-## Getting Support
-
-- Check out the [libraries category on the Particle community site](https://community.particle.io/category/libraries) and post a thread there!
-- To file a bug; create a GitHub issue on this repo. Be sure to include details about how to replicate it.
-
-## Contributing
-
-This repo is meant to serve as a place to consolidate insights from conversations had about libraries on the [Particle community site](https://community.particle.io), GitHub, or elsewhere on the web. "Proposals" to change the spec are pull requests that both define the conventions in the README AND illustrate them in underlying code. If something doesn't seem right, start a community thread or issue pull requests to stir up the conversation about how it ought to be!
+Local vendored copies must contain the same version. Preserve the included
+MIT license when redistributing the library.

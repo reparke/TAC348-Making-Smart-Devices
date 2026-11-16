@@ -5,6 +5,7 @@
 const int pulseSignalPin = A4;
 
 #include <PulseSensorAmped.h>
+PulseSensor PulseSensorAmped;
 
 void setup() {
     /*

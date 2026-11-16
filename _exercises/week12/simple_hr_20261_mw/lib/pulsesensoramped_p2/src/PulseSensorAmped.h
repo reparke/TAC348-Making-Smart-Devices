@@ -1,63 +1,76 @@
-
 #ifndef PULSE_INTERRUPT_H
 #define PULSE_INTERRUPT_H
 
 #include "Particle.h"
 
-// The "beats updated" callback; Called when valid pulse data is available.
-// Passed Estimated Beats Per Minute and Interbeat Interval
+// Callbacks run in process(), on the application thread.
 extern void PulseSensorAmped_data(int BPM, int IBI) __attribute__((weak));
-// The "signal lost" callback; Called when no more valid pulse data is
-// avaialble.
 extern void PulseSensorAmped_lost(void) __attribute__((weak));
 
 class PulseSensor {
    public:
+    struct Diagnostics {
+        int raw;
+        int filtered;
+        int threshold;
+        int peakToPeak;  // Filtered signal range since the previous snapshot.
+        uint32_t samples;
+        uint32_t maxGapMs;
+        bool tracking;
+    };
+
     PulseSensor();
     void attach(int pin);
     void process();
     void start();
+    void setMinimumAmplitude(int adcCounts);
+    Diagnostics getDiagnostics();
 
    private:
+    static constexpr int ADC_MIDPOINT = 2048;
+    static constexpr uint32_t SAMPLE_MS = 2;
+    static constexpr uint32_t MAX_SAMPLE_GAP_MS = 20;
+    static constexpr uint32_t LOST_MS = 2500;
+    static constexpr int FILTER_TIME_MS = 12;
+    static constexpr int HYSTERESIS = 10;
+
+    // Timer callbacks are a separate thread, not hardware interrupts.
+    // Declare the mutex first so it outlives the timer during destruction.
+    Mutex stateMutex;
     Timer pulseTimer;
+    int pulsePin = A1;
+    int blinkPin = D7;
+    int minimumAmplitude = 60;
 
-    volatile int rate[10];                 // array to hold last ten IBI values
-    volatile unsigned long sampleCounter;  // used to determine pulse timing
-    volatile unsigned long lastBeatTime;   // used to find IBI
-    volatile int P;       // used to find peak in pulse wave, seeded
-    volatile int T;       // used to find trough in pulse wave, seeded
-    volatile int thresh;  // used to find instant moment of heart beat, seeded
-    volatile int amp;     // used to hold amplitude of pulse waveform, seeded
-    volatile boolean
-        firstBeat;  // used to seed rate array so we startup with reasonable BPM
-    volatile boolean secondBeat;  // used to seed rate array so we startup with
-                                  // reasonable BPM
+    int rate[10] = {};
+    uint32_t lastSampleTime = 0;
+    uint32_t lastBeatTime = 0;
+    int P = ADC_MIDPOINT;
+    int T = ADC_MIDPOINT;
+    int thresh = ADC_MIDPOINT;
+    bool firstBeat = true;
+    bool secondBeat = false;
+    bool Pulse = false;
+    bool tracking = false;
+    bool lossReported = false;
+    bool beatPending = false;
+    bool lossPending = false;
+    int BPM = -1;
+    int IBI = 600;
+    int rawSignal = 0;
+    int filteredSignal = 0;
+    int32_t firstStageScaled = 0;
+    int32_t filteredScaled = 0;
 
-    // these variables are volatile because they are used during the interrupt
-    // service routine!
-    volatile int BPM;        // used to hold the pulse rate
-    volatile int rawSignal;  // holds the incoming raw data
-    volatile int IBI;        // holds the time between beats, must be seeded!
-    volatile boolean
-        Pulse;            // true when pulse wave is high, false when it's low
-    volatile boolean QS;  // becomes true when Arduoino finds a beat.
+    int windowMin = 4095;
+    int windowMax = 0;
+    uint32_t sampleCount = 0;
+    uint32_t maxGapMs = 0;
 
-    // SparkIntervalTimer uses hardware timers that are otherwise allocated for
-    // PIN functions (ADC/PWM) The first allocated timer is TIMR2 on Core and
-    // TIMR3 on Photon which is assigned to A0 & A1 ADC/PWM channels So use A2
-    // (though A0 & A1 ADC should still work on Core and not affected on Photon)
-    // for pulse input, D7 (onboard LED) for blink LED and D6 for fancy LED
-    //  VARIABLES
-    // int pulsePin = A0;  // Pulse Sensor purple wire connected to analog pin 0
-    int pulsePin;       // Pulse Sensor purple wire connected to analog pin 0
-    int blinkPin = D7;  // pin to blink led at each beat
-    int fadePin = D6;   // pin to do fancy classy fading blink at each beat
-    int fadeRate = 0;   // used to fade LED on with PWM on fadePin
-
-    void timerSetup();
-    friend void pulseISR(void);
+    void sample();
+    // Caller holds stateMutex for the following helpers.
+    void resetDetector(uint32_t now);
+    void loseSignal(uint32_t now);
 };
-
-extern PulseSensor pulseSensor;
 
 #endif
