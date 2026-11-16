@@ -22,9 +22,9 @@ void setup() {
 }
 
 void loop() {
-    delay(100);
     // Must process Pulse Sensor updates in main event loop
     PulseSensorAmped.process();
+    delay(1);
 }
 
 // An optional function to recieve the Beats Per Minute (BPM) and Interbeat
