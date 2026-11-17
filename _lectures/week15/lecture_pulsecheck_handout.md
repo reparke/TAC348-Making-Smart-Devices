@@ -29,6 +29,37 @@ Before you write your prompt in the webhook body, plan the five parts of your pr
 
 <!-- e.g. Role: You are the analysis engine for a fitness tracker. Input: heart rate in beats per minute and steps per minute, one value per minute. Choices: exactly one of sleep, resting, walking, workout. Rules: alert only if the heart rate is concerning for the activity. Output: msg is a friendly note of at most 40 characters. -->
 
+## Create the Webhook
+
+Check off each step. The screenshots are in [Creating the Webhook](lecture_pulsecheck.html#creating-the-webhook) on the lecture page.
+
+- [ ] Create a Gemini API key. Keep it private: it goes in the Particle console only
+- [ ] In `pulsecheck_webhook_body_starter.json`, replace `TODO PROMPT` with your prompt (no double quotes inside it)
+- [ ] Replace `TODO STATES` with `"sleep", "resting", "walking", "workout"`
+- [ ] In the Particle console, go to **Cloud services > Integrations > Add new integration** and choose **Custom Webhook**
+- [ ] On the **Webhook Builder** tab, fill in
+
+| Field | Value |
+|-------|-------|
+| Name | `PulseCheck` |
+| Event name | `pulsecheck` |
+| URL | `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent` |
+| Request type | `POST` |
+| Request format | `JSON` |
+
+- [ ] Open **Extra settings**. Under **JSON data**, choose **Custom**, delete what is there, and paste your whole body file
+- [ ] Under **HTTP headers**, add the key `x-goog-api-key` with your Gemini API key as the value
+- [ ] Under **Response template**, paste
+
+```
+{% raw %}{{#candidates}}{{#content}}{{#parts}}{{{text}}}{{/parts}}{{/content}}{{/candidates}}{% endraw %}
+```
+
+- [ ] Click **Enable integration**
+- [ ] Complete TODO 1 in `pulsecheck.cpp`, flash, and press the button. The LED turns white, then a color
+
+If the LED turns magenta: __ <!-- White then magenta after 20 s: no webhook, or its event name is not pulsecheck. Magenta right away: Gemini rejected the request, so open the webhook in the console and read the error (400 = key header or body, 404 = model name, 429 = quota) -->
+
 ## Part 1: Five Mystery Datasets
 
 1. Open `data/fitbit_windows.csv` (it opens in Excel or Google Sheets) and look at the heart rate and step numbers for datasets A to E. **Before you press the button**, write your own guess for each one in the table below.
