@@ -164,9 +164,49 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 ## Creating the Webhook
 
 - Same steps as [Particle + Gemini Integration](/lectures/weekX/lecture_particle_gemini_integration.html)
-- Open `pulsecheck_webhook_body_starter.json` and fill in the two blanks
-  - `TODO PROMPT`: your prompt
+- Open `pulsecheck_webhook_body_starter.json`. This is the JSON the webhook sends to Gemini
+
+```json
+{% raw %}{
+  "systemInstruction": {
+    "parts": [
+      {
+        "text": "TODO PROMPT: write the prompt. Tell Gemini what data it receives, which states to choose from, when to set alert, and how to write msg (at most 40 characters)."
+      }
+    ]
+  },
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        { "text": "{{{PARTICLE_EVENT_VALUE}}}" }
+      ]
+    }
+  ],
+  "generationConfig": {
+    "temperature": 0.2,
+    "thinkingConfig": { "thinkingLevel": "minimal" },
+    "responseMimeType": "application/json",
+    "responseSchema": {
+      "type": "OBJECT",
+      "properties": {
+        "state": { "type": "STRING", "enum": ["TODO STATES: list the four states the firmware understands"] },
+        "alert": { "type": "BOOLEAN" },
+        "msg":   { "type": "STRING" }
+      },
+      "required": ["state", "alert", "msg"]
+    }
+  }
+}{% endraw %}
+```
+
+- Fill in the two blanks
+  - `TODO PROMPT`: your prompt, on one line, with no double quotes inside it
   - `TODO STATES`: `"sleep", "resting", "walking", "workout"`
+- Leave the rest as it is
+  - `systemInstruction`: the prompt Gemini reads before the data
+  - `contents`: the data from your Photon 2
+  - `responseSchema`: forces Gemini to answer with exactly `state`, `alert`, and `msg`
 - In the [Particle console](https://console.particle.io/), go to **Cloud services > Integrations > Add new integration** and choose **Custom Webhook**
 
 <img src="lecture_pulsecheck.assets/webhook-1-custom-webhook.png" alt="Choosing Custom Webhook in the Particle console" style="width:600px;" />
@@ -199,6 +239,22 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 - Note: in the body, `{% raw %}{{{PARTICLE_EVENT_VALUE}}}{% endraw %}` is where Particle puts the data your Photon 2 published
 - Note: the response template pulls just Gemini's answer out of its reply, so the Photon 2 receives only `{"state", "alert", "msg"}`
 - To change your prompt later, open the webhook, click **Edit**, and change it under **Extra settings > JSON data**
+
+## Webhook Troubleshooting
+
+- To see what went wrong, open your webhook in the Particle console and look at its most recent error
+
+| What you see | Cause and fix |
+|--------------|---------------|
+| LED turns white, then magenta after 20 seconds | The webhook did not run. Check that it is enabled and its event name is `pulsecheck` |
+| LED turns magenta right away | The request was rejected. Read the error on the webhook's page |
+| `Header name must be a valid HTTP token` | There is an HTTP header row with an empty name. The name is `x-goog-api-key`, the value is your key, and there are no blank rows |
+| Error 400 or `API_KEY_INVALID` | The API key is wrong or missing |
+| Error 400 "Unknown name" | Something other than the body file is in **JSON data**. Only the body goes there |
+| Error 404 | The model in the URL was retired. Use the current Flash-Lite model |
+| Error 429 | You used up your free quota. Wait a minute, or change the model in the URL for the rest of the day |
+
+- Note: after you change the webhook, press the button again to test it. You don't need to flash again
 
 ## Part 1: Your Job
 
