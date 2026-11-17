@@ -13,7 +13,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
   onGeminiReply() below shows it on the RGB LED.
 
   Wiring: RGB LED on SCL (red), MISO (green), MOSI (blue), each with a
-  330 Ohm resistor. Button on D5 with a 10k Ohm resistor.
+  330 Ohm resistor, long leg to GND. Button on D5 with a 10k Ohm resistor.
 
   Open the serial monitor to see Gemini's answer for each dataset:
     particle serial monitor --follow

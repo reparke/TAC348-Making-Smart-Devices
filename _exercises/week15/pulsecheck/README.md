@@ -19,10 +19,10 @@ Send 10 minutes of real Fitbit data to Google Gemini through a Particle webhook,
 | RGB LED red | SCL | 330 Ohm |
 | RGB LED green | MISO (MI on the board) | 330 Ohm |
 | RGB LED blue | MOSI (MO on the board) | 330 Ohm |
-| RGB LED common (long leg) | 3V3 | none |
+| RGB LED common (long leg) | GND | none |
 | Button | D5 | 10k Ohm |
 
-Same wiring as the RGB LED and button exercise. The button reads `LOW` when pressed.
+Same wiring as the RGB LED and button exercise. The button reads `LOW` when pressed. This is for a common cathode RGB LED. If yours is common anode, the long leg goes to 3V3 instead, and you set `COMMON_ANODE` to `true` at the top of `src/pulsecheck_setup.h`.
 
 ## 2. Get a Gemini API key
 
@@ -74,7 +74,7 @@ Open this folder in Particle Workbench, configure it for your Photon 2, and flas
   Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
   ```
 
-* Write Gemini's answer for each dataset on the handout, then check it against the answer key at the end of the [PulseCheck lecture](https://makingsmartdevices.com/lectures/week15/lecture_pulsecheck.html#check-your-answers).
+* Write Gemini's answer for each dataset on the handout. Your instructor goes over the answers at the end of each part.
 
 ## 6. Run Part 2
 
@@ -86,7 +86,7 @@ Open this folder in Particle Workbench, configure it for your Photon 2, and flas
    * `sleep`: `awake`, `asleep`, or `restless` for each minute
 3. Update your prompt in the Console (**Edit**, then **Extra settings > JSON data**) so Gemini knows what the four new signals mean.
 4. The safety rule is ready-made: in Part 2, `defaultSafetyRule()` checks METs instead of steps.
-5. Write Gemini's answers on the handout and check them against the answer key.
+5. Write Gemini's answers on the handout. Your instructor goes over the answers.
 
 | LED | Meaning |
 |-----|---------|
@@ -110,5 +110,6 @@ Open this folder in Particle Workbench, configure it for your Photon 2, and flas
 | Magenta right away, "Webhook error" | Gemini rejected the request. Open the webhook in the Console and read the latest error. |
 | Error 400 or `API_KEY_INVALID` | The `x-goog-api-key` header is missing or the key is wrong. A 400 "Unknown name" means something other than the body file was pasted into JSON data. |
 | Error 404 "no longer available" | The model in the URL was retired. Use `gemini-3.5-flash-lite`. |
+| LED is white when it should be off, or colors look wrong | Your RGB LED is the other kind. Change `COMMON_ANODE` at the top of `src/pulsecheck_setup.h` and move the long leg (GND for common cathode, 3V3 for common anode). |
 | LED breathing magenta, nothing runs | Safe mode: the firmware needs a newer Device OS. Run `particle update` with USB connected, then flash again. |
 | Nothing happens when you press the button | Check the button wiring on D5 and its 10k Ohm resistor. |

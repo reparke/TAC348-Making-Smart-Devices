@@ -8,7 +8,7 @@ const char* EVENT_NAME = "pulsecheck";
 
 /*
 1) PINS AND SETTINGS ==========================================
-  RGB LED: 330 Ohm resistor on each color
+  RGB LED: 330 Ohm resistor on each color, long leg to GND
   Button: 10k Ohm resistor (reads LOW when pressed)
   ===============================================================
 */
@@ -16,6 +16,13 @@ const int PIN_RED = SCL;
 const int PIN_GREEN = MISO;  // on board its MI
 const int PIN_BLUE = MOSI;   // on board its MO
 const int PIN_BUTTON = D5;
+
+/* Which kind of RGB LED you have:
+     false = common cathode: the long leg goes to GND
+     true  = common anode:   the long leg goes to 3V3
+   If the LED is white when it should be off, change this.
+*/
+const bool COMMON_ANODE = false;
 
 const unsigned long MIN_GAP_MS = 10000;          // at most one request every 10 s (free-tier quota)
 const unsigned long REPLY_TIMEOUT_MS = 20000;    // no reply after 20 s = error
@@ -133,11 +140,12 @@ bool waitingForReply = false;
 bool alertOn = false;
 bool ruleFired = false;
 
-// Common anode RGB LED: the long leg goes to 3V3, so LOW = on. Flip the values.
+// Common cathode (long leg to GND): HIGH = on. Common anode (long leg to 3V3): LOW = on,
+// so the values are flipped. Set COMMON_ANODE at the top of this file to match your LED.
 void changeLedColor(int r, int g, int b) {
-    analogWrite(PIN_RED, 255 - r);
-    analogWrite(PIN_GREEN, 255 - g);
-    analogWrite(PIN_BLUE, 255 - b);
+    analogWrite(PIN_RED, COMMON_ANODE ? 255 - r : r);
+    analogWrite(PIN_GREEN, COMMON_ANODE ? 255 - g : g);
+    analogWrite(PIN_BLUE, COMMON_ANODE ? 255 - b : b);
 }
 
 // Bad reply, webhook error, or timeout: magenta, or red if the safety rule fired.

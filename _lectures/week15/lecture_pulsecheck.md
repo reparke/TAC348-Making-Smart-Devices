@@ -21,7 +21,7 @@ title: PulseCheck - Smart Devices and AI
 - Two parts
   - **Part 1**: five mystery datasets with heart rate and steps
   - **Part 2**: three harder datasets with four more signals: calories, intensity, METs, and sleep
-- For each dataset, you write down what Gemini says, then check it against the answer key
+- For each dataset, you write down what Gemini says. Your instructor goes over the answers at the end of each part
 - Handout: [PulseCheck Student Handout](lecture_pulsecheck_handout.html)
 
 ## How It Works
@@ -57,10 +57,12 @@ set the RGB LED
 | RGB LED red | SCL | 330 Ohm |
 | RGB LED green | MISO (MI on the board) | 330 Ohm |
 | RGB LED blue | MOSI (MO on the board) | 330 Ohm |
-| RGB LED common (long leg) | 3V3 | none |
+| RGB LED common (long leg) | GND | none |
 | Button | D5 | 10k Ohm |
 
 - Same wiring as the RGB LED and button exercise
+- Note: this is for a common cathode RGB LED. If yours is common anode, the long leg goes to 3V3 instead, and you set `COMMON_ANODE` to `true` at the top of `pulsecheck_setup.h`
+  - If the LED is white when it should be off, you have the other kind
 - The button reads `LOW` when pressed
 
 ## The Data
@@ -98,7 +100,7 @@ Sending dataset A
 Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 ```
 
-- Write Gemini's answer for each dataset on the handout, then check it in [Check Your Answers](#check-your-answers)
+- Write Gemini's answer for each dataset on the handout. Your instructor goes over the answers at the end of each part
 - Tip: before you press the button, look at the table and make your own guess. The full numbers are in `data/fitbit_windows.csv`
 
 ## Gemini's Answer
@@ -289,24 +291,6 @@ hr_bpm=[62,62,...] steps_per_min=[0,0,...] calories_per_min=[0.9,0.9,...] intens
 - Limits are per Google project, so use a key from your own Google account
 - The daily limit resets at midnight Pacific time
 - Ran out (error 429)? Switch the webhook to another model. Each model has its own quota
-
-## Check Your Answers
-
-| Dataset | What it is | Correct `state` | Correct `alert` | Safety rule fires? |
-|---------|------------|-----------------|-----------------|--------------------|
-| A | walking | `walking` | `false` | no |
-| B | sleep | `sleep` | `false` | no |
-| C | heart rate spike at rest | `resting` | `true` | **yes** |
-| D | resting | `resting` | `false` | no |
-| E | workout (running) | `workout` | `false` | no |
-| F | heart rate spike while asleep | `sleep` | `true` | **yes** |
-| G | workout with no steps (like cycling) | `workout` | `false` | no |
-| H | heart rate spike while sitting awake | `resting` | `true` | **yes** |
-
-- Note: 42 bpm while asleep (B) is normal for a fit person
-- Note: C is a real resting window with 75 bpm added to the last 4 minutes, to make the spike obvious
-- F and H are real heart rate jumps with no movement. A spike like this can have a harmless cause, but a watch should still flag it
-- G is why METs matter: heart rate near 190 with zero steps looks like an emergency, until you see METs of 14
 
 ## Going Further
 

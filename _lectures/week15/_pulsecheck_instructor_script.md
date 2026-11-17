@@ -2,6 +2,8 @@
 
 A minute-by-minute script for teaching the [PulseCheck lecture](lecture_pulsecheck.md) with the [student handout](lecture_pulsecheck_handout.md).
 
+This file holds the answers. Its name starts with an underscore so that it is not published on the course website. The lecture page and the handout do not contain the answers.
+
 Each segment has four kinds of lines:
 
 - **Show**: what to put on the screen or hold up
@@ -27,7 +29,7 @@ Times are a guide. If you run late, the cut list is at the end.
 
 ## Before Class
 
-- [ ] Each kit has: common anode RGB LED, three 330 Ohm resistors, one 10k Ohm resistor, a push button, jumper wires
+- [ ] Each kit has: RGB LED (common cathode; see the note in Wiring if yours are common anode), three 330 Ohm resistors, one 10k Ohm resistor, a push button, jumper wires
 - [ ] Students have a Google account for their own Gemini API key (each key has its own free-tier quota)
 - [ ] Check that `gemini-3.5-flash-lite` still works. Google retires models. If it returns 404, use the newest Flash-Lite model and update the lecture
 - [ ] Flash `pulsecheck_final` on your own Photon 2. Press through A to E, then set `PART = 2` and press through F to H. Write down what Gemini answered, so you know what students will see
@@ -52,7 +54,7 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 **Ask:** "What could go wrong if a watch trusts the AI completely?"
 **Expect:** it misses a real emergency, or it raises a false alarm and scares someone. Either answer is good. Tell them they will see both today.
 
-**Say:** "There are two parts and a handout. The answer key is at the bottom of the lecture page. Don't scroll down to it until I say so."
+**Say:** "There are two parts and a handout. I'll go over the answers at the end of each part."
 
 **Students do:** find a partner, take one handout per pair.
 
@@ -88,10 +90,10 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 | RGB LED red | SCL | 330 Ohm |
 | RGB LED green | MISO (MI on the board) | 330 Ohm |
 | RGB LED blue | MOSI (MO on the board) | 330 Ohm |
-| RGB LED common (long leg) | 3V3 | none |
+| RGB LED common (long leg) | GND | none |
 | Button | D5 | 10k Ohm |
 
-**Say:** "This is the same RGB LED and button wiring you've done before. Two things to watch. First, this LED is common anode, so the long leg goes to 3V3, not ground. Second, the button: the 10k resistor goes from D5 to 3V3, and the button connects D5 to ground. Use two legs that are diagonal from each other."
+**Say:** "This is the same RGB LED and button wiring you've done before. Two things to watch. First, the LED's long leg goes to ground. Second, the button: the 10k resistor goes from D5 to 3V3, and the button connects D5 to ground. Use two legs that are diagonal from each other."
 
 **Ask:** "How do you tell a 330 Ohm resistor from a 10k?"
 **Expect:** the color bands. 330 is orange, orange, brown. 10k is brown, black, orange. (Or measure with a multimeter.)
@@ -103,7 +105,7 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 
 | If you see | It means |
 |------------|----------|
-| Colors inverted after flashing (white when it should be off) | The LED is common cathode, or the long leg is on ground |
+| LED stays dark, or is white when it should be off | The LED is the other kind (common anode). Move the long leg to 3V3 and set `COMMON_ANODE` to `true` in `pulsecheck_setup.h` |
 | One color never lights | That leg's resistor or wire is in the wrong row |
 
 ## 4. Starter Code (0:25 to 0:32)
@@ -236,7 +238,7 @@ hr_bpm=[70,68,66,68,65,68,144,143,143,138] steps_per_min=[0,0,0,0,0,0,0,0,0,0]
 
 ## 8. Check Part 1 (1:05 to 1:08)
 
-**Show:** scroll to **Check Your Answers**, rows A to E only.
+**Show:** the answers for A to E. They are not on the lecture page, so put this table on the projector.
 
 | Dataset | What it is | `state` | `alert` | Safety rule fires? |
 |---------|------------|---------|---------|--------------------|
@@ -298,7 +300,7 @@ What to expect (confirm against your own run before class):
 
 ## 10. Check Part 2 (1:23 to 1:26)
 
-**Show:** **Check Your Answers**, rows F to H.
+**Show:** the answers for F to H. They are not on the lecture page, so put this table on the projector.
 
 | Dataset | What it is | `state` | `alert` | Safety rule fires? |
 |---------|------------|---------|---------|--------------------|
@@ -344,3 +346,30 @@ What to expect (confirm against your own run before class):
 | H | heart rate spike while sitting awake | resting | true | yes |
 
 Data: Furberg, R., Brinton, J., Keating, M., & Ortiz, A. (2016). *Crowd-sourced Fitbit datasets 03.12.2016-05.12.2016*. Zenodo. [doi.org/10.5281/zenodo.53894](https://doi.org/10.5281/zenodo.53894) (CC BY 4.0)
+
+## Handout Answers
+
+| Where | Answer |
+|-------|--------|
+| Plan Your Prompt | e.g. Role: You are the analysis engine for a fitness tracker. Input: heart rate in beats per minute and steps per minute, one value per minute. Choices: exactly one of sleep, resting, walking, workout. Rules: alert only if the heart rate is concerning for the activity. Output: msg is a friendly note of at most 40 characters. |
+| Create the Webhook: if the LED turns magenta | White then magenta after 20 s: no webhook, or its event name is not pulsecheck. Magenta right away: Gemini rejected the request, so open the webhook in the console and read the error (400 = key header or body, 404 = model name, 429 = quota) |
+| Part 1 table | A walking false / B sleep false / C resting true (safety rule fires) / D resting false / E workout false |
+| Question 3 | C |
+| Question 4 | Most often C: a high heart rate looks like a workout unless the prompt says to decide from steps first. B vs D can also be mixed up: both have zero steps |
+| Question 5 | e.g. "Decide the state from the steps first: if steps stay near zero, the state is resting or sleep..." |
+| Question 6 | 1562 / 10 = 156.2 bpm; Often close but not exact: language models are not reliable at math |
+| Question 7 | sitting still; very hard exercise; very active |
+| Question 8 | a dangerous heart rate spike at rest: about 190 bpm with no steps; 10 to 19 calories a minute, intensity 3, and METs of 9 to 14 all mean hard exercise, like cycling, so it's a workout |
+| Part 2 table | F sleep true (safety rule fires) / G workout false / H resting true (safety rule fires) |
+| Question 10 | e.g. "calories_per_min is about 1 at rest. intensity is 0 sedentary to 3 very active. mets is energy use: 1.0 is still, 3+ is exercise even with zero steps. sleep says asleep, restless, or awake each minute; if mostly asleep, the state is sleep." |
+| Question 11 | Steps miss exercise like cycling or rowing. A rule based on steps could raise a false alarm during a bike ride; METs show the body is working |
+| Question 12 | C, F, H |
+| Question 13 | No. A better prompt makes the right answer more likely but is not a guarantee. Let the model interpret the data; keep safety checks in plain code you can test |
+| Question 14 | e.g. heart rate variability, skin temperature, blood oxygen, breathing rate, time of day (would help tell B sleep from D resting) |
+
+Notes on the datasets:
+
+- B: 42 bpm while asleep is normal for a fit person
+- C is a real resting window with 75 bpm added to the last 4 minutes, to make the spike obvious. The other seven are unedited
+- F and H are real heart rate jumps with no movement. A spike like this can have a harmless cause, but a watch should still flag it
+- G is why METs matter: heart rate near 190 with zero steps looks like an emergency, until you see METs of 14

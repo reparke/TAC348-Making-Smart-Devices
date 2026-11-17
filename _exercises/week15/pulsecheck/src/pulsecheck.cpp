@@ -13,7 +13,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
   handles timeouts. You only change PART at the top, for Part 2.
 
   Wiring: RGB LED on SCL (red), MISO (green), MOSI (blue), each with a
-  330 Ohm resistor. Button on D5 with a 10k Ohm resistor.
+  330 Ohm resistor, long leg to GND. Button on D5 with a 10k Ohm resistor.
 
   Your job: complete TODO 1 below. TODO 2 is optional.
 
