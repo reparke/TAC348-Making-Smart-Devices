@@ -230,6 +230,9 @@ void pulsecheck_setup() {
     changeLedColor(0, 0, 0);  // off at boot
     pinMode(PIN_BUTTON, INPUT);
     Particle.subscribe(String("hook-response/") + EVENT_NAME, onWebhookReply);
+    // Also matches when "Only the device that triggers the webhook should receive
+    // its response" is checked: the reply is then named <device id>/hook-response/...
+    Particle.subscribe(System.deviceID() + "/hook-response/" + EVENT_NAME, onWebhookReply);
     Particle.subscribe(String("hook-error/") + EVENT_NAME, onWebhookError);
 }
 
