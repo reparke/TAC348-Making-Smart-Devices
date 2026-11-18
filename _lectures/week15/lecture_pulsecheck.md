@@ -18,6 +18,11 @@ title: PulseCheck - Smart Devices and AI
   - Press the button to send 10 minutes of real Fitbit heart rate and step data to **Google Gemini**
   - Gemini decides what the wearer is doing and whether anything looks wrong
   - The Photon 2 shows the answer on an RGB LED
+- Two parts
+  - **Part 1**: five mystery datasets with heart rate and steps
+  - **Part 2**: three harder datasets with four more signals: calories, intensity, METs, and sleep
+- For each dataset, you write down what Gemini says. Your instructor goes over the answers at the end of each part
+- Handout: [PulseCheck Student Handout](lecture_pulsecheck_handout.html)
 
 ## How It Works
 
@@ -52,9 +57,12 @@ set the RGB LED
 | RGB LED red | SCL | 330 Ohm |
 | RGB LED green | MISO (MI on the board) | 330 Ohm |
 | RGB LED blue | MOSI (MO on the board) | 330 Ohm |
+| RGB LED common (long leg) | GND | none |
 | Button | D5 | 10k Ohm |
 
 - Same wiring as the RGB LED and button exercise
+- Note: this is for a common cathode RGB LED. If yours is common anode, the long leg goes to 3V3 instead, and you set `COMMON_ANODE` to `true` at the top of `pulsecheck_setup.h`
+  - If the LED is white when it should be off, you have the other kind
 - The button reads `LOW` when pressed
 
 ## The Data
@@ -70,34 +78,30 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
 
 - Note: no double quotes in the data, or it breaks the webhook's JSON
 
-## Five Windows
+## Part 1: Five Mystery Datasets
 
-- Each button press sends the next window
+- Each button press sends the next dataset: **A**, **B**, **C**, **D**, **E**, then back to A
+- Each one is 10 minutes of a real person: resting, walking, a workout, sleep, or something concerning
+  - We don't tell you which is which
 
-| # | Window | Heart rate (bpm) | Steps per minute |
-|---|--------|------------------|------------------|
-| 1 | resting | 70 to 75 | 0 |
-| 2 | walking | 96 to 104 | 88 to 104 |
-| 3 | workout | 153 to 160 | 166 to 174 |
-| 4 | sleep | 42 to 43 | 0 |
-| 5 | anomaly | 63 to 70, then 138 to 144 for the last 4 minutes | 0 |
+| Dataset | Heart rate (bpm) | Steps per minute |
+|---------|------------------|------------------|
+| A | 96 to 104 | 88 to 104 |
+| B | 42 to 43 | 0 |
+| C | 63 to 70, then 138 to 144 for the last 4 minutes | 0 |
+| D | 70 to 75 | 0 |
+| E | 153 to 160 | 166 to 174 |
 
-- The window name is **not** sent to Gemini
-- The serial monitor prints it next to Gemini's answer, so you can grade the model
-- Note: the dataset has no real emergencies, so the anomaly is a real resting window with 75 bpm added to the last 4 minutes
+- Only the numbers are sent to Gemini, never the letter
+- The serial monitor prints the letter next to Gemini's answer
 
-## Answer Key
+```
+Sending dataset A
+Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
+```
 
-| # | Window | Correct `state` | Correct `alert` | Safety rule fires? |
-|---|--------|-----------------|-----------------|--------------------|
-| 1 | resting | `resting` | `false` | no |
-| 2 | walking | `walking` | `false` | no |
-| 3 | workout | `workout` | `false` | no |
-| 4 | sleep | `sleep` | `false` | no |
-| 5 | anomaly | `resting` | `true` | **yes** |
-
-- Note: 42 bpm while asleep is normal for a fit person
-- In our tests, Gemini 3.5 Flash-Lite matched this key on all five windows, three times each
+- Write Gemini's answer for each dataset on the handout. Your instructor goes over the answers at the end of each part
+- Tip: before you press the button, look at the table and make your own guess. The full numbers are in `data/fitbit_windows.csv`
 
 ## Gemini's Answer
 
@@ -122,16 +126,145 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
 - Unzip it and open the `pulsecheck_start` folder in Particle Workbench
   - `src/pulsecheck.cpp`: your code
   - `src/pulsecheck_setup.h`: the plumbing
-  - `pulsecheck_webhook_starter.json`: the webhook template
-  - `README.md`: step-by-step setup and the answer key
+  - `src/fitbit_data.h`: the Fitbit numbers, compiled into the firmware
+  - `data/fitbit_windows.csv`: the same numbers as a spreadsheet, for you to look at
+  - `pulsecheck_webhook_body_starter.json`: the JSON body for your webhook, with two blanks
+  - `README.md`: step-by-step setup
 
-## Your Job
+## Writing Your Prompt
 
-- `pulsecheck_setup.h` does the plumbing: the Fitbit data, the button, publishing, reading the reply, timeouts
-  - You only change `EVENT_NAME` at the top
+- The prompt is the instructions Gemini reads before it sees the data
+  - It goes in the `TODO PROMPT` blank of `pulsecheck_webhook_body_starter.json`
+  - Review: [Prompt Engineering for IoT](/lectures/weekX/lecture_particle_gemini_integration.html#prompt-engineering-for-iot)
+- Gemini only knows what you tell it. A good prompt answers five questions
+
+| Part | Question it answers | Example |
+|------|---------------------|---------|
+| Role | Who is Gemini in this job? | You are the analysis engine for a fitness tracker |
+| Input | What is the data, and in what units? | Two lists, one value per minute: heart rate in beats per minute and steps per minute |
+| Choices | What answers are allowed? | Classify the activity as exactly one of: sleep, resting, walking, workout |
+| Rules | How should it decide, and when is it an alert? | Set alert to true only if the heart rate pattern is concerning for that activity |
+| Output | What should the reply look like? | Write msg as a friendly note of at most 40 characters |
+
+- Compare
+
+> Tell me what this person is doing.
+
+> You are the analysis engine for a fitness tracker. You receive heart rate in beats per minute and steps per minute, one value per minute. Classify the activity as exactly one of: sleep, resting, walking, workout. ...
+
+- The first one leaves Gemini guessing: what do the numbers mean? what words can it answer with?
+- Tips
+  - Be specific: say "beats per minute", not "the numbers"
+  - Use the same words as your code: if the firmware checks for `"resting"`, the prompt must say `resting`
+  - Don't put double quotes inside the prompt, or it breaks the webhook's JSON
+- Prompts are written like code: **test, find the mistake, change one thing, test again**
+  - If Gemini gets a dataset wrong, ask what it didn't know, and add one sentence that tells it
+  - Change one sentence at a time, so you know what fixed it
+
+## Creating the Webhook
+
+- Same steps as [Particle + Gemini Integration](/lectures/weekX/lecture_particle_gemini_integration.html)
+- Open `pulsecheck_webhook_body_starter.json`. This is the JSON the webhook sends to Gemini
+
+```json
+{% raw %}{
+  "systemInstruction": {
+    "parts": [
+      {
+        "text": "TODO PROMPT: write the prompt. Tell Gemini what data it receives, which states to choose from, when to set alert, and how to write msg (at most 40 characters)."
+      }
+    ]
+  },
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        { "text": "{{{PARTICLE_EVENT_VALUE}}}" }
+      ]
+    }
+  ],
+  "generationConfig": {
+    "temperature": 0.2,
+    "thinkingConfig": { "thinkingLevel": "minimal" },
+    "responseMimeType": "application/json",
+    "responseSchema": {
+      "type": "OBJECT",
+      "properties": {
+        "state": { "type": "STRING", "enum": ["TODO STATES: list the four states the firmware understands"] },
+        "alert": { "type": "BOOLEAN" },
+        "msg":   { "type": "STRING" }
+      },
+      "required": ["state", "alert", "msg"]
+    }
+  }
+}{% endraw %}
+```
+
+- Fill in the two blanks
+  - `TODO PROMPT`: your prompt, on one line, with no double quotes inside it
+  - `TODO STATES`: `"sleep", "resting", "walking", "workout"`
+- Leave the rest as it is
+  - `systemInstruction`: the prompt Gemini reads before the data
+  - `contents`: the data from your Photon 2
+  - `responseSchema`: forces Gemini to answer with exactly `state`, `alert`, and `msg`
+- In the [Particle console](https://console.particle.io/), go to **Cloud services > Integrations > Add new integration** and choose **Custom Webhook**
+
+<img src="lecture_pulsecheck.assets/webhook-1-custom-webhook.png" alt="Choosing Custom Webhook in the Particle console" style="width:600px;" />
+
+- Stay on the **Webhook Builder** tab and use the following settings
+  - **Name**: `PulseCheck`
+  - **Event name**: `pulsecheck`
+  - **URL**: `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent`
+  - **Request type**: `POST`
+  - **Request format**: `JSON`
+  - Leave "Only the device that triggers the webhook should receive its response" unchecked
+
+<img src="lecture_pulsecheck.assets/webhook-2-builder.png" alt="Webhook Builder settings for PulseCheck" style="width:700px;" />
+
+- Go to **Extra settings**
+  - Under **JSON data**, choose **Custom**, delete what is there, and paste your whole body file
+
+<img src="lecture_pulsecheck.assets/webhook-3-json-data.png" alt="Custom JSON data in Extra settings" style="width:700px;" />
+
+  - Under **HTTP headers**, add
+    - **Key**: `x-goog-api-key`
+    - **Value**: your Gemini API key
+  - Under **Response template**, add
+
+```
+{% raw %}{{#candidates}}{{#content}}{{#parts}}{{{text}}}{{/parts}}{{/content}}{{/candidates}}{% endraw %}
+```
+
+- Click **Enable integration**
+- Note: in the body, `{% raw %}{{{PARTICLE_EVENT_VALUE}}}{% endraw %}` is where Particle puts the data your Photon 2 published
+- Note: the response template pulls just Gemini's answer out of its reply, so the Photon 2 receives only `{"state", "alert", "msg"}`
+- To change your prompt later, open the webhook, click **Edit**, and change it under **Extra settings > JSON data**
+
+## Webhook Troubleshooting
+
+- To see what went wrong, open your webhook in the Particle console and look at its most recent error
+
+| What you see | Cause and fix |
+|--------------|---------------|
+| LED turns white, then magenta after 20 seconds | The webhook did not run. Check that it is enabled and its event name is `pulsecheck` |
+| LED turns magenta right away | The request was rejected. Read the error on the webhook's page |
+| `Header name must be a valid HTTP token` | There is an HTTP header row with an empty name. The name is `x-goog-api-key`, the value is your key, and there are no blank rows |
+| Error 400 or `API_KEY_INVALID` | The API key is wrong or missing |
+| Error 400 "Unknown name" | Something other than the body file is in **JSON data**. Only the body goes there |
+| Error 404 | The model in the URL was retired. Use the current Flash-Lite model |
+| Error 429 | You used up your free quota. Wait a minute, or change the model in the URL for the rest of the day |
+
+- Note: after you change the webhook, press the button again to test it. You don't need to flash again
+
+## Part 1: Your Job
+
+- `pulsecheck_setup.h` does the plumbing: the button, publishing, reading the reply, timeouts
+  - You don't need to change it for Part 1
+- Write your prompt using the five parts above, and create the webhook
 - In `pulsecheck.cpp`:
   - **TODO 1**: show Gemini's answer on the RGB LED in `onGeminiReply()` with `changeLedColor(r, g, b)`
   - **TODO 2** (optional): write your own `safetyRule()`
+- Run datasets A to E and fill in Part 1 of the handout
 
 ## When Gemini Gets It Wrong
 
@@ -160,6 +293,46 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
 - `defaultSafetyRule()` in `pulsecheck_setup.h` is a ready-made version
 - Let the model interpret the data. Keep safety checks in code you can test
 
+## Part 2: More Signals
+
+- Heart rate and steps alone can't tell everything apart
+  - Lying awake and sleeping look the same
+  - Cycling or rowing has a high heart rate but almost no steps, so it looks like a spike at rest
+- Real watches send more. Part 2 adds four signals from the same Fitbit dataset, for six in total
+
+| Signal | What it means | Example |
+|--------|---------------|---------|
+| <code style="white-space:nowrap">calories_per_min</code> | Calories burned each minute. About 1 at rest, 10 or more in hard exercise | <code style="white-space:nowrap">[12.4,12.4,10.5,...]</code> |
+| <code style="white-space:nowrap">intensity</code> | Fitbit's activity level: 0 sedentary, 1 light, 2 moderate, 3 very active | <code style="white-space:nowrap">[3,3,3,...]</code> |
+| <code style="white-space:nowrap">mets</code> | Energy use compared to rest. 1.0 = sitting still, 3+ = exercise, even with no steps | <code style="white-space:nowrap">[9.0,9.0,7.6,...]</code> |
+| <code style="white-space:nowrap">sleep</code> | Fitbit's sleep tracking for each minute: awake, asleep, or restless | <code style="white-space:nowrap">[asleep,asleep,...]</code> |
+
+- Note: Fitbit works out calories, intensity, and METs from its motion sensor, so they tend to move together. Sleep comes from its sleep tracking
+- Three new datasets: **F**, **G**, **H**
+  - All three have zero steps the whole time
+  - All three are real, unedited Fitbit data
+
+| Dataset | Heart rate (bpm) | Steps | Calories per minute | Intensity | METs | Sleep |
+|---------|------------------|-------|---------------------|-----------|------|-------|
+| F | 60 to 63, then 96 to 97 for the last 3 minutes | 0 | 0.9 to 1.1 | 0 | 1.0 to 1.2 | asleep |
+| G | 132 to 191 | 0 | 10.5 to 19.3 | 3 | 7.6 to 14.0 | awake |
+| H | 65 to 74, then 90 to 100 for the last 4 minutes | 0 | 1.0 to 1.3 | 0 | 1.0 to 1.2 | awake |
+
+```
+hr_bpm=[62,62,...] steps_per_min=[0,0,...] calories_per_min=[0.9,0.9,...] intensity=[0,0,...] mets=[1.0,1.0,...] sleep=[asleep,asleep,...] interval=1min
+```
+
+## Part 2: Your Job
+
+- Set `PART` to `2` at the top of `pulsecheck_setup.h` and flash
+- Update your prompt so Gemini knows what the four new signals mean
+  - Without it, Gemini has to guess what the new numbers are
+- The safety rule is ready-made: `defaultSafetyRule()` switches to METs in Part 2
+  - Part 1: still = steps under 10 per minute
+  - Part 2: still = METs at 1.5 or below
+  - Steps miss exercise like cycling. METs do not
+- Run datasets F to H and fill in Part 2 of the handout
+
 ## Free Tier Limits
 
 <img src="lecture_pulsecheck.assets/gemini-free-tier-limits.webp" alt="Gemini API rate limit page in Google AI Studio, free tier" style="width:700px;" />
@@ -177,9 +350,8 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
 
 ## Going Further
 
-- **More signals**: real rings also track heart rate variability, skin temperature, blood oxygen, breathing, and sleep stages
-  - Adding these did not stop Gemini from missing the anomaly. The safety rule still caught it
+- **Even more signals**: real rings also track heart rate variability, skin temperature, blood oxygen, and breathing
+  - In our tests with these, Gemini still missed some spikes at rest. The safety rule still caught them
 - **More Fitbit data**: test more windows from the same dataset
-  - Gemini mixes up lying awake and sleeping, since heart rate and steps alone can't tell them apart
 - **Real sensors**: replace the Fitbit data with readings from your smart watch build
 - Note: PulseCheck is not a medical device. Do not send real personal health data to the free tier
