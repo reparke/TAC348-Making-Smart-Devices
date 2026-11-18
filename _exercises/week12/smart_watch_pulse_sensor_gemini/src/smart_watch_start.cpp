@@ -27,6 +27,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 //////////////////////////////////
 #define ARDUINOJSON_ENABLE_ARDUINO_STRING 1
 #include <ArduinoJson.h>
+#include "json_webhook_response_helper.h"
 
 //////////////////////////////////
 // Pulse Sensor                 //
@@ -312,31 +313,12 @@ void PulseSensorAmped_lost(void) {}
 
 // step 3: create the myHandler function
 void myHandler(const char* event, const char* data) {
-    static String jsonBuffer;
+    JsonDocument doc;
+    String fullJson = json_webhook_response_helper(event, data);
 
-    // two "const char *" params
-    // for us, treat these like strings
-    // the DATA param includes the entire json response
-    // Serial.println(String(data));
-
-    // these 5 lines are from the library and they convert the
-    //  JSON string back into an object we manipulate in code
-
-    int responseIndex = 0;
-    const char* slashOffset = strrchr(event, '/');
-    if (slashOffset) responseIndex = atoi(slashOffset + 1);
-    if (responseIndex == 0) jsonBuffer = "";
-    jsonBuffer += data;
-
-    // Part 2 is where you can parse the actual data; you code goes in the
-    // IF
-
-    // Test to see if was successful
-
-    DynamicJsonDocument doc(12288);
-    DeserializationError error = deserializeJson(doc, jsonBuffer);
+    DeserializationError error = deserializeJson(doc, fullJson);
     if (!error) {
-        Serial.println(String(jsonBuffer));
+        Serial.println(fullJson);
         Serial.println();
         temperature = doc["current"]["temperature_2m"];
         weatherCode = doc["current"]["weather_code"];
@@ -365,19 +347,13 @@ void myHandler(const char* event, const char* data) {
 {{candidates.0.content.parts.0.text}}
 */
 void myHandlerGemini(const char* event, const char* data) {
-    static String jsonBuffer;
+    JsonDocument doc;
+    String fullJson = json_webhook_response_helper<1>(event, data);
 
-    int responseIndex = 0;
-    const char* slashOffset = strrchr(event, '/');
-    if (slashOffset) responseIndex = atoi(slashOffset + 1);
-    if (responseIndex == 0) jsonBuffer = "";
-    jsonBuffer += data;
-
-    DynamicJsonDocument doc(12288);
-    DeserializationError error = deserializeJson(doc, jsonBuffer);
+    DeserializationError error = deserializeJson(doc, fullJson);
     if (!error) {
         // {{candidates.0.content.parts.0.text}}
-        Serial.println(String(jsonBuffer));
+        Serial.println(fullJson);
         description =
             doc["candidates"][0]["content"]["parts"][0]["text"].as<String>();
         Serial.println();
