@@ -309,7 +309,7 @@ void PulseSensorAmped_lost(void) {}
 
 void myHandlerSunrise(const char *event, const char *data) {
     JsonDocument doc;
-    String fullJson = json_webhook_response_helper<1>(event, data);
+    String fullJson = json_webhook_response_helper(event, data);
     if (fullJson.length() == 0) return;  // Wait for the complete response
 
     DeserializationError error = deserializeJson(doc, fullJson);
