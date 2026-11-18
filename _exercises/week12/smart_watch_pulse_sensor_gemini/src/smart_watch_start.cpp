@@ -348,7 +348,7 @@ void myHandler(const char* event, const char* data) {
 */
 void myHandlerGemini(const char* event, const char* data) {
     JsonDocument doc;
-    String fullJson = json_webhook_response_helper<1>(event, data);
+    String fullJson = json_webhook_response_helper(event, data);
 
     DeserializationError error = deserializeJson(doc, fullJson);
     if (!error) {
