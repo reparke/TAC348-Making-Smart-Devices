@@ -27,6 +27,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 //////////////////////////////////
 #define ARDUINOJSON_ENABLE_ARDUINO_STRING 1
 #include <ArduinoJson.h>
+#include "json_webhook_response_helper.h"
 #include <PulseSensorAmped.h>
 // const int pulseSignalPin = A4;
 /* CHANGE */
@@ -307,9 +308,11 @@ void PulseSensorAmped_data(int BPM, int IBI) {
 void PulseSensorAmped_lost(void) {}
 
 void myHandlerSunrise(const char *event, const char *data) {
-    // declare object to store JSON response
-    StaticJsonDocument<1024> doc;
-    DeserializationError error = deserializeJson(doc, data);
+    JsonDocument doc;
+    String fullJson = json_webhook_response_helper<1>(event, data);
+    if (fullJson.length() == 0) return;  // Wait for the complete response
+
+    DeserializationError error = deserializeJson(doc, fullJson);
 
     // Test to see if was successful
     if (error) {
@@ -334,9 +337,11 @@ void myHandlerSunrise(const char *event, const char *data) {
 }
 
 void myHandler(const char *event, const char *data) {
-    // declare object to store JSON response
-    StaticJsonDocument<1024> doc;
-    DeserializationError error = deserializeJson(doc, data);
+    JsonDocument doc;
+    String fullJson = json_webhook_response_helper(event, data);
+    if (fullJson.length() == 0) return;  // Wait for the complete response
+
+    DeserializationError error = deserializeJson(doc, fullJson);
 
     // Test to see if was successful
     if (error) {

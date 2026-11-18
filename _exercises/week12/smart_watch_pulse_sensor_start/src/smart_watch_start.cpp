@@ -27,6 +27,7 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 //////////////////////////////////
 #define ARDUINOJSON_ENABLE_ARDUINO_STRING 1
 #include <ArduinoJson.h>
+#include "json_webhook_response_helper.h"
 
 //////////////////////////////////
 // Pulse Sensor                 //
