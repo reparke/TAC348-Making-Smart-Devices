@@ -22,7 +22,6 @@ title: PulseCheck - Smart Devices and AI
   - **Part 1**: five mystery datasets with heart rate and steps
   - **Part 2**: three harder datasets with four more signals: calories, intensity, METs, and sleep
 - For each dataset, you write down what Gemini says. Your instructor goes over the answers at the end of each part
-- Handout: [PulseCheck Student Handout](lecture_pulsecheck_handout.html)
 
 ## How It Works
 
@@ -100,7 +99,7 @@ Sending dataset A
 Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 ```
 
-- Write Gemini's answer for each dataset on the handout. Your instructor goes over the answers at the end of each part
+- Write down Gemini's `state` and `alert` for each dataset. Your instructor goes over the answers at the end of each part
 - Tip: before you press the button, look at the table and make your own guess. The full numbers are in `data/fitbit_windows.csv`
 
 ## Gemini's Answer
@@ -114,18 +113,20 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 - `state`: one of `sleep`, `resting`, `walking`, `workout`
 - `alert`: true when something looks concerning
 - `msg`: a short note for a small watch screen
-- The Photon 2 still checks every reply. Anything unexpected turns the LED magenta
+- This answer arrives wrapped inside Gemini's full reply. Your code unpacks both on the Photon 2
+- Check what you get. A state your code does not know should turn the LED magenta
   - Never trust the model's output blindly
 - Review
   - [JSON Overview](/lectures/week11/lecture_json_overview.html)
-  - [Retrieving Data from APIs using Mustache Templates](/lectures/week11/lecture_retrieving_data_mustache_templates.html): the webhook's `responseTemplate` pulls Gemini's answer out of its reply the same way
+  - [Retrieving Data from APIs using Mustache Templates](/lectures/week11/lecture_retrieving_data_mustache_templates.html): in week 11 a response template trimmed the reply before it reached the Photon 2. Here there is no template: your code deals with Gemini's whole reply
 
 ## Starter Code
 
 - Download the [starter code](/resources/pulsecheck/pulsecheck_start.zip) directly
 - Unzip it and open the `pulsecheck_start` folder in Particle Workbench
   - `src/pulsecheck.cpp`: your code
-  - `src/pulsecheck_setup.h`: the plumbing
+  - `src/pulsecheck_setup.h`: the button, the LED, and loading the Fitbit data
+  - `src/json_webhook_response_helper.h`: joins a webhook reply that arrives in pieces, the same file as the weather exercises
   - `src/fitbit_data.h`: the Fitbit numbers, compiled into the firmware
   - `data/fitbit_windows.csv`: the same numbers as a spreadsheet, for you to look at
   - `pulsecheck_webhook_body_starter.json`: the JSON body for your webhook, with two blanks
@@ -217,7 +218,7 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
   - **URL**: `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent`
   - **Request type**: `POST`
   - **Request format**: `JSON`
-  - Leave "Only the device that triggers the webhook should receive its response" unchecked
+  - "Only the device that triggers the webhook should receive its response": either setting works. Your code listens for both kinds of reply
 
 <img src="lecture_pulsecheck.assets/webhook-2-builder.png" alt="Webhook Builder settings for PulseCheck" style="width:700px;" />
 
@@ -229,15 +230,11 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
   - Under **HTTP headers**, add
     - **Key**: `x-goog-api-key`
     - **Value**: your Gemini API key
-  - Under **Response template**, add
-
-```
-{% raw %}{{#candidates}}{{#content}}{{#parts}}{{{text}}}{{/parts}}{{/content}}{{/candidates}}{% endraw %}
-```
+  - Leave **Response template** empty
 
 - Click **Enable integration**
 - Note: in the body, `{% raw %}{{{PARTICLE_EVENT_VALUE}}}{% endraw %}` is where Particle puts the data your Photon 2 published
-- Note: the response template pulls just Gemini's answer out of its reply, so the Photon 2 receives only `{"state", "alert", "msg"}`
+- Note: with no response template, the Photon 2 receives Gemini's whole reply. Your code finds the answer inside it
 - To change your prompt later, open the webhook, click **Edit**, and change it under **Extra settings > JSON data**
 
 ## Webhook Troubleshooting
@@ -246,7 +243,8 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 
 | What you see | Cause and fix |
 |--------------|---------------|
-| LED turns white, then magenta after 20 seconds | The webhook did not run. Check that it is enabled and its event name is `pulsecheck` |
+| LED turns white, then magenta after 20 seconds | No reply reached your code. Check that the webhook is enabled and its event name is `pulsecheck`, that you finished TODO 1 with both subscribe lines, and that the name in them matches the event name |
+| LED turns white, then stays off or stays white | The reply arrived but TODO 2 or TODO 3 is not finished. Look at the serial monitor: an empty `state=` means the JSON was not unpacked |
 | LED turns magenta right away | The request was rejected. Read the error on the webhook's page |
 | `Header name must be a valid HTTP token` | There is an HTTP header row with an empty name. The name is `x-goog-api-key`, the value is your key, and there are no blank rows |
 | Error 400 or `API_KEY_INVALID` | The API key is wrong or missing |
@@ -256,15 +254,94 @@ Dataset A | Gemini: state=walking alert=0 msg="Steady walk, avg 100 bpm"
 
 - Note: after you change the webhook, press the button again to test it. You don't need to flash again
 
+## Reading Gemini's Reply
+
+- This is the same pattern as the weather exercises
+  - Review: [Retrieving Data from an API](/lectures/week11/lecture_retrieving_data_from_api.html) and [JSON Parsing with ArduinoJson](/lectures/week11/lecture_json_parsing_with_arduinojson.html)
+- **Step 1**: subscribe to the webhook's reply in `setup()`
+
+```c++
+Particle.subscribe("hook-response/pulsecheck", onWebhookReply, MY_DEVICES);
+Particle.subscribe(System.deviceID() + "/hook-response/pulsecheck", onWebhookReply, MY_DEVICES);
+```
+
+- The first line is the same as the weather exercises
+- The second line is for webhooks that put the device ID in front of the reply's name, for example `0a10aced.../hook-response/pulsecheck/0`
+  - `Particle.subscribe()` matches the start of a name, so the first line alone would miss those replies
+  - To see which name your webhook uses, watch the **Events** tab in the Particle Console when you press the button
+
+- **Step 2**: the event handler receives the reply in `data`
+
+```c++
+void onWebhookReply(const char* event, const char* data) {
+    // A long reply arrives in pieces. This returns "" until all of it is here.
+    String fullJson = json_webhook_response_helper(event, data);
+    if (fullJson == "") return;
+    if (!geminiGotReply()) return;               // stops the timeout; ignores late replies
+
+    // your code: unpack the reply, then set the LED
+}
+```
+
+- **Step 3**: look at what arrived. `fullJson` is Gemini's whole reply, not just your three values
+
+```json
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "{\"state\": \"workout\", \"alert\": false, \"msg\": \"Great pace!\"}",
+            "thoughtSignature": "EnsKeQFpFH0T..."
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP"
+    }
+  ],
+  "usageMetadata": { "promptTokenCount": 412, "candidatesTokenCount": 21 },
+  "modelVersion": "gemini-3.5-flash-lite"
+}
+```
+
+- Your answer is the `text`, four levels down: `candidates`, the first item, `content`, `parts`, the first item, `text`
+- Ignore the rest: `thoughtSignature` is a long code Gemini adds for its own use, and `usageMetadata` counts tokens
+- That text is itself JSON, stored as a string. That is why its quotes have a `\` in front
+- So you unpack **twice**
+- **Step 4**: unpack the reply with `ArduinoJson` and take out the text
+  - Create a `JsonDocument` and `deserializeJson()` `fullJson` into it
+  - Check the `DeserializationError` it returns before you read anything
+  - Follow the path down to the text. You wrote this same line in the week 12 smart watch exercise, where the text was a sentence
+
+```c++
+String answerText = doc["candidates"][0]["content"]["parts"][0]["text"].as<String>();
+```
+
+- **Step 5**: unpack the text the same way, into a second `JsonDocument`, and read your three values from it
+
+```c++
+state = answer["state"].as<String>();
+```
+
+- A reply this size often arrives in two or more pieces. `json_webhook_response_helper()` joins them, which is why you unpack `fullJson` and not `data`
+- Note: `geminiGotReply()` comes from the `GeminiWebhook` library. It tells the library that the answer arrived, so the 20 second timeout stops
+
 ## Part 1: Your Job
 
-- `pulsecheck_setup.h` does the plumbing: the button, publishing, reading the reply, timeouts
-  - You don't need to change it for Part 1
+- `pulsecheck_setup.h` and the `GeminiWebhook` library handle the button, the Fitbit data, sending, and timeouts
+  - You don't need to change them for Part 1
 - Write your prompt using the five parts above, and create the webhook
+- Install two libraries in Workbench with **Particle: Install Library**. The starter does not come with them
+  - `ArduinoJson`: unpacks JSON
+  - `GeminiWebhook`: sending, waiting, and timeouts. You can install it in any project
 - In `pulsecheck.cpp`:
-  - **TODO 1**: show Gemini's answer on the RGB LED in `onGeminiReply()` with `changeLedColor(r, g, b)`
-  - **TODO 2** (optional): write your own `safetyRule()`
-- Run datasets A to E and fill in Part 1 of the handout
+  - **TODO 1**: subscribe to the webhook's reply in `setup()`
+  - **TODO 2**: unpack the JSON into `state`, `alert`, and `msg` in `onWebhookReply()`
+  - **TODO 3**: show the answer on the RGB LED with `changeLedColor(r, g, b)` and `showAlert()`
+  - **TODO 4** (optional): write your own `safetyRule()`
+- Run datasets A to E and write down Gemini's answer for each one
 
 ## When Gemini Gets It Wrong
 
@@ -331,7 +408,7 @@ hr_bpm=[62,62,...] steps_per_min=[0,0,...] calories_per_min=[0.9,0.9,...] intens
   - Part 1: still = steps under 10 per minute
   - Part 2: still = METs at 1.5 or below
   - Steps miss exercise like cycling. METs do not
-- Run datasets F to H and fill in Part 2 of the handout
+- Run datasets F to H and write down Gemini's answer for each one
 
 ## Free Tier Limits
 
@@ -347,6 +424,83 @@ hr_bpm=[62,62,...] steps_per_min=[0,0,...] calories_per_min=[0.9,0.9,...] intens
 - Limits are per Google project, so use a key from your own Google account
 - The daily limit resets at midnight Pacific time
 - Ran out (error 429)? Switch the webhook to another model. Each model has its own quota
+
+## Using It in Your Own Project
+
+- The `GeminiWebhook` library is not tied to PulseCheck. Install it in any project that sends text to an AI model through a webhook
+- It handles what is the same every time
+  - sending no more often than your free quota allows
+  - knowing whether you are still waiting for a reply
+  - giving up if no reply comes (timeout)
+  - telling you when the webhook reports an error
+- You write what is different every time: what to send, and how to unpack the reply
+
+| Function | What it does |
+|----------|--------------|
+| `geminiSetup("my_event")` | Call once in `setup()`. The name must match your webhook's event name |
+| `geminiSend(text)` | Sends the text to your webhook. Returns `false` if it is too soon or a reply is pending |
+| `geminiReady()` | `true` when `geminiSend()` would send |
+| `geminiWaiting()` | `true` while a request is out and no reply has arrived |
+| `geminiGotReply()` | Call at the start of your reply handler. Stops the timeout. Returns `false` for a late reply |
+| `geminiLoop()` | Call every time through `loop()`. Reports a timeout |
+| `onGeminiError(String why)` | **You** define this. It is called when a request fails |
+
+- A complete example
+
+```c++
+{% raw %}#include "Particle.h"
+
+#define ARDUINOJSON_ENABLE_ARDUINO_STRING 1
+#include <ArduinoJson.h>
+
+#include "json_webhook_response_helper.h"
+#include "GeminiWebhook.h"
+
+SYSTEM_MODE(AUTOMATIC);
+SYSTEM_THREAD(ENABLED);
+
+// The webhook's reply, for example {"answer": "Open a window"}
+void myHandler(const char* event, const char* data) {
+    String fullJson = json_webhook_response_helper(event, data);
+    if (fullJson == "") return;
+    if (!geminiGotReply()) return;
+
+    // Gemini's whole reply; the answer is the text deep inside it
+    JsonDocument doc;
+    if (deserializeJson(doc, fullJson)) return;
+    String answerText = doc["candidates"][0]["content"]["parts"][0]["text"].as<String>();
+
+    // that text is JSON too
+    JsonDocument answer;
+    if (deserializeJson(answer, answerText)) return;
+    Serial.println(answer["answer"].as<String>());
+}
+
+// Called when a request fails
+void onGeminiError(String why) {
+    Serial.println("No answer: " + why);
+}
+
+void setup() {
+    Serial.begin(9600);
+    geminiSetup("my_event");
+    Particle.subscribe("hook-response/my_event", myHandler, MY_DEVICES);
+    Particle.subscribe(System.deviceID() + "/hook-response/my_event", myHandler, MY_DEVICES);
+}
+
+void loop() {
+    geminiLoop();
+    if (geminiReady()) {
+        geminiSend("temperature=72F humidity=40%");   // sends again every 10 s
+    }
+}{% endraw %}
+```
+
+- To use it
+  - Install the `GeminiWebhook` and `ArduinoJson` libraries (**Particle: Install Library**)
+  - Copy `json_webhook_response_helper.h` into your project's `src` folder
+  - Create a webhook the same way as PulseCheck, with your own event name, prompt, and `responseSchema`
+- To change the limits, pass them to `geminiSetup()` in milliseconds: `geminiSetup("my_event", 5000, 30000)` is one request every 5 seconds and a 30 second timeout
 
 ## Going Further
 

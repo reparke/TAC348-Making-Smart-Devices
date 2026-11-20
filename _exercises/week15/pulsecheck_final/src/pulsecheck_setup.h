@@ -1,5 +1,6 @@
 #include "Particle.h"
-#include "fitbit_data.h"   // the Fitbit datasets: A-E for Part 1, F-H for Part 2
+#include "fitbit_data.h"     // the Fitbit datasets: A-E for Part 1, F-H for Part 2
+#include "GeminiWebhook.h"   // library: sending, waiting, timeout, errors (reusable in any project)
 
 /* This is the event your webhook listens for.
    It must match the "event" in your webhook exactly.
@@ -23,9 +24,6 @@ const int PIN_BUTTON = D5;
    If the LED is white when it should be off, change this.
 */
 const bool COMMON_ANODE = false;
-
-const unsigned long MIN_GAP_MS = 10000;          // at most one request every 10 s (free-tier quota)
-const unsigned long REPLY_TIMEOUT_MS = 20000;    // no reply after 20 s = error
 
 /* Which part of the exercise you are on:
      1 = Part 1: datasets A-E, heart rate and steps
@@ -120,23 +118,20 @@ bool defaultSafetyRule() {
 }
 
 /*
-3) EVENT HANDLER FORWARD DECLARATIONS ========================
-  You need to define these two functions in pulsecheck.cpp.
+3) EVENT HANDLER FORWARD DECLARATION =========================
+  You need to define this function in pulsecheck.cpp.
   However, we need a "forward declaration" (the function header)
-  as a C++ requirement because they are used below.
+  as a C++ requirement because it is used below.
   ===============================================================
 */
-// Called when Gemini answers. Set the LED color here.
-void onGeminiReply(String state, bool alert, String msg);
-
 // Return true when the data needs an alert, whatever Gemini says.
 bool safetyRule();
 
 /*
-4) LED HELPERS ================================================
+4) LED AND LOG HELPERS ========================================
+  Use these in pulsecheck.cpp
   ===============================================================
 */
-bool waitingForReply = false;
 bool alertOn = false;
 bool ruleFired = false;
 
@@ -148,26 +143,32 @@ void changeLedColor(int r, int g, int b) {
     analogWrite(PIN_BLUE, COMMON_ANODE ? 255 - b : b);
 }
 
-// Bad reply, webhook error, or timeout: magenta, or red if the safety rule fired.
-void showError(const char* why) {
-    Log.error("%s", why);
-    waitingForReply = false;
-    alertOn = ruleFired;
-    changeLedColor(255, 0, ruleFired ? 0 : 255);
+// Blink the LED red until the next button press.
+void showAlert() {
+    alertOn = true;
+    changeLedColor(255, 0, 0);
+}
+
+// true when your safetyRule() raised an alert for the dataset that was just sent
+bool safetyRuleFired() { return ruleFired; }
+
+// Print Gemini's answer next to the dataset letter in the serial monitor.
+void logAnswer(String state, bool alert, String msg) {
+    Log.warn("Dataset %s | Gemini: state=%s alert=%d msg=\"%s\"",
+             datasetLabel(), state.c_str(), alert, msg.c_str());
+    if (ruleFired && !alert) Log.warn("Safety rule overrides Gemini: alert on");
 }
 
 /*
-5) SEND AND RECEIVE ===========================================
-  Publish the data, and read Gemini's reply from the webhook:
-    {"state":"workout","alert":false,"msg":"Great pace!"}
+5) SEND =======================================================
+  One button press sends the next dataset to your webhook.
+  Reading the reply is your job, in pulsecheck.cpp.
   ===============================================================
 */
-unsigned long lastSendMs = 0;
-bool hasSent = false;
 int prevButtonVal = HIGH;
 
 void sendData() {
-    if (waitingForReply || (hasSent && millis() - lastSendMs < MIN_GAP_MS)) {
+    if (!geminiReady()) {
         Log.warn("Too soon, request skipped");
         return;
     }
@@ -179,51 +180,9 @@ void sendData() {
     Log.warn("Sending dataset %s", datasetLabel());
     Log.info("Sending: %s", payload.c_str());
 
-    waitingForReply = true;
     alertOn = false;
-    hasSent = true;
-    lastSendMs = millis();
     changeLedColor(255, 255, 255);               // white = waiting for Gemini
-    if (!Particle.publish(EVENT_NAME, payload)) showError("Could not publish");
-}
-
-void onWebhookReply(const char* event, const char* data) {
-    if (!waitingForReply) return;                // ignore late replies
-    JSONValue obj = JSONValue::parseCopy(data ? data : "");
-    String state, msg;
-    bool alert = false, hasState = false, hasAlert = false, hasMsg = false;
-    if (obj.isObject()) {
-        JSONObjectIterator it(obj);
-        while (it.next()) {
-            String key = it.name().data();
-            if (key == "state" && it.value().isString()) {
-                state = it.value().toString().data();
-                hasState = true;
-            } else if (key == "alert" && it.value().isBool()) {
-                alert = it.value().toBool();
-                hasAlert = true;
-            } else if (key == "msg" && it.value().isString()) {
-                msg = it.value().toString().data();
-                hasMsg = true;
-            }
-        }
-    }
-    bool validState = state == "resting" || state == "walking" || state == "workout" || state == "sleep";
-    if (!hasState || !hasAlert || !hasMsg || !validState) {
-        showError("Reply was not the expected JSON");
-        return;
-    }
-
-    waitingForReply = false;
-    Log.warn("Dataset %s | Gemini: state=%s alert=%d msg=\"%s\"",
-             datasetLabel(), state.c_str(), alert, msg.c_str());
-    if (ruleFired && !alert) Log.warn("Safety rule overrides Gemini: alert on");
-    alertOn = alert || ruleFired;
-    onGeminiReply(state, alertOn, msg);          // your code in pulsecheck.cpp
-}
-
-void onWebhookError(const char* event, const char* data) {
-    if (waitingForReply) showError("Webhook error");
+    geminiSend(payload);
 }
 
 /*
@@ -237,11 +196,7 @@ void pulsecheck_setup() {
     pinMode(PIN_BLUE, OUTPUT);
     changeLedColor(0, 0, 0);  // off at boot
     pinMode(PIN_BUTTON, INPUT);
-    Particle.subscribe(String("hook-response/") + EVENT_NAME, onWebhookReply);
-    // Also matches when "Only the device that triggers the webhook should receive
-    // its response" is checked: the reply is then named <device id>/hook-response/...
-    Particle.subscribe(System.deviceID() + "/hook-response/" + EVENT_NAME, onWebhookReply);
-    Particle.subscribe(String("hook-error/") + EVENT_NAME, onWebhookError);
+    geminiSetup(EVENT_NAME);
 }
 
 void pulsecheck_loop() {
@@ -252,9 +207,7 @@ void pulsecheck_loop() {
     }
     prevButtonVal = currButtonVal;
 
-    if (waitingForReply && millis() - lastSendMs > REPLY_TIMEOUT_MS) {
-        showError("No reply from webhook (timeout)");
-    }
+    geminiLoop();                                // reports a timeout if no reply came
     if (alertOn) {
         changeLedColor((millis() / 250) % 2 ? 255 : 0, 0, 0);   // blink red
     }
