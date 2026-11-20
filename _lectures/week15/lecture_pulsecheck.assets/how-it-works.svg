@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 250" width="860" height="250" role="img" aria-label="How PulseCheck works: the Photon 2 publishes an event, a webhook in the Particle Cloud calls Gemini, and the reply comes back as a hook-response event">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#52514e"/></marker></defs>
+<rect width="860" height="250" fill="#fcfcfb"/>
+<rect x="20" y="60" width="220" height="130" rx="10" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<text x="130" y="92" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#0b0b0b" text-anchor="middle">Photon 2</text>
+<text x="130" y="120" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">button pressed</text>
+<text x="130" y="140" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">publishes the data</text>
+<text x="130" y="160" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">sets the RGB LED</text>
+<rect x="320" y="60" width="220" height="130" rx="10" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<text x="430" y="92" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#0b0b0b" text-anchor="middle">Particle Cloud</text>
+<text x="430" y="120" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">webhook adds the prompt</text>
+<text x="430" y="140" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">and the API key</text>
+<rect x="620" y="60" width="220" height="130" rx="10" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<text x="730" y="92" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#0b0b0b" text-anchor="middle">Gemini</text>
+<text x="730" y="120" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">reads the data</text>
+<text x="730" y="140" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">returns JSON</text>
+<line x1="244" y1="100" x2="316" y2="100" stroke="#52514e" stroke-width="2" marker-end="url(#a)"/>
+<line x1="316" y1="150" x2="244" y2="150" stroke="#52514e" stroke-width="2" marker-end="url(#a)"/>
+<text x="280.0" y="50" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">event</text>
+<text x="280.0" y="212" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">hook-response</text>
+<line x1="544" y1="100" x2="616" y2="100" stroke="#52514e" stroke-width="2" marker-end="url(#a)"/>
+<line x1="616" y1="150" x2="544" y2="150" stroke="#52514e" stroke-width="2" marker-end="url(#a)"/>
+<text x="580.0" y="50" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">request</text>
+<text x="580.0" y="212" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">reply</text>
+<text x="430.0" y="26" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">Request goes right along the top. The reply comes back along the bottom, about 1 second later.</text>
+</svg>

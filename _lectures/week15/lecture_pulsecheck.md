@@ -25,15 +25,7 @@ title: PulseCheck - Smart Devices and AI
 
 ## How It Works
 
-```
-Photon 2                      Particle Cloud                  Gemini
---------                      --------------                  ------
-button pressed
-Particle.publish(event)  -->  webhook adds the prompt   -->   reads the data
-                              and the API key                 returns JSON
-onWebhookReply()         <--  hook-response event       <--   {"state", "alert", "msg"}
-set the RGB LED
-```
+<img src="lecture_pulsecheck.assets/how-it-works.svg" alt="The Photon 2 publishes an event, a webhook in the Particle Cloud calls Gemini, and the reply comes back as a hook-response event" style="width:800px;" />
 
 - The Photon 2 never talks to Gemini directly. It just publishes an event
 - The **webhook** does the AI call, then sends Gemini's answer back as a `hook-response` event
@@ -90,6 +82,8 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
 | C | 63 to 70, then 138 to 144 for the last 4 minutes | 0 |
 | D | 70 to 75 | 0 |
 | E | 153 to 160 | 166 to 174 |
+
+<img src="lecture_pulsecheck.assets/datasets-part1.svg" alt="Heart rate and steps per minute for datasets A to E" style="width:900px;" />
 
 - Only the numbers are sent to Gemini, never the letter
 - The serial monitor prints the letter next to Gemini's answer
@@ -305,6 +299,10 @@ void onWebhookReply(const char* event, const char* data) {
   "modelVersion": "gemini-3.5-flash-lite"
 }
 ```
+
+- One real request and reply, for dataset A
+
+<img src="lecture_pulsecheck.assets/gemini-sample-reply.gif" alt="Animation: the Photon 2 publishes heart rate and steps, Gemini's raw reply arrives about one second later, and the code prints the unpacked answer" style="width:900px;" />
 
 - Your answer is the `text`, four levels down: `candidates`, the first item, `content`, `parts`, the first item, `text`
 - Ignore the rest: `thoughtSignature` is a long code Gemini adds for its own use, and `usageMetadata` counts tokens
