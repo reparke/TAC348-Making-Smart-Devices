@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 930 396" width="930" height="396" role="img" aria-label="The five mystery datasets">
+<rect width="930" height="396" fill="#fcfcfb"/>
+<text x="64" y="22" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#0b0b0b">The five mystery datasets</text>
+<text x="64" y="40" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e">One reading per minute for 10 minutes. Which is resting, walking, a workout, sleep, or a concern?</text>
+<rect x="64" y="93" width="10" height="10" rx="2" fill="#2a78d6"/>
+<text x="80" y="102" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#0b0b0b">Heart rate (bpm)</text>
+<line x1="64" x2="214" y1="220.0" y2="220.0" stroke="#e4e3df" stroke-width="1"/>
+<text x="56" y="224.0" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">40</text>
+<line x1="64" x2="214" y1="169.0" y2="169.0" stroke="#e4e3df" stroke-width="1"/>
+<text x="56" y="173.0" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">100</text>
+<line x1="64" x2="214" y1="118.0" y2="118.0" stroke="#e4e3df" stroke-width="1"/>
+<text x="56" y="122.0" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">160</text>
+<polyline points="71.5,169.0 86.5,171.6 101.5,169.0 116.5,165.6 131.5,165.6 146.5,169.0 161.5,172.4 176.5,169.0 191.5,169.0 206.5,171.6" fill="none" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="139.0" y="80" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="middle">Dataset A</text>
+<line x1="236" x2="386" y1="220.0" y2="220.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="236" x2="386" y1="169.0" y2="169.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="236" x2="386" y1="118.0" y2="118.0" stroke="#e4e3df" stroke-width="1"/>
+<polyline points="243.5,218.3 258.5,218.3 273.5,217.4 288.5,218.3 303.5,218.3 318.5,217.4 333.5,218.3 348.5,217.4 363.5,217.4 378.5,217.4" fill="none" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="311.0" y="80" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="middle">Dataset B</text>
+<line x1="408" x2="558" y1="220.0" y2="220.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="408" x2="558" y1="169.0" y2="169.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="408" x2="558" y1="118.0" y2="118.0" stroke="#e4e3df" stroke-width="1"/>
+<polyline points="415.5,194.5 430.5,196.2 445.5,197.9 460.5,196.2 475.5,198.8 490.5,196.2 505.5,131.6 520.5,132.4 535.5,132.4 550.5,136.7" fill="none" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="483.0" y="80" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="middle">Dataset C</text>
+<line x1="580" x2="730" y1="220.0" y2="220.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="580" x2="730" y1="169.0" y2="169.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="580" x2="730" y1="118.0" y2="118.0" stroke="#e4e3df" stroke-width="1"/>
+<polyline points="587.5,192.8 602.5,194.5 617.5,193.7 632.5,192.8 647.5,190.2 662.5,191.1 677.5,190.2 692.5,192.8 707.5,191.9 722.5,190.2" fill="none" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="655.0" y="80" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="middle">Dataset D</text>
+<line x1="752" x2="902" y1="220.0" y2="220.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="752" x2="902" y1="169.0" y2="169.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="752" x2="902" y1="118.0" y2="118.0" stroke="#e4e3df" stroke-width="1"/>
+<polyline points="759.5,123.1 774.5,122.2 789.5,121.4 804.5,119.7 819.5,118.8 834.5,121.4 849.5,118.0 864.5,120.5 879.5,123.1 894.5,124.0" fill="none" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="827.0" y="80" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#0b0b0b" text-anchor="middle">Dataset E</text>
+<rect x="64" y="253" width="10" height="10" rx="2" fill="#eb6834"/>
+<text x="80" y="262" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#0b0b0b">Steps per minute</text>
+<line x1="64" x2="214" y1="380.0" y2="380.0" stroke="#e4e3df" stroke-width="1"/>
+<text x="56" y="384.0" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">0</text>
+<line x1="64" x2="214" y1="329.0" y2="329.0" stroke="#e4e3df" stroke-width="1"/>
+<text x="56" y="333.0" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">90</text>
+<line x1="64" x2="214" y1="278.0" y2="278.0" stroke="#e4e3df" stroke-width="1"/>
+<text x="56" y="282.0" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">180</text>
+<rect x="66.0" y="321.6" width="11.0" height="58.4" rx="2" fill="#eb6834"/>
+<rect x="81.0" y="321.1" width="11.0" height="58.9" rx="2" fill="#eb6834"/>
+<rect x="96.0" y="323.9" width="11.0" height="56.1" rx="2" fill="#eb6834"/>
+<rect x="111.0" y="323.3" width="11.0" height="56.7" rx="2" fill="#eb6834"/>
+<rect x="126.0" y="323.9" width="11.0" height="56.1" rx="2" fill="#eb6834"/>
+<rect x="141.0" y="330.1" width="11.0" height="49.9" rx="2" fill="#eb6834"/>
+<rect x="156.0" y="323.3" width="11.0" height="56.7" rx="2" fill="#eb6834"/>
+<rect x="171.0" y="323.3" width="11.0" height="56.7" rx="2" fill="#eb6834"/>
+<rect x="186.0" y="323.3" width="11.0" height="56.7" rx="2" fill="#eb6834"/>
+<rect x="201.0" y="322.8" width="11.0" height="57.2" rx="2" fill="#eb6834"/>
+<text x="64" y="395" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e">minute 0</text>
+<text x="214" y="395" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">9</text>
+<line x1="236" x2="386" y1="380.0" y2="380.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="236" x2="386" y1="329.0" y2="329.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="236" x2="386" y1="278.0" y2="278.0" stroke="#e4e3df" stroke-width="1"/>
+<text x="236" y="395" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e">minute 0</text>
+<text x="386" y="395" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">9</text>
+<line x1="408" x2="558" y1="380.0" y2="380.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="408" x2="558" y1="329.0" y2="329.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="408" x2="558" y1="278.0" y2="278.0" stroke="#e4e3df" stroke-width="1"/>
+<text x="408" y="395" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e">minute 0</text>
+<text x="558" y="395" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">9</text>
+<line x1="580" x2="730" y1="380.0" y2="380.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="580" x2="730" y1="329.0" y2="329.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="580" x2="730" y1="278.0" y2="278.0" stroke="#e4e3df" stroke-width="1"/>
+<text x="580" y="395" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e">minute 0</text>
+<text x="730" y="395" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">9</text>
+<line x1="752" x2="902" y1="380.0" y2="380.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="752" x2="902" y1="329.0" y2="329.0" stroke="#e4e3df" stroke-width="1"/>
+<line x1="752" x2="902" y1="278.0" y2="278.0" stroke="#e4e3df" stroke-width="1"/>
+<rect x="754.0" y="282.5" width="11.0" height="97.5" rx="2" fill="#eb6834"/>
+<rect x="769.0" y="284.2" width="11.0" height="95.8" rx="2" fill="#eb6834"/>
+<rect x="784.0" y="285.9" width="11.0" height="94.1" rx="2" fill="#eb6834"/>
+<rect x="799.0" y="283.7" width="11.0" height="96.3" rx="2" fill="#eb6834"/>
+<rect x="814.0" y="281.4" width="11.0" height="98.6" rx="2" fill="#eb6834"/>
+<rect x="829.0" y="283.1" width="11.0" height="96.9" rx="2" fill="#eb6834"/>
+<rect x="844.0" y="283.1" width="11.0" height="96.9" rx="2" fill="#eb6834"/>
+<rect x="859.0" y="282.0" width="11.0" height="98.0" rx="2" fill="#eb6834"/>
+<rect x="874.0" y="282.5" width="11.0" height="97.5" rx="2" fill="#eb6834"/>
+<rect x="889.0" y="283.1" width="11.0" height="96.9" rx="2" fill="#eb6834"/>
+<text x="752" y="395" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e">minute 0</text>
+<text x="902" y="395" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#52514e" text-anchor="end">9</text>
+</svg>
