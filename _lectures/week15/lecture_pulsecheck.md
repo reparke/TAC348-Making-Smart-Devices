@@ -18,10 +18,13 @@ title: PulseCheck - Smart Devices and AI
   - Press the button to send 10 minutes of real Fitbit heart rate and step data to **Google Gemini**
   - Gemini decides what the wearer is doing and whether anything looks wrong
   - The Photon 2 shows the answer on an RGB LED
-- Two parts
-  - **Part 1**: five mystery datasets with heart rate and steps
-  - **Part 2**: three harder datasets with four more signals: calories, intensity, METs, and sleep
+- There are two projects on this page
+  - **PulseCheck Basic**: the one we build in class. Real Fitbit data, an RGB LED, and a button
+    - **Part 1**: five mystery datasets with heart rate and steps
+    - **Part 2**: three harder datasets with four more signals: calories, intensity, METs, and sleep
+  - **PulseCheck Ring**: optional, for after class. The 11 signals a fitness ring tracks, with no wiring
 - For each dataset, you write down what Gemini says. Your instructor goes over the answers at the end of each part
+- Note: PulseCheck is not a medical device. Do not send real personal health data to the free tier
 
 ## How It Works
 
@@ -40,6 +43,8 @@ title: PulseCheck - Smart Devices and AI
 - Review
   - [APIs and Webhooks](/lectures/week05/lecture_api_webhook.html)
   - [Particle + Gemini Integration](/lectures/weekX/lecture_particle_gemini_integration.html) for creating your Gemini API key
+
+# PulseCheck Basic
 
 ## Wiring
 
@@ -421,6 +426,134 @@ hr_bpm=[62,62,...] steps_per_min=[0,0,...] calories_per_min=[0.9,0.9,...] intens
 - The daily limit resets at midnight Pacific time
 - Ran out (error 429)? Switch the webhook to another model. Each model has its own quota
 
+# PulseCheck Ring
+
+## What Is PulseCheck Ring?
+
+- An optional second project, for after you finish Basic
+- The same pipeline, with the **11 signals** a fitness ring tracks instead of heart rate and steps
+- **No wiring**: it uses the Photon 2's own RGB LED and its MODE button
+- The data is made up on the Photon 2, in five scenarios numbered 1 to 5
+- You do the same work as in Basic: write the prompt, create the webhook, subscribe to the reply, unpack it, and set the LED
+
+| | Basic | Ring |
+|---|---|---|
+| Data | Real Fitbit data, 8 datasets | Made-up data, 5 scenarios |
+| Signals | 2 in Part 1, 6 in Part 2 | 11 |
+| LED and button | On a breadboard | The Photon 2's own LED and MODE button |
+| Sending | One button press at a time | Every 30 seconds, or on a tap of MODE |
+| Event name | `pulsecheck` | `pulsering` |
+| Libraries | `ArduinoJson`, `GeminiWebhook` | The same |
+
+## Ring: The Data
+
+- One reading per minute for 10 minutes, for each signal
+
+| Signal | Name in the data | Unit |
+|--------|------------------|------|
+| Heart rate | `hr_bpm` | beats per minute |
+| Steps | `steps_per_min` | steps per minute |
+| Heart rate variability | `hrv_ms` | milliseconds. Higher usually means more relaxed |
+| Skin temperature | `skin_temp_c` | degrees C |
+| Blood oxygen | `spo2_pct` | percent. Normal is 95 or more |
+| Breathing rate | `breaths_per_min` | breaths per minute |
+| Movement intensity | `motion_g` | g. Near 0 when still |
+| Calories burned | `kcal_per_min` | kcal per minute |
+| Temperature change from baseline | `temp_delta_c` | degrees C |
+| Stress score | `stress` | 0 to 100 |
+| Sleep stage | `sleep_stage` | `awake`, `light`, `deep`, or `rem` |
+
+- The five scenarios are resting, walking, a workout, sleep, and something a ring should worry about
+- The number does not tell you which is which. Only the numbers in the data are sent to Gemini
+
+## Ring: Starter Code
+
+- Download the [Ring starter code](/resources/pulsecheck/pulsering_start.zip) directly
+- Unzip it and open the `pulsering_start` folder in Particle Workbench
+  - `src/pulsering.cpp`: your code
+  - `src/pulsering_setup.h`: the MODE button, the LED, and the ring data
+  - `src/json_webhook_response_helper.h`: the same file as in Basic
+  - `pulsering_webhook_body_starter.json`: the JSON body for your webhook, with two blanks
+  - `README.md`: step-by-step setup
+
+## Ring: Your Job
+
+- Create a **second webhook**, the same way as in Basic, with two changes
+  - **Event name**: `pulsering`
+  - **JSON data**: your filled-in `pulsering_webhook_body_starter.json`
+- Write a new prompt. It has to explain all 11 signals and their units
+- Install the `ArduinoJson` and `GeminiWebhook` libraries in this project too
+- In `pulsering.cpp`, the TODOs are the same as in Basic
+  - **TODO 1**: subscribe to the reply, with `pulsering` in the event name
+  - **TODO 2**: unpack Gemini's reply into `state`, `alert`, and `msg`
+  - **TODO 3**: show the answer on the LED
+  - **TODO 4** (optional): write your own `safetyRule()`, for example an alert when blood oxygen drops below 92
+- Flash it. The Photon 2 sends the next scenario by itself every 30 seconds. Tap MODE to send one right away
+- The serial monitor prints the scenario number next to Gemini's answer
+
+```
+Sending scenario 1
+Scenario 1 | Gemini: state=walking alert=0 msg="Steady walk, HRV 35 ms"
+```
+
+- Write down Gemini's `state` and `alert` for scenarios 1 to 5, then check them in the Answers section
+- Important! Sending every 30 seconds uses 120 requests an hour. Unplug the Photon 2 when you are done, or set `AUTO_SEND_MS` to `0` in `pulsering_setup.h`
+
+# Answers
+
+## Answers for Basic and Ring
+
+- Your instructor gives you the password at the end of each part
+- It unlocks the answers for both projects
+- The answers are stored scrambled. They appear only with the right password
+
+<!-- answers:start (made by tools/lock_answers.mjs; do not edit by hand) -->
+<div id="pc-answers" data-salt="MEfFn/iIKxohIJyignzisg==" data-iv="N8fdIenSy5FDKiqv" data-text="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">
+  <label for="pc-answers-password">Password</label>
+  <input type="password" id="pc-answers-password" autocomplete="off" style="width:16em; display:inline-block;" />
+  <button type="button" id="pc-answers-button">Show answers</button>
+  <p id="pc-answers-message" role="status"></p>
+  <div id="pc-answers-content"></div>
+</div>
+<!-- answers:end -->
+
+<script>
+{% raw %}(function () {
+  var box = document.getElementById('pc-answers');
+  if (!box) return;
+  var input = document.getElementById('pc-answers-password');
+  var message = document.getElementById('pc-answers-message');
+  function bytes(b64) {
+    var s = atob(b64), out = new Uint8Array(s.length);
+    for (var i = 0; i < s.length; i++) out[i] = s.charCodeAt(i);
+    return out;
+  }
+  function unlock() {
+    if (!window.crypto || !crypto.subtle) { message.textContent = 'This browser cannot unlock the answers.'; return; }
+    message.textContent = 'Checking...';
+    crypto.subtle.importKey('raw', new TextEncoder().encode(input.value), 'PBKDF2', false, ['deriveKey'])
+      .then(function (base) {
+        return crypto.subtle.deriveKey(
+          { name: 'PBKDF2', salt: bytes(box.dataset.salt), iterations: 200000, hash: 'SHA-256' },
+          base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      })
+      .then(function (key) {
+        return crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes(box.dataset.iv) }, key, bytes(box.dataset.text));
+      })
+      .then(function (plain) {
+        document.getElementById('pc-answers-content').innerHTML = new TextDecoder().decode(plain);
+        message.textContent = '';
+        input.value = '';
+      })
+      .catch(function () { message.textContent = 'That password is not right.'; });
+  }
+  document.getElementById('pc-answers-button').addEventListener('click', unlock);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') unlock(); });
+})();{% endraw %}
+</script>
+
+# Your Own Project
+
 ## Using It in Your Own Project
 
 - The `GeminiWebhook` library is not tied to PulseCheck. Install it in any project that sends text to an AI model through a webhook
@@ -497,61 +630,3 @@ void loop() {
   - Copy `json_webhook_response_helper.h` into your project's `src` folder
   - Create a webhook the same way as PulseCheck, with your own event name, prompt, and `responseSchema`
 - To change the limits, pass them to `geminiSetup()` in milliseconds: `geminiSetup("my_event", 5000, 30000)` is one request every 5 seconds and a 30 second timeout
-
-## Going Further
-
-- **Even more signals**: real rings also track heart rate variability, skin temperature, blood oxygen, and breathing
-  - In our tests with these, Gemini still missed some spikes at rest. The safety rule still caught them
-- **More Fitbit data**: test more windows from the same dataset
-- **Real sensors**: replace the Fitbit data with readings from your smart watch build
-- Note: PulseCheck is not a medical device. Do not send real personal health data to the free tier
-
-## Answers
-
-- Your instructor gives you the password at the end of each part
-- The answers are stored scrambled. They appear only with the right password
-
-<!-- answers:start (made by tools/lock_answers.mjs; do not edit by hand) -->
-<div id="pc-answers" data-salt="Qj6gbDopPMbX2gzx1kwDhA==" data-iv="QKpYJRzr+z2hw5A7" data-text="qIHElyWKhM5qjJ0PbHQFwo9TNTvx+sezSHHgyUXd88q18yA/ew0qz2ewBSdLoZgQOMx/+07IScRpFz2YRl0kZlDOc27md22eZ3AB8I7Ru0Btye7xKeEIXj6V9172JmGJ2+vW5RfThuCiExouocuQBskMlz7ILW54gQHokdfaOKREfyRlz9Z7izDersaGnxq0q+8lGokeT9cct4U8UvvE+qAmg097zLONtIlAw1FJn+bZNBUzQlrDcte60EYXCA8Y7r8I2w8mAbmBf5uaPdHeexT6fRO1eRnvzhx+/NrKtdSGJGoCQ7ZPnJPZ2PKl6Jv+YdSDfYvBxDLHB3QyjkD7zGZo2p8HdCz+V0XTbPLvLEv+pqxJhOBZVLRw3JTPD95b55MHt7udfW/ciz50DP2GPnsOafAjyKNnciUM8cUFm6hiYXA/HEGBc0CKzhbJuVvCrALAELTX/iOeaLUAr1UKCJHsfmggJjXJ4Vj5pSf6Se7zhIuKg4508dDiKphXob+WQjNAmAq68fOu3XIT5WrKYa8nyuNAAzButdgDip83m6GV3RLT2YXZFRxZLBvkgY7yA6hzlmzB8lz3Z8NDtz3Rouyr4XllSQN+wz5/SMvIF5lrpMgpx4YfThPEk9ySheaNrDYqQJ/QEaRHSHH2k49lDyqZ4g7eoQUYGUG4nFlb+j746F2eG4Zn25W+1miDVujh2n3P2HOwUpZaJz26p0DPQYYezhGPBJrzL6DBktSLx2+G5HG9Diwqje/DEH2pTzfm5CCMUF7asxQxiDKXqF8Vu9hl4ikV1R+RdBMP3zfR6Kb/k1I37I+Y8tWcAiL23POaktk7OeEVspREdccw1b/jVBe5GDAiH9St6gfta2H/ehaGpLrd8tEN4MunwJAu4Fs5+ACkfFgJf36hq5/HkF1CH4Zx0/PnzM9mfIFOM3yecKNnkN8PDDNT4ybRdOnMPK/2bFJHjC/sl1eyVizl27YPvVAzlQRjscAuxwlYvDycaKNPU6lzkPi68hF2r1aSH8veuRW7dy93/JKv84VQ9XOf/mM0D26Ba5cGKn03L/9Mugk65J+ReyKTOwuuP1Ugek0zltZHGmqueKgWN5DLrpr7Y1XZZ1lP9+OWMaLx8JKMfyvcIWKMho+jJQipuQnSv0BpkuZcQqwmBBGDJG9hMu1ebO3+zqrthROykKOepwesX7NEoCHkYL/JbkcGomKPepaYzlovylI7T91Dch5Gv/uwjvXTZ5UH2w4Sp0Yv8atSjTDB8KeRvQ2N6dCqxipjOAKMVGiP95ak0abOTsonuCRpdeJ/B+uLvSC+tFMrYkIthjWTSg1ZA3NImHcqiTyCsITUpkSC/jGHiL+0EaR6FE37lgBBWby44e7VcuduKr6ZxYOSq05qJ8iyFrWFqz9/zF0+HNJP+L+0BVBmpEVGDokNxWahlJtNRvV73ZVkskQ50iEpFv3yqUHAX+A6Q3qaEEUhtaz0i6iTDSGOjWfW7cysSmxBn0nf8ic45z7VqUctiCIPt4dj3iBDm9vk4zN2ZPWNL/EKh/O2zet2DIUGMZaDbeod4kqssreTBXdxV1TVQVu9omxkxP4/79FvWWua7rmbIE2KolSsFMipNeyiTYcKtoJEjhrTX/oVAgwFcT1f2C3+ce7X8FPbg6zG61Lk8h45ehoGgfrDNr6Dg/zOdlHYMsY/p9O/LzudmOqL5bv9E3sgcPs9LfSiEtIbJ0cPhW3zdBtNo60OvfcjbVeUKuXT4hMqrapAxf/6b83llTKKW2ozQkbtbgtNTuk5iBJfIzFh6RFuA/lpIgOajNHputcSqR0leK8hVMvV7hQ19juJf+3gjjwuXBresUcgwCwIG0KiS661Zef9XF8sDh8JV5RoQZ+Ngnl1GHphkzsKsL0XcHlRPH7Ujdnsuenx/EjyzHDrZGqjrpU26sEAejYqkJDgtSwdNH5xl+2KphvsXwyPAiAuHM9XW4xec2w=">
-  <label for="pc-answers-password">Password</label>
-  <input type="password" id="pc-answers-password" autocomplete="off" style="width:16em; display:inline-block;" />
-  <button type="button" id="pc-answers-button">Show answers</button>
-  <p id="pc-answers-message" role="status"></p>
-  <div id="pc-answers-content"></div>
-</div>
-<!-- answers:end -->
-
-<script>
-{% raw %}(function () {
-  var box = document.getElementById('pc-answers');
-  if (!box) return;
-  var input = document.getElementById('pc-answers-password');
-  var message = document.getElementById('pc-answers-message');
-  function bytes(b64) {
-    var s = atob(b64), out = new Uint8Array(s.length);
-    for (var i = 0; i < s.length; i++) out[i] = s.charCodeAt(i);
-    return out;
-  }
-  function unlock() {
-    if (!window.crypto || !crypto.subtle) { message.textContent = 'This browser cannot unlock the answers.'; return; }
-    message.textContent = 'Checking...';
-    crypto.subtle.importKey('raw', new TextEncoder().encode(input.value), 'PBKDF2', false, ['deriveKey'])
-      .then(function (base) {
-        return crypto.subtle.deriveKey(
-          { name: 'PBKDF2', salt: bytes(box.dataset.salt), iterations: 200000, hash: 'SHA-256' },
-          base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
-      })
-      .then(function (key) {
-        return crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes(box.dataset.iv) }, key, bytes(box.dataset.text));
-      })
-      .then(function (plain) {
-        document.getElementById('pc-answers-content').innerHTML = new TextDecoder().decode(plain);
-        message.textContent = '';
-        input.value = '';
-      })
-      .catch(function () { message.textContent = 'That password is not right.'; });
-  }
-  document.getElementById('pc-answers-button').addEventListener('click', unlock);
-  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') unlock(); });
-})();{% endraw %}
-</script>
