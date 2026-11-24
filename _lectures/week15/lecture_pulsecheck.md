@@ -83,8 +83,6 @@ hr_bpm=[72,70,71,72,75,74,75,72,73,75] steps_per_min=[0,0,0,0,0,0,0,0,0,0] inter
 | D | 70 to 75 | 0 |
 | E | 153 to 160 | 166 to 174 |
 
-<img src="lecture_pulsecheck.assets/datasets-part1.svg" alt="Heart rate and steps per minute for datasets A to E" style="width:900px;" />
-
 - Only the numbers are sent to Gemini, never the letter
 - The serial monitor prints the letter next to Gemini's answer
 
