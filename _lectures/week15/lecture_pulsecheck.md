@@ -61,6 +61,11 @@ title: PulseCheck - Smart Devices and AI
   - If the LED is white when it should be off, you have the other kind
 - The button reads `LOW` when pressed
 
+<img src="lecture_pulsecheck.assets/breadboard-build.jpg" alt="The finished PulseCheck build: a Photon 2 on a breadboard with an RGB LED, three resistors, and a push button" style="width:400px;" />
+
+- This is what the finished build looks like
+- Follow the table for the connections. A photo does not show every leg clearly
+
 ## The Data
 
 - Real Fitbit data from a public dataset of 30 people
