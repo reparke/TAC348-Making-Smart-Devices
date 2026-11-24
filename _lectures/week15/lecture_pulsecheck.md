@@ -505,3 +505,53 @@ void loop() {
 - **More Fitbit data**: test more windows from the same dataset
 - **Real sensors**: replace the Fitbit data with readings from your smart watch build
 - Note: PulseCheck is not a medical device. Do not send real personal health data to the free tier
+
+## Answers
+
+- Your instructor gives you the password at the end of each part
+- The answers are stored scrambled. They appear only with the right password
+
+<!-- answers:start (made by tools/lock_answers.mjs; do not edit by hand) -->
+<div id="pc-answers" data-salt="Qj6gbDopPMbX2gzx1kwDhA==" data-iv="QKpYJRzr+z2hw5A7" data-text="qIHElyWKhM5qjJ0PbHQFwo9TNTvx+sezSHHgyUXd88q18yA/ew0qz2ewBSdLoZgQOMx/+07IScRpFz2YRl0kZlDOc27md22eZ3AB8I7Ru0Btye7xKeEIXj6V9172JmGJ2+vW5RfThuCiExouocuQBskMlz7ILW54gQHokdfaOKREfyRlz9Z7izDersaGnxq0q+8lGokeT9cct4U8UvvE+qAmg097zLONtIlAw1FJn+bZNBUzQlrDcte60EYXCA8Y7r8I2w8mAbmBf5uaPdHeexT6fRO1eRnvzhx+/NrKtdSGJGoCQ7ZPnJPZ2PKl6Jv+YdSDfYvBxDLHB3QyjkD7zGZo2p8HdCz+V0XTbPLvLEv+pqxJhOBZVLRw3JTPD95b55MHt7udfW/ciz50DP2GPnsOafAjyKNnciUM8cUFm6hiYXA/HEGBc0CKzhbJuVvCrALAELTX/iOeaLUAr1UKCJHsfmggJjXJ4Vj5pSf6Se7zhIuKg4508dDiKphXob+WQjNAmAq68fOu3XIT5WrKYa8nyuNAAzButdgDip83m6GV3RLT2YXZFRxZLBvkgY7yA6hzlmzB8lz3Z8NDtz3Rouyr4XllSQN+wz5/SMvIF5lrpMgpx4YfThPEk9ySheaNrDYqQJ/QEaRHSHH2k49lDyqZ4g7eoQUYGUG4nFlb+j746F2eG4Zn25W+1miDVujh2n3P2HOwUpZaJz26p0DPQYYezhGPBJrzL6DBktSLx2+G5HG9Diwqje/DEH2pTzfm5CCMUF7asxQxiDKXqF8Vu9hl4ikV1R+RdBMP3zfR6Kb/k1I37I+Y8tWcAiL23POaktk7OeEVspREdccw1b/jVBe5GDAiH9St6gfta2H/ehaGpLrd8tEN4MunwJAu4Fs5+ACkfFgJf36hq5/HkF1CH4Zx0/PnzM9mfIFOM3yecKNnkN8PDDNT4ybRdOnMPK/2bFJHjC/sl1eyVizl27YPvVAzlQRjscAuxwlYvDycaKNPU6lzkPi68hF2r1aSH8veuRW7dy93/JKv84VQ9XOf/mM0D26Ba5cGKn03L/9Mugk65J+ReyKTOwuuP1Ugek0zltZHGmqueKgWN5DLrpr7Y1XZZ1lP9+OWMaLx8JKMfyvcIWKMho+jJQipuQnSv0BpkuZcQqwmBBGDJG9hMu1ebO3+zqrthROykKOepwesX7NEoCHkYL/JbkcGomKPepaYzlovylI7T91Dch5Gv/uwjvXTZ5UH2w4Sp0Yv8atSjTDB8KeRvQ2N6dCqxipjOAKMVGiP95ak0abOTsonuCRpdeJ/B+uLvSC+tFMrYkIthjWTSg1ZA3NImHcqiTyCsITUpkSC/jGHiL+0EaR6FE37lgBBWby44e7VcuduKr6ZxYOSq05qJ8iyFrWFqz9/zF0+HNJP+L+0BVBmpEVGDokNxWahlJtNRvV73ZVkskQ50iEpFv3yqUHAX+A6Q3qaEEUhtaz0i6iTDSGOjWfW7cysSmxBn0nf8ic45z7VqUctiCIPt4dj3iBDm9vk4zN2ZPWNL/EKh/O2zet2DIUGMZaDbeod4kqssreTBXdxV1TVQVu9omxkxP4/79FvWWua7rmbIE2KolSsFMipNeyiTYcKtoJEjhrTX/oVAgwFcT1f2C3+ce7X8FPbg6zG61Lk8h45ehoGgfrDNr6Dg/zOdlHYMsY/p9O/LzudmOqL5bv9E3sgcPs9LfSiEtIbJ0cPhW3zdBtNo60OvfcjbVeUKuXT4hMqrapAxf/6b83llTKKW2ozQkbtbgtNTuk5iBJfIzFh6RFuA/lpIgOajNHputcSqR0leK8hVMvV7hQ19juJf+3gjjwuXBresUcgwCwIG0KiS661Zef9XF8sDh8JV5RoQZ+Ngnl1GHphkzsKsL0XcHlRPH7Ujdnsuenx/EjyzHDrZGqjrpU26sEAejYqkJDgtSwdNH5xl+2KphvsXwyPAiAuHM9XW4xec2w=">
+  <label for="pc-answers-password">Password</label>
+  <input type="password" id="pc-answers-password" autocomplete="off" style="width:16em; display:inline-block;" />
+  <button type="button" id="pc-answers-button">Show answers</button>
+  <p id="pc-answers-message" role="status"></p>
+  <div id="pc-answers-content"></div>
+</div>
+<!-- answers:end -->
+
+<script>
+{% raw %}(function () {
+  var box = document.getElementById('pc-answers');
+  if (!box) return;
+  var input = document.getElementById('pc-answers-password');
+  var message = document.getElementById('pc-answers-message');
+  function bytes(b64) {
+    var s = atob(b64), out = new Uint8Array(s.length);
+    for (var i = 0; i < s.length; i++) out[i] = s.charCodeAt(i);
+    return out;
+  }
+  function unlock() {
+    if (!window.crypto || !crypto.subtle) { message.textContent = 'This browser cannot unlock the answers.'; return; }
+    message.textContent = 'Checking...';
+    crypto.subtle.importKey('raw', new TextEncoder().encode(input.value), 'PBKDF2', false, ['deriveKey'])
+      .then(function (base) {
+        return crypto.subtle.deriveKey(
+          { name: 'PBKDF2', salt: bytes(box.dataset.salt), iterations: 200000, hash: 'SHA-256' },
+          base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      })
+      .then(function (key) {
+        return crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes(box.dataset.iv) }, key, bytes(box.dataset.text));
+      })
+      .then(function (plain) {
+        document.getElementById('pc-answers-content').innerHTML = new TextDecoder().decode(plain);
+        message.textContent = '';
+        input.value = '';
+      })
+      .catch(function () { message.textContent = 'That password is not right.'; });
+  }
+  document.getElementById('pc-answers-button').addEventListener('click', unlock);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') unlock(); });
+})();{% endraw %}
+</script>
