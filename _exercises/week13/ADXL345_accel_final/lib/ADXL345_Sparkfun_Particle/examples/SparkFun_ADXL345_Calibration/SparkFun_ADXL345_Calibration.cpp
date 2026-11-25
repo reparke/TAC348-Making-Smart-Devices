@@ -18,7 +18,13 @@
  *  Arduino Uno
  *  *****************************************/
  
+#include "Particle.h"
+
 #include "SparkFun_ADXL345.h"
+
+SYSTEM_MODE(AUTOMATIC);
+SYSTEM_THREAD(ENABLED);
+SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
 /*********** COMMUNICATION SELECTION ***********/
 /*    Comment Out The One You Are Not Using    */

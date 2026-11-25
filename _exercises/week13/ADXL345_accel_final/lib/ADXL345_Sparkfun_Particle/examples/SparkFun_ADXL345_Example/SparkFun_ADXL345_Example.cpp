@@ -19,12 +19,20 @@
  *  Arduino Uno
  *  *********************************************/
 
+#include "Particle.h"
+
 #include "SparkFun_ADXL345.h"  // SparkFun ADXL345 Library
+
+SYSTEM_MODE(AUTOMATIC);
+SYSTEM_THREAD(ENABLED);
+SerialLogHandler logHandler(LOG_LEVEL_WARN);
+
+void ADXL_ISR();
 
 /*********** COMMUNICATION SELECTION ***********/
 /*    Comment Out The One You Are Not Using    */
-// ADXL345 adxl = ADXL345(10);           // USE FOR SPI COMMUNICATION, ADXL345(CS_PIN);
-ADXL345 adxl = ADXL345();             // USE FOR I2C COMMUNICATION
+ADXL345 adxl = ADXL345(10);           // USE FOR SPI COMMUNICATION, ADXL345(CS_PIN);
+//ADXL345 adxl = ADXL345();             // USE FOR I2C COMMUNICATION
 
 /****************** INTERRUPT ******************/
 /*      Uncomment If Attaching Interrupt       */

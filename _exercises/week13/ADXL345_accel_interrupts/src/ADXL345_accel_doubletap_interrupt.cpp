@@ -25,14 +25,16 @@ void changeRgbLed(int r, int g, int b) {
 }
 
 int doubleTapCount = 0;
-int tapCount = 0;
-int activityCount = 0;
 
-// This flag will be set to true in the interrupt service routine.
+// Count at most one double-tap event every 300 ms to filter repeated events.
+const unsigned long DOUBLE_TAP_COOLDOWN_MS = 300;
+unsigned long prevDoubleTapMillis = 0;
+
+// The ISR sets this flag when a double-tap interrupt arrives.
 volatile bool doubleTapDetected = false;
 
 // Interrupt Service Routine (ISR)
-// This function is called when the interrupt pin goes HIGH.
+// This function is called when the double-tap interrupt pin goes HIGH.
 void doubleTapISR() {
     // It's best to do as little as possible in an ISR.
     // Just set a flag. Avoid any I2C/Serial/etc. communication in an ISR.
@@ -60,42 +62,46 @@ void setup() {
                               // Higher Values = Wider Measurement Range
                               // Lower Values = Greater Sensitivity
 
-    // Configure settings for tap detection
+    // Configure the axes used for double-tap detection.
     adxl.setTapDetectionOnXYZ(
-        0, 0, 1);  // Detect taps on Z-axis. "adxl.setTapDetectionOnX(X, Y, Z);"
+        0, 0, 1);  // Detect double taps on the Z-axis.
                    // (1==ON, 0==OFF)
 
-    // Set values for what is considered a TAP and what is a DOUBLE TAP (0-255)
+    // Configure double-tap detection thresholds and timing (0-255).
     adxl.setTapThreshold(30);      // 62.5 mg per increment.
     adxl.setTapDuration(40);       // 625 µs per increment
     adxl.setDoubleTapLatency(80);  // 1.25 ms per increment
     adxl.setDoubleTapWindow(240);  // 1.25 ms per increment
 
-    // Setting all interupts to take place on INT1 pin (which is default already)
+    // Interrupts default to INT1, which is connected to D2.
     // adxl.setInterruptMapping(ADXL345_INT_DOUBLE_TAP_BIT, ADXL345_INT1_PIN);
 
     // Turn on Interrupts for each mode (1 == ON, 0 == OFF)
-    // Enable the double-tap interrupt. It was found that enabling the
-    // single-tap interrupt is not required for this to work.
+    // Enable double taps for this example.
     adxl.ActivityINT(0);
     adxl.doubleTapINT(1);
-    adxl.singleTapINT(0);  // Keep single tap interrupt disabled for simplicity
+    adxl.singleTapINT(0);
 }
 
 void loop() {
-    adxl.readAndCalcAccel();  // reads current x,y,z accel and calculates G's
+    unsigned long curMillis = millis();
 
-    if (doubleTapDetected) {
-        // Reset the flag for the next detection.
+    // adxl.readAndCalcAccel();  // reads current x,y,z accel and calculates G's
+
+    if (doubleTapDetected == true) {
+        // Reset the flag for the next double-tap detection.
         doubleTapDetected = false;
-        doubleTapCount++;
+        // Always read and clear the double-tap interrupt, even during the cooldown.
+        // Otherwise INT1 can stay HIGH and prevent the next rising edge.
+        bool isDoubleTap = adxl.readDoubleTap();
 
-        // IMPORTANT: Read the interrupt source to clear the interrupt on the
-        // ADXL345. This allows new interrupts to be detected. This is done here
-        // instead of the ISR.
-        // We can use readDoubleTap() which internally calls
-        // getInterruptSource().
-        adxl.readDoubleTap();
-        Serial.println("Double tap = " + String(doubleTapCount));
+        if (isDoubleTap == true) {
+            // Count another double tap after the debounce time has passed.
+            if (curMillis - prevDoubleTapMillis > DOUBLE_TAP_COOLDOWN_MS) {
+                prevDoubleTapMillis = curMillis;
+                doubleTapCount++;
+                Serial.println("Double tap count = " + String(doubleTapCount));
+            }
+        }
     }
 }

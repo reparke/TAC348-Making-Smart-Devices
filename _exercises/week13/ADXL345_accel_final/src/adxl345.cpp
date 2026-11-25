@@ -1,24 +1,3 @@
-/*
- * Project myProject
- * Author: Your Name
- * Date:
- * For comprehensive documentation and examples, please visit:
- * https://docs.particle.io/firmware/best-practices/firmware-template/
- */
-
-// Include Particle Device OS APIs
-#include "Particle.h"
-
-// Let Device OS manage the connection to the Particle Cloud
-SYSTEM_MODE(AUTOMATIC);
-
-// Run the application and system concurrently in separate threads
-SYSTEM_THREAD(ENABLED);
-
-// Show system, cloud connectivity, and application logs over USB
-// View logs with CLI using 'particle serial monitor --follow'
-SerialLogHandler logHandler(LOG_LEVEL_WARN);
-
 /*  *********************************************
  *  Particle ADXL 345 Example
  *  Rob Parke
@@ -36,11 +15,13 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
  *  Created: Jul 13, 2016
  *  Updated: Sep 06, 2016
  *  *********************************************/
-const int PIN_RED = A2;
-const int PIN_GREEN = A5;
-const int PIN_BLUE = D15; // aka MOSI pin
 
+#include "Particle.h"
 #include "SparkFun_ADXL345.h"  // SparkFun ADXL345 Library
+
+SYSTEM_MODE(AUTOMATIC);
+SYSTEM_THREAD(ENABLED);
+SerialLogHandler logHandler(LOG_LEVEL_WARN);
 
 /*********** COMMUNICATION SELECTION ***********/
 /*    Comment Out The One You Are Not Using    */
@@ -98,12 +79,6 @@ void printAccelGraph(float value, String name, int numBarsFull,
     Serial.println(" (" + String(value, 2) + " g)");
 }
 
-void changeRgbLed(int r, int g, int b) {
-    analogWrite(PIN_RED, r);
-    analogWrite(PIN_GREEN, g);
-    analogWrite(PIN_BLUE, b);
-}
-
 void displayExampleGraphs() {
     // use the printAccelGraph funciton to print the values along with a bar
     // graph, to see their relation to eachother:
@@ -116,10 +91,6 @@ void displayExampleGraphs() {
 /******************** SETUP ********************/
 /*          Configure ADXL345 Settings         */
 void setup() {
-    pinMode(PIN_RED, OUTPUT);
-    pinMode(PIN_GREEN, OUTPUT);
-    pinMode(PIN_BLUE, OUTPUT);
-
     Serial.begin(9600);  // Start the serial terminal
 
     adxl.powerOn();  // Power on the ADXL345
@@ -132,18 +103,18 @@ void setup() {
     adxl.setActivityXYZ(
         1, 0, 0);  // Set to activate movement detection in the axes
                    // "adxl.setActivityXYZ(X, Y, Z);" (1 == ON, 0 == OFF)
-    adxl.setActivityThreshold(200);  // 62.5mg per increment   // Set activity
-                                     // // Inactivity thresholds (0-255)
+    adxl.setActivityThreshold(75);  // 62.5mg per increment   // Set activity //
+                                    // Inactivity thresholds (0-255)
 
     adxl.setTapDetectionOnXYZ(
         0, 0, 1);  // Detect taps in the directions turned ON
                    // "adxl.setTapDetectionOnX(X, Y, Z);" (1 == ON, 0 == OFF)
 
     // Set values for what is considered a TAP and what is a DOUBLE TAP (0-255)
-    adxl.setTapThreshold(40);      // 62.5 mg per increment
-    adxl.setTapDuration(32);       // 625 μs per increment
+    adxl.setTapThreshold(50);      // 62.5 mg per increment
+    adxl.setTapDuration(15);       // 625 μs per increment
     adxl.setDoubleTapLatency(80);  // 1.25 ms per increment
-    adxl.setDoubleTapWindow(240);  // 1.25 ms per increment
+    adxl.setDoubleTapWindow(200);  // 1.25 ms per increment
 
     // Setting all interupts to take place on INT1 pin
     // adxl.setImportantInterruptMapping(1, 1, 1, 1, 1);     // Sets
@@ -161,76 +132,10 @@ void setup() {
 
 void loop() {
     adxl.readAndCalcAccel();  // reads current x,y,z accel and calculates G's
-    //////////////////////////////////
-    //     Graphing Measurement     //
-    //////////////////////////////////
+
     /* After reading, six class variables are updated: x, y, z, cx, cy, and
     cz. Those are the raw, 12-bit values (x, y, and z) and the calculated
     acceleration's in units of g (cx, cy, and cz). */
-    // displayExampleGraphs();
-    // delay(500);
-
-    //////////////////////////////////
-    //     Measuring Gravity        //
-    //////////////////////////////////
-    /* SENSOR
-      two acceleration variables
-      x, y, z ---> actual measurement of accel
-      cx, cy, cz --> calculated accel as a fraction of Gravity
-    */
-    // // we want to use the accel (aka where the device is in 3d space) to
-    // control
-    // // the RGB led in real time
-    // // different directions are different colors ---> brightness is affected
-    // by
-    // // the accel
-
-    // int r = map(adxl.cx, -0.8, 0.8, 0.0, 255.0);
-    // int g = map(adxl.cy, -0.8, 0.8, 0.0, 255.0);
-    // int b = map(adxl.cz, -0.8, 0.8, 0.0, 255.0);
-    // changeRgbLed(r, g, b);
-
-    //////////////////////////////////
-    //     Detecting Orientation    //
-    //////////////////////////////////
-    // int orientation = adxl.getOrientation();
-    // switch (orientation) {
-    //     case ADXL345_ORIENTATION_PORTRAIT_U:
-    //         Serial.println("Portrait Up");
-    //         break;
-    //     case ADXL345_ORIENTATION_PORTRAIT_D:
-    //         Serial.println("Portrait Down");
-    //         break;
-    //     case ADXL345_ORIENTATION_LANDSCAPE_L:
-    //         Serial.println("Landscape Left");
-    //         break;
-    //     case ADXL345_ORIENTATION_LANDSCAPE_R:
-    //         Serial.println("Landscape Right");
-    //         break;
-    // }
-
-    //////////////////////////////////
-    //     Tap Detection            //
-    //////////////////////////////////
-    /*
-      in general, measure activty, tap, and double at the same is hard
-      use if, else if so the statements are mutually exclusive
-      AND
-      if you're using tap+double tap, don't use activitt
-    */
-    if (adxl.readDoubleTap() == true) {
-        Serial.println("** DOUBLE TAP **");
-        changeRgbLed(255, 0, 0);
-        delay(30);
-        changeRgbLed(0, 0, 0);
-    } else if (adxl.readTap() == true) {
-        Serial.println("** TAP **");
-        changeRgbLed(0, 255, 0);
-        delay(30);
-        changeRgbLed(0, 0, 0);
-    }
-    //  else if (adxl.readActivity() == true) {
-    //     // currently configured to measure motion in the x direction
-    //     Serial.println("** Activity **");
-    // }
+    displayExampleGraphs();
+    delay(500);
 }

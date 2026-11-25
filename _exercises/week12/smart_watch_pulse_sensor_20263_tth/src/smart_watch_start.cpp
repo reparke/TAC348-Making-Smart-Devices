@@ -28,6 +28,8 @@ SerialLogHandler logHandler(LOG_LEVEL_WARN);
 #define ARDUINOJSON_ENABLE_ARDUINO_STRING 1
 #include <ArduinoJson.h>
 
+#include "json_webhook_response_helper.h"
+
 //////////////////////////////////
 // Pulse Sensor                 //
 //////////////////////////////////
@@ -81,14 +83,47 @@ int beatAvg = 0;  // global var for heart rate
 //////////////////////////
 // Clock  Screen  Var   //
 //////////////////////////
-// TODO:
+/*
+how frequently should we update the clock screen?
+    - every second (for now) -- too slow
+    why? 
+        latency
+        delay in millis 
+    
+    let redraw the screen at twice the change frequency --> twice per sec (500ms)
+
+
+why not update 10 times per second?
+    - excessive bcz time changes once per sec
+    - nothing changes on the screen
+    - redundant
+    ---> wastes battery power
+    ---> can the oled every update that fast (latency)
+*/
+const unsigned long TIME_SCREEN_UPDATE = 500;
+
 
 //////////////////////////
 // Weather Screen  Var  //
 //////////////////////////
-/* Open Meteo
+/* 
+    open meteo
+    what design considerations should we consider when deciding 
+        how oftento update screen?
+        -once a minute
+        -every 10 min
+        - how often do we need to know the weather
+        - how acessible the info needs to be
+        - how often does open meteo update its weather
+        - how variable is our weather
+        - how we use the data and what data we want
  */
-// TODO:
+const unsigned long WEATHER_SCREEN_UPDATE = 1800000; //30 min
+int humidity = 0;
+float temperature = 0;
+int weatherCode = 0;
+// we can a boolean flag (var)
+bool runOnce = true;
 
 //////////////////////////
 // Button Variables     //
@@ -101,7 +136,7 @@ int prevButtonVal = HIGH;  // the last VERIFIED state
 //////////////////////////
 // TODO: create state enum and variable(s) to track state
 enum State { Clock, Heart, Weather };
-State currentState = Heart;
+State currentState = Weather;
 
 ///////////////////////////////////////////////////////////////
 //               END LIBRARIES AND DECLARATIONS              //
@@ -151,22 +186,124 @@ void runHeartScreen() {
 
 // TODO
 void runClockScreen() {
-    // for debugging
-    Serial.println("Clock");
-    oled.clear(PAGE);  // Clear the display
-    oled.setCursor(0, 0);
-    oled.print("Clock");
-    oled.display();
+    // // for debugging
+    // Serial.println("Clock");
+    // oled.clear(PAGE);  // Clear the display
+    // oled.setCursor(0, 0);
+    // oled.print("Clock");
+    // oled.display();
+    
+    
+    unsigned long curMillis = millis();
+    if (curMillis - prevMillis > TIME_SCREEN_UPDATE) {
+        prevMillis = curMillis;
+
+        oled.clear(PAGE);
+        oled.drawBitmap(bitmap_clock_16x12);
+
+        //month date
+        oled.setFontType(0);
+        oled.setCursor(25, 0);
+        oled.print(Time.format("%b %e"));
+
+        //day
+        oled.setCursor(25, 10);
+        oled.print(Time.format("%a"));
+
+        //second
+        oled.setCursor(50,30);
+        oled.print(Time.format("%S"));
+
+        //time
+        oled.setFontType(1);
+        oled.setCursor(0,25);
+        // oled.print(Time.format("%R"));      //24 hr time -- 14:54
+        oled.print(Time.format("%I:%M"));
+        
+        oled.display();
+    }
 }
 
-// TODO
+/*
+remind me: what are the steps we need to in order to connect a web api, get response, and get the data into the photon
+
+- publish the request 
+- get the API URL from open meteo
+- build the webhook on particle console
+- subscribe to response
+- build the event handler (handle the web response)
+    - unpack or PARSE The json
+
+
+WHERE should we put the particle.publish?
+    millis timer in weather screen
+
+problem: we will have to wait 30 min! to see any weather
+    what is the solution to this?
+    --> put the request in setup() because this is called ONCE when the device turns on
+    ---> THIS DOES NOT WORK!
+
+new problem
+    in setup() we DO NOT HAVE WIFI
+    sometimes in loop when the device just turns on, we ALSO DONT have wifi
+
+
+
+*/
 void runWeatherScreen() {
-    // for debugging
-    Serial.println("Weather");
-    oled.clear(PAGE);  // Clear the display
-    oled.setCursor(0, 0);
-    oled.print("Weather");
+    // // for debugging
+    // Serial.println("Weather");
+    // oled.clear(PAGE);  // Clear the display
+    // oled.setCursor(0, 0);
+    // oled.print("Weather");
+    // oled.display();
+
+    //come back to timer later
+    unsigned long curMillis = millis();
+    if (curMillis - prevMillis > WEATHER_SCREEN_UPDATE) {
+        prevMillis = curMillis;
+        //publish the request
+        Particle.publish("open_meteo", "");
+    }
+
+    //build the screen now imagining we'll have to weather data later
+    oled.clear(PAGE);
+    if(weatherCode == 61)  {
+        //rainy
+        oled.drawBitmap(bitmap_rainy_16x12);
+    }
+    else {
+        oled.drawBitmap(bitmap_sunny_16x12);
+    }
+    oled.setFontType(1);
+    oled.setCursor(38,5);
+    oled.print(String(temperature,0));
     oled.display();
+
+}
+void myHandler(const char* event, const char* data) {
+    // Handle the integration response
+    // assemble/parse
+    // Part 1: helper function allows for webhook responses to be delivered in
+    // multple "chunks"; you don't need to change these lines
+    String fullJson = json_webhook_response_helper(event, data);
+    JsonDocument doc;
+    DeserializationError error = deserializeJson(doc, fullJson);
+
+    // Part 2 is where you can parse the actual data; you code goes in the IF
+    if (!error) {
+        /*          ============
+        Here is where your parsing code goes
+                    ============
+        */
+        temperature = doc["current"]["temperature_2m"];
+        humidity = doc["current"]["relative_humidity_2m"];
+        weatherCode = doc["current"]["weather_code"];
+
+        Serial.println("In LA, the temperature now is " +
+                       String(temperature, 0) + " and the humidity is " +
+                       String(humidity) + "%");
+    }
 }
 
 // TODO
@@ -203,7 +340,7 @@ void loadNextScreen() {
 // Pulse Sensor Functions //
 ////////////////////////////
 
-// everytime the sensor detects a heart bear
+// everytime the sensor detects a heart bear 
 // this function is called automatically
 //  and the BPM param is the most recent pulse averge
 void PulseSensorAmped_data(int BPM, int IBI) { beatAvg = BPM; }
@@ -211,6 +348,12 @@ void PulseSensorAmped_data(int BPM, int IBI) { beatAvg = BPM; }
 void PulseSensorAmped_lost(void) {}
 
 void setup() {
+    // Subscribe to the integration response event
+    Particle.subscribe("hook-response/open_meteo", myHandler, MY_DEVICES);
+
+    //we dont need daylight
+
+    Time.zone(-8);
     /*
 https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64313/4?u=rob7
 */
@@ -236,6 +379,14 @@ https://community.particle.io/t/pulse-sensor-amped-incompatible-with-os-5-3-0/64
 }
 
 void loop() {
+
+    //publish a message ONCE when the photon has wifi
+    if (runOnce == true && Particle.connected() == true) {
+        runOnce = false;    
+        Particle.publish("open_meteo", "");
+    }
+
+
     //function will trigger the event handler everytime a beat
     //is detected
     PulseSensorAmped.process();

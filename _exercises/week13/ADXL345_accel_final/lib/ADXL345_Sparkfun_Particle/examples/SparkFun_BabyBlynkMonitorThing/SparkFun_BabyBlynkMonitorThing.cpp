@@ -32,11 +32,20 @@
  *  SparkFun ESP8266 Thing
  *  *********************************************/
 
+#include "Particle.h"
+
 #define BLYNK_PRINT Serial    // Comment this out to disable prints and save space
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #include <SparkFun_ADXL345.h>
 #include <SimpleTimer.h>
+
+SYSTEM_MODE(AUTOMATIC);
+SYSTEM_THREAD(ENABLED);
+SerialLogHandler logHandler(LOG_LEVEL_WARN);
+
+void checkBaby();
+void sleepTime();
 
 /*********** COMMUNICATION SELECTION ***********/
 /*                                             */
